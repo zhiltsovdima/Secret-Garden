@@ -1,0 +1,605 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		62E9AF83290C2FF600175A21 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9AF82290C2FF600175A21 /* AppDelegate.swift */; };
+		62E9AF85290C2FF600175A21 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9AF84290C2FF600175A21 /* SceneDelegate.swift */; };
+		62E9AF8C290C2FF700175A21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62E9AF8B290C2FF700175A21 /* Assets.xcassets */; };
+		62E9AF8F290C2FF700175A21 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62E9AF8D290C2FF700175A21 /* LaunchScreen.storyboard */; };
+		62E9AF9A290C2FF700175A21 /* Secret_GardenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9AF99290C2FF700175A21 /* Secret_GardenTests.swift */; };
+		62E9AFA4290C2FF700175A21 /* Secret_GardenUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9AFA3290C2FF700175A21 /* Secret_GardenUITests.swift */; };
+		62E9AFA6290C2FF700175A21 /* Secret_GardenUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9AFA5290C2FF700175A21 /* Secret_GardenUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		62E9AF96290C2FF700175A21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 62E9AF77290C2FF600175A21 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 62E9AF7E290C2FF600175A21;
+			remoteInfo = "Secret Garden";
+		};
+		62E9AFA0290C2FF700175A21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 62E9AF77290C2FF600175A21 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 62E9AF7E290C2FF600175A21;
+			remoteInfo = "Secret Garden";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		62E9AF7F290C2FF600175A21 /* Secret Garden.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Secret Garden.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		62E9AF82290C2FF600175A21 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		62E9AF84290C2FF600175A21 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		62E9AF8B290C2FF700175A21 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		62E9AF8E290C2FF700175A21 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		62E9AF90290C2FF700175A21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		62E9AF95290C2FF700175A21 /* Secret GardenTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Secret GardenTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		62E9AF99290C2FF700175A21 /* Secret_GardenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secret_GardenTests.swift; sourceTree = "<group>"; };
+		62E9AF9F290C2FF700175A21 /* Secret GardenUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Secret GardenUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		62E9AFA3290C2FF700175A21 /* Secret_GardenUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secret_GardenUITests.swift; sourceTree = "<group>"; };
+		62E9AFA5290C2FF700175A21 /* Secret_GardenUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secret_GardenUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		62E9AF7C290C2FF600175A21 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		62E9AF92290C2FF700175A21 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		62E9AF9C290C2FF700175A21 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		62E9AF76290C2FF600175A21 = {
+			isa = PBXGroup;
+			children = (
+				62E9AF81290C2FF600175A21 /* Secret Garden */,
+				62E9AF98290C2FF700175A21 /* Secret GardenTests */,
+				62E9AFA2290C2FF700175A21 /* Secret GardenUITests */,
+				62E9AF80290C2FF600175A21 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		62E9AF80290C2FF600175A21 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				62E9AF7F290C2FF600175A21 /* Secret Garden.app */,
+				62E9AF95290C2FF700175A21 /* Secret GardenTests.xctest */,
+				62E9AF9F290C2FF700175A21 /* Secret GardenUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		62E9AF81290C2FF600175A21 /* Secret Garden */ = {
+			isa = PBXGroup;
+			children = (
+				62E9AF82290C2FF600175A21 /* AppDelegate.swift */,
+				62E9AF84290C2FF600175A21 /* SceneDelegate.swift */,
+				62E9AFB3290C304800175A21 /* Supporting Files */,
+			);
+			path = "Secret Garden";
+			sourceTree = "<group>";
+		};
+		62E9AF98290C2FF700175A21 /* Secret GardenTests */ = {
+			isa = PBXGroup;
+			children = (
+				62E9AF99290C2FF700175A21 /* Secret_GardenTests.swift */,
+			);
+			path = "Secret GardenTests";
+			sourceTree = "<group>";
+		};
+		62E9AFA2290C2FF700175A21 /* Secret GardenUITests */ = {
+			isa = PBXGroup;
+			children = (
+				62E9AFA3290C2FF700175A21 /* Secret_GardenUITests.swift */,
+				62E9AFA5290C2FF700175A21 /* Secret_GardenUITestsLaunchTests.swift */,
+			);
+			path = "Secret GardenUITests";
+			sourceTree = "<group>";
+		};
+		62E9AFB3290C304800175A21 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				62E9AF8B290C2FF700175A21 /* Assets.xcassets */,
+				62E9AF8D290C2FF700175A21 /* LaunchScreen.storyboard */,
+				62E9AF90290C2FF700175A21 /* Info.plist */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		62E9AF7E290C2FF600175A21 /* Secret Garden */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 62E9AFA9290C2FF700175A21 /* Build configuration list for PBXNativeTarget "Secret Garden" */;
+			buildPhases = (
+				62E9AF7B290C2FF600175A21 /* Sources */,
+				62E9AF7C290C2FF600175A21 /* Frameworks */,
+				62E9AF7D290C2FF600175A21 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Secret Garden";
+			productName = "Secret Garden";
+			productReference = 62E9AF7F290C2FF600175A21 /* Secret Garden.app */;
+			productType = "com.apple.product-type.application";
+		};
+		62E9AF94290C2FF700175A21 /* Secret GardenTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 62E9AFAC290C2FF700175A21 /* Build configuration list for PBXNativeTarget "Secret GardenTests" */;
+			buildPhases = (
+				62E9AF91290C2FF700175A21 /* Sources */,
+				62E9AF92290C2FF700175A21 /* Frameworks */,
+				62E9AF93290C2FF700175A21 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				62E9AF97290C2FF700175A21 /* PBXTargetDependency */,
+			);
+			name = "Secret GardenTests";
+			productName = "Secret GardenTests";
+			productReference = 62E9AF95290C2FF700175A21 /* Secret GardenTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		62E9AF9E290C2FF700175A21 /* Secret GardenUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 62E9AFAF290C2FF700175A21 /* Build configuration list for PBXNativeTarget "Secret GardenUITests" */;
+			buildPhases = (
+				62E9AF9B290C2FF700175A21 /* Sources */,
+				62E9AF9C290C2FF700175A21 /* Frameworks */,
+				62E9AF9D290C2FF700175A21 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				62E9AFA1290C2FF700175A21 /* PBXTargetDependency */,
+			);
+			name = "Secret GardenUITests";
+			productName = "Secret GardenUITests";
+			productReference = 62E9AF9F290C2FF700175A21 /* Secret GardenUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		62E9AF77290C2FF600175A21 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1400;
+				LastUpgradeCheck = 1400;
+				TargetAttributes = {
+					62E9AF7E290C2FF600175A21 = {
+						CreatedOnToolsVersion = 14.0.1;
+					};
+					62E9AF94290C2FF700175A21 = {
+						CreatedOnToolsVersion = 14.0.1;
+						TestTargetID = 62E9AF7E290C2FF600175A21;
+					};
+					62E9AF9E290C2FF700175A21 = {
+						CreatedOnToolsVersion = 14.0.1;
+						TestTargetID = 62E9AF7E290C2FF600175A21;
+					};
+				};
+			};
+			buildConfigurationList = 62E9AF7A290C2FF600175A21 /* Build configuration list for PBXProject "Secret Garden" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 62E9AF76290C2FF600175A21;
+			productRefGroup = 62E9AF80290C2FF600175A21 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				62E9AF7E290C2FF600175A21 /* Secret Garden */,
+				62E9AF94290C2FF700175A21 /* Secret GardenTests */,
+				62E9AF9E290C2FF700175A21 /* Secret GardenUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		62E9AF7D290C2FF600175A21 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				62E9AF8F290C2FF700175A21 /* LaunchScreen.storyboard in Resources */,
+				62E9AF8C290C2FF700175A21 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		62E9AF93290C2FF700175A21 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		62E9AF9D290C2FF700175A21 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		62E9AF7B290C2FF600175A21 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				62E9AF83290C2FF600175A21 /* AppDelegate.swift in Sources */,
+				62E9AF85290C2FF600175A21 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		62E9AF91290C2FF700175A21 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				62E9AF9A290C2FF700175A21 /* Secret_GardenTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		62E9AF9B290C2FF700175A21 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				62E9AFA4290C2FF700175A21 /* Secret_GardenUITests.swift in Sources */,
+				62E9AFA6290C2FF700175A21 /* Secret_GardenUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		62E9AF97290C2FF700175A21 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 62E9AF7E290C2FF600175A21 /* Secret Garden */;
+			targetProxy = 62E9AF96290C2FF700175A21 /* PBXContainerItemProxy */;
+		};
+		62E9AFA1290C2FF700175A21 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 62E9AF7E290C2FF600175A21 /* Secret Garden */;
+			targetProxy = 62E9AFA0290C2FF700175A21 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		62E9AF8D290C2FF700175A21 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				62E9AF8E290C2FF700175A21 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		62E9AFA7290C2FF700175A21 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		62E9AFA8290C2FF700175A21 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		62E9AFAA290C2FF700175A21 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = J846X7UY52;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Secret Garden/Supporting Files/Info.plist";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.zhiltsov.Secret-Garden";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		62E9AFAB290C2FF700175A21 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = J846X7UY52;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Secret Garden/Supporting Files/Info.plist";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.zhiltsov.Secret-Garden";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		62E9AFAD290C2FF700175A21 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = J846X7UY52;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.zhiltsov.Secret-GardenTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Secret Garden.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Secret Garden";
+			};
+			name = Debug;
+		};
+		62E9AFAE290C2FF700175A21 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = J846X7UY52;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.zhiltsov.Secret-GardenTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Secret Garden.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Secret Garden";
+			};
+			name = Release;
+		};
+		62E9AFB0290C2FF700175A21 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = J846X7UY52;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.zhiltsov.Secret-GardenUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Secret Garden";
+			};
+			name = Debug;
+		};
+		62E9AFB1290C2FF700175A21 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = J846X7UY52;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.zhiltsov.Secret-GardenUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Secret Garden";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		62E9AF7A290C2FF600175A21 /* Build configuration list for PBXProject "Secret Garden" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				62E9AFA7290C2FF700175A21 /* Debug */,
+				62E9AFA8290C2FF700175A21 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		62E9AFA9290C2FF700175A21 /* Build configuration list for PBXNativeTarget "Secret Garden" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				62E9AFAA290C2FF700175A21 /* Debug */,
+				62E9AFAB290C2FF700175A21 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		62E9AFAC290C2FF700175A21 /* Build configuration list for PBXNativeTarget "Secret GardenTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				62E9AFAD290C2FF700175A21 /* Debug */,
+				62E9AFAE290C2FF700175A21 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		62E9AFAF290C2FF700175A21 /* Build configuration list for PBXNativeTarget "Secret GardenUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				62E9AFB0290C2FF700175A21 /* Debug */,
+				62E9AFB1290C2FF700175A21 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 62E9AF77290C2FF600175A21 /* Project object */;
+}
