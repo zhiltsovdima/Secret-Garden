@@ -14,6 +14,8 @@
 		62E9AF9A290C2FF700175A21 /* Secret_GardenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9AF99290C2FF700175A21 /* Secret_GardenTests.swift */; };
 		62E9AFA4290C2FF700175A21 /* Secret_GardenUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9AFA3290C2FF700175A21 /* Secret_GardenUITests.swift */; };
 		62E9AFA6290C2FF700175A21 /* Secret_GardenUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9AFA5290C2FF700175A21 /* Secret_GardenUITestsLaunchTests.swift */; };
+		62E9AFB5290D187100175A21 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9AFB4290D187100175A21 /* TabBarController.swift */; };
+		62E9AFB9290D1C5C00175A21 /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9AFB8290D1C5C00175A21 /* Resources.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +47,8 @@
 		62E9AF9F290C2FF700175A21 /* Secret GardenUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Secret GardenUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		62E9AFA3290C2FF700175A21 /* Secret_GardenUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secret_GardenUITests.swift; sourceTree = "<group>"; };
 		62E9AFA5290C2FF700175A21 /* Secret_GardenUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secret_GardenUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		62E9AFB4290D187100175A21 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		62E9AFB8290D1C5C00175A21 /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,8 +99,9 @@
 		62E9AF81290C2FF600175A21 /* Secret Garden */ = {
 			isa = PBXGroup;
 			children = (
-				62E9AF82290C2FF600175A21 /* AppDelegate.swift */,
-				62E9AF84290C2FF600175A21 /* SceneDelegate.swift */,
+				62E9AFB7290D189300175A21 /* Application */,
+				62E9AFBA290D1C6400175A21 /* Resources */,
+				62E9AFB6290D187E00175A21 /* Controllers */,
 				62E9AFB3290C304800175A21 /* Supporting Files */,
 			);
 			path = "Secret Garden";
@@ -127,6 +132,31 @@
 				62E9AF90290C2FF700175A21 /* Info.plist */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		62E9AFB6290D187E00175A21 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				62E9AFB4290D187100175A21 /* TabBarController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		62E9AFB7290D189300175A21 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				62E9AF82290C2FF600175A21 /* AppDelegate.swift */,
+				62E9AF84290C2FF600175A21 /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		62E9AFBA290D1C6400175A21 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				62E9AFB8290D1C5C00175A21 /* Resources.swift */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,6 +289,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62E9AFB5290D187100175A21 /* TabBarController.swift in Sources */,
+				62E9AFB9290D1C5C00175A21 /* Resources.swift in Sources */,
 				62E9AF83290C2FF600175A21 /* AppDelegate.swift in Sources */,
 				62E9AF85290C2FF600175A21 /* SceneDelegate.swift in Sources */,
 			);
