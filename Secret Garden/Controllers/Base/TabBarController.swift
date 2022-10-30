@@ -9,7 +9,7 @@ import UIKit
 
 enum Tabs: Int {
     case home
-    case plants
+    case garden
     case shop
 }
 
@@ -25,25 +25,27 @@ final class TabBarController: UITabBarController {
         tabBar.tintColor = Resources.Colors.active
         tabBar.backgroundColor = Resources.Colors.tabBarColor
                 
-        let homeViewController = UIViewController()
-        let plantsViewController = UIViewController()
-        let shopViewController = UIViewController()
+        let homeViewController = HomeViewController()
+        let plantsViewController = PlantsViewController()
+        let shopViewController = ShopViewController()
+        
+        let plantsNavigationController = NavBarController(rootViewController: plantsViewController)
+        let shopNavigationController = NavBarController(rootViewController: shopViewController)
 
         homeViewController.tabBarItem = UITabBarItem(title: Resources.Strings.TabBar.home,
                                                      image: Resources.Images.TabBar.home,
                                                      tag: Tabs.home.rawValue)
-        plantsViewController.tabBarItem = UITabBarItem(title: Resources.Strings.TabBar.plants,
-                                                     image: Resources.Images.TabBar.plants,
-                                                     tag: Tabs.plants.rawValue)
+        plantsNavigationController.tabBarItem = UITabBarItem(title: Resources.Strings.TabBar.garden,
+                                                     image: Resources.Images.TabBar.garden,
+                                                     tag: Tabs.garden.rawValue)
         shopViewController.tabBarItem = UITabBarItem(title: Resources.Strings.TabBar.shop,
                                                      image: Resources.Images.TabBar.shop,
                                                      tag: Tabs.shop.rawValue)
         
         setViewControllers([
             homeViewController,
-            plantsViewController,
-            shopViewController
+            plantsNavigationController,
+            shopNavigationController
         ], animated: false)
     }
-
 }

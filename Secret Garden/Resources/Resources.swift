@@ -12,12 +12,14 @@ enum Resources {
     enum Colors {
         static let active = UIColor(named: "TabBarAccent")
         static let tabBarColor = UIColor(named: "TabBarColor")
+        
+        static let backgroundColor = UIColor(named: "WhiteBackground")
     }
     
     enum Strings {
         enum TabBar {
             static let home = "Home"
-            static let plants = "My Plants"
+            static let garden = "My Garden"
             static let shop = "Shop"
         }
     }
@@ -25,7 +27,7 @@ enum Resources {
     enum Images {
         enum TabBar {
             static let home = UIImage(named: "home")
-            static let plants = UIImage(named: "plants")
+            static let garden = UIImage(named: "plants")
             static let shop = UIImage(named: "shop")
         }
     }
