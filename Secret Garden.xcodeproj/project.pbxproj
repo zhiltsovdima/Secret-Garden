@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		62E9AF83290C2FF600175A21 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9AF82290C2FF600175A21 /* AppDelegate.swift */; };
 		62E9AF85290C2FF600175A21 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9AF84290C2FF600175A21 /* SceneDelegate.swift */; };
-		62E9AF8C290C2FF700175A21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62E9AF8B290C2FF700175A21 /* Assets.xcassets */; };
 		62E9AF8F290C2FF700175A21 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62E9AF8D290C2FF700175A21 /* LaunchScreen.storyboard */; };
 		62E9AF9A290C2FF700175A21 /* Secret_GardenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9AF99290C2FF700175A21 /* Secret_GardenTests.swift */; };
 		62E9AFA4290C2FF700175A21 /* Secret_GardenUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9AFA3290C2FF700175A21 /* Secret_GardenUITests.swift */; };
@@ -23,6 +22,7 @@
 		62E9AFC4290EAFD500175A21 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9AFC3290EAFD500175A21 /* BaseViewController.swift */; };
 		62E9AFC72911051500175A21 /* Plant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9AFC62911051400175A21 /* Plant.swift */; };
 		62E9AFCD2911106E00175A21 /* PlantCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9AFCC2911106E00175A21 /* PlantCell.swift */; };
+		62E9AFCF291125BC00175A21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62E9AFCE291125BC00175A21 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,7 +46,6 @@
 		62E9AF7F290C2FF600175A21 /* Secret Garden.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Secret Garden.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		62E9AF82290C2FF600175A21 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		62E9AF84290C2FF600175A21 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		62E9AF8B290C2FF700175A21 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		62E9AF8E290C2FF700175A21 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		62E9AF90290C2FF700175A21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		62E9AF95290C2FF700175A21 /* Secret GardenTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Secret GardenTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -63,6 +62,7 @@
 		62E9AFC3290EAFD500175A21 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		62E9AFC62911051400175A21 /* Plant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plant.swift; sourceTree = "<group>"; };
 		62E9AFCC2911106E00175A21 /* PlantCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantCell.swift; sourceTree = "<group>"; };
+		62E9AFCE291125BC00175A21 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../../../../.Trash/Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,7 +143,7 @@
 		62E9AFB3290C304800175A21 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				62E9AF8B290C2FF700175A21 /* Assets.xcassets */,
+				62E9AFCE291125BC00175A21 /* Assets.xcassets */,
 				62E9AF8D290C2FF700175A21 /* LaunchScreen.storyboard */,
 				62E9AF90290C2FF700175A21 /* Info.plist */,
 			);
@@ -308,8 +308,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62E9AFCF291125BC00175A21 /* Assets.xcassets in Resources */,
 				62E9AF8F290C2FF700175A21 /* LaunchScreen.storyboard in Resources */,
-				62E9AF8C290C2FF700175A21 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -31,5 +31,9 @@ enum Resources {
             static let shop = UIImage(named: "shop")
         }
     }
+    
+    enum Cells {
+        static let plantCell = "PlantCell"
+    }
 }
 
