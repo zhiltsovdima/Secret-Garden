@@ -24,6 +24,7 @@
 		62E9AFCD2911106E00175A21 /* PlantCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9AFCC2911106E00175A21 /* PlantCell.swift */; };
 		62E9AFCF291125BC00175A21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62E9AFCE291125BC00175A21 /* Assets.xcassets */; };
 		62E9AFD129116D9E00175A21 /* AddPlantController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9AFD029116D9E00175A21 /* AddPlantController.swift */; };
+		62E9AFD52911A35D00175A21 /* BaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9AFD42911A35D00175A21 /* BaseButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		62E9AFCC2911106E00175A21 /* PlantCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantCell.swift; sourceTree = "<group>"; };
 		62E9AFCE291125BC00175A21 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../../../../.Trash/Assets.xcassets; sourceTree = "<group>"; };
 		62E9AFD029116D9E00175A21 /* AddPlantController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlantController.swift; sourceTree = "<group>"; };
+		62E9AFD42911A35D00175A21 /* BaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,6 +189,7 @@
 				62E9AFB4290D187100175A21 /* TabBarController.swift */,
 				62E9AFC1290EAB4500175A21 /* NavBarController.swift */,
 				62E9AFC3290EAFD500175A21 /* BaseViewController.swift */,
+				62E9AFD42911A35D00175A21 /* BaseButton.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -337,6 +340,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62E9AFD52911A35D00175A21 /* BaseButton.swift in Sources */,
 				62E9AFBC290D409500175A21 /* HomeViewController.swift in Sources */,
 				62E9AFD129116D9E00175A21 /* AddPlantController.swift in Sources */,
 				62E9AFB5290D187100175A21 /* TabBarController.swift in Sources */,

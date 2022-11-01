@@ -13,6 +13,8 @@ final class AddPlantController: BaseViewController {
     let nameTextField = UITextField()
     let nameView = UIView()
     let nameLabel = UILabel()
+    let saveButton = UIButton()
+
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -40,10 +42,18 @@ final class AddPlantController: BaseViewController {
         
         view.addSubview(nameView)
         nameView.backgroundColor = Resources.Colors.tabBarColor
+        nameView.layer.borderColor = UIColor.lightGray.cgColor
+        nameView.layer.borderWidth = 1
         
         view.addSubview(nameTextField)
         nameTextField.textColor = .black
         nameTextField.backgroundColor = Resources.Colors.tabBarColor
+        
+        view.addSubview(saveButton)
+        saveButton.layer.cornerRadius = 20
+        saveButton.backgroundColor = Resources.Colors.accent
+        saveButton.setTitleColor(Resources.Colors.backgroundColor, for: .normal)
+        saveButton.setTitle(Resources.Strings.Common.save, for: .normal)
     }
     
     private func constraintViews() {
@@ -64,7 +74,7 @@ final class AddPlantController: BaseViewController {
         
         nameView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            nameView.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8),
+            nameView.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 5),
             nameView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             nameView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             nameView.heightAnchor.constraint(equalToConstant: 40)
@@ -76,6 +86,15 @@ final class AddPlantController: BaseViewController {
             nameTextField.leadingAnchor.constraint(equalTo: nameView.leadingAnchor, constant: 5),
             nameTextField.trailingAnchor.constraint(equalTo: nameView.trailingAnchor, constant: -5),
             nameTextField.bottomAnchor.constraint(equalTo: nameView.bottomAnchor, constant: -5)
+        ])
+        
+        let saveArea = view.safeAreaLayoutGuide
+        saveButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            saveButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            saveButton.heightAnchor.constraint(equalToConstant: 50),
+            saveButton.widthAnchor.constraint(equalToConstant: 150),
+            saveButton.bottomAnchor.constraint(equalTo: saveArea.bottomAnchor, constant: -5)
         ])
     }
 }

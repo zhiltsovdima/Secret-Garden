@@ -24,6 +24,7 @@ enum Resources {
         }
         enum Common {
             static let name = "Enter the name:"
+            static let save = "Save" 
         }
     }
     
