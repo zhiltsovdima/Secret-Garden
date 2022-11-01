@@ -49,14 +49,14 @@ final class PlantsViewController: BaseViewController {
     }
     
     @objc func navBarRightButtonHandler() {
-        print("right button")
+        let addPlantController = AddPlantController()
+        navigationController?.pushViewController(addPlantController, animated: true)
     }
 }
 
 extension PlantsViewController {
     func addNavBarButton() {
         let button = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(navBarRightButtonHandler))
-        button.tintColor = Resources.Colors.active
         navigationItem.rightBarButtonItem = button
     }
 }

@@ -10,7 +10,7 @@ import UIKit
 enum Resources {
     
     enum Colors {
-        static let active = UIColor(named: "TabBarAccent")
+        static let accent = UIColor(named: "TabBarAccent")
         static let tabBarColor = UIColor(named: "TabBarColor")
         
         static let backgroundColor = UIColor(named: "WhiteBackground")
@@ -22,6 +22,9 @@ enum Resources {
             static let garden = "My Garden"
             static let shop = "Shop"
         }
+        enum Common {
+            static let name = "Enter the name:"
+        }
     }
     
     enum Images {
@@ -29,6 +32,9 @@ enum Resources {
             static let home = UIImage(named: "home")
             static let garden = UIImage(named: "plants")
             static let shop = UIImage(named: "shop")
+        }
+        enum Common {
+            static let camera = UIImage(systemName: "camera.circle.fill")
         }
     }
     

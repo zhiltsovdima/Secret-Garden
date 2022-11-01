@@ -22,7 +22,7 @@ final class TabBarController: UITabBarController {
     }
 
     private func configure() {
-        tabBar.tintColor = Resources.Colors.active
+        tabBar.tintColor = Resources.Colors.accent
         tabBar.backgroundColor = Resources.Colors.tabBarColor
                 
         let homeViewController = HomeViewController()

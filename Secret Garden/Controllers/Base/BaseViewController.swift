@@ -17,5 +17,6 @@ class BaseViewController: UIViewController {
     
     func configure() {
         view.backgroundColor = Resources.Colors.backgroundColor
+        navigationController?.navigationBar.tintColor = Resources.Colors.accent
     }
 }
