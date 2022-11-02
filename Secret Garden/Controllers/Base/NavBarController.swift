@@ -17,6 +17,7 @@ final class NavBarController: UINavigationController {
     
     private func configure() {
         view.backgroundColor = Resources.Colors.backgroundColor
+        view.tintColor = Resources.Colors.accent
         navigationBar.isTranslucent = false
     }
 }

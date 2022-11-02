@@ -24,7 +24,13 @@ enum Resources {
         }
         enum Common {
             static let name = "Enter the name:"
-            static let save = "Save" 
+            static let save = "Save"
+            static let cancel = "Cancel"
+        }
+        enum AddPlant {
+            static let titleAlert = "Chose your image"
+            static let camera = "Take a photo"
+            static let photoLibrary = "Open the Photo Library"
         }
     }
     

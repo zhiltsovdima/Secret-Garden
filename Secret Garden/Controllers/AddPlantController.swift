@@ -9,7 +9,7 @@ import UIKit
 
 final class AddPlantController: BaseViewController {
     
-    let imageView = UIImageView()
+    let plantImageView = UIImageView()
     let nameTextField = UITextField()
     let nameView = UIView()
     let nameLabel = UILabel()
@@ -26,15 +26,17 @@ final class AddPlantController: BaseViewController {
     }
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         setupViews()
         constraintViews()
+        addImageViewGestureRecognizer(to: plantImageView)
     }
     
     private func setupViews() {
-        view.addSubview(imageView)
-        imageView.image = Resources.Images.Common.camera
-        imageView.tintColor = Resources.Colors.accent
-        imageView.contentMode = .scaleAspectFit
+        view.addSubview(plantImageView)
+        plantImageView.image = Resources.Images.Common.camera
+        plantImageView.tintColor = Resources.Colors.accent
+        plantImageView.contentMode = .scaleAspectFit
         
         view.addSubview(nameLabel)
         nameLabel.text = Resources.Strings.Common.name
@@ -57,17 +59,17 @@ final class AddPlantController: BaseViewController {
     }
     
     private func constraintViews() {
-        imageView.translatesAutoresizingMaskIntoConstraints = false
+        plantImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
-            imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            imageView.heightAnchor.constraint(equalToConstant: 200),
-            imageView.widthAnchor.constraint(equalToConstant: 200)
+            plantImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
+            plantImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            plantImageView.heightAnchor.constraint(equalToConstant: 200),
+            plantImageView.widthAnchor.constraint(equalToConstant: 200)
         ])
         
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            nameLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 20),
+            nameLabel.topAnchor.constraint(equalTo: plantImageView.bottomAnchor, constant: 20),
             nameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             nameLabel.heightAnchor.constraint(equalToConstant: 30)
         ])
@@ -96,5 +98,58 @@ final class AddPlantController: BaseViewController {
             saveButton.widthAnchor.constraint(equalToConstant: 150),
             saveButton.bottomAnchor.constraint(equalTo: saveArea.bottomAnchor, constant: -5)
         ])
+    }
+}
+
+// MARK: - TapGestureRecognizer
+extension AddPlantController {
+    
+    private func addImageViewGestureRecognizer(to imageView: UIImageView) {
+        imageView.isUserInteractionEnabled = true
+        imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapPhoto)))
+    }
+    
+    @objc private func tapPhoto() {
+        choosePhotoAlert()
+    }
+}
+
+// MARK: - UIImagePickerController
+extension AddPlantController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    private func showImagePickerController(sourceType: UIImagePickerController.SourceType) {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        imagePickerController.sourceType = sourceType
+        present(imagePickerController, animated: true)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        if let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            plantImageView.image = originalImage
+        }
+        dismiss(animated: true)
+    }
+}
+
+// MARK: - UIAlertController
+extension AddPlantController {
+    
+    private func choosePhotoAlert() {
+        let alertController = UIAlertController(title: Resources.Strings.AddPlant.titleAlert, message: nil, preferredStyle: .actionSheet)
+        let cameraAction = UIAlertAction(title: Resources.Strings.AddPlant.camera, style: .default) { [weak self] action in
+            self?.showImagePickerController(sourceType: .camera)
+        }
+        let photoLibraryAction = UIAlertAction(title: Resources.Strings.AddPlant.photoLibrary, style: .default) { [weak self] action in
+            self?.showImagePickerController(sourceType: .photoLibrary)
+        }
+        let cancelAction = UIAlertAction(title: Resources.Strings.Common.cancel, style: .cancel)
+        
+        alertController.addAction(cameraAction)
+        alertController.addAction(photoLibraryAction)
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true)
+
     }
 }
