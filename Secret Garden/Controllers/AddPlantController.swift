@@ -13,7 +13,7 @@ final class AddPlantController: BaseViewController {
     let nameTextField = UITextField()
     let nameView = UIView()
     let nameLabel = UILabel()
-    let saveButton = UIButton()
+    let saveButton = BaseButton()
 
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -53,10 +53,8 @@ final class AddPlantController: BaseViewController {
         nameTextField.backgroundColor = Resources.Colors.tabBarColor
         
         view.addSubview(saveButton)
-        saveButton.layer.cornerRadius = 20
-        saveButton.backgroundColor = Resources.Colors.accent
-        saveButton.setTitleColor(Resources.Colors.backgroundColor, for: .normal)
         saveButton.setTitle(Resources.Strings.Common.save, for: .normal)
+        saveButton.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
     }
     
     private func constraintViews() {
@@ -100,6 +98,10 @@ final class AddPlantController: BaseViewController {
             saveButton.widthAnchor.constraint(equalToConstant: 150),
             saveButton.bottomAnchor.constraint(equalTo: saveArea.bottomAnchor, constant: -5)
         ])
+    }
+    
+    @objc private func saveButtonTapped() {
+        print("save")
     }
 }
 
