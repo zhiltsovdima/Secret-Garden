@@ -17,6 +17,5 @@ class BaseViewController: UIViewController {
     
     func configure() {
         view.backgroundColor = Resources.Colors.backgroundColor
-        navigationController?.navigationBar.backgroundColor = Resources.Colors.backgroundColor
     }
 }

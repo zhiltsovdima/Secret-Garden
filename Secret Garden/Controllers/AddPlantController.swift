@@ -19,6 +19,7 @@ final class AddPlantController: BaseViewController {
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         hidesBottomBarWhenPushed = true
+        extendedLayoutIncludesOpaqueBars = true
     }
     
     required init?(coder: NSCoder) {
@@ -59,9 +60,11 @@ final class AddPlantController: BaseViewController {
     }
     
     private func constraintViews() {
+        let saveArea = view.safeAreaLayoutGuide
+
         plantImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            plantImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
+            plantImageView.topAnchor.constraint(equalTo: saveArea.topAnchor, constant: 20),
             plantImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             plantImageView.heightAnchor.constraint(equalToConstant: 200),
             plantImageView.widthAnchor.constraint(equalToConstant: 200)
@@ -90,7 +93,6 @@ final class AddPlantController: BaseViewController {
             nameTextField.bottomAnchor.constraint(equalTo: nameView.bottomAnchor, constant: -5)
         ])
         
-        let saveArea = view.safeAreaLayoutGuide
         saveButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             saveButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
