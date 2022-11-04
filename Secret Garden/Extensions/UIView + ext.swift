@@ -1,4 +1,4 @@
-//
+ //
 //  UIView + ext.swift
 //  Secret Garden
 //
@@ -9,7 +9,7 @@ import UIKit
 
 extension UIView {
     
-    func makeSystem(_ button: UIButton) {
+    func makeSystemAnimation(for button: UIButton) {
         button.addTarget(self, action: #selector(handleIn), for: [
             .touchDown,
             .touchDragInside

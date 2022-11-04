@@ -43,6 +43,7 @@ enum Resources {
         }
         enum Common {
             static let camera = UIImage(systemName: "camera.circle.fill")
+            static let moreOptions = UIImage(systemName: "ellipsis")
         }
     }
     

@@ -80,6 +80,9 @@ extension PlantsViewController: UITableViewDelegate, UITableViewDataSource {
         if let plantCell = cell as? PlantCell {
             let plant = plants[indexPath.row]
             plantCell.set(plant: plant)
+            plantCell.buttonCompletionHandler = {
+                print("More options for \(indexPath.row) cell")
+            }
         }
         return cell
     }
@@ -88,3 +91,4 @@ extension PlantsViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
+

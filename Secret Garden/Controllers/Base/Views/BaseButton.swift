@@ -22,7 +22,7 @@ class BaseButton: UIButton {
         backgroundColor = Resources.Colors.accent
         layer.cornerRadius = 20
         setTitleColor(Resources.Colors.backgroundColor, for: .normal)
-        makeSystem(self)
+        makeSystemAnimation(for: self)
     }
     
 }

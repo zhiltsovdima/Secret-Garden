@@ -32,7 +32,7 @@ final class AddPlantController: BaseViewController {
         super.viewDidLoad()
         title = Resources.Strings.AddPlant.titleController
         setupViews()
-        constraintViews()
+        setConstaints()
         configureTapGesture(to: plantImageView)
         configureTapGesture(to: view)
         configureTextField()
@@ -62,7 +62,7 @@ final class AddPlantController: BaseViewController {
         saveButton.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
     }
     
-    private func constraintViews() {
+    private func setConstaints() {
         let saveArea = view.safeAreaLayoutGuide
 
         plantImageView.translatesAutoresizingMaskIntoConstraints = false

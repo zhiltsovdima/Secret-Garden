@@ -8,19 +8,21 @@
 import UIKit
 
 final class PlantCell: UITableViewCell {
-    
+        
     var plantImageView = UIImageView()
     var plantTitleLabel = UILabel()
+    
+    var settingsButton = UIButton()
+    var buttonCompletionHandler: (() -> Void)?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         addSubview(plantImageView)
         addSubview(plantTitleLabel)
+        contentView.addSubview(settingsButton)
         
-        configureTitlelabel()
-        configureImageView()
-        setImageViewConstraints()
-        setTitleLabelConstraints()
+        configureViews()
+        setConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -32,18 +34,25 @@ final class PlantCell: UITableViewCell {
         plantTitleLabel.text = plant.name
     }
     
-    private func configureImageView() {
+    @objc func settingsButtonAction() {
+        buttonCompletionHandler?()
+    }
+    
+    private func configureViews() {
         plantImageView.layer.cornerRadius = 10
         plantImageView.clipsToBounds = true
         plantImageView.contentMode = .scaleAspectFill
-    }
-    
-    private func configureTitlelabel() {
+ 
         plantTitleLabel.numberOfLines = 0
+        plantTitleLabel.minimumScaleFactor = 20.0
         plantTitleLabel.adjustsFontSizeToFitWidth = true
+
+        settingsButton.setImage(Resources.Images.Common.moreOptions, for: .normal)
+        settingsButton.addTarget(self, action: #selector(settingsButtonAction), for: .touchUpInside)
+        makeSystemAnimation(for: settingsButton)
     }
     
-    private func setImageViewConstraints() {
+    private func setConstraints() {
         plantImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             plantImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
@@ -51,15 +60,21 @@ final class PlantCell: UITableViewCell {
             plantImageView.heightAnchor.constraint(equalToConstant: 150),
             plantImageView.widthAnchor.constraint(equalToConstant: 150)
         ])
-    }
-    
-    private func setTitleLabelConstraints() {
+
         plantTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             plantTitleLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             plantTitleLabel.leadingAnchor.constraint(equalTo: plantImageView.trailingAnchor, constant: 20),
-            plantTitleLabel.heightAnchor.constraint(equalToConstant: 150),
-            plantTitleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10)
+            plantTitleLabel.heightAnchor.constraint(equalToConstant: 40),
+            plantTitleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30)
+        ])
+        
+        settingsButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            settingsButton.widthAnchor.constraint(equalToConstant: 30),
+            settingsButton.heightAnchor.constraint(equalToConstant: 30),
+            settingsButton.topAnchor.constraint(equalTo: topAnchor, constant: 25),
+            settingsButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5)
         ])
     }
 }
