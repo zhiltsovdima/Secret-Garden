@@ -14,6 +14,8 @@ final class AddPlantController: BaseViewController {
     let nameView = UIView()
     let nameLabel = UILabel()
     let saveButton = BaseButton()
+    
+    var completionHandler: ((String, UIImage) -> Void)?
 
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -28,9 +30,12 @@ final class AddPlantController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = Resources.Strings.AddPlant.titleController
         setupViews()
         constraintViews()
-        addImageViewGestureRecognizer(to: plantImageView)
+        configureTapGesture(to: plantImageView)
+        configureTapGesture(to: view)
+        configureTextField()
     }
     
     private func setupViews() {
@@ -101,20 +106,50 @@ final class AddPlantController: BaseViewController {
     }
     
     @objc private func saveButtonTapped() {
-        print("save")
+        if let plantName = nameTextField.text, let plantImage = plantImageView.image, plantImage != Resources.Images.Common.camera {
+            completionHandler?(plantName, plantImage)
+            navigationController?.popViewController(animated: true)
+        } else {
+            print("Error, you need to add a name and an image")
+        }
+    }
+    
+    private func configureTextField() {
+        nameTextField.delegate = self
+    }
+    
+    @objc private func handleTap() {
+        view.endEditing(true)
+    }
+    @objc private func tapPhoto() {
+        choosePhotoAlert()
+    }
+}
+
+// MARK: - UITextFieldDelegate
+
+extension AddPlantController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
     }
 }
 
 // MARK: - TapGestureRecognizer
 extension AddPlantController {
     
-    private func addImageViewGestureRecognizer(to imageView: UIImageView) {
-        imageView.isUserInteractionEnabled = true
-        imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapPhoto)))
-    }
-    
-    @objc private func tapPhoto() {
-        choosePhotoAlert()
+    private func configureTapGesture(to selectedView: UIView) {
+        if let imageView = selectedView as? UIImageView {
+            imageView.isUserInteractionEnabled = true
+            imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapPhoto)))
+        } else {
+            selectedView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
+        }
     }
 }
 

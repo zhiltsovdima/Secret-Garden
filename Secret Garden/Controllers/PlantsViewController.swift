@@ -11,7 +11,7 @@ final class PlantsViewController: BaseViewController {
     
     var tableView = UITableView()
     
-    let plants = [
+    var plants = [
         Plant(image: UIImage(named: "plant1"), name: "Ficus"),
         Plant(image: UIImage(named: "plant2"), name: "Another one"),
         Plant(image: UIImage(named: "plant3"), name: "One more")
@@ -48,8 +48,14 @@ final class PlantsViewController: BaseViewController {
         tableView.dataSource = self
     }
     
-    @objc func navBarRightButtonHandler() {
+    @objc private func navBarRightButtonHandler() {
         let addPlantController = AddPlantController()
+        addPlantController.completionHandler = { [weak self] plantName, plantImage in
+            DispatchQueue.main.async {
+                self?.plants.insert(Plant(image: plantImage, name: plantName), at: 0)
+                self?.tableView.reloadData()
+            }
+        }
         navigationController?.pushViewController(addPlantController, animated: true)
     }
 }
@@ -76,5 +82,9 @@ extension PlantsViewController: UITableViewDelegate, UITableViewDataSource {
             plantCell.set(plant: plant)
         }
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }

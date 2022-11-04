@@ -124,7 +124,7 @@
 				62E9AFCB2911101600175A21 /* View */,
 				62E9AFB6290D187E00175A21 /* Controllers */,
 				62E9AFBA290D1C6400175A21 /* Resources */,
-				62E9AFD82913BA9D00175A21 /* Extension */,
+				62E9AFD82913BA9D00175A21 /* Extensions */,
 				62E9AFB3290C304800175A21 /* Supporting Files */,
 			);
 			path = "Secret Garden";
@@ -192,7 +192,7 @@
 				62E9AFB4290D187100175A21 /* TabBarController.swift */,
 				62E9AFC1290EAB4500175A21 /* NavBarController.swift */,
 				62E9AFC3290EAFD500175A21 /* BaseViewController.swift */,
-				62E9AFD92913BD9100175A21 /* BaseButton.swift */,
+				62E9AFDB2913C17100175A21 /* Views */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -213,12 +213,20 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		62E9AFD82913BA9D00175A21 /* Extension */ = {
+		62E9AFD82913BA9D00175A21 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				62E9AFD62913BA9800175A21 /* UIView + ext.swift */,
 			);
-			path = Extension;
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		62E9AFDB2913C17100175A21 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				62E9AFD92913BD9100175A21 /* BaseButton.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -28,6 +28,7 @@ enum Resources {
             static let cancel = "Cancel"
         }
         enum AddPlant {
+            static let titleController = "Add a new plant"
             static let titleAlert = "Chose your image"
             static let camera = "Take a photo"
             static let photoLibrary = "Open the Photo Library"
