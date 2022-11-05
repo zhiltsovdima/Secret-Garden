@@ -17,10 +17,8 @@ final class PlantCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        addSubview(plantImageView)
-        addSubview(plantTitleLabel)
-        contentView.addSubview(settingsButton)
         
+        setupViews()
         configureViews()
         setConstraints()
     }
@@ -36,6 +34,12 @@ final class PlantCell: UITableViewCell {
     
     @objc func settingsButtonAction() {
         buttonCompletionHandler?()
+    }
+    
+    private func setupViews() {
+        addSubview(plantImageView)
+        addSubview(plantTitleLabel)
+        contentView.addSubview(settingsButton)
     }
     
     private func configureViews() {

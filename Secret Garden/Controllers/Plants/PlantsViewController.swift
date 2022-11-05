@@ -80,8 +80,18 @@ extension PlantsViewController: UITableViewDelegate, UITableViewDataSource {
         if let plantCell = cell as? PlantCell {
             let plant = plants[indexPath.row]
             plantCell.set(plant: plant)
-            plantCell.buttonCompletionHandler = {
-                print("More options for \(indexPath.row) cell")
+            plantCell.buttonCompletionHandler = { [weak self] in
+                let optionsPopVC = PlantOptionsTableViewController()
+                optionsPopVC.modalPresentationStyle = .popover
+                let popoverVC = optionsPopVC.popoverPresentationController
+                popoverVC?.delegate = self
+                popoverVC?.sourceView = plantCell.settingsButton
+                popoverVC?.sourceRect = CGRect(x: Int(plantCell.settingsButton.bounds.minX),
+                                               y: Int(plantCell.settingsButton.bounds.midY),
+                                               width: 0,
+                                               height: 0
+                )
+                self?.present(optionsPopVC, animated: true)
             }
         }
         return cell
@@ -89,6 +99,14 @@ extension PlantsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+
+// MARK: - UIPopoverPresentationControllerDelegate
+
+extension PlantsViewController: UIPopoverPresentationControllerDelegate {
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
     }
 }
 

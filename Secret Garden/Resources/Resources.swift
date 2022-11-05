@@ -33,6 +33,10 @@ enum Resources {
             static let camera = "Take a photo"
             static let photoLibrary = "Open the Photo Library"
         }
+        enum Options {
+            static let rename = "Rename"
+            static let delete = "Delete"
+        }
     }
     
     enum Images {
@@ -49,6 +53,7 @@ enum Resources {
     
     enum Cells {
         static let plantCell = "PlantCell"
+        static let plantOptionsCell = "PlantOptionsCell"
     }
 }
 
