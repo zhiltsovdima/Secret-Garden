@@ -11,11 +11,7 @@ final class PlantsViewController: BaseViewController {
     
     var tableView = UITableView()
     
-    var plants = [
-        Plant(image: UIImage(named: "plant1"), name: "Ficus"),
-        Plant(image: UIImage(named: "plant2"), name: "Another one"),
-        Plant(image: UIImage(named: "plant3"), name: "One more")
-    ]
+    var garden = Garden()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,7 +49,7 @@ final class PlantsViewController: BaseViewController {
         addPlantController.completionHandler = { [weak self] plantName, plantImage in
             self?.tableView.performBatchUpdates ({
                 DispatchQueue.main.async {
-                    self?.plants.insert(Plant(image: plantImage, name: plantName), at: 0)
+                    self?.garden.addNewPlant(name: plantName, image: plantImage)
                     self?.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
                 }
             }) { (result) in
@@ -75,14 +71,14 @@ extension PlantsViewController {
 extension PlantsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return plants.count
+        return garden.plants.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Resources.Cells.plantCell, for: indexPath)
         
         if let plantCell = cell as? PlantCell {
-            let plant = plants[indexPath.row]
+            let plant = garden.plants[indexPath.row]
             plantCell.set(plant: plant)
             plantCell.buttonCompletionHandler = { [weak self] in
                 let optionsPopVC = PlantOptionsTableViewController()
@@ -98,7 +94,7 @@ extension PlantsViewController: UITableViewDelegate, UITableViewDataSource {
                 optionsPopVC.deletePlantCompletionHandler = { [weak self] in
                     self?.tableView.performBatchUpdates {
                         DispatchQueue.main.async {
-                            self?.plants.remove(at: indexPath.row)
+                            self?.garden.removePlant(at: indexPath.row)
                             self?.tableView.deleteRows(at: [indexPath], with: .automatic)
                         }
                     }
