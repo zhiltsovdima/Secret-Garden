@@ -51,9 +51,13 @@ final class PlantsViewController: BaseViewController {
     @objc private func navBarRightButtonHandler() {
         let addPlantController = AddPlantController()
         addPlantController.completionHandler = { [weak self] plantName, plantImage in
-            DispatchQueue.main.async {
-                self?.plants.insert(Plant(image: plantImage, name: plantName), at: 0)
-                self?.tableView.reloadData()
+            self?.tableView.performBatchUpdates ({
+                DispatchQueue.main.async {
+                    self?.plants.insert(Plant(image: plantImage, name: plantName), at: 0)
+                    self?.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
+                }
+            }) { (result) in
+                self?.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
             }
         }
         navigationController?.pushViewController(addPlantController, animated: true)
@@ -91,6 +95,14 @@ extension PlantsViewController: UITableViewDelegate, UITableViewDataSource {
                                                width: 0,
                                                height: 0
                 )
+                optionsPopVC.deletePlantCompletionHandler = { [weak self] in
+                    self?.tableView.performBatchUpdates {
+                        DispatchQueue.main.async {
+                            self?.plants.remove(at: indexPath.row)
+                            self?.tableView.deleteRows(at: [indexPath], with: .automatic)
+                        }
+                    }
+                }
                 self?.present(optionsPopVC, animated: true)
             }
         }

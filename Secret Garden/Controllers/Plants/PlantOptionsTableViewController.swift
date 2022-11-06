@@ -14,6 +14,8 @@ final class PlantOptionsTableViewController: UITableViewController {
         Resources.Strings.Options.delete
     ]
     
+    var deletePlantCompletionHandler: (() -> Void)?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -39,7 +41,16 @@ final class PlantOptionsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+        
+        switch indexPath.row {
+        case 0:
+            print("Edit")
+        case 1:
+            deletePlantCompletionHandler?()
+        default:
+            break
+        }
+        dismiss(animated: true)
     }
     
 }
