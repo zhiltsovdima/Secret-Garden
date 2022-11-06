@@ -9,8 +9,8 @@ import UIKit
 
 final class PlantOptionsTableViewController: UITableViewController {
     
-    let options = [
-        Resources.Strings.Options.rename,
+    private let options = [
+        //Resources.Strings.Options.rename,
         Resources.Strings.Options.delete
     ]
     
@@ -44,13 +44,12 @@ final class PlantOptionsTableViewController: UITableViewController {
         
         switch indexPath.row {
         case 0:
-            print("Edit")
-        case 1:
             deletePlantCompletionHandler?()
+            dismiss(animated: true)
         default:
             break
         }
-        dismiss(animated: true)
+
+        
     }
-    
 }

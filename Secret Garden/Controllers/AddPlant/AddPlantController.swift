@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class AddPlantController: BaseViewController {
+class AddPlantController: BaseViewController {
     
     let plantImageView = UIImageView()
     let nameTextField = UITextField()
@@ -15,9 +15,15 @@ final class AddPlantController: BaseViewController {
     let nameLabel = UILabel()
     let saveButton = BaseButton()
     
-    var completionHandler: ((String, UIImage) -> Void)?
-
+    var plantImage: UIImage? {
+        return plantImageView.image
+    }
+    var plantName: String? {
+        return nameTextField.text
+    }
     
+    var completionHandler: ((Plant) -> Void)?
+
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         hidesBottomBarWhenPushed = true
@@ -32,7 +38,7 @@ final class AddPlantController: BaseViewController {
         super.viewDidLoad()
         title = Resources.Strings.AddPlant.titleController
         setupViews()
-        setConstaints()
+        setConstraints()
         configureTapGesture(to: plantImageView)
         configureTapGesture(to: view)
         configureTextField()
@@ -49,20 +55,22 @@ final class AddPlantController: BaseViewController {
         nameLabel.textColor = .black
         
         view.addSubview(nameView)
-        nameView.backgroundColor = Resources.Colors.tabBarColor
+        nameView.backgroundColor = Resources.Colors.backgroundFields
         nameView.layer.borderColor = UIColor.lightGray.cgColor
-        nameView.layer.borderWidth = 1
+        nameView.layer.borderWidth = 0.5
+        nameView.layer.cornerRadius = 5
         
         view.addSubview(nameTextField)
         nameTextField.textColor = .black
-        nameTextField.backgroundColor = Resources.Colors.tabBarColor
+        nameTextField.backgroundColor = Resources.Colors.backgroundFields
+        nameTextField.placeholder = Resources.Strings.AddPlant.placeholder
         
         view.addSubview(saveButton)
         saveButton.setTitle(Resources.Strings.Common.save, for: .normal)
         saveButton.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
     }
     
-    private func setConstaints() {
+    private func setConstraints() {
         let saveArea = view.safeAreaLayoutGuide
 
         plantImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -101,15 +109,18 @@ final class AddPlantController: BaseViewController {
             saveButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             saveButton.heightAnchor.constraint(equalToConstant: 50),
             saveButton.widthAnchor.constraint(equalToConstant: 150),
-            saveButton.bottomAnchor.constraint(equalTo: saveArea.bottomAnchor, constant: -5)
+            saveButton.topAnchor.constraint(equalTo: nameView.bottomAnchor, constant: 20)
         ])
     }
     
     @objc private func saveButtonTapped() {
-        if let plantName = nameTextField.text, let plantImage = plantImageView.image, plantImage != Resources.Images.Common.camera {
-            completionHandler?(plantName, plantImage)
+        if let plantName, let plantImage, plantImage != Resources.Images.Common.camera {
+            
+            let plant = Plant(name: plantName, image: plantImage)
+            completionHandler?(plant)
             navigationController?.popViewController(animated: true)
         } else {
+            // FIXME: add a somethimg visual
             print("Error, you need to add a name and an image")
         }
     }
@@ -133,10 +144,6 @@ extension AddPlantController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        
     }
 }
 

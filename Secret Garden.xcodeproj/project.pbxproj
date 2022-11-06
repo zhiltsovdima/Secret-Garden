@@ -27,6 +27,7 @@
 		62E9AFD72913BA9800175A21 /* UIView + ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9AFD62913BA9800175A21 /* UIView + ext.swift */; };
 		62E9AFDA2913BD9100175A21 /* BaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9AFD92913BD9100175A21 /* BaseButton.swift */; };
 		62E9B0032916D4D300175A21 /* PlantOptionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9B0022916D4D300175A21 /* PlantOptionsTableViewController.swift */; };
+		62E9B0052917C77E00175A21 /* EditPlantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9B0042917C77E00175A21 /* EditPlantViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,7 @@
 		62E9AFD62913BA9800175A21 /* UIView + ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + ext.swift"; sourceTree = "<group>"; };
 		62E9AFD92913BD9100175A21 /* BaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseButton.swift; sourceTree = "<group>"; };
 		62E9B0022916D4D300175A21 /* PlantOptionsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantOptionsTableViewController.swift; sourceTree = "<group>"; };
+		62E9B0042917C77E00175A21 /* EditPlantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPlantViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -236,6 +238,7 @@
 				62E9AFCB2911101600175A21 /* Views */,
 				62E9AFBD290D40AF00175A21 /* PlantsViewController.swift */,
 				62E9B0022916D4D300175A21 /* PlantOptionsTableViewController.swift */,
+				62E9B0042917C77E00175A21 /* EditPlantViewController.swift */,
 			);
 			path = Plants;
 			sourceTree = "<group>";
@@ -406,6 +409,7 @@
 				62E9B0032916D4D300175A21 /* PlantOptionsTableViewController.swift in Sources */,
 				62E9AFC0290D40B900175A21 /* ShopViewController.swift in Sources */,
 				62E9AFDA2913BD9100175A21 /* BaseButton.swift in Sources */,
+				62E9B0052917C77E00175A21 /* EditPlantViewController.swift in Sources */,
 				62E9AFC72911051500175A21 /* Plant.swift in Sources */,
 				62E9AF85290C2FF600175A21 /* SceneDelegate.swift in Sources */,
 				62E9AFC2290EAB4500175A21 /* NavBarController.swift in Sources */,

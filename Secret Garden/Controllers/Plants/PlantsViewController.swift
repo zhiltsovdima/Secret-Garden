@@ -46,10 +46,10 @@ final class PlantsViewController: BaseViewController {
     
     @objc private func navBarRightButtonHandler() {
         let addPlantController = AddPlantController()
-        addPlantController.completionHandler = { [weak self] plantName, plantImage in
+        addPlantController.completionHandler = { [weak self] addedPlant in
             self?.tableView.performBatchUpdates ({
                 DispatchQueue.main.async {
-                    self?.garden.addNewPlant(name: plantName, image: plantImage)
+                    self?.garden.plants.insert(addedPlant, at: 0)
                     self?.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
                 }
             }) { (result) in
@@ -117,4 +117,3 @@ extension PlantsViewController: UIPopoverPresentationControllerDelegate {
         return .none
     }
 }
-

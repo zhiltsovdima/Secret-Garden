@@ -14,6 +14,7 @@ enum Resources {
         static let tabBarColor = UIColor(named: "TabBarColor")
         
         static let backgroundColor = UIColor(named: "WhiteBackground")
+        static let backgroundFields = #colorLiteral(red: 0.9363515973, green: 0.9363515973, blue: 0.9363515973, alpha: 1)
     }
     
     enum Strings {
@@ -23,7 +24,7 @@ enum Resources {
             static let shop = "Shop"
         }
         enum Common {
-            static let name = "Enter the name:"
+            static let name = "Name"
             static let save = "Save"
             static let cancel = "Cancel"
         }
@@ -32,6 +33,7 @@ enum Resources {
             static let titleAlert = "Chose your image"
             static let camera = "Take a photo"
             static let photoLibrary = "Open the Photo Library"
+            static let placeholder = "Give your plant a name"
         }
         enum Options {
             static let rename = "Rename"
