@@ -7,37 +7,23 @@
 
 import UIKit
 
-struct Plant {
+struct Plant: Codable {
     var name: String
-    var image: UIImage?
+    var image: PlantImage
 }
 
-struct Garden {
-    var plants = [Plant]()
+struct PlantImage: Codable {
+    let imageData: Data?
     
-    init() {
-        setup()
-    }
-    
-    mutating func addNewPlant(name: String, image: UIImage) {
-        let plant = Plant(name: name, image: image)
-        plants.insert(plant, at: 0)
-    }
-    
-    mutating func removePlant(at index: Int) {
-        plants.remove(at: index)
-    }
-    
-    mutating func setup() {
-        let names = ["Ficus", "Croton", "Another one", "One more"]
-        let images = [UIImage(named: "plant1"),
-                      UIImage(named: "plant2"),
-                      UIImage(named: "plant3"),
-                      UIImage(named: "plant22")
-        ]
-        
-        for index in 0...3 {
-            plants.append(Plant(name: names[index], image: images[index]))
+    func getImage() -> UIImage? {
+        if let imageData {
+            return UIImage(data: imageData)
+        } else {
+            return nil
         }
+    }
+    
+    init(_ image: UIImage) {
+        self.imageData = image.jpegData(compressionQuality: 0.5)
     }
 }

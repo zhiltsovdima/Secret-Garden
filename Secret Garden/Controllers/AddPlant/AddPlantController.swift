@@ -116,7 +116,7 @@ class AddPlantController: BaseViewController {
     @objc private func saveButtonTapped() {
         if let plantName, let plantImage, plantImage != Resources.Images.Common.camera {
             
-            let plant = Plant(name: plantName, image: plantImage)
+            let plant = Plant(name: plantName, image: PlantImage(plantImage))
             completionHandler?(plant)
             navigationController?.popViewController(animated: true)
         } else {

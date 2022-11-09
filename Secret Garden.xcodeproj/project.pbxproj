@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		626FA06D291BB7AC00FEB461 /* Garden.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626FA06C291BB7AC00FEB461 /* Garden.swift */; };
 		62E9AF83290C2FF600175A21 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9AF82290C2FF600175A21 /* AppDelegate.swift */; };
 		62E9AF85290C2FF600175A21 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9AF84290C2FF600175A21 /* SceneDelegate.swift */; };
 		62E9AF8F290C2FF700175A21 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62E9AF8D290C2FF700175A21 /* LaunchScreen.storyboard */; };
@@ -48,6 +49,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		626FA06C291BB7AC00FEB461 /* Garden.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Garden.swift; sourceTree = "<group>"; };
 		62E9AF7F290C2FF600175A21 /* Secret Garden.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Secret Garden.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		62E9AF82290C2FF600175A21 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		62E9AF84290C2FF600175A21 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 			isa = PBXGroup;
 			children = (
 				62E9AFC62911051400175A21 /* Plant.swift */,
+				626FA06C291BB7AC00FEB461 /* Garden.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -283,6 +286,8 @@
 			dependencies = (
 			);
 			name = "Secret Garden";
+			packageProductDependencies = (
+			);
 			productName = "Secret Garden";
 			productReference = 62E9AF7F290C2FF600175A21 /* Secret Garden.app */;
 			productType = "com.apple.product-type.application";
@@ -355,6 +360,8 @@
 				Base,
 			);
 			mainGroup = 62E9AF76290C2FF600175A21;
+			packageReferences = (
+			);
 			productRefGroup = 62E9AF80290C2FF600175A21 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -408,6 +415,7 @@
 				62E9AFC4290EAFD500175A21 /* BaseViewController.swift in Sources */,
 				62E9B0032916D4D300175A21 /* PlantOptionsTableViewController.swift in Sources */,
 				62E9AFC0290D40B900175A21 /* ShopViewController.swift in Sources */,
+				626FA06D291BB7AC00FEB461 /* Garden.swift in Sources */,
 				62E9AFDA2913BD9100175A21 /* BaseButton.swift in Sources */,
 				62E9B0052917C77E00175A21 /* EditPlantViewController.swift in Sources */,
 				62E9AFC72911051500175A21 /* Plant.swift in Sources */,

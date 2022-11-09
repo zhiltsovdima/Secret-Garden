@@ -11,7 +11,7 @@ final class PlantsViewController: BaseViewController {
     
     var tableView = UITableView()
     
-    var garden = Garden()
+    let garden = Garden()
 
     override func viewDidLoad() {
         super.viewDidLoad()

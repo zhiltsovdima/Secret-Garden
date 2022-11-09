@@ -28,7 +28,7 @@ final class PlantCell: UITableViewCell {
     }
     
     func set(plant: Plant) {
-        plantImageView.image = plant.image
+        plantImageView.image = plant.image.getImage()
         plantTitleLabel.text = plant.name
     }
     

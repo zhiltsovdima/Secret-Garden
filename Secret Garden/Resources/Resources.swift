@@ -39,6 +39,9 @@ enum Resources {
             static let rename = "Rename"
             static let delete = "Delete"
         }
+        enum FolderForSaveData {
+            static let garden = "Garden"
+        }
     }
     
     enum Images {
