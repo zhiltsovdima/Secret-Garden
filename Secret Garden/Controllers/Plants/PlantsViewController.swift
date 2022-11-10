@@ -106,6 +106,10 @@ extension PlantsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let plant = garden.plants[indexPath.row]
+        let detailVC = DetailPlantController(of: plant)
+        navigationController?.pushViewController(detailVC, animated: true)
+        
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }

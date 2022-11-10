@@ -7,12 +7,10 @@
 
 import UIKit
 
-final class EditPlantViewController: BaseViewController {
+final class EditPlantViewController: DetailBaseController {
     
     let nameTextField = UITextField()
-    let plantImageView = UIImageView()
     
-    let backgroundView = UIView()
     let nameLabel = UILabel()
     let nameView = UIView()
     
@@ -30,30 +28,24 @@ final class EditPlantViewController: BaseViewController {
 
     }
     
-    private func setupViews() {
-        view.addSubview(plantImageView)
-        plantImageView.contentMode = .scaleAspectFill
+    override func setupViews() {
         
-        view.addSubview(backgroundView)
-        backgroundView.backgroundColor = Resources.Colors.backgroundColor
-        backgroundView.layer.cornerRadius = 20
-        
-        backgroundView.addSubview(nameView)
+        detailInfoView.addSubview(nameView)
         nameView.backgroundColor = Resources.Colors.backgroundFields
         nameView.layer.borderColor = UIColor.lightGray.cgColor
         nameView.layer.borderWidth = 0.5
         nameView.layer.cornerRadius = 5
         
-        backgroundView.addSubview(nameTextField)
+        detailInfoView.addSubview(nameTextField)
         nameTextField.backgroundColor = Resources.Colors.backgroundFields
         
-        backgroundView.addSubview(nameLabel)
+        detailInfoView.addSubview(nameLabel)
         nameLabel.text = Resources.Strings.Common.name
         
-        backgroundView.addSubview(imageLabel)
+        detailInfoView.addSubview(imageLabel)
         imageLabel.text = "Image"
         
-        backgroundView.addSubview(chooseImageButton)
+        detailInfoView.addSubview(chooseImageButton)
         chooseImageButton.backgroundColor = Resources.Colors.backgroundFields
         chooseImageButton.layer.cornerRadius = 5
         chooseImageButton.layer.borderColor = UIColor.lightGray.cgColor
@@ -63,41 +55,25 @@ final class EditPlantViewController: BaseViewController {
         chooseImageButton.setTitle("Choose new", for: .normal)
         chooseImageButton.addTarget(self, action: #selector(choosePhotoAlert), for: .touchUpInside)
         
-        backgroundView.addSubview(saveButton)
+        detailInfoView.addSubview(saveButton)
         saveButton.setTitle(Resources.Strings.Common.save, for: .normal)
         saveButton.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
     }
     
-    private func setConstraints() {
-        plantImageView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            plantImageView.topAnchor.constraint(equalTo: view.topAnchor),
-            plantImageView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            plantImageView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            plantImageView.heightAnchor.constraint(equalToConstant: view.bounds.height / 3)
-        ])
-        
-        backgroundView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            backgroundView.heightAnchor.constraint(equalToConstant: view.bounds.height * 2/3),
-            backgroundView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            backgroundView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            backgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-            
-        ])
+    override func setConstraints() {
         
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            nameLabel.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 20),
-            nameLabel.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 20),
+            nameLabel.topAnchor.constraint(equalTo: detailInfoView.topAnchor, constant: 20),
+            nameLabel.leadingAnchor.constraint(equalTo: detailInfoView.leadingAnchor, constant: 20),
             nameLabel.heightAnchor.constraint(equalToConstant: 30)
         ])
         
         nameView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             nameView.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 5),
-            nameView.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 20),
-            nameView.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -20),
+            nameView.leadingAnchor.constraint(equalTo: detailInfoView.leadingAnchor, constant: 20),
+            nameView.trailingAnchor.constraint(equalTo: detailInfoView.trailingAnchor, constant: -20),
             nameView.heightAnchor.constraint(equalToConstant: 40)
         ])
         
@@ -112,21 +88,21 @@ final class EditPlantViewController: BaseViewController {
         imageLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             imageLabel.topAnchor.constraint(equalTo: nameView.bottomAnchor, constant: 10),
-            imageLabel.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 20),
+            imageLabel.leadingAnchor.constraint(equalTo: detailInfoView.leadingAnchor, constant: 20),
             imageLabel.heightAnchor.constraint(equalToConstant: 30)
         ])
         
         chooseImageButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             chooseImageButton.topAnchor.constraint(equalTo: imageLabel.bottomAnchor, constant: 5),
-            chooseImageButton.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 20),
+            chooseImageButton.leadingAnchor.constraint(equalTo: detailInfoView.leadingAnchor, constant: 20),
             chooseImageButton.widthAnchor.constraint(equalToConstant: 100),
             chooseImageButton.heightAnchor.constraint(equalToConstant: 30)
         ])
         
         saveButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            saveButton.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor),
+            saveButton.centerXAnchor.constraint(equalTo: detailInfoView.centerXAnchor),
             saveButton.heightAnchor.constraint(equalToConstant: 50),
             saveButton.widthAnchor.constraint(equalToConstant: 150),
             saveButton.topAnchor.constraint(equalTo: chooseImageButton.bottomAnchor, constant: 20)
