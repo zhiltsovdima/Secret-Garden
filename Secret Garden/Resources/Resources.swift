@@ -12,6 +12,7 @@ enum Resources {
     enum Colors {
         static let accent = UIColor(named: "TabBarAccent")
         static let tabBarColor = UIColor(named: "TabBarColor")
+        static let tipBackground = UIColor(named: "TipsBackground")
         
         static let backgroundColor = UIColor(named: "WhiteBackground")
         static let backgroundFields = #colorLiteral(red: 0.9363515973, green: 0.9363515973, blue: 0.9363515973, alpha: 1)
@@ -35,6 +36,10 @@ enum Resources {
             static let photoLibrary = "Open the Photo Library"
             static let placeholder = "Give your plant a name"
         }
+        enum Home {
+            static let tipTitle = "Совет дня"
+            static let tipBody = "Начинай свой день со стакана воды"
+        }
         enum Options {
             static let rename = "Rename"
             static let delete = "Delete"
@@ -47,13 +52,16 @@ enum Resources {
     enum Images {
         enum TabBar {
             static let home = UIImage(named: "home")
-            static let garden = UIImage(named: "plants")
-            static let shop = UIImage(named: "shop")
+            static let garden = UIImage(systemName: "leaf")
+            static let shop = UIImage(systemName: "bag")
         }
         enum Common {
             static let camera = UIImage(systemName: "camera.circle.fill")
             static let moreOptions = UIImage(systemName: "ellipsis")
             static let back = UIImage(systemName: "chevron.backward.circle.fill")
+        }
+        enum Home {
+            static let tip = UIImage(named: "Plant")
         }
     }
     

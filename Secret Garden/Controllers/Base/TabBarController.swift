@@ -29,21 +29,22 @@ final class TabBarController: UITabBarController {
         let plantsViewController = PlantsViewController()
         let shopViewController = ShopViewController()
         
+        let homeNavigationController = NavBarController(rootViewController: homeViewController)
         let plantsNavigationController = NavBarController(rootViewController: plantsViewController)
         let shopNavigationController = NavBarController(rootViewController: shopViewController)
 
-        homeViewController.tabBarItem = UITabBarItem(title: Resources.Strings.TabBar.home,
+        homeNavigationController.tabBarItem = UITabBarItem(title: Resources.Strings.TabBar.home,
                                                      image: Resources.Images.TabBar.home,
                                                      tag: Tabs.home.rawValue)
         plantsNavigationController.tabBarItem = UITabBarItem(title: Resources.Strings.TabBar.garden,
                                                      image: Resources.Images.TabBar.garden,
                                                      tag: Tabs.garden.rawValue)
-        shopViewController.tabBarItem = UITabBarItem(title: Resources.Strings.TabBar.shop,
+        shopNavigationController.tabBarItem = UITabBarItem(title: Resources.Strings.TabBar.shop,
                                                      image: Resources.Images.TabBar.shop,
                                                      tag: Tabs.shop.rawValue)
         
         setViewControllers([
-            homeViewController,
+            homeNavigationController,
             plantsNavigationController,
             shopNavigationController
         ], animated: false)
