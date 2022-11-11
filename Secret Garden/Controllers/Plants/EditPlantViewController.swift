@@ -9,6 +9,8 @@ import UIKit
 
 final class EditPlantViewController: DetailBaseController {
     
+    let plantToEdit: Plant
+    
     let nameTextField = UITextField()
     
     let nameLabel = UILabel()
@@ -17,11 +19,21 @@ final class EditPlantViewController: DetailBaseController {
     let imageLabel = UILabel()
     let chooseImageButton = UIButton()
     let saveButton = BaseButton()
-         
+    
+    var completionHandler: ((Plant)-> Void)?
+    
+    init(_ plantToEdit: Plant) {
+        self.plantToEdit = plantToEdit
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+                
         setupViews()
         setConstraints()
         configureTextField()
@@ -29,6 +41,9 @@ final class EditPlantViewController: DetailBaseController {
     }
     
     override func setupViews() {
+        super.setupViews()
+        
+        plantImageView.image = plantToEdit.image.getImage()
         
         detailInfoView.addSubview(nameView)
         nameView.backgroundColor = Resources.Colors.backgroundFields
@@ -38,6 +53,7 @@ final class EditPlantViewController: DetailBaseController {
         
         detailInfoView.addSubview(nameTextField)
         nameTextField.backgroundColor = Resources.Colors.backgroundFields
+        nameTextField.text = plantToEdit.name
         
         detailInfoView.addSubview(nameLabel)
         nameLabel.text = Resources.Strings.Common.name
@@ -61,6 +77,7 @@ final class EditPlantViewController: DetailBaseController {
     }
     
     override func setConstraints() {
+        super.setConstraints()
         
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -114,7 +131,14 @@ final class EditPlantViewController: DetailBaseController {
     }
     
     @objc private func saveButtonTapped() {
-
+        guard let newName = nameTextField.text else { print("Error! Enter the new name")
+            return
+        }
+        let newImage = PlantImage(plantImageView.image!)
+        let editedPlant = Plant(name: newName, image: newImage)
+        
+        completionHandler?(editedPlant)
+        dismiss(animated: true)
     }
 }
 

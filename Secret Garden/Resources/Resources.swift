@@ -41,7 +41,7 @@ enum Resources {
             static let tipBody = "Начинай свой день со стакана воды"
         }
         enum Options {
-            static let rename = "Rename"
+            static let edit = "Edit"
             static let delete = "Delete"
         }
         enum FolderForSaveData {

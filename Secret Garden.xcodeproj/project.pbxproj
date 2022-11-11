@@ -29,7 +29,7 @@
 		62E9AFD129116D9E00175A21 /* AddPlantController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9AFD029116D9E00175A21 /* AddPlantController.swift */; };
 		62E9AFD72913BA9800175A21 /* UIView + ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9AFD62913BA9800175A21 /* UIView + ext.swift */; };
 		62E9AFDA2913BD9100175A21 /* BaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9AFD92913BD9100175A21 /* BaseButton.swift */; };
-		62E9B0032916D4D300175A21 /* PlantOptionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9B0022916D4D300175A21 /* PlantOptionsTableViewController.swift */; };
+		62E9B0032916D4D300175A21 /* OptionsPlantTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9B0022916D4D300175A21 /* OptionsPlantTableViewController.swift */; };
 		62E9B0052917C77E00175A21 /* EditPlantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9B0042917C77E00175A21 /* EditPlantViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -77,7 +77,7 @@
 		62E9AFD029116D9E00175A21 /* AddPlantController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlantController.swift; sourceTree = "<group>"; };
 		62E9AFD62913BA9800175A21 /* UIView + ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + ext.swift"; sourceTree = "<group>"; };
 		62E9AFD92913BD9100175A21 /* BaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseButton.swift; sourceTree = "<group>"; };
-		62E9B0022916D4D300175A21 /* PlantOptionsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantOptionsTableViewController.swift; sourceTree = "<group>"; };
+		62E9B0022916D4D300175A21 /* OptionsPlantTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsPlantTableViewController.swift; sourceTree = "<group>"; };
 		62E9B0042917C77E00175A21 /* EditPlantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPlantViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -245,7 +245,7 @@
 			children = (
 				62E9AFCB2911101600175A21 /* Views */,
 				62E9AFBD290D40AF00175A21 /* PlantsViewController.swift */,
-				62E9B0022916D4D300175A21 /* PlantOptionsTableViewController.swift */,
+				62E9B0022916D4D300175A21 /* OptionsPlantTableViewController.swift */,
 				62E9B0042917C77E00175A21 /* EditPlantViewController.swift */,
 				626FA06E291CFC0E00FEB461 /* DetailPlantController.swift */,
 			);
@@ -421,7 +421,7 @@
 				62E9AFBE290D40AF00175A21 /* PlantsViewController.swift in Sources */,
 				62E9AFC4290EAFD500175A21 /* BaseViewController.swift in Sources */,
 				626FA06F291CFC0E00FEB461 /* DetailPlantController.swift in Sources */,
-				62E9B0032916D4D300175A21 /* PlantOptionsTableViewController.swift in Sources */,
+				62E9B0032916D4D300175A21 /* OptionsPlantTableViewController.swift in Sources */,
 				62E9AFC0290D40B900175A21 /* ShopViewController.swift in Sources */,
 				626FA06D291BB7AC00FEB461 /* Garden.swift in Sources */,
 				62E9AFDA2913BD9100175A21 /* BaseButton.swift in Sources */,

@@ -81,9 +81,9 @@ extension PlantsViewController: UITableViewDelegate, UITableViewDataSource {
             let plant = garden.plants[indexPath.row]
             plantCell.set(plant: plant)
             plantCell.buttonCompletionHandler = { [weak self] in
-                let optionsPopVC = PlantOptionsTableViewController()
-                optionsPopVC.modalPresentationStyle = .popover
-                let popoverVC = optionsPopVC.popoverPresentationController
+                let optionsVC = OptionsPlantTableViewController()
+                optionsVC.modalPresentationStyle = .popover
+                let popoverVC = optionsVC.popoverPresentationController
                 popoverVC?.delegate = self
                 popoverVC?.sourceView = plantCell.settingsButton
                 popoverVC?.sourceRect = CGRect(x: Int(plantCell.settingsButton.bounds.minX),
@@ -91,7 +91,15 @@ extension PlantsViewController: UITableViewDelegate, UITableViewDataSource {
                                                width: 0,
                                                height: 0
                 )
-                optionsPopVC.deletePlantCompletionHandler = { [weak self] in
+                optionsVC.editPlantCompletionHandler = {
+                    let editVC = EditPlantViewController(plant)
+                    editVC.completionHandler = { editedPlant in
+                        self?.garden.plants[indexPath.row] = editedPlant
+                        tableView.reloadRows(at: [indexPath], with: .automatic)
+                    }
+                    self?.present(editVC, animated: true)
+                }
+                optionsVC.deletePlantCompletionHandler = {
                     self?.tableView.performBatchUpdates {
                         DispatchQueue.main.async {
                             self?.garden.removePlant(at: indexPath.row)
@@ -99,7 +107,7 @@ extension PlantsViewController: UITableViewDelegate, UITableViewDataSource {
                         }
                     }
                 }
-                self?.present(optionsPopVC, animated: true)
+                self?.present(optionsVC, animated: true)
             }
         }
         return cell
