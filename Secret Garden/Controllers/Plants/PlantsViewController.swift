@@ -47,12 +47,9 @@ final class PlantsViewController: BaseViewController {
     @objc private func navBarRightButtonHandler() {
         let addPlantController = AddPlantController()
         addPlantController.completionHandler = { [weak self] addedPlant in
-            self?.tableView.performBatchUpdates ({
-                DispatchQueue.main.async {
-                    self?.garden.plants.insert(addedPlant, at: 0)
-                    self?.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
-                }
-            }) { (result) in
+            DispatchQueue.main.async {
+                self?.garden.plants.insert(addedPlant, at: 0)
+                self?.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
                 self?.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
             }
         }
@@ -94,17 +91,17 @@ extension PlantsViewController: UITableViewDelegate, UITableViewDataSource {
                 optionsVC.editPlantCompletionHandler = {
                     let editVC = EditPlantViewController(plant)
                     editVC.completionHandler = { editedPlant in
-                        self?.garden.plants[indexPath.row] = editedPlant
-                        tableView.reloadRows(at: [indexPath], with: .automatic)
+                        DispatchQueue.main.async {
+                            self?.garden.plants[indexPath.row] = editedPlant
+                            self?.tableView.reloadRows(at: [indexPath], with: .automatic)
+                        }
                     }
                     self?.present(editVC, animated: true)
                 }
                 optionsVC.deletePlantCompletionHandler = {
-                    self?.tableView.performBatchUpdates {
-                        DispatchQueue.main.async {
-                            self?.garden.removePlant(at: indexPath.row)
-                            self?.tableView.deleteRows(at: [indexPath], with: .automatic)
-                        }
+                    DispatchQueue.main.async {
+                        self?.garden.removePlant(at: indexPath.row)
+                        self?.tableView.deleteRows(at: [indexPath], with: .automatic)
                     }
                 }
                 self?.present(optionsVC, animated: true)

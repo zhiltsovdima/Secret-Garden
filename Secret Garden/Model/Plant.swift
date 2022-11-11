@@ -24,6 +24,6 @@ struct PlantImage: Codable {
     }
     
     init(_ image: UIImage) {
-        self.imageData = image.jpegData(compressionQuality: 0.5)
+        self.imageData = image.jpegCompress(.low)
     }
 }

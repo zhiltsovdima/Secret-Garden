@@ -49,9 +49,8 @@ final class OptionsPlantTableViewController: UITableViewController {
                 self.editPlantCompletionHandler?()
             }
         case 1:
-            dismiss(animated: true) {
-                self.deletePlantCompletionHandler?()
-            }
+            deletePlantCompletionHandler?()
+            dismiss(animated: true)
         default:
             dismiss(animated: true)
         }
