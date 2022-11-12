@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		620332E5291FA24700ADE1A1 /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620332E4291FA24700ADE1A1 /* ItemCell.swift */; };
 		626FA06D291BB7AC00FEB461 /* Garden.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626FA06C291BB7AC00FEB461 /* Garden.swift */; };
 		626FA06F291CFC0E00FEB461 /* DetailPlantController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626FA06E291CFC0E00FEB461 /* DetailPlantController.swift */; };
 		626FA071291CFCB000FEB461 /* DetailBaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626FA070291CFCB000FEB461 /* DetailBaseController.swift */; };
@@ -52,6 +53,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		620332E4291FA24700ADE1A1 /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
 		626FA06C291BB7AC00FEB461 /* Garden.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Garden.swift; sourceTree = "<group>"; };
 		626FA06E291CFC0E00FEB461 /* DetailPlantController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPlantController.swift; sourceTree = "<group>"; };
 		626FA070291CFCB000FEB461 /* DetailBaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailBaseController.swift; sourceTree = "<group>"; };
@@ -259,6 +261,7 @@
 			isa = PBXGroup;
 			children = (
 				62E9AFBF290D40B900175A21 /* ShopViewController.swift */,
+				620332E4291FA24700ADE1A1 /* ItemCell.swift */,
 			);
 			path = Shop;
 			sourceTree = "<group>";
@@ -424,6 +427,7 @@
 				626FA071291CFCB000FEB461 /* DetailBaseController.swift in Sources */,
 				62E9AFBE290D40AF00175A21 /* PlantsViewController.swift in Sources */,
 				62E9AFC4290EAFD500175A21 /* BaseViewController.swift in Sources */,
+				620332E5291FA24700ADE1A1 /* ItemCell.swift in Sources */,
 				626FA06F291CFC0E00FEB461 /* DetailPlantController.swift in Sources */,
 				62E9B0032916D4D300175A21 /* OptionsPlantTableViewController.swift in Sources */,
 				62E9AFC0290D40B900175A21 /* ShopViewController.swift in Sources */,

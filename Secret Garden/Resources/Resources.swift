@@ -51,7 +51,7 @@ enum Resources {
     
     enum Images {
         enum TabBar {
-            static let home = UIImage(named: "home")
+            static let home = UIImage(systemName: "house")
             static let garden = UIImage(systemName: "leaf")
             static let shop = UIImage(systemName: "bag")
         }
@@ -68,6 +68,15 @@ enum Resources {
     enum Cells {
         static let plantCell = "PlantCell"
         static let plantOptionsCell = "PlantOptionsCell"
+        static let itemCell = "ItemCell"
+    }
+    
+    enum Constants {
+        enum shopVC {
+            static let columnCount: CGFloat = 2.0
+            static let aspectRatio: CGFloat = 3.0 / 4.0
+            static let itemsSpacing: CGFloat = 20.0
+        }
     }
 }
 

@@ -9,7 +9,7 @@ import UIKit
 
 final class PlantsViewController: BaseViewController {
     
-    var tableView = UITableView()
+    let tableView = UITableView()
     
     let garden = Garden()
 
@@ -43,6 +43,14 @@ final class PlantsViewController: BaseViewController {
         tableView.delegate = self
         tableView.dataSource = self
     }
+}
+
+extension PlantsViewController {
+    
+    func addNavBarButton() {
+        let button = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(navBarRightButtonHandler))
+        navigationItem.rightBarButtonItem = button
+    }
     
     @objc private func navBarRightButtonHandler() {
         let addPlantController = AddPlantController()
@@ -54,13 +62,6 @@ final class PlantsViewController: BaseViewController {
             }
         }
         navigationController?.pushViewController(addPlantController, animated: true)
-    }
-}
-
-extension PlantsViewController {
-    func addNavBarButton() {
-        let button = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(navBarRightButtonHandler))
-        navigationItem.rightBarButtonItem = button
     }
 }
 
@@ -77,7 +78,7 @@ extension PlantsViewController: UITableViewDelegate, UITableViewDataSource {
         if let plantCell = cell as? PlantCell {
             let plant = garden.plants[indexPath.row]
             plantCell.set(plant: plant)
-            plantCell.buttonCompletionHandler = { [weak self] in
+            plantCell.buttonCompletionHandler = { [weak self, unowned plantCell] in
                 let optionsVC = OptionsPlantTableViewController()
                 optionsVC.modalPresentationStyle = .popover
                 let popoverVC = optionsVC.popoverPresentationController
