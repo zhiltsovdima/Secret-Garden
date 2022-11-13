@@ -28,7 +28,7 @@ final class PlantsViewController: BaseViewController {
         setTableViewDelegates()
         tableView.rowHeight = 200
         tableView.separatorStyle = .none
-        tableView.register(PlantCell.self, forCellReuseIdentifier: Resources.Cells.plantCell)
+        tableView.register(PlantCell.self, forCellReuseIdentifier: Resources.Identifiers.plantCell)
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -47,7 +47,7 @@ final class PlantsViewController: BaseViewController {
 
 extension PlantsViewController {
     
-    func addNavBarButton() {
+    private func addNavBarButton() {
         let button = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(navBarRightButtonHandler))
         navigationItem.rightBarButtonItem = button
     }
@@ -73,7 +73,7 @@ extension PlantsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: Resources.Cells.plantCell, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: Resources.Identifiers.plantCell, for: indexPath)
         
         if let plantCell = cell as? PlantCell {
             let plant = garden.plants[indexPath.row]
@@ -84,11 +84,15 @@ extension PlantsViewController: UITableViewDelegate, UITableViewDataSource {
                 let popoverVC = optionsVC.popoverPresentationController
                 popoverVC?.delegate = self
                 popoverVC?.sourceView = plantCell.settingsButton
-                popoverVC?.sourceRect = CGRect(x: Int(plantCell.settingsButton.bounds.minX),
-                                               y: Int(plantCell.settingsButton.bounds.midY),
+                popoverVC?.sourceRect = CGRect(x: plantCell.settingsButton.bounds.minX - 70,
+                                               y: plantCell.settingsButton.bounds.midY + 7,
                                                width: 0,
                                                height: 0
                 )
+                popoverVC?.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
+
+                optionsVC.preferredContentSize.width = self!.view.bounds.width / 3.0
+                
                 optionsVC.editPlantCompletionHandler = {
                     let editVC = EditPlantViewController(plant)
                     editVC.completionHandler = { editedPlant in

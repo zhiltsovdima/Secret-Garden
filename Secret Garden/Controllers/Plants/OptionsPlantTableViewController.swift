@@ -20,12 +20,13 @@ final class OptionsPlantTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: Resources.Cells.plantOptionsCell)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: Resources.Identifiers.plantOptionsCell)
         tableView.isScrollEnabled = false
     }
     
     override func viewWillLayoutSubviews() {
-        preferredContentSize = CGSize(width: 150.0, height: tableView.contentSize.height)
+        super.viewWillLayoutSubviews()
+        preferredContentSize.height = tableView.contentSize.height - 1
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -33,7 +34,7 @@ final class OptionsPlantTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: Resources.Cells.plantOptionsCell, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: Resources.Identifiers.plantOptionsCell, for: indexPath)
         
         let optionName = options[indexPath.row]
         cell.textLabel?.text = optionName

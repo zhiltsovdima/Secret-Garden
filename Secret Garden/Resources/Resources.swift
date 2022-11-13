@@ -59,16 +59,20 @@ enum Resources {
             static let camera = UIImage(systemName: "camera.circle.fill")
             static let moreOptions = UIImage(systemName: "ellipsis")
             static let back = UIImage(systemName: "chevron.backward.circle.fill")
+            static let favorites = UIImage(systemName: "heart.circle")
+            static let cart = UIImage(systemName: "cart.circle")
         }
         enum Home {
             static let tip = UIImage(named: "Plant")
         }
     }
     
-    enum Cells {
+    enum Identifiers {
         static let plantCell = "PlantCell"
         static let plantOptionsCell = "PlantOptionsCell"
         static let itemCell = "ItemCell"
+        static let categoriesView = "HeaderCollectionReusableView"
+        static let categoryCell = "CategoryCell"
     }
     
     enum Constants {

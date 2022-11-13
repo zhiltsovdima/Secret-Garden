@@ -9,10 +9,7 @@ import UIKit
 
 final class ShopViewController: BaseViewController {
     
-    private lazy var collectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: flowLayout)
-        return collectionView
-    }()
+    private lazy var collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: flowLayout)
     
     private let flowLayout = UICollectionViewFlowLayout()
     
@@ -25,12 +22,17 @@ final class ShopViewController: BaseViewController {
     private var gapSection: CGFloat {
         return flowLayout.sectionInset.right * 2.0
     }
+    private var width: CGFloat {
+        return (boundsCollectionWidth - gapItems - gapSection) / Resources.Constants.shopVC.columnCount
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         title = Resources.Strings.TabBar.shop
         navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.tintColor = .black
+        addNavBarButtons()
         
         configureCollectionView()
         
@@ -39,12 +41,18 @@ final class ShopViewController: BaseViewController {
     private func configureCollectionView() {
         
         setDelegates()
-        collectionView.register(ItemCell.self, forCellWithReuseIdentifier: Resources.Cells.itemCell)
+        collectionView.register(ItemCell.self,
+                                forCellWithReuseIdentifier: Resources.Identifiers.itemCell)
+        collectionView.register(CategoriesView.self,
+                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                                withReuseIdentifier: Resources.Identifiers.categoriesView)
         
         view.addSubview(collectionView)
         flowLayout.scrollDirection = .vertical
-        flowLayout.sectionInset.right = Resources.Constants.shopVC.itemsSpacing
-        flowLayout.sectionInset.left = Resources.Constants.shopVC.itemsSpacing
+        flowLayout.sectionInset = UIEdgeInsets(top: Resources.Constants.shopVC.itemsSpacing,
+                                               left: Resources.Constants.shopVC.itemsSpacing,
+                                               bottom: 0,
+                                               right: Resources.Constants.shopVC.itemsSpacing)
         flowLayout.minimumInteritemSpacing = Resources.Constants.shopVC.itemsSpacing
         flowLayout.minimumLineSpacing = Resources.Constants.shopVC.itemsSpacing
     
@@ -57,6 +65,31 @@ final class ShopViewController: BaseViewController {
     
 }
 
+// MARK: - NavBar Buttons
+
+extension ShopViewController {
+    
+    private func addNavBarButtons() {
+        let buttons = [UIBarButtonItem(image: Resources.Images.Common.favorites,
+                                     style: .done,
+                                     target: self,
+                                     action: #selector(favoritesAction)),
+                       UIBarButtonItem(image: Resources.Images.Common.cart,
+                                       style: .done,
+                                       target: self,
+                                       action: #selector(cartAction))
+                       ]
+        navigationItem.rightBarButtonItems = buttons
+    }
+    
+    @objc private func cartAction() {
+        print("cart")
+    }
+    @objc private func favoritesAction() {
+        print("favorites")
+    }
+}
+
 // MARK: - UICollectionViewDelegate
 
 extension ShopViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -66,10 +99,18 @@ extension ShopViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Resources.Cells.itemCell, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Resources.Identifiers.itemCell, for: indexPath)
         
         cell.contentView.backgroundColor = .systemPink
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader,
+                                                                     withReuseIdentifier: Resources.Identifiers.categoriesView,
+                                                                     for: indexPath) as! CategoriesView
+        header.congifure()
+        return header
     }
 }
 
@@ -78,7 +119,11 @@ extension ShopViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let width = (boundsCollectionWidth - gapItems - gapSection) / Resources.Constants.shopVC.columnCount
         return CGSize(width: width, height: width / Resources.Constants.shopVC.aspectRatio)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        
+        return CGSize(width: width, height: 40)
     }
 }
