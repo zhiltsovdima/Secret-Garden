@@ -47,6 +47,9 @@ enum Resources {
         enum FolderForSaveData {
             static let garden = "Garden"
         }
+        enum Shop {
+            static let addToCart = "Add to Cart"
+        }
     }
     
     enum Images {
@@ -60,6 +63,7 @@ enum Resources {
             static let moreOptions = UIImage(systemName: "ellipsis")
             static let back = UIImage(systemName: "chevron.backward.circle.fill")
             static let favorites = UIImage(systemName: "heart.circle")
+            static let addToFavorite = UIImage(systemName: "heart")
             static let cart = UIImage(systemName: "cart.circle")
         }
         enum Home {
@@ -78,7 +82,7 @@ enum Resources {
     enum Constants {
         enum shopVC {
             static let columnCount: CGFloat = 2.0
-            static let aspectRatio: CGFloat = 3.0 / 4.0
+            static let aspectRatio: CGFloat = 2.0 / 3.0
             static let itemsSpacing: CGFloat = 20.0
         }
     }
