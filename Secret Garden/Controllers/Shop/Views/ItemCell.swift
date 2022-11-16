@@ -9,6 +9,8 @@ import UIKit
 
 class ItemCell: UICollectionViewCell {
     
+    private var imageView = UIImageView()
+    private var name: String?
     private let favoriteButton = UIButton()
     private let addToCartButton = UIButton()
     
@@ -23,13 +25,16 @@ class ItemCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setItem() {
-        
+    func setItem(_ item: ShopItem) {
+        name = item.name
+        imageView.image = item.image
     }
     
     private func configure() {
         favoriteButton.frame = CGRect(x: 0, y: 0, width: frame.width * 0.25, height: frame.width * 0.25)
         addToCartButton.frame = CGRect(x: 0, y: 0, width: 0, height: frame.width * 0.25)
+        
+        addSubview(imageView)
 
         contentView.addSubview(favoriteButton)
         favoriteButton.setImage(Resources.Images.Common.addToFavorite, for: .normal)
@@ -49,6 +54,14 @@ class ItemCell: UICollectionViewCell {
     }
     
     private func setConstraints() {
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            imageView.topAnchor.constraint(equalTo: topAnchor),
+            imageView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            imageView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            imageView.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ])
+        
         favoriteButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             favoriteButton.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.25),

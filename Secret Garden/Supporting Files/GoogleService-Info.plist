@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>363211642031-89t5ppkt26l4ahngkrd2gdqnog8952hn.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.363211642031-89t5ppkt26l4ahngkrd2gdqnog8952hn</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAr-pVG4d84s-Tez3wtuAs4loGSWHIXpY0</string>
+	<key>GCM_SENDER_ID</key>
+	<string>363211642031</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.zhiltsov.Secret-Garden</string>
+	<key>PROJECT_ID</key>
+	<string>secret-garden-eb4c7</string>
+	<key>STORAGE_BUCKET</key>
+	<string>secret-garden-eb4c7.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:363211642031:ios:eb5e53719649db02fef05a</string>
+</dict>
+</plist>

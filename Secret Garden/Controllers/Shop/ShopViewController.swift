@@ -9,6 +9,8 @@ import UIKit
 
 final class ShopViewController: BaseViewController {
     
+    let shop = Shop()
+    
     private lazy var collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: flowLayout)
     
     private let flowLayout = UICollectionViewFlowLayout()
@@ -95,13 +97,14 @@ extension ShopViewController {
 extension ShopViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return shop.items.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Resources.Identifiers.itemCell, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Resources.Identifiers.itemCell, for: indexPath) as! ItemCell
         
-        cell.contentView.backgroundColor = .systemPink
+        let item = shop.items[indexPath.item]
+        cell.setItem(item)
         return cell
     }
     

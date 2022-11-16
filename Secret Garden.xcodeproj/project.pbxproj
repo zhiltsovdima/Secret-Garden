@@ -10,6 +10,13 @@
 		620332E5291FA24700ADE1A1 /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620332E4291FA24700ADE1A1 /* ItemCell.swift */; };
 		620332E82920D32500ADE1A1 /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620332E72920D32500ADE1A1 /* CategoriesView.swift */; };
 		620332EA2921583F00ADE1A1 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620332E92921583F00ADE1A1 /* CategoryCell.swift */; };
+		620332EC2923CB7A00ADE1A1 /* Shop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620332EB2923CB7A00ADE1A1 /* Shop.swift */; };
+		620332F12923DD3000ADE1A1 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 620332F02923DD3000ADE1A1 /* FirebaseAnalytics */; };
+		620332F32923DD3000ADE1A1 /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 620332F22923DD3000ADE1A1 /* FirebaseDatabaseSwift */; };
+		620332F52923DD3000ADE1A1 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 620332F42923DD3000ADE1A1 /* FirebaseFirestoreSwift */; };
+		620332F72923DD3000ADE1A1 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 620332F62923DD3000ADE1A1 /* FirebaseStorage */; };
+		620332F92923E90B00ADE1A1 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620332F82923E90B00ADE1A1 /* APIManager.swift */; };
+		620332FE2924D2AD00ADE1A1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 620332FD2924D2AD00ADE1A1 /* GoogleService-Info.plist */; };
 		626FA06D291BB7AC00FEB461 /* Garden.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626FA06C291BB7AC00FEB461 /* Garden.swift */; };
 		626FA06F291CFC0E00FEB461 /* DetailPlantController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626FA06E291CFC0E00FEB461 /* DetailPlantController.swift */; };
 		626FA071291CFCB000FEB461 /* DetailBaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626FA070291CFCB000FEB461 /* DetailBaseController.swift */; };
@@ -58,6 +65,9 @@
 		620332E4291FA24700ADE1A1 /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
 		620332E72920D32500ADE1A1 /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
 		620332E92921583F00ADE1A1 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
+		620332EB2923CB7A00ADE1A1 /* Shop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shop.swift; sourceTree = "<group>"; };
+		620332F82923E90B00ADE1A1 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		620332FD2924D2AD00ADE1A1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		626FA06C291BB7AC00FEB461 /* Garden.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Garden.swift; sourceTree = "<group>"; };
 		626FA06E291CFC0E00FEB461 /* DetailPlantController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPlantController.swift; sourceTree = "<group>"; };
 		626FA070291CFCB000FEB461 /* DetailBaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailBaseController.swift; sourceTree = "<group>"; };
@@ -94,6 +104,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				620332F32923DD3000ADE1A1 /* FirebaseDatabaseSwift in Frameworks */,
+				620332F72923DD3000ADE1A1 /* FirebaseStorage in Frameworks */,
+				620332F12923DD3000ADE1A1 /* FirebaseAnalytics in Frameworks */,
+				620332F52923DD3000ADE1A1 /* FirebaseFirestoreSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -177,6 +191,7 @@
 		62E9AFB3290C304800175A21 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				620332FD2924D2AD00ADE1A1 /* GoogleService-Info.plist */,
 				62E9AFCE291125BC00175A21 /* Assets.xcassets */,
 				62E9AF8D290C2FF700175A21 /* LaunchScreen.storyboard */,
 				62E9AF90290C2FF700175A21 /* Info.plist */,
@@ -230,6 +245,8 @@
 			children = (
 				62E9AFC62911051400175A21 /* Plant.swift */,
 				626FA06C291BB7AC00FEB461 /* Garden.swift */,
+				620332EB2923CB7A00ADE1A1 /* Shop.swift */,
+				620332F82923E90B00ADE1A1 /* APIManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -313,6 +330,10 @@
 			);
 			name = "Secret Garden";
 			packageProductDependencies = (
+				620332F02923DD3000ADE1A1 /* FirebaseAnalytics */,
+				620332F22923DD3000ADE1A1 /* FirebaseDatabaseSwift */,
+				620332F42923DD3000ADE1A1 /* FirebaseFirestoreSwift */,
+				620332F62923DD3000ADE1A1 /* FirebaseStorage */,
 			);
 			productName = "Secret Garden";
 			productReference = 62E9AF7F290C2FF600175A21 /* Secret Garden.app */;
@@ -387,6 +408,7 @@
 			);
 			mainGroup = 62E9AF76290C2FF600175A21;
 			packageReferences = (
+				620332EF2923DD3000ADE1A1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 62E9AF80290C2FF600175A21 /* Products */;
 			projectDirPath = "";
@@ -406,6 +428,7 @@
 			files = (
 				62E9AFCF291125BC00175A21 /* Assets.xcassets in Resources */,
 				62E9AF8F290C2FF700175A21 /* LaunchScreen.storyboard in Resources */,
+				620332FE2924D2AD00ADE1A1 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,12 +468,14 @@
 				62E9AFC4290EAFD500175A21 /* BaseViewController.swift in Sources */,
 				620332E5291FA24700ADE1A1 /* ItemCell.swift in Sources */,
 				626FA06F291CFC0E00FEB461 /* DetailPlantController.swift in Sources */,
+				620332EC2923CB7A00ADE1A1 /* Shop.swift in Sources */,
 				62E9B0032916D4D300175A21 /* OptionsPlantTableViewController.swift in Sources */,
 				62E9AFC0290D40B900175A21 /* ShopViewController.swift in Sources */,
 				626FA06D291BB7AC00FEB461 /* Garden.swift in Sources */,
 				62E9AFDA2913BD9100175A21 /* BaseButton.swift in Sources */,
 				62E9B0052917C77E00175A21 /* EditPlantViewController.swift in Sources */,
 				62E9AFC72911051500175A21 /* Plant.swift in Sources */,
+				620332F92923E90B00ADE1A1 /* APIManager.swift in Sources */,
 				62E9AF85290C2FF600175A21 /* SceneDelegate.swift in Sources */,
 				62E9AFC2290EAB4500175A21 /* NavBarController.swift in Sources */,
 			);
@@ -792,6 +817,40 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		620332EF2923DD3000ADE1A1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		620332F02923DD3000ADE1A1 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 620332EF2923DD3000ADE1A1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		620332F22923DD3000ADE1A1 /* FirebaseDatabaseSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 620332EF2923DD3000ADE1A1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabaseSwift;
+		};
+		620332F42923DD3000ADE1A1 /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 620332EF2923DD3000ADE1A1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
+		};
+		620332F62923DD3000ADE1A1 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 620332EF2923DD3000ADE1A1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 62E9AF77290C2FF600175A21 /* Project object */;
 }
