@@ -37,7 +37,16 @@ final class ShopViewController: BaseViewController {
         addNavBarButtons()
         
         configureCollectionView()
+        updateUI()
         
+    }
+    
+    private func updateUI() {
+        shop.completion = { index in
+            DispatchQueue.main.async {
+                self.collectionView.reloadItems(at: [IndexPath(item: index, section: 0)])
+            }
+        }
     }
     
     private func configureCollectionView() {

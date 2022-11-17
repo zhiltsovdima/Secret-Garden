@@ -13,6 +13,11 @@ class ItemCell: UICollectionViewCell {
     private var name: String?
     private let favoriteButton = UIButton()
     private let addToCartButton = UIButton()
+    private let spinner = UIActivityIndicatorView()
+    
+    private var isFetched: Bool {
+        return imageView.image != nil ? true : false
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -28,6 +33,11 @@ class ItemCell: UICollectionViewCell {
     func setItem(_ item: ShopItem) {
         name = item.name
         imageView.image = item.image
+        if isFetched {
+            spinner.stopAnimating()
+        } else {
+            spinner.startAnimating()
+        }
     }
     
     private func configure() {
@@ -35,6 +45,7 @@ class ItemCell: UICollectionViewCell {
         addToCartButton.frame = CGRect(x: 0, y: 0, width: 0, height: frame.width * 0.25)
         
         addSubview(imageView)
+        addSubview(spinner)
 
         contentView.addSubview(favoriteButton)
         favoriteButton.setImage(Resources.Images.Common.addToFavorite, for: .normal)
@@ -60,6 +71,12 @@ class ItemCell: UICollectionViewCell {
             imageView.leadingAnchor.constraint(equalTo: leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: trailingAnchor),
             imageView.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ])
+        
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            spinner.centerXAnchor.constraint(equalTo: centerXAnchor),
+            spinner.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
         
         favoriteButton.translatesAutoresizingMaskIntoConstraints = false
