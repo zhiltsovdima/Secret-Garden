@@ -17,6 +17,7 @@
 		620332F72923DD3000ADE1A1 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 620332F62923DD3000ADE1A1 /* FirebaseStorage */; };
 		620332F92923E90B00ADE1A1 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620332F82923E90B00ADE1A1 /* APIManager.swift */; };
 		620332FE2924D2AD00ADE1A1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 620332FD2924D2AD00ADE1A1 /* GoogleService-Info.plist */; };
+		622AF21B2927C16500A1A994 /* ItemDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622AF21A2927C16500A1A994 /* ItemDetailController.swift */; };
 		626FA06D291BB7AC00FEB461 /* Garden.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626FA06C291BB7AC00FEB461 /* Garden.swift */; };
 		626FA06F291CFC0E00FEB461 /* DetailPlantController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626FA06E291CFC0E00FEB461 /* DetailPlantController.swift */; };
 		626FA071291CFCB000FEB461 /* DetailBaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626FA070291CFCB000FEB461 /* DetailBaseController.swift */; };
@@ -68,6 +69,7 @@
 		620332EB2923CB7A00ADE1A1 /* Shop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shop.swift; sourceTree = "<group>"; };
 		620332F82923E90B00ADE1A1 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		620332FD2924D2AD00ADE1A1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		622AF21A2927C16500A1A994 /* ItemDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailController.swift; sourceTree = "<group>"; };
 		626FA06C291BB7AC00FEB461 /* Garden.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Garden.swift; sourceTree = "<group>"; };
 		626FA06E291CFC0E00FEB461 /* DetailPlantController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPlantController.swift; sourceTree = "<group>"; };
 		626FA070291CFCB000FEB461 /* DetailBaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailBaseController.swift; sourceTree = "<group>"; };
@@ -293,6 +295,7 @@
 			children = (
 				620332E6292023C600ADE1A1 /* Views */,
 				62E9AFBF290D40B900175A21 /* ShopViewController.swift */,
+				622AF21A2927C16500A1A994 /* ItemDetailController.swift */,
 			);
 			path = Shop;
 			sourceTree = "<group>";
@@ -464,6 +467,7 @@
 				626FA075291E82F100FEB461 /* UIImage + ext.swift in Sources */,
 				620332E82920D32500ADE1A1 /* CategoriesView.swift in Sources */,
 				626FA071291CFCB000FEB461 /* DetailBaseController.swift in Sources */,
+				622AF21B2927C16500A1A994 /* ItemDetailController.swift in Sources */,
 				62E9AFBE290D40AF00175A21 /* PlantsViewController.swift in Sources */,
 				62E9AFC4290EAFD500175A21 /* BaseViewController.swift in Sources */,
 				620332E5291FA24700ADE1A1 /* ItemCell.swift in Sources */,

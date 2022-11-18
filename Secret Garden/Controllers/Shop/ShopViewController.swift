@@ -124,6 +124,12 @@ extension ShopViewController: UICollectionViewDelegate, UICollectionViewDataSour
         header.congifure()
         return header
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let shopItem = shop.items[indexPath.item]
+        let itemDetailVC = ItemDetailController(shopItem)
+        navigationController?.pushViewController(itemDetailVC, animated: true)
+    }
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout

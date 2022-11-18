@@ -50,6 +50,7 @@ enum Resources {
         enum Shop {
             static let addToCart = "Add to Cart"
             static let collectionNameInDataBase = "SecretGarden"
+            static let price = "Price" 
         }
     }
     
