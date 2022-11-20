@@ -18,6 +18,27 @@ class ItemDetailController: BaseViewController {
     let latinNameItem = UILabel()
     let descriptionItem = UILabel()
     
+    let detailsStackView = UIStackView()
+    let upperDetailsStack = UIStackView()
+    
+    let careLevelView = UIView()
+    let careLevelImage = UIImageView(image: Resources.Images.Shop.careLevel)
+    let careLevelLabel = UILabel()
+    let careValueLabel = UILabel()
+    
+    let petView = UIView()
+    let petFriendlyImage = UIImageView(image: Resources.Images.Shop.petFriendly)
+    let petFriendlyLabel = UILabel()
+    let petValueLabel = UILabel()
+    
+    let originView = UIView()
+    let originImage = UIImageView(image: Resources.Images.Shop.origin)
+    let originLabel = UILabel()
+    let originValueLabel = UILabel()
+
+
+
+    
     let bottonView = UIView()
     let priceStackView = UIStackView()
     let priceStrLabel = UILabel()
@@ -25,7 +46,6 @@ class ItemDetailController: BaseViewController {
     
     let addToCartButton = BaseButton()
     
-    let testLabel = UILabel()
     
     init(_ shopItem: ShopItem) {
         self.shopItem = shopItem
@@ -53,6 +73,22 @@ class ItemDetailController: BaseViewController {
         scrollView.addSubview(latinNameItem)
         scrollView.addSubview(descriptionItem)
         
+        scrollView.addSubview(upperDetailsStack)
+        upperDetailsStack.addSubview(careLevelView)
+        careLevelView.addSubview(careLevelImage)
+        careLevelView.addSubview(careLevelLabel)
+        careLevelView.addSubview(careValueLabel)
+        
+        upperDetailsStack.addSubview(petView)
+        petView.addSubview(petFriendlyImage)
+        petView.addSubview(petFriendlyLabel)
+        petView.addSubview(petValueLabel)
+        
+        upperDetailsStack.addSubview(originView)
+        originView.addSubview(originImage)
+        originView.addSubview(originLabel)
+        originView.addSubview(originValueLabel)
+        
         view.addSubview(bottonView)
         bottonView.addSubview(priceStackView)
         bottonView.addSubview(addToCartButton)
@@ -70,6 +106,20 @@ class ItemDetailController: BaseViewController {
         
         descriptionItem.numberOfLines = 0
         descriptionItem.text = shopItem.description
+        
+        upperDetailsStack.axis = .horizontal
+        upperDetailsStack.distribution = .fillEqually
+        
+        careLevelLabel.text = Resources.Strings.Shop.Detail.careLevel
+        careValueLabel.text = shopItem.careLevel
+        
+        petFriendlyLabel.text = Resources.Strings.Shop.Detail.petFriendly
+        petValueLabel.text = shopItem.petFriendly
+        petValueLabel.numberOfLines = 0
+        
+        originLabel.text = Resources.Strings.Shop.Detail.origin
+        originValueLabel.text = shopItem.origin
+        originValueLabel.numberOfLines = 0
         
         priceStackView.axis = .vertical
         priceStackView.alignment = .leading
@@ -91,6 +141,24 @@ class ItemDetailController: BaseViewController {
         nameItem.translatesAutoresizingMaskIntoConstraints = false
         latinNameItem.translatesAutoresizingMaskIntoConstraints = false
         descriptionItem.translatesAutoresizingMaskIntoConstraints = false
+        
+        upperDetailsStack.translatesAutoresizingMaskIntoConstraints = false
+        careLevelView.translatesAutoresizingMaskIntoConstraints = false
+        careLevelImage.translatesAutoresizingMaskIntoConstraints = false
+        careLevelLabel.translatesAutoresizingMaskIntoConstraints = false
+        careValueLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        petView.translatesAutoresizingMaskIntoConstraints = false
+        petFriendlyImage.translatesAutoresizingMaskIntoConstraints = false
+        petFriendlyLabel.translatesAutoresizingMaskIntoConstraints = false
+        petValueLabel.translatesAutoresizingMaskIntoConstraints = false
+
+        originView.translatesAutoresizingMaskIntoConstraints = false
+        originImage.translatesAutoresizingMaskIntoConstraints = false
+        originLabel.translatesAutoresizingMaskIntoConstraints = false
+        originValueLabel.translatesAutoresizingMaskIntoConstraints = false
+
+        
         bottonView.translatesAutoresizingMaskIntoConstraints = false
         priceStackView.translatesAutoresizingMaskIntoConstraints = false
         priceStrLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -98,6 +166,8 @@ class ItemDetailController: BaseViewController {
         addToCartButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
+            
+            // MARK: - ScrollView
             scrollView.topAnchor.constraint(equalTo: safeArea.topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -118,9 +188,76 @@ class ItemDetailController: BaseViewController {
             descriptionItem.topAnchor.constraint(equalTo: latinNameItem.bottomAnchor, constant: 20),
             descriptionItem.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 20),
             descriptionItem.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor,constant: -20),
-            descriptionItem.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             descriptionItem.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -40),
             
+            // MARK: - DetailsStackView
+            
+            upperDetailsStack.topAnchor.constraint(equalTo: descriptionItem.bottomAnchor, constant: 20),
+            upperDetailsStack.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 20),
+            upperDetailsStack.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -20),
+            upperDetailsStack.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            upperDetailsStack.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -40),
+            upperDetailsStack.heightAnchor.constraint(equalToConstant: 80.0),
+            
+            // MARK: - CareLevelView
+            
+            careLevelView.topAnchor.constraint(equalTo: upperDetailsStack.topAnchor),
+            careLevelView.leadingAnchor.constraint(equalTo: upperDetailsStack.leadingAnchor),
+            careLevelView.bottomAnchor.constraint(equalTo: upperDetailsStack.bottomAnchor),
+            careLevelView.widthAnchor.constraint(equalTo: upperDetailsStack.widthAnchor, multiplier: 1/3),
+            
+            careLevelImage.topAnchor.constraint(equalTo: careLevelView.topAnchor),
+            careLevelImage.leadingAnchor.constraint(equalTo: careLevelView.leadingAnchor),
+            
+            careLevelLabel.topAnchor.constraint(equalTo: careLevelView.topAnchor),
+            careLevelLabel.leadingAnchor.constraint(equalTo: careLevelImage.trailingAnchor, constant: 5),
+            
+            careValueLabel.topAnchor.constraint(equalTo: careLevelLabel.bottomAnchor),
+            careValueLabel.leadingAnchor.constraint(equalTo: careLevelView.leadingAnchor),
+            careValueLabel.bottomAnchor.constraint(equalTo: careLevelView.bottomAnchor),
+            careValueLabel.widthAnchor.constraint(equalTo: careLevelView.widthAnchor),
+
+            // MARK: - PetView
+            
+            petView.topAnchor.constraint(equalTo: upperDetailsStack.topAnchor),
+            petView.leadingAnchor.constraint(equalTo: careLevelView.trailingAnchor),
+            petView.bottomAnchor.constraint(equalTo: upperDetailsStack.bottomAnchor),
+            petView.widthAnchor.constraint(equalTo: upperDetailsStack.widthAnchor, multiplier: 1/3),
+            
+            petFriendlyImage.topAnchor.constraint(equalTo: petView.topAnchor),
+            petFriendlyImage.leadingAnchor.constraint(equalTo: petView.leadingAnchor),
+            
+            petFriendlyLabel.topAnchor.constraint(equalTo: petView.topAnchor),
+            petFriendlyLabel.leadingAnchor.constraint(equalTo: petFriendlyImage.trailingAnchor, constant: 5),
+            
+            petValueLabel.topAnchor.constraint(equalTo: petFriendlyLabel.bottomAnchor),
+            petValueLabel.leadingAnchor.constraint(equalTo: petView.leadingAnchor),
+            petValueLabel.bottomAnchor.constraint(equalTo: petView.bottomAnchor),
+            petValueLabel.widthAnchor.constraint(equalTo: petView.widthAnchor),
+
+
+
+            // MARK: - OriginView
+
+            originView.topAnchor.constraint(equalTo: upperDetailsStack.topAnchor),
+            originView.leadingAnchor.constraint(equalTo: petView.trailingAnchor),
+            originView.trailingAnchor.constraint(equalTo: upperDetailsStack.trailingAnchor),
+            originView.bottomAnchor.constraint(equalTo: upperDetailsStack.bottomAnchor),
+            originView.widthAnchor.constraint(equalTo: upperDetailsStack.widthAnchor, multiplier: 1/3),
+            
+            originImage.topAnchor.constraint(equalTo: originView.topAnchor),
+            originImage.leadingAnchor.constraint(equalTo: originView.leadingAnchor),
+            
+            originLabel.topAnchor.constraint(equalTo: originView.topAnchor),
+            originLabel.leadingAnchor.constraint(equalTo: originImage.trailingAnchor, constant: 5),
+            
+            originValueLabel.topAnchor.constraint(equalTo: originLabel.bottomAnchor),
+            originValueLabel.leadingAnchor.constraint(equalTo: originView.leadingAnchor),
+            originValueLabel.bottomAnchor.constraint(equalTo: originView.bottomAnchor),
+            originValueLabel.widthAnchor.constraint(equalTo: originView.widthAnchor),
+
+            // MARK: - BottonStackView
+
             bottonView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             bottonView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             bottonView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor),

@@ -48,6 +48,16 @@ enum Resources {
             static let garden = "Garden"
         }
         enum Shop {
+            
+            enum Detail {
+                static let careLevel = "Care Level"
+                static let petFriendly = "Pet Friendly"
+                static let origin = "Origin"
+                static let light = "Light"
+                static let humidity = "Humidity"
+                static let temperature = "Temperature"
+            }
+            
             static let addToCart = "Add to Cart"
             static let collectionNameInDataBase = "SecretGarden"
             static let price = "Price" 
@@ -71,6 +81,15 @@ enum Resources {
         }
         enum Home {
             static let tip = UIImage(named: "PlantForTip")
+        }
+        
+        enum Shop {
+            static let careLevel = UIImage(systemName: "chart.bar.fill")
+            static let petFriendly = UIImage(systemName: "pawprint.fill")
+            static let origin = UIImage(systemName: "globe.desk.fill")
+            static let light = UIImage(systemName: "sun.max.fill")
+            static let humidity = UIImage(systemName: "drop.fill")
+            static let temperature = UIImage(systemName: "thermometer")
         }
     }
     
