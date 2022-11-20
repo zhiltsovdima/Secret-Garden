@@ -32,7 +32,7 @@ final class ShopViewController: BaseViewController {
         super.viewDidLoad()
 
         title = Resources.Strings.TabBar.shop
-        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.tintColor = .black
         addNavBarButtons()
         

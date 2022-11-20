@@ -66,7 +66,7 @@ final class APIManager {
         let reference = storage.reference()
         let pathRef = reference.child("pictures")
         
-        var image = UIImage(named: "defaultPlant")!
+        var image = Resources.Images.Common.defaultPlant!
         
         guard let imageName else { completion(image); return }
         let fileRef = pathRef.child(imageName + ".jpg")

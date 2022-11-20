@@ -18,9 +18,14 @@ class BaseButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        layer.cornerRadius = bounds.height * 0.5
+    }
+    
     func configureAppearance() {
         backgroundColor = Resources.Colors.accent
-        layer.cornerRadius = 20
         setTitleColor(Resources.Colors.backgroundColor, for: .normal)
         makeSystemAnimation(for: self)
     }

@@ -11,6 +11,22 @@ class ItemDetailController: BaseViewController {
     
     let shopItem: ShopItem
     
+    let scrollView = UIScrollView()
+    
+    let imageView = UIImageView()
+    let nameItem = UILabel()
+    let latinNameItem = UILabel()
+    let descriptionItem = UILabel()
+    
+    let bottonView = UIView()
+    let priceStackView = UIStackView()
+    let priceStrLabel = UILabel()
+    let priceLabel = UILabel()
+    
+    let addToCartButton = BaseButton()
+    
+    let testLabel = UILabel()
+    
     init(_ shopItem: ShopItem) {
         self.shopItem = shopItem
         super.init(nibName: nil, bundle: nil)
@@ -20,140 +36,111 @@ class ItemDetailController: BaseViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    let scrollView = UIScrollView()
-    let contentView = UIView()
-    
-    let imageView = UIImageView()
-    let nameItem = UILabel()
-    let latinNameItem = UILabel()
-    
-    let descriptionItem = UILabel()
-    
-    let bottonStackView = UIStackView()
-    let priceStackView = UIStackView()
-    let priceStrLabel = UILabel()
-    let priceLabel = UILabel()
-    
-    let addToCartButton = BaseButton()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.largeTitleDisplayMode = .never
         
         addViews()
         configureViews()
         setConstraints()
     }
-    
+
     private func addViews() {
         view.addSubview(scrollView)
-        scrollView.addSubview(contentView)
         
-        contentView.addSubview(imageView)
-        contentView.addSubview(nameItem)
-        contentView.addSubview(latinNameItem)
-        contentView.addSubview(descriptionItem)
+        scrollView.addSubview(imageView)
+        scrollView.addSubview(nameItem)
+        scrollView.addSubview(latinNameItem)
+        scrollView.addSubview(descriptionItem)
         
-        view.addSubview(bottonStackView)
-        bottonStackView.addSubview(priceStackView)
-        bottonStackView.addSubview(addToCartButton)
+        view.addSubview(bottonView)
+        bottonView.addSubview(priceStackView)
+        bottonView.addSubview(addToCartButton)
         priceStackView.addSubview(priceStrLabel)
         priceStackView.addSubview(priceLabel)
     }
     
     private func configureViews() {
+                
         imageView.image = shopItem.image
-        imageView.contentMode = .scaleAspectFit
-        nameItem.text = shopItem.name
-        descriptionItem.text = shopItem.description
-        descriptionItem.numberOfLines = 0
-        descriptionItem.sizeToFit()
+        imageView.contentMode = .scaleToFill
         
+        nameItem.text = shopItem.name
+        latinNameItem.text = shopItem.latinName
+        
+        descriptionItem.numberOfLines = 0
+        descriptionItem.text = shopItem.description
+        
+        priceStackView.axis = .vertical
+        priceStackView.alignment = .leading
+        priceStackView.spacing = 10
         
         priceStrLabel.text = Resources.Strings.Shop.price
-        
         priceLabel.text = shopItem.price
+        
         addToCartButton.setTitle(Resources.Strings.Shop.addToCart, for: .normal)
         
     }
     
     private func setConstraints() {
+    
         let safeArea = view.safeAreaLayoutGuide
         
         scrollView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
-            scrollView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            scrollView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: bottonStackView.topAnchor)
-        ])
-        
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            contentView.widthAnchor.constraint(equalToConstant: view.frame.width),
-            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor)
-        ])
-        
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            imageView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20),
-            imageView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20),
-            imageView.heightAnchor.constraint(equalToConstant: view.frame.height * 0.33)
-        ])
-        
         nameItem.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            nameItem.topAnchor.constraint(equalTo: imageView.bottomAnchor),
-            nameItem.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-        ])
-        
+        latinNameItem.translatesAutoresizingMaskIntoConstraints = false
         descriptionItem.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            descriptionItem.topAnchor.constraint(equalTo: nameItem.bottomAnchor, constant: 20),
-            descriptionItem.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            descriptionItem.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20)
-        ])
-        
-        
-        bottonStackView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            bottonStackView.heightAnchor.constraint(equalToConstant: view.frame.height * 0.06),
-            bottonStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            bottonStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            bottonStackView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor)
-        ])
-        
+        bottonView.translatesAutoresizingMaskIntoConstraints = false
         priceStackView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            priceStackView.leadingAnchor.constraint(equalTo: bottonStackView.leadingAnchor),
-            priceStackView.trailingAnchor.constraint(equalTo: addToCartButton.trailingAnchor),
-            priceStackView.topAnchor.constraint(equalTo: bottonStackView.topAnchor),
-            priceStackView.bottomAnchor.constraint(equalTo: bottonStackView.bottomAnchor)
-        ])
-        
         priceStrLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            priceStrLabel.leadingAnchor.constraint(equalTo: priceStackView.leadingAnchor),
-            priceStrLabel.topAnchor.constraint(equalTo: priceStackView.topAnchor, constant: 3)
-        ])
-        
         priceLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            priceLabel.leadingAnchor.constraint(equalTo: priceStackView.leadingAnchor),
-            priceLabel.topAnchor.constraint(equalTo: priceStrLabel.bottomAnchor, constant: 3),
-            priceLabel.bottomAnchor.constraint(equalTo: priceStackView.bottomAnchor, constant: -3)
-        ])
-        
         addToCartButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            addToCartButton.trailingAnchor.constraint(equalTo: bottonStackView.trailingAnchor),
-            addToCartButton.topAnchor.constraint(equalTo: bottonStackView.topAnchor),
-            addToCartButton.bottomAnchor.constraint(equalTo: bottonStackView.bottomAnchor),
-            addToCartButton.widthAnchor.constraint(equalToConstant: view.frame.width * 0.5)
-
-        ])
         
+        NSLayoutConstraint.activate([
+            scrollView.topAnchor.constraint(equalTo: safeArea.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: bottonView.topAnchor),
+            
+            imageView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            imageView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 30),
+            imageView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -30),
+            imageView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -60),
+            imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: 1.25),
+            
+            nameItem.topAnchor.constraint(equalTo: imageView.bottomAnchor),
+            nameItem.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 20),
+            
+            latinNameItem.topAnchor.constraint(equalTo: nameItem.bottomAnchor),
+            latinNameItem.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 20),
+            
+            descriptionItem.topAnchor.constraint(equalTo: latinNameItem.bottomAnchor, constant: 20),
+            descriptionItem.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 20),
+            descriptionItem.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor,constant: -20),
+            descriptionItem.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            descriptionItem.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -40),
+            
+            bottonView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            bottonView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            bottonView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor),
+            bottonView.heightAnchor.constraint(equalTo: safeArea.heightAnchor, multiplier: 0.1),
+            
+            priceStackView.topAnchor.constraint(equalTo: bottonView.topAnchor, constant: 10),
+            priceStackView.leadingAnchor.constraint(equalTo: bottonView.leadingAnchor, constant: 20),
+            priceStackView.trailingAnchor.constraint(equalTo: addToCartButton.leadingAnchor),
+            priceStackView.bottomAnchor.constraint(equalTo: bottonView.bottomAnchor),
+            
+            priceStrLabel.topAnchor.constraint(equalTo: priceStackView.topAnchor),
+            priceStrLabel.leadingAnchor.constraint(equalTo: priceStackView.leadingAnchor),
+            
+            priceLabel.topAnchor.constraint(equalTo: priceStrLabel.bottomAnchor),
+            priceLabel.leadingAnchor.constraint(equalTo: priceStackView.leadingAnchor),
+            
+            addToCartButton.topAnchor.constraint(equalTo: bottonView.topAnchor, constant: 10),
+            addToCartButton.trailingAnchor.constraint(equalTo: bottonView.trailingAnchor, constant: -20),
+            addToCartButton.bottomAnchor.constraint(equalTo: bottonView.bottomAnchor),
+            addToCartButton.widthAnchor.constraint(equalToConstant: view.frame.width * 0.5)
+        ])
     }
-    
 }

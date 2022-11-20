@@ -17,6 +17,7 @@ final class PlantsViewController: BaseViewController {
         super.viewDidLoad()
 
         title = Resources.Strings.TabBar.garden
+        navigationItem.largeTitleDisplayMode = .never
         addNavBarButton()
         
         configureTableView()

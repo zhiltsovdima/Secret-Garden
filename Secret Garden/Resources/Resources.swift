@@ -14,8 +14,8 @@ enum Resources {
         static let tabBarColor = UIColor(named: "TabBarColor")
         static let tipBackground = UIColor(named: "TipsBackground")
         
-        static let backgroundColor = UIColor(named: "WhiteBackground")
-        static let backgroundFields = #colorLiteral(red: 0.9363515973, green: 0.9363515973, blue: 0.9363515973, alpha: 1)
+        static let backgroundColor = UIColor(named: "Background")
+        static let backgroundFields = UIColor(named: "FieldsBackground")
     }
     
     enum Strings {
@@ -61,6 +61,7 @@ enum Resources {
             static let shop = UIImage(systemName: "bag")
         }
         enum Common {
+            static let defaultPlant = UIImage(named: "DefaultPlant")
             static let camera = UIImage(systemName: "camera.circle.fill")
             static let moreOptions = UIImage(systemName: "ellipsis")
             static let back = UIImage(systemName: "chevron.backward.circle.fill")
@@ -69,7 +70,7 @@ enum Resources {
             static let cart = UIImage(systemName: "cart.circle")
         }
         enum Home {
-            static let tip = UIImage(named: "Plant")
+            static let tip = UIImage(named: "PlantForTip")
         }
     }
     
