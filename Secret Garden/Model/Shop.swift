@@ -14,6 +14,7 @@ struct ShopItem {
     let category: String?
     let description: String?
     let price: String?
+    let size: String?
     let petFriendly: String?
     let careLevel: String?
     let origin: String?
@@ -28,11 +29,7 @@ struct ShopItem {
 
 class Shop {
     
-    var items = [ShopItem]() {
-        didSet {
-            //completion?()
-        }
-    }
+    var items = [ShopItem]()
     
     init() {
         fetchData()

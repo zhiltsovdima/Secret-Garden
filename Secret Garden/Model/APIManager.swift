@@ -37,6 +37,7 @@ final class APIManager {
                 let description = data["description"] as? String
                 let image = data["image"] as? String
                 let price = data["price"] as? String
+                let size = data["size"] as? String
                 let petFriendly = data["petFriendly"] as? String
                 let careLevel = data["careLevel"] as? String
                 let origin = data["origin"] as? String
@@ -49,6 +50,7 @@ final class APIManager {
                                 category: category,
                                 description: description,
                                 price: price,
+                                size: size,
                                 petFriendly: petFriendly,
                                 careLevel: careLevel,
                                 origin: origin,

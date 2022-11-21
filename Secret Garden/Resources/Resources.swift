@@ -16,6 +16,8 @@ enum Resources {
         
         static let backgroundColor = UIColor(named: "Background")
         static let backgroundFields = UIColor(named: "FieldsBackground")
+        
+        static let subHeader: UIColor = .systemGray
     }
     
     enum Strings {
@@ -52,6 +54,7 @@ enum Resources {
             enum Detail {
                 static let careLevel = "Care Level"
                 static let petFriendly = "Pet Friendly"
+                static let size = "Size"
                 static let origin = "Origin"
                 static let light = "Light"
                 static let humidity = "Humidity"
@@ -84,6 +87,7 @@ enum Resources {
         }
         
         enum Shop {
+            static let size = UIImage(systemName: "ruler.fill")
             static let careLevel = UIImage(systemName: "chart.bar.fill")
             static let petFriendly = UIImage(systemName: "pawprint.fill")
             static let origin = UIImage(systemName: "globe.desk.fill")
@@ -99,6 +103,13 @@ enum Resources {
         static let itemCell = "ItemCell"
         static let categoriesView = "HeaderCollectionReusableView"
         static let categoryCell = "CategoryCell"
+    }
+    
+    enum Fonts {
+        static let generalText = UIFont(name: "Helvetica", size: 16)
+        static let header = UIFont(name: "Helvetica-Bold", size: 24)
+        static let subHeaders = UIFont(name: "Helvetica", size: 14)
+        static let values = UIFont(name: "Helvetica-Bold", size: 17)
     }
     
     enum Constants {
