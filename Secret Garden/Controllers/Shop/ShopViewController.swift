@@ -94,10 +94,12 @@ extension ShopViewController {
     }
     
     @objc private func cartAction() {
-        print("cart")
+        let cartVC = CartViewController()
+        navigationController?.pushViewController(cartVC, animated: true)
     }
     @objc private func favoritesAction() {
-        print("favorites")
+        let favoritesVC = FavoritesViewController(shop)
+        navigationController?.pushViewController(favoritesVC, animated: true)
     }
 }
 
@@ -114,6 +116,9 @@ extension ShopViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         let item = shop.items[indexPath.item]
         cell.setItem(item)
+        cell.favoriteCompletion = { isFavorite in
+            self.shop.items[indexPath.item].isFavorite = isFavorite
+        }
         return cell
     }
     

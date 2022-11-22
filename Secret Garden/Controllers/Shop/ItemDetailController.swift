@@ -95,6 +95,9 @@ class ItemDetailController: BaseViewController {
         scrollView.addSubview(detailsStackView)
         
         detailsStackView.addArrangedSubview(upperDetailsStack)
+        detailsStackView.addArrangedSubview(bottonDetailsStack)
+        detailsStackView.addArrangedSubview(originView)
+        
         upperDetailsStack.addArrangedSubview(careLevelView)
         careLevelView.addSubview(careLevelImage)
         careLevelView.addSubview(careLevelLabel)
@@ -110,8 +113,6 @@ class ItemDetailController: BaseViewController {
         sizeView.addSubview(sizeLabel)
         sizeView.addSubview(sizeValueLabel)
         
-        
-        detailsStackView.addArrangedSubview(bottonDetailsStack)
         bottonDetailsStack.addArrangedSubview(lightView)
         lightView.addSubview(lightImage)
         lightView.addSubview(lightLabel)
@@ -127,7 +128,6 @@ class ItemDetailController: BaseViewController {
         temperatureView.addSubview(temperatureLabel)
         temperatureView.addSubview(temperatureValueLabel)
         
-        detailsStackView.addArrangedSubview(originView)
         originView.addSubview(originImage)
         originView.addSubview(originLabel)
         originView.addSubview(originValueLabel)
@@ -170,25 +170,29 @@ class ItemDetailController: BaseViewController {
         careLevelLabel.text = Resources.Strings.Shop.Detail.careLevel
         careLevelLabel.font = Resources.Fonts.subHeaders
         careLevelLabel.textColor = Resources.Colors.subHeader
+        careLevelLabel.numberOfLines = 0
         careValueLabel.text = shopItem.careLevel
         careValueLabel.font = Resources.Fonts.values
+        careValueLabel.numberOfLines = 0
+
         
         petFriendlyLabel.text = Resources.Strings.Shop.Detail.petFriendly
         petFriendlyLabel.font = Resources.Fonts.subHeaders
         petFriendlyLabel.textColor = Resources.Colors.subHeader
+        petFriendlyLabel.numberOfLines = 0
         petValueLabel.text = shopItem.petFriendly
-        petValueLabel.numberOfLines = 0
         petValueLabel.font = Resources.Fonts.values
+        petValueLabel.numberOfLines = 0
         
         sizeLabel.text = Resources.Strings.Shop.Detail.size
         sizeLabel.font = Resources.Fonts.subHeaders
         sizeLabel.textColor = Resources.Colors.subHeader
+        sizeLabel.numberOfLines = 0
         var sizeValueText = shopItem.size?.components(separatedBy: ",").map({$0.trimmingCharacters(in: .whitespaces) + "\n"}).joined()
         sizeValueText?.removeLast()
         sizeValueLabel.text = sizeValueText
-        sizeValueLabel.numberOfLines = 0
         sizeValueLabel.font = Resources.Fonts.values
-
+        sizeValueLabel.numberOfLines = 0
         
         bottonDetailsStack.axis = .horizontal
         bottonDetailsStack.distribution = .fillEqually
@@ -196,30 +200,34 @@ class ItemDetailController: BaseViewController {
         lightLabel.text = Resources.Strings.Shop.Detail.light
         lightLabel.font = Resources.Fonts.subHeaders
         lightLabel.textColor = Resources.Colors.subHeader
+        lightLabel.numberOfLines = 0
         lightValueLabel.text = shopItem.light
         lightValueLabel.font = Resources.Fonts.values
+        lightValueLabel.numberOfLines = 0
 
-        
         humidityLabel.text = Resources.Strings.Shop.Detail.humidity
         humidityLabel.font = Resources.Fonts.subHeaders
         humidityLabel.textColor = Resources.Colors.subHeader
+        humidityLabel.numberOfLines = 0
         humidityValueLabel.text = shopItem.humidity
         humidityValueLabel.font = Resources.Fonts.values
+        humidityValueLabel.numberOfLines = 0
 
         temperatureLabel.text = Resources.Strings.Shop.Detail.temperature
         temperatureLabel.font = Resources.Fonts.subHeaders
         temperatureLabel.textColor = Resources.Colors.subHeader
+        temperatureLabel.numberOfLines = 0
         temperatureValueLabel.text = shopItem.temperature
-        temperatureValueLabel.numberOfLines = 0
         temperatureValueLabel.font = Resources.Fonts.values
-
+        temperatureValueLabel.numberOfLines = 0
         
         originLabel.text = Resources.Strings.Shop.Detail.origin
         originLabel.font = Resources.Fonts.subHeaders
         originLabel.textColor = Resources.Colors.subHeader
+        originLabel.numberOfLines = 0
         originValueLabel.text = shopItem.origin
-        originValueLabel.numberOfLines = 0
         originValueLabel.font = Resources.Fonts.generalText
+        originValueLabel.numberOfLines = 0
 
         
         // BottonView
@@ -250,38 +258,31 @@ class ItemDetailController: BaseViewController {
         descriptionItem.translatesAutoresizingMaskIntoConstraints = false
         
         detailsStackView.translatesAutoresizingMaskIntoConstraints = false
-        upperDetailsStack.translatesAutoresizingMaskIntoConstraints = false
         
-        careLevelView.translatesAutoresizingMaskIntoConstraints = false
         careLevelImage.translatesAutoresizingMaskIntoConstraints = false
         careLevelLabel.translatesAutoresizingMaskIntoConstraints = false
         careValueLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        petView.translatesAutoresizingMaskIntoConstraints = false
         petFriendlyImage.translatesAutoresizingMaskIntoConstraints = false
         petFriendlyLabel.translatesAutoresizingMaskIntoConstraints = false
         petValueLabel.translatesAutoresizingMaskIntoConstraints = false
 
-        sizeView.translatesAutoresizingMaskIntoConstraints = false
         sizeImage.translatesAutoresizingMaskIntoConstraints = false
         sizeLabel.translatesAutoresizingMaskIntoConstraints = false
         sizeValueLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        bottonDetailsStack.translatesAutoresizingMaskIntoConstraints = false
-        lightView.translatesAutoresizingMaskIntoConstraints = false
         lightImage.translatesAutoresizingMaskIntoConstraints = false
         lightLabel.translatesAutoresizingMaskIntoConstraints = false
         lightValueLabel.translatesAutoresizingMaskIntoConstraints = false
-        humidityView.translatesAutoresizingMaskIntoConstraints = false
+
         humidityImage.translatesAutoresizingMaskIntoConstraints = false
         humidityLabel.translatesAutoresizingMaskIntoConstraints = false
         humidityValueLabel.translatesAutoresizingMaskIntoConstraints = false
-        temperatureView.translatesAutoresizingMaskIntoConstraints = false
+
         temperatureImage.translatesAutoresizingMaskIntoConstraints = false
         temperatureLabel.translatesAutoresizingMaskIntoConstraints = false
         temperatureValueLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        originView.translatesAutoresizingMaskIntoConstraints = false
         originImage.translatesAutoresizingMaskIntoConstraints = false
         originLabel.translatesAutoresizingMaskIntoConstraints = false
         originValueLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -306,7 +307,7 @@ class ItemDetailController: BaseViewController {
             imageView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -60),
             imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: 1.25),
             
-            nameItem.topAnchor.constraint(equalTo: imageView.bottomAnchor),
+            nameItem.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 10),
             nameItem.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 20),
             
             latinNameItem.topAnchor.constraint(equalTo: nameItem.bottomAnchor),
@@ -336,6 +337,7 @@ class ItemDetailController: BaseViewController {
             careValueLabel.leadingAnchor.constraint(equalTo: careLevelView.leadingAnchor),
             careValueLabel.bottomAnchor.constraint(equalTo: careLevelView.bottomAnchor),
             careValueLabel.widthAnchor.constraint(equalTo: careLevelView.widthAnchor),
+            careValueLabel.heightAnchor.constraint(equalTo: petValueLabel.heightAnchor),
 
             // MARK: - Pet Friendly
             
@@ -349,6 +351,7 @@ class ItemDetailController: BaseViewController {
             petValueLabel.leadingAnchor.constraint(equalTo: petView.leadingAnchor),
             petValueLabel.bottomAnchor.constraint(equalTo: petView.bottomAnchor),
             petValueLabel.widthAnchor.constraint(equalTo: petView.widthAnchor),
+            petValueLabel.heightAnchor.constraint(equalTo: sizeValueLabel.heightAnchor),
 
             // MARK: - Size
             
@@ -362,6 +365,7 @@ class ItemDetailController: BaseViewController {
             sizeValueLabel.leadingAnchor.constraint(equalTo: sizeView.leadingAnchor),
             sizeValueLabel.bottomAnchor.constraint(equalTo: sizeView.bottomAnchor),
             sizeValueLabel.widthAnchor.constraint(equalTo: sizeView.widthAnchor),
+            sizeValueLabel.heightAnchor.constraint(equalTo: careValueLabel.heightAnchor),
             
             // MARK: - Light
             
@@ -375,6 +379,7 @@ class ItemDetailController: BaseViewController {
             lightValueLabel.leadingAnchor.constraint(equalTo: lightView.leadingAnchor),
             lightValueLabel.bottomAnchor.constraint(equalTo: lightView.bottomAnchor),
             lightValueLabel.widthAnchor.constraint(equalTo: lightView.widthAnchor),
+            lightValueLabel.heightAnchor.constraint(equalTo: humidityValueLabel.heightAnchor),
 
             // MARK: - Humidity
             
@@ -388,6 +393,7 @@ class ItemDetailController: BaseViewController {
             humidityValueLabel.leadingAnchor.constraint(equalTo: humidityView.leadingAnchor),
             humidityValueLabel.bottomAnchor.constraint(equalTo: humidityView.bottomAnchor),
             humidityValueLabel.widthAnchor.constraint(equalTo: humidityView.widthAnchor),
+            humidityValueLabel.heightAnchor.constraint(equalTo: temperatureValueLabel.heightAnchor),
 
             // MARK: - Temperature
             
@@ -401,6 +407,7 @@ class ItemDetailController: BaseViewController {
             temperatureValueLabel.leadingAnchor.constraint(equalTo: temperatureView.leadingAnchor),
             temperatureValueLabel.bottomAnchor.constraint(equalTo: temperatureView.bottomAnchor),
             temperatureValueLabel.widthAnchor.constraint(equalTo: temperatureView.widthAnchor),
+            temperatureValueLabel.heightAnchor.constraint(equalTo: lightValueLabel.heightAnchor),
             
             // MARK: - Origin
             
@@ -413,7 +420,7 @@ class ItemDetailController: BaseViewController {
             originValueLabel.topAnchor.constraint(equalTo: originLabel.bottomAnchor, constant: 10),
             originValueLabel.leadingAnchor.constraint(equalTo: originView.leadingAnchor),
             originValueLabel.bottomAnchor.constraint(equalTo: originView.bottomAnchor),
-            originValueLabel.widthAnchor.constraint(equalTo: originView.widthAnchor),
+            originValueLabel.widthAnchor.constraint(equalToConstant: view.frame.width - 40),
             
             // MARK: - Price and Add to Cart View
 
@@ -425,17 +432,18 @@ class ItemDetailController: BaseViewController {
             priceStackView.topAnchor.constraint(equalTo: bottonView.topAnchor, constant: 10),
             priceStackView.leadingAnchor.constraint(equalTo: bottonView.leadingAnchor, constant: 20),
             priceStackView.trailingAnchor.constraint(equalTo: addToCartButton.leadingAnchor),
-            priceStackView.bottomAnchor.constraint(equalTo: bottonView.bottomAnchor),
+            priceStackView.bottomAnchor.constraint(equalTo: bottonView.bottomAnchor, constant: -10),
             
             priceLabel.topAnchor.constraint(equalTo: priceStackView.topAnchor),
             priceLabel.leadingAnchor.constraint(equalTo: priceStackView.leadingAnchor),
             
             priceValueLabel.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 5),
             priceValueLabel.leadingAnchor.constraint(equalTo: priceStackView.leadingAnchor),
+            priceValueLabel.bottomAnchor.constraint(equalTo: priceStackView.bottomAnchor),
             
             addToCartButton.topAnchor.constraint(equalTo: bottonView.topAnchor, constant: 10),
             addToCartButton.trailingAnchor.constraint(equalTo: bottonView.trailingAnchor, constant: -20),
-            addToCartButton.bottomAnchor.constraint(equalTo: bottonView.bottomAnchor),
+            addToCartButton.bottomAnchor.constraint(equalTo: bottonView.bottomAnchor, constant: -10),
             addToCartButton.widthAnchor.constraint(equalToConstant: view.frame.width * 0.5)
         ])
     }

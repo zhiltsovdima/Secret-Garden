@@ -19,6 +19,9 @@
 		620332FE2924D2AD00ADE1A1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 620332FD2924D2AD00ADE1A1 /* GoogleService-Info.plist */; };
 		622AF21B2927C16500A1A994 /* ItemDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622AF21A2927C16500A1A994 /* ItemDetailController.swift */; };
 		622AF21D2928EDD900A1A994 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 622AF21C2928EDD900A1A994 /* Assets.xcassets */; };
+		622AF21F292CCBB100A1A994 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622AF21E292CCBB100A1A994 /* FavoritesViewController.swift */; };
+		622AF221292CCC3400A1A994 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622AF220292CCC3400A1A994 /* CartViewController.swift */; };
+		622AF223292CDA8200A1A994 /* FavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622AF222292CDA8200A1A994 /* FavoriteCell.swift */; };
 		626FA06D291BB7AC00FEB461 /* Garden.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626FA06C291BB7AC00FEB461 /* Garden.swift */; };
 		626FA06F291CFC0E00FEB461 /* DetailPlantController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626FA06E291CFC0E00FEB461 /* DetailPlantController.swift */; };
 		626FA071291CFCB000FEB461 /* DetailBaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626FA070291CFCB000FEB461 /* DetailBaseController.swift */; };
@@ -71,6 +74,9 @@
 		620332FD2924D2AD00ADE1A1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		622AF21A2927C16500A1A994 /* ItemDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailController.swift; sourceTree = "<group>"; };
 		622AF21C2928EDD900A1A994 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		622AF21E292CCBB100A1A994 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
+		622AF220292CCC3400A1A994 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
+		622AF222292CDA8200A1A994 /* FavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCell.swift; sourceTree = "<group>"; };
 		626FA06C291BB7AC00FEB461 /* Garden.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Garden.swift; sourceTree = "<group>"; };
 		626FA06E291CFC0E00FEB461 /* DetailPlantController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPlantController.swift; sourceTree = "<group>"; };
 		626FA070291CFCB000FEB461 /* DetailBaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailBaseController.swift; sourceTree = "<group>"; };
@@ -136,6 +142,7 @@
 				620332E72920D32500ADE1A1 /* CategoriesView.swift */,
 				620332E92921583F00ADE1A1 /* CategoryCell.swift */,
 				620332E4291FA24700ADE1A1 /* ItemCell.swift */,
+				622AF222292CDA8200A1A994 /* FavoriteCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -296,6 +303,8 @@
 				620332E6292023C600ADE1A1 /* Views */,
 				62E9AFBF290D40B900175A21 /* ShopViewController.swift */,
 				622AF21A2927C16500A1A994 /* ItemDetailController.swift */,
+				622AF21E292CCBB100A1A994 /* FavoritesViewController.swift */,
+				622AF220292CCC3400A1A994 /* CartViewController.swift */,
 			);
 			path = Shop;
 			sourceTree = "<group>";
@@ -457,6 +466,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				620332EA2921583F00ADE1A1 /* CategoryCell.swift in Sources */,
+				622AF21F292CCBB100A1A994 /* FavoritesViewController.swift in Sources */,
 				62E9AFD72913BA9800175A21 /* UIView + ext.swift in Sources */,
 				62E9AFBC290D409500175A21 /* HomeViewController.swift in Sources */,
 				62E9AFD129116D9E00175A21 /* AddPlantController.swift in Sources */,
@@ -471,11 +481,13 @@
 				62E9AFBE290D40AF00175A21 /* PlantsViewController.swift in Sources */,
 				62E9AFC4290EAFD500175A21 /* BaseViewController.swift in Sources */,
 				620332E5291FA24700ADE1A1 /* ItemCell.swift in Sources */,
+				622AF221292CCC3400A1A994 /* CartViewController.swift in Sources */,
 				626FA06F291CFC0E00FEB461 /* DetailPlantController.swift in Sources */,
 				620332EC2923CB7A00ADE1A1 /* Shop.swift in Sources */,
 				62E9B0032916D4D300175A21 /* OptionsPlantTableViewController.swift in Sources */,
 				62E9AFC0290D40B900175A21 /* ShopViewController.swift in Sources */,
 				626FA06D291BB7AC00FEB461 /* Garden.swift in Sources */,
+				622AF223292CDA8200A1A994 /* FavoriteCell.swift in Sources */,
 				62E9AFDA2913BD9100175A21 /* BaseButton.swift in Sources */,
 				62E9B0052917C77E00175A21 /* EditPlantViewController.swift in Sources */,
 				62E9AFC72911051500175A21 /* Plant.swift in Sources */,

@@ -19,6 +19,8 @@ class ItemCell: UICollectionViewCell {
         return imageView.image != nil ? true : false
     }
     
+    var favoriteCompletion: ((Bool) -> Void)?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -40,9 +42,29 @@ class ItemCell: UICollectionViewCell {
         }
     }
     
+    override func layoutSubviews() {
+        favoriteButton.layer.cornerRadius = favoriteButton.frame.height * 0.5
+        addToCartButton.layer.cornerRadius = addToCartButton.frame.height * 0.5
+    }
+    
+    @objc private func addToFavorites() {
+        
+        if favoriteButton.backgroundColor == Resources.Colors.backgroundColor {
+            favoriteButton.backgroundColor = .black
+            favoriteButton.tintColor = Resources.Colors.backgroundColor
+            favoriteCompletion?(true)
+        } else {
+            favoriteButton.backgroundColor = Resources.Colors.backgroundColor
+            favoriteButton.tintColor = .black
+            favoriteCompletion?(false)
+        }
+    }
+    
+    @objc private func addToCart() {
+        
+    }
+    
     private func configure() {
-        favoriteButton.frame = CGRect(x: 0, y: 0, width: frame.width * 0.25, height: frame.width * 0.25)
-        addToCartButton.frame = CGRect(x: 0, y: 0, width: 0, height: frame.width * 0.25)
         
         addSubview(imageView)
         addSubview(spinner)
@@ -51,16 +73,16 @@ class ItemCell: UICollectionViewCell {
         favoriteButton.setImage(Resources.Images.Common.addToFavorite, for: .normal)
         favoriteButton.backgroundColor = Resources.Colors.backgroundColor
         favoriteButton.tintColor = .black
-        favoriteButton.layer.cornerRadius = favoriteButton.frame.height * 0.5
         favoriteButton.layer.borderWidth = 0.1
+        favoriteButton.addTarget(self, action: #selector(addToFavorites), for: .touchUpInside)
         
         contentView.addSubview(addToCartButton)
         addToCartButton.setTitle(Resources.Strings.Shop.addToCart, for: .normal)
         addToCartButton.setTitleColor(.black, for: .normal)
-        addToCartButton.titleLabel?.font = addToCartButton.titleLabel?.font.withSize(13)
+        addToCartButton.titleLabel?.font = Resources.Fonts.generalText?.withSize(13)
         addToCartButton.backgroundColor = Resources.Colors.backgroundColor
-        addToCartButton.layer.cornerRadius = addToCartButton.frame.height * 0.5
         addToCartButton.layer.borderWidth = 0.1
+        addToCartButton.addTarget(self, action: #selector(addToCart), for: .touchUpInside)
 
     }
     

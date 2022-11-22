@@ -25,6 +25,8 @@ struct ShopItem {
     
     var image: UIImage?
     
+    var isFavorite = false
+    
 }
 
 class Shop {

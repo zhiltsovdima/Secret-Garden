@@ -103,6 +103,7 @@ enum Resources {
         static let itemCell = "ItemCell"
         static let categoriesView = "HeaderCollectionReusableView"
         static let categoryCell = "CategoryCell"
+        static let favoriteCell = "FavoriteCell"
     }
     
     enum Fonts {
