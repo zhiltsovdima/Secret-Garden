@@ -94,20 +94,23 @@ extension PlantsViewController: UITableViewDelegate, UITableViewDataSource {
 
                 optionsVC.preferredContentSize.width = self!.view.bounds.width / 3.0
                 
-                optionsVC.editPlantCompletionHandler = {
-                    let editVC = EditPlantViewController(plant)
-                    editVC.completionHandler = { editedPlant in
+                optionsVC.actualCell = plantCell
+                optionsVC.editPlantCompletionHandler = { actualCell in
+                    let actualIndexPath = self?.tableView.indexPath(for: actualCell!)
+                    let editVC = EditPlantViewController(plant, actualIndexPath!)
+                    editVC.completionHandler = { editedPlant, actualIndexPath in
                         DispatchQueue.main.async {
-                            self?.garden.plants[indexPath.row] = editedPlant
-                            self?.tableView.reloadRows(at: [indexPath], with: .automatic)
+                            self?.garden.plants[actualIndexPath.row] = editedPlant
+                            self?.tableView.reloadRows(at: [actualIndexPath], with: .automatic)
                         }
                     }
                     self?.present(editVC, animated: true)
                 }
-                optionsVC.deletePlantCompletionHandler = {
+                optionsVC.deletePlantCompletionHandler = { actualCell in
+                    let actualIndexPath = self?.tableView.indexPath(for: actualCell!)
                     DispatchQueue.main.async {
-                        self?.garden.removePlant(at: indexPath.row)
-                        self?.tableView.deleteRows(at: [indexPath], with: .automatic)
+                        self?.garden.removePlant(at: actualIndexPath!.row)
+                        self?.tableView.deleteRows(at: [actualIndexPath!], with: .automatic)
                     }
                 }
                 self?.present(optionsVC, animated: true)

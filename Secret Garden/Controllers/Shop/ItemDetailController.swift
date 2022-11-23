@@ -171,7 +171,7 @@ class ItemDetailController: BaseViewController {
         
         descriptionItem.numberOfLines = 0
         descriptionItem.text = shopItem.description
-        descriptionItem.font = Resources.Fonts.generalText
+        descriptionItem.font = Resources.Fonts.general
         
         // DetailsStackView
         detailsStackView.axis = .vertical
@@ -186,7 +186,7 @@ class ItemDetailController: BaseViewController {
         careLevelLabel.textColor = Resources.Colors.subHeader
         careLevelLabel.numberOfLines = 0
         careValueLabel.text = shopItem.careLevel
-        careValueLabel.font = Resources.Fonts.values
+        careValueLabel.font = Resources.Fonts.generalBold
         careValueLabel.numberOfLines = 0
 
         
@@ -195,7 +195,7 @@ class ItemDetailController: BaseViewController {
         petFriendlyLabel.textColor = Resources.Colors.subHeader
         petFriendlyLabel.numberOfLines = 0
         petValueLabel.text = shopItem.petFriendly
-        petValueLabel.font = Resources.Fonts.values
+        petValueLabel.font = Resources.Fonts.generalBold
         petValueLabel.numberOfLines = 0
         
         sizeLabel.text = Resources.Strings.Shop.Detail.size
@@ -205,7 +205,7 @@ class ItemDetailController: BaseViewController {
         var sizeValueText = shopItem.size?.components(separatedBy: ",").map({$0.trimmingCharacters(in: .whitespaces) + "\n"}).joined()
         sizeValueText?.removeLast()
         sizeValueLabel.text = sizeValueText
-        sizeValueLabel.font = Resources.Fonts.values
+        sizeValueLabel.font = Resources.Fonts.generalBold
         sizeValueLabel.numberOfLines = 0
         
         bottonDetailsStack.axis = .horizontal
@@ -216,7 +216,7 @@ class ItemDetailController: BaseViewController {
         lightLabel.textColor = Resources.Colors.subHeader
         lightLabel.numberOfLines = 0
         lightValueLabel.text = shopItem.light
-        lightValueLabel.font = Resources.Fonts.values
+        lightValueLabel.font = Resources.Fonts.generalBold
         lightValueLabel.numberOfLines = 0
 
         humidityLabel.text = Resources.Strings.Shop.Detail.humidity
@@ -224,7 +224,7 @@ class ItemDetailController: BaseViewController {
         humidityLabel.textColor = Resources.Colors.subHeader
         humidityLabel.numberOfLines = 0
         humidityValueLabel.text = shopItem.humidity
-        humidityValueLabel.font = Resources.Fonts.values
+        humidityValueLabel.font = Resources.Fonts.generalBold
         humidityValueLabel.numberOfLines = 0
 
         temperatureLabel.text = Resources.Strings.Shop.Detail.temperature
@@ -232,7 +232,7 @@ class ItemDetailController: BaseViewController {
         temperatureLabel.textColor = Resources.Colors.subHeader
         temperatureLabel.numberOfLines = 0
         temperatureValueLabel.text = shopItem.temperature
-        temperatureValueLabel.font = Resources.Fonts.values
+        temperatureValueLabel.font = Resources.Fonts.generalBold
         temperatureValueLabel.numberOfLines = 0
         
         originLabel.text = Resources.Strings.Shop.Detail.origin
@@ -240,7 +240,7 @@ class ItemDetailController: BaseViewController {
         originLabel.textColor = Resources.Colors.subHeader
         originLabel.numberOfLines = 0
         originValueLabel.text = shopItem.origin
-        originValueLabel.font = Resources.Fonts.generalText
+        originValueLabel.font = Resources.Fonts.general
         originValueLabel.numberOfLines = 0
 
         
@@ -255,7 +255,7 @@ class ItemDetailController: BaseViewController {
         priceValueLabel.font = Resources.Fonts.header
         
         addToCartButton.setTitle(Resources.Strings.Shop.addToCart, for: .normal)
-        addToCartButton.titleLabel?.font = Resources.Fonts.generalText?.withSize(18)
+        addToCartButton.titleLabel?.font = Resources.Fonts.general?.withSize(18)
         
     }
     

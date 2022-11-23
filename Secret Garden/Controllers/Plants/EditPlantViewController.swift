@@ -20,10 +20,13 @@ final class EditPlantViewController: DetailBaseController {
     let chooseImageButton = UIButton()
     let saveButton = BaseButton()
     
-    var completionHandler: ((Plant)-> Void)?
+    let actualIndexPath: IndexPath
     
-    init(_ plantToEdit: Plant) {
+    var completionHandler: ((Plant, IndexPath)-> Void)?
+    
+    init(_ plantToEdit: Plant, _ actualIndexPath: IndexPath) {
         self.plantToEdit = plantToEdit
+        self.actualIndexPath = actualIndexPath
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -137,7 +140,7 @@ final class EditPlantViewController: DetailBaseController {
         let newImage = PlantImage(plantImageView.image!)
         let editedPlant = Plant(name: newName, image: newImage)
         
-        completionHandler?(editedPlant)
+        completionHandler?(editedPlant, actualIndexPath)
         dismiss(animated: true)
     }
 }

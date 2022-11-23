@@ -30,6 +30,7 @@ class FavoritesViewController: BaseViewController {
         super.viewDidLoad()
         
         title = "Favorites"
+        navigationItem.largeTitleDisplayMode = .never
         
         configureTableView()
         
@@ -37,7 +38,8 @@ class FavoritesViewController: BaseViewController {
     
     private func configureTableView() {
         setTableViewDelegates()
-        tableView.rowHeight = 100
+        tableView.rowHeight = 150
+        tableView.separatorStyle = .none
         tableView.register(FavoriteCell.self, forCellReuseIdentifier: Resources.Identifiers.favoriteCell)
         view.addSubview(tableView)
         
@@ -67,8 +69,19 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: Resources.Identifiers.favoriteCell, for: indexPath) as! FavoriteCell
         
         cell.setFavorite(favoriteItems[indexPath.row])
+        cell.unfavoriteCompletion = { [weak self] unfavCell in
+            let unfavIndexPath = self?.tableView.indexPath(for: unfavCell)
+            DispatchQueue.main.async {
+                self?.favoriteItems.remove(at: unfavIndexPath!.row)
+                self?.tableView.deleteRows(at: [unfavIndexPath!], with: .fade)
+            }
+        }
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
 }

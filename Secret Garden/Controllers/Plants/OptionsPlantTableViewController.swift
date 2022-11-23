@@ -14,8 +14,10 @@ final class OptionsPlantTableViewController: UITableViewController {
         Resources.Strings.Options.delete
     ]
     
-    var editPlantCompletionHandler: (() -> Void)?
-    var deletePlantCompletionHandler: (() -> Void)?
+    var actualCell: UITableViewCell?
+    
+    var editPlantCompletionHandler: ((UITableViewCell?) -> Void)?
+    var deletePlantCompletionHandler: ((UITableViewCell?) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,10 +49,10 @@ final class OptionsPlantTableViewController: UITableViewController {
         switch indexPath.row {
         case 0:
             dismiss(animated: true) {
-                self.editPlantCompletionHandler?()
+                self.editPlantCompletionHandler?(self.actualCell)
             }
         case 1:
-            deletePlantCompletionHandler?()
+            deletePlantCompletionHandler?(actualCell)
             dismiss(animated: true)
         default:
             dismiss(animated: true)

@@ -108,10 +108,10 @@ enum Resources {
     }
     
     enum Fonts {
-        static let generalText = UIFont(name: "Helvetica", size: 16)
+        static let general = UIFont(name: "Helvetica", size: 16)
         static let header = UIFont(name: "Helvetica-Bold", size: 24)
         static let subHeaders = UIFont(name: "Helvetica", size: 14)
-        static let values = UIFont(name: "Helvetica-Bold", size: 17)
+        static let generalBold = UIFont(name: "Helvetica-Bold", size: 16)
     }
     
     enum Constants {
