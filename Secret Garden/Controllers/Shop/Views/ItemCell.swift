@@ -35,11 +35,14 @@ class ItemCell: UICollectionViewCell {
     func setItem(_ item: ShopItem) {
         name = item.name
         imageView.image = item.image
+        favoriteButton.backgroundColor = item.isFavorite ? .black : Resources.Colors.backgroundColor
+        favoriteButton.tintColor = item.isFavorite ? Resources.Colors.backgroundColor : .black
         if isFetched {
             spinner.stopAnimating()
         } else {
             spinner.startAnimating()
         }
+        
     }
     
     override func layoutSubviews() {
@@ -71,8 +74,7 @@ class ItemCell: UICollectionViewCell {
 
         contentView.addSubview(favoriteButton)
         favoriteButton.setImage(Resources.Images.Common.addToFavorite, for: .normal)
-        favoriteButton.backgroundColor = Resources.Colors.backgroundColor
-        favoriteButton.tintColor = .black
+        
         favoriteButton.layer.borderWidth = 0.1
         favoriteButton.addTarget(self, action: #selector(addToFavorites), for: .touchUpInside)
         

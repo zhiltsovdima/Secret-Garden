@@ -9,61 +9,63 @@ import UIKit
 
 class ItemDetailController: BaseViewController {
     
-    let shopItem: ShopItem
+    private let shopItem: ShopItem
     
-    let scrollView = UIScrollView()
+    private let scrollView = UIScrollView()
     
-    let imageView = UIImageView()
-    let nameItem = UILabel()
-    let latinNameItem = UILabel()
-    let descriptionItem = UILabel()
+    private let imageView = UIImageView()
+    private let nameItem = UILabel()
+    private let latinNameItem = UILabel()
+    private let descriptionItem = UILabel()
     
-    let detailsStackView = UIStackView()
-    let upperDetailsStack = UIStackView()
+    private let detailsStackView = UIStackView()
+    private let upperDetailsStack = UIStackView()
     
-    let careLevelView = UIView()
-    let careLevelImage = UIImageView(image: Resources.Images.Shop.careLevel)
-    let careLevelLabel = UILabel()
-    let careValueLabel = UILabel()
+    private let careLevelView = UIView()
+    private let careLevelImage = UIImageView(image: Resources.Images.Shop.careLevel)
+    private let careLevelLabel = UILabel()
+    private let careValueLabel = UILabel()
     
-    let petView = UIView()
-    let petFriendlyImage = UIImageView(image: Resources.Images.Shop.petFriendly)
-    let petFriendlyLabel = UILabel()
-    let petValueLabel = UILabel()
+    private let petView = UIView()
+    private let petFriendlyImage = UIImageView(image: Resources.Images.Shop.petFriendly)
+    private let petFriendlyLabel = UILabel()
+    private let petValueLabel = UILabel()
     
-    let sizeView = UIView()
-    let sizeImage = UIImageView(image: Resources.Images.Shop.size)
-    let sizeLabel = UILabel()
-    let sizeValueLabel = UILabel()
+    private let sizeView = UIView()
+    private let sizeImage = UIImageView(image: Resources.Images.Shop.size)
+    private let sizeLabel = UILabel()
+    private let sizeValueLabel = UILabel()
     
-    let bottonDetailsStack = UIStackView()
+    private let bottonDetailsStack = UIStackView()
     
-    let lightView = UIView()
-    let lightImage = UIImageView(image: Resources.Images.Shop.light)
-    let lightLabel = UILabel()
-    let lightValueLabel = UILabel()
+    private let lightView = UIView()
+    private let lightImage = UIImageView(image: Resources.Images.Shop.light)
+    private let lightLabel = UILabel()
+    private let lightValueLabel = UILabel()
     
-    let humidityView = UIView()
-    let humidityImage = UIImageView(image: Resources.Images.Shop.humidity)
-    let humidityLabel = UILabel()
-    let humidityValueLabel = UILabel()
+    private let humidityView = UIView()
+    private let humidityImage = UIImageView(image: Resources.Images.Shop.humidity)
+    private let humidityLabel = UILabel()
+    private let humidityValueLabel = UILabel()
     
-    let temperatureView = UIView()
-    let temperatureImage = UIImageView(image: Resources.Images.Shop.temperature)
-    let temperatureLabel = UILabel()
-    let temperatureValueLabel = UILabel()
+    private let temperatureView = UIView()
+    private let temperatureImage = UIImageView(image: Resources.Images.Shop.temperature)
+    private let temperatureLabel = UILabel()
+    private let temperatureValueLabel = UILabel()
     
-    let originView = UIView()
-    let originImage = UIImageView(image: Resources.Images.Shop.origin)
-    let originLabel = UILabel()
-    let originValueLabel = UILabel()
+    private let originView = UIView()
+    private let originImage = UIImageView(image: Resources.Images.Shop.origin)
+    private let originLabel = UILabel()
+    private let originValueLabel = UILabel()
     
-    let bottonView = UIView()
-    let priceStackView = UIStackView()
-    let priceLabel = UILabel()
-    let priceValueLabel = UILabel()
+    private let bottonView = UIView()
+    private let priceStackView = UIStackView()
+    private let priceLabel = UILabel()
+    private let priceValueLabel = UILabel()
     
-    let addToCartButton = BaseButton()
+    private let addToCartButton = BaseButton()
+    
+    var favoriteCompletion: ((Bool) -> Void)?
     
     
     init(_ shopItem: ShopItem) {
@@ -79,9 +81,26 @@ class ItemDetailController: BaseViewController {
         super.viewDidLoad()
         navigationItem.largeTitleDisplayMode = .never
         
+        addNavBarButton()
         addViews()
         configureViews()
         setConstraints()
+    }
+    
+    private func addNavBarButton() {
+        let favoriteImage = shopItem.isFavorite ? Resources.Images.Common.addToFavoriteFill : Resources.Images.Common.addToFavorite
+        let button = UIBarButtonItem(image: favoriteImage, style: .done, target: self, action: #selector(addToFavorite))
+        navigationItem.rightBarButtonItem = button
+    }
+    
+    @objc private func addToFavorite() {
+        if navigationItem.rightBarButtonItem?.image == Resources.Images.Common.addToFavorite {
+            navigationItem.rightBarButtonItem?.image = Resources.Images.Common.addToFavoriteFill
+            favoriteCompletion?(true)
+        } else {
+            navigationItem.rightBarButtonItem?.image = Resources.Images.Common.addToFavorite
+            favoriteCompletion?(false)
+        }
     }
 
     private func addViews() {
@@ -137,11 +156,6 @@ class ItemDetailController: BaseViewController {
         bottonView.addSubview(addToCartButton)
         priceStackView.addSubview(priceLabel)
         priceStackView.addSubview(priceValueLabel)
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        upperDetailsStack.distribution = .fillEqually
     }
     
     private func configureViews() {

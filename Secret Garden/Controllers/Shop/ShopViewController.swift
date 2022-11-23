@@ -133,6 +133,10 @@ extension ShopViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let shopItem = shop.items[indexPath.item]
         let itemDetailVC = ItemDetailController(shopItem)
+        itemDetailVC.favoriteCompletion = { isFavorite in
+            self.shop.items[indexPath.item].isFavorite = isFavorite
+            collectionView.reloadItems(at: [indexPath])
+        }
         navigationController?.pushViewController(itemDetailVC, animated: true)
     }
 }

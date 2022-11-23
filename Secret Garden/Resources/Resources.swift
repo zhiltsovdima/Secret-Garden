@@ -80,6 +80,7 @@ enum Resources {
             static let back = UIImage(systemName: "chevron.backward.circle.fill")
             static let favorites = UIImage(systemName: "heart.circle")
             static let addToFavorite = UIImage(systemName: "heart")
+            static let addToFavoriteFill = UIImage(systemName: "heart.fill")
             static let cart = UIImage(systemName: "cart.circle")
         }
         enum Home {
