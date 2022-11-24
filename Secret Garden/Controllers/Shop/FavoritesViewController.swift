@@ -13,6 +13,8 @@ class FavoritesViewController: BaseViewController {
     
     private let tableView = UITableView()
     
+    private let placeholder = UIImageView(image: Resources.Images.Common.emptyCollection)
+    
     init(_ shop: Shop) {
         self.shop = shop
         super.init(nibName: nil, bundle: nil)
@@ -29,7 +31,7 @@ class FavoritesViewController: BaseViewController {
         navigationItem.largeTitleDisplayMode = .never
         
         configureTableView()
-        
+        configurePlaceholder()
     }
     
     private func configureTableView() {
@@ -52,12 +54,39 @@ class FavoritesViewController: BaseViewController {
         tableView.delegate = self
         tableView.dataSource = self
     }
+}
+// MARK: - Placeholder Configuration
+
+extension FavoritesViewController {
     
+    private func isItEmpty() {
+        if shop.favorites.isEmpty {
+            tableView.isHidden = true
+            placeholder.isHidden = false
+        } else {
+            tableView.isHidden = false
+            placeholder.isHidden = true
+        }
+    }
+    
+    private func configurePlaceholder() {
+        view.addSubview(placeholder)
+        placeholder.isHidden = true
+        placeholder.contentMode = .scaleAspectFit
+        placeholder.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            placeholder.topAnchor.constraint(equalTo: view.topAnchor),
+            placeholder.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            placeholder.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            placeholder.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+    }
 }
 
 extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        isItEmpty()
         return shop.favorites.count
     }
     
@@ -71,6 +100,7 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
             DispatchQueue.main.async {
                 self?.shop.favorites.remove(at: unfavIndexPath!.row)
                 self?.tableView.deleteRows(at: [unfavIndexPath!], with: .fade)
+                self?.isItEmpty()
             }
             self?.shop.favoriteItem(withId: favItem.id!, false)
         }
@@ -90,6 +120,7 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
                 self?.shop.favorites.append(item!)
             } else {
                 self?.shop.favorites.remove(at: indexPath.row)
+                self?.isItEmpty()
             }
             tableView.reloadData()
         }

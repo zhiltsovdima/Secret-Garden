@@ -9,9 +9,11 @@ import UIKit
 
 final class PlantsViewController: BaseViewController {
     
-    let tableView = UITableView()
+    private let tableView = UITableView()
     
-    let garden = Garden()
+    private let garden = Garden()
+    
+    private let placeholder = UIImageView(image: Resources.Images.Common.emptyCollection)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +23,7 @@ final class PlantsViewController: BaseViewController {
         addNavBarButton()
         
         configureTableView()
-        
+        configurePlaceholder()
     }
     
     private func configureTableView() {
@@ -46,6 +48,36 @@ final class PlantsViewController: BaseViewController {
     }
 }
 
+// MARK: - Placeholder Configuration
+
+extension PlantsViewController {
+    
+    private func isItEmpty() {
+        if garden.plants.isEmpty {
+            tableView.isHidden = true
+            placeholder.isHidden = false
+        } else {
+            tableView.isHidden = false
+            placeholder.isHidden = true
+        }
+    }
+    
+    private func configurePlaceholder() {
+        view.addSubview(placeholder)
+        placeholder.isHidden = true
+        placeholder.contentMode = .scaleAspectFit
+        placeholder.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            placeholder.topAnchor.constraint(equalTo: view.topAnchor),
+            placeholder.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            placeholder.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            placeholder.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+    }
+}
+
+// MARK: - NavBar Button
+
 extension PlantsViewController {
     
     private func addNavBarButton() {
@@ -60,6 +92,7 @@ extension PlantsViewController {
                 self?.garden.plants.insert(addedPlant, at: 0)
                 self?.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
                 self?.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+                self?.isItEmpty()
             }
         }
         navigationController?.pushViewController(addPlantController, animated: true)
@@ -70,6 +103,7 @@ extension PlantsViewController {
 extension PlantsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        isItEmpty()
         return garden.plants.count
     }
     
@@ -111,6 +145,7 @@ extension PlantsViewController: UITableViewDelegate, UITableViewDataSource {
                     DispatchQueue.main.async {
                         self?.garden.removePlant(at: actualIndexPath!.row)
                         self?.tableView.deleteRows(at: [actualIndexPath!], with: .automatic)
+                        self?.isItEmpty()
                     }
                 }
                 self?.present(optionsVC, animated: true)
