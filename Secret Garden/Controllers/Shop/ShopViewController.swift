@@ -40,12 +40,7 @@ final class ShopViewController: BaseViewController {
     }
     
     private func updateUI() {
-        shop.completion = { index in
-            DispatchQueue.main.async {
-                self.collectionView.reloadItems(at: [IndexPath(item: index, section: 0)])
-            }
-        }
-        shop.unfavoriteCompletion = { index in
+        shop.updateCompletion = { index in
             DispatchQueue.main.async {
                 self.collectionView.reloadItems(at: [IndexPath(item: index, section: 0)])
             }
@@ -126,12 +121,13 @@ extension ShopViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let shopItem = shop.items[indexPath.item]
         cell.setItem(shopItem)
         cell.favoriteCompletion = { [weak self] isFavorite in
-            self?.shop.items[indexPath.item].isFavorite = isFavorite
+            self?.shop.favoriteItem(withId: indexPath.item, isFavorite)
+            let changedItem = self?.shop.items[indexPath.item]
             if isFavorite {
-                self?.shop.favoriteItems.append(shopItem)
+                self?.shop.favorites.insert(changedItem!, at: 0)
             } else {
-                self?.shop.favoriteItems.removeAll { item in
-                    item.id == shopItem.id
+                self?.shop.favorites.removeAll { item in
+                    item.id == changedItem!.id
                 }
             }
         }
@@ -150,12 +146,13 @@ extension ShopViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let shopItem = shop.items[indexPath.item]
         let itemDetailVC = ItemDetailController(shopItem)
         itemDetailVC.favoriteCompletion = { [weak self] isFavorite in
-            self?.shop.items[indexPath.item].isFavorite = isFavorite
+            self?.shop.favoriteItem(withId: indexPath.item, isFavorite)
+            let changedItem = self?.shop.items[indexPath.item]
             if isFavorite {
-                self?.shop.favoriteItems.append(shopItem)
+                self?.shop.favorites.insert(changedItem!, at: 0)
             } else {
-                self?.shop.favoriteItems.removeAll { item in
-                    item.id == shopItem.id
+                self?.shop.favorites.removeAll { item in
+                    item.id == changedItem!.id
                 }
             }
             collectionView.reloadItems(at: [indexPath])

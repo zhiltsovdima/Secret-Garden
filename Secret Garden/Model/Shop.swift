@@ -34,20 +34,19 @@ class Shop {
     
     var items = [ShopItem]()
     
-    var favoriteItems = [ShopItem]()
+    var favorites = [ShopItem]()
     
     init() {
         fetchData()
     }
     
-    var unfavoriteCompletion: ((Int) -> Void)?
-    var completion: ((Int) -> Void)?
+    var updateCompletion: ((Int) -> Void)?
     
-    func unfavorite(withId id: Int) {
+    func favoriteItem(withId id: Int, _ isFavorite: Bool) {
         for index in items.indices {
             if items[index].id == id {
-                items[index].isFavorite = false
-                unfavoriteCompletion?(index)
+                items[index].isFavorite = isFavorite
+                updateCompletion?(index)
             }
         }
     }
@@ -61,7 +60,7 @@ class Shop {
                 let imageName = self.items[index].imageString
                 APIManager.shared.getImage(imageName: imageName) { fetchedImage in
                     self.items[index].image = fetchedImage
-                    self.completion?(index)
+                    self.updateCompletion?(index)
                 }
                 self.items[index].id = index
             }

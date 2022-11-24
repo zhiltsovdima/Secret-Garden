@@ -58,28 +58,43 @@ class FavoritesViewController: BaseViewController {
 extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return shop.favoriteItems.count
+        return shop.favorites.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Resources.Identifiers.favoriteCell, for: indexPath) as! FavoriteCell
         
-        let favItem = shop.favoriteItems[indexPath.row]
+        let favItem = shop.favorites[indexPath.row]
         cell.setFavorite(favItem)
         cell.unfavoriteCompletion = { [weak self] unfavCell in
             let unfavIndexPath = self?.tableView.indexPath(for: unfavCell)
             DispatchQueue.main.async {
-                self?.shop.favoriteItems.remove(at: unfavIndexPath!.row)
+                self?.shop.favorites.remove(at: unfavIndexPath!.row)
                 self?.tableView.deleteRows(at: [unfavIndexPath!], with: .fade)
             }
-            self?.shop.unfavorite(withId: favItem.id!)
+            self?.shop.favoriteItem(withId: favItem.id!, false)
         }
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+        let shopItemId = shop.favorites[indexPath.row].id
+        let shopItem = shop.items[shopItemId!]
+        
+        let itemDetailVC = ItemDetailController(shopItem)
+        itemDetailVC.favoriteCompletion = { [weak self] isFavorite in
+            self?.shop.favoriteItem(withId: shopItemId!, isFavorite)
+            if isFavorite {
+                let item = self?.shop.items[shopItemId!]
+                self?.shop.favorites.append(item!)
+            } else {
+                self?.shop.favorites.remove(at: indexPath.row)
+            }
+            tableView.reloadData()
+        }
+        navigationController?.pushViewController(itemDetailVC, animated: true)
+        tableView.deselectRow(at: indexPath, animated: false)
     }
     
 }
