@@ -9,7 +9,7 @@ import UIKit
 
 final class ShopViewController: BaseViewController {
     
-    let shop = Shop()
+    private let shop = Shop()
     
     private lazy var collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: flowLayout)
     
@@ -31,9 +31,7 @@ final class ShopViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = Resources.Strings.TabBar.shop
-        navigationItem.largeTitleDisplayMode = .always
-        navigationController?.navigationBar.tintColor = .black
+        setNavbarAppearance()
         addNavBarButtons()
         
         configureCollectionView()
@@ -47,6 +45,17 @@ final class ShopViewController: BaseViewController {
                 self.collectionView.reloadItems(at: [IndexPath(item: index, section: 0)])
             }
         }
+        shop.unfavoriteCompletion = { index in
+            DispatchQueue.main.async {
+                self.collectionView.reloadItems(at: [IndexPath(item: index, section: 0)])
+            }
+        }
+    }
+    
+    private func setNavbarAppearance() {
+        title = Resources.Strings.TabBar.shop
+        navigationItem.largeTitleDisplayMode = .always
+        navigationController?.navigationBar.tintColor = .black
     }
     
     private func configureCollectionView() {
@@ -114,10 +123,17 @@ extension ShopViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Resources.Identifiers.itemCell, for: indexPath) as! ItemCell
         
-        let item = shop.items[indexPath.item]
-        cell.setItem(item)
-        cell.favoriteCompletion = { isFavorite in
-            self.shop.items[indexPath.item].isFavorite = isFavorite
+        let shopItem = shop.items[indexPath.item]
+        cell.setItem(shopItem)
+        cell.favoriteCompletion = { [weak self] isFavorite in
+            self?.shop.items[indexPath.item].isFavorite = isFavorite
+            if isFavorite {
+                self?.shop.favoriteItems.append(shopItem)
+            } else {
+                self?.shop.favoriteItems.removeAll { item in
+                    item.id == shopItem.id
+                }
+            }
         }
         return cell
     }
@@ -133,8 +149,15 @@ extension ShopViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let shopItem = shop.items[indexPath.item]
         let itemDetailVC = ItemDetailController(shopItem)
-        itemDetailVC.favoriteCompletion = { isFavorite in
-            self.shop.items[indexPath.item].isFavorite = isFavorite
+        itemDetailVC.favoriteCompletion = { [weak self] isFavorite in
+            self?.shop.items[indexPath.item].isFavorite = isFavorite
+            if isFavorite {
+                self?.shop.favoriteItems.append(shopItem)
+            } else {
+                self?.shop.favoriteItems.removeAll { item in
+                    item.id == shopItem.id
+                }
+            }
             collectionView.reloadItems(at: [indexPath])
         }
         navigationController?.pushViewController(itemDetailVC, animated: true)

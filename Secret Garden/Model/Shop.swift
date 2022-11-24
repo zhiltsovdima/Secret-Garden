@@ -26,6 +26,7 @@ struct ShopItem {
     var image: UIImage?
     
     var isFavorite = false
+    var id: Int?
     
 }
 
@@ -33,13 +34,25 @@ class Shop {
     
     var items = [ShopItem]()
     
+    var favoriteItems = [ShopItem]()
+    
     init() {
         fetchData()
     }
     
+    var unfavoriteCompletion: ((Int) -> Void)?
     var completion: ((Int) -> Void)?
     
-    func fetchData() {
+    func unfavorite(withId id: Int) {
+        for index in items.indices {
+            if items[index].id == id {
+                items[index].isFavorite = false
+                unfavoriteCompletion?(index)
+            }
+        }
+    }
+    
+    private func fetchData() {
         
         APIManager.shared.getPost(collectionName: Resources.Strings.Shop.collectionNameInDataBase) { shopItems in
             
@@ -50,6 +63,7 @@ class Shop {
                     self.items[index].image = fetchedImage
                     self.completion?(index)
                 }
+                self.items[index].id = index
             }
         }
     }

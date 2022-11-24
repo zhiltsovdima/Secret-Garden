@@ -9,11 +9,7 @@ import UIKit
 
 class FavoritesViewController: BaseViewController {
     
-    let shop: Shop
-    
-    private lazy var favoriteItems = shop.items.filter { item in
-        item.isFavorite == true
-    }
+    private let shop: Shop
     
     private let tableView = UITableView()
     
@@ -62,19 +58,21 @@ class FavoritesViewController: BaseViewController {
 extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return favoriteItems.count
+        return shop.favoriteItems.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Resources.Identifiers.favoriteCell, for: indexPath) as! FavoriteCell
         
-        cell.setFavorite(favoriteItems[indexPath.row])
+        let favItem = shop.favoriteItems[indexPath.row]
+        cell.setFavorite(favItem)
         cell.unfavoriteCompletion = { [weak self] unfavCell in
             let unfavIndexPath = self?.tableView.indexPath(for: unfavCell)
             DispatchQueue.main.async {
-                self?.favoriteItems.remove(at: unfavIndexPath!.row)
+                self?.shop.favoriteItems.remove(at: unfavIndexPath!.row)
                 self?.tableView.deleteRows(at: [unfavIndexPath!], with: .fade)
             }
+            self?.shop.unfavorite(withId: favItem.id!)
         }
         
         return cell
