@@ -98,7 +98,7 @@ extension ShopViewController {
     }
     
     @objc private func cartAction() {
-        let cartVC = CartViewController()
+        let cartVC = CartViewController(shop)
         navigationController?.pushViewController(cartVC, animated: true)
     }
     @objc private func favoritesAction() {
@@ -131,6 +131,16 @@ extension ShopViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 }
             }
         }
+        cell.cartCompletion = { [weak self] in
+            self?.shop.items[indexPath.item].isAddedToCart = true
+            let newItem = self?.shop.items[indexPath.item]
+            self?.shop.cart.insert(newItem!, at: 0)
+        }
+        cell.goToCartCompletion = {
+            let cartVC = CartViewController(self.shop)
+            
+            self.navigationController?.pushViewController(cartVC, animated: true)
+        }
         return cell
     }
     
@@ -156,6 +166,17 @@ extension ShopViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 }
             }
             collectionView.reloadItems(at: [indexPath])
+        }
+        itemDetailVC.cartCompletion = { [weak self] in
+            self?.shop.items[indexPath.item].isAddedToCart = true
+            let newItem = self?.shop.items[indexPath.item]
+            self?.shop.cart.insert(newItem!, at: 0)
+            collectionView.reloadItems(at: [indexPath])
+        }
+        itemDetailVC.goToCartCompletion = {
+            let cartVC = CartViewController(self.shop)
+            collectionView.reloadItems(at: [indexPath])
+            self.navigationController?.pushViewController(cartVC, animated: true)
         }
         navigationController?.pushViewController(itemDetailVC, animated: true)
     }

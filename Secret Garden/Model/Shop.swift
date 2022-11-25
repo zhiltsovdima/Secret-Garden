@@ -26,6 +26,7 @@ struct ShopItem {
     var image: UIImage?
     
     var isFavorite = false
+    var isAddedToCart = false
     var id: Int?
     
 }
@@ -35,6 +36,8 @@ class Shop {
     var items = [ShopItem]()
     
     var favorites = [ShopItem]()
+    
+    var cart = [ShopItem]()
     
     init() {
         fetchData()

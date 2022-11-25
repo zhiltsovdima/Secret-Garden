@@ -62,6 +62,7 @@ enum Resources {
             }
             
             static let addToCart = "Add to Cart"
+            static let added = "Added"
             static let collectionNameInDataBase = "SecretGarden"
             static let price = "Price" 
         }

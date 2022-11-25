@@ -66,6 +66,8 @@ class ItemDetailController: BaseViewController {
     private let addToCartButton = BaseButton()
     
     var favoriteCompletion: ((Bool) -> Void)?
+    var cartCompletion: (() -> Void)?
+    var goToCartCompletion: (() -> Void)?
     
     
     init(_ shopItem: ShopItem) {
@@ -101,6 +103,14 @@ class ItemDetailController: BaseViewController {
             navigationItem.rightBarButtonItem?.image = Resources.Images.Common.addToFavorite
             favoriteCompletion?(false)
         }
+    }
+    
+    @objc private func addToCartAction() {
+        guard addToCartButton.backgroundColor == Resources.Colors.backgroundColor else { goToCartCompletion?(); return }
+        addToCartButton.backgroundColor = .black
+        addToCartButton.titleLabel?.tintColor = Resources.Colors.backgroundColor
+        addToCartButton.titleLabel?.text = Resources.Strings.Shop.added
+        cartCompletion?()
     }
 
     private func addViews() {
@@ -254,9 +264,16 @@ class ItemDetailController: BaseViewController {
         priceValueLabel.text = shopItem.price
         priceValueLabel.font = Resources.Fonts.header
         
-        addToCartButton.setTitle(Resources.Strings.Shop.addToCart, for: .normal)
+        if shopItem.isAddedToCart {
+            addToCartButton.setTitle(Resources.Strings.Shop.added, for: .normal)
+            addToCartButton.backgroundColor = .black
+
+        } else {
+            addToCartButton.setTitle(Resources.Strings.Shop.addToCart, for: .normal)
+            addToCartButton.backgroundColor = Resources.Colors.accent
+        }
         addToCartButton.titleLabel?.font = Resources.Fonts.general?.withSize(18)
-        
+        addToCartButton.addTarget(self, action: #selector(addToCartAction), for: .touchUpInside)
     }
     
     // MARK: - CONSTRAINTS

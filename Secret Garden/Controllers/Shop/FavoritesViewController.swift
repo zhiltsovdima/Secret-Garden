@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FavoritesViewController: BaseViewController {
+final class FavoritesViewController: BaseViewController {
     
     private let shop: Shop
     

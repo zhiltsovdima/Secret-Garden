@@ -20,6 +20,8 @@ class ItemCell: UICollectionViewCell {
     }
     
     var favoriteCompletion: ((Bool) -> Void)?
+    var cartCompletion: (() -> Void)?
+    var goToCartCompletion: (() -> Void)?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -37,6 +39,15 @@ class ItemCell: UICollectionViewCell {
         imageView.image = item.image
         favoriteButton.backgroundColor = item.isFavorite ? .black : Resources.Colors.backgroundColor
         favoriteButton.tintColor = item.isFavorite ? Resources.Colors.backgroundColor : .black
+        if item.isAddedToCart {
+            addToCartButton.backgroundColor = .black
+            addToCartButton.setTitle(Resources.Strings.Shop.added, for: .normal)
+            addToCartButton.setTitleColor(Resources.Colors.backgroundColor, for: .normal)
+        } else {
+            addToCartButton.backgroundColor = Resources.Colors.backgroundColor
+            addToCartButton.setTitle(Resources.Strings.Shop.addToCart, for: .normal)
+            addToCartButton.setTitleColor(.black, for: .normal)
+        }
         if isFetched {
             spinner.stopAnimating()
         } else {
@@ -65,6 +76,11 @@ class ItemCell: UICollectionViewCell {
     
     @objc private func addToCart() {
         
+        guard addToCartButton.backgroundColor == Resources.Colors.backgroundColor else { goToCartCompletion?(); return }
+        addToCartButton.backgroundColor = .black
+        addToCartButton.setTitle(Resources.Strings.Shop.added, for: .normal)
+        addToCartButton.setTitleColor(Resources.Colors.backgroundColor, for: .normal)
+        cartCompletion?()
     }
     
     private func configure() {
