@@ -64,7 +64,14 @@ enum Resources {
             static let addToCart = "Add to Cart"
             static let added = "Added"
             static let collectionNameInDataBase = "SecretGarden"
-            static let price = "Price" 
+            static let price = "Price"
+            static let checkout = "Checkout"
+            static let total = "Total"
+            static let subTotal = "Sub Total"
+            static let shipping = "Shipping"
+
+
+
         }
     }
     
@@ -107,6 +114,8 @@ enum Resources {
         static let categoriesView = "HeaderCollectionReusableView"
         static let categoryCell = "CategoryCell"
         static let favoriteCell = "FavoriteCell"
+        static let cartCell = "CartCell"
+
     }
     
     enum Fonts {
