@@ -45,10 +45,19 @@ class Shop {
     
     var updateCompletion: ((Int) -> Void)?
     
-    func favoriteItem(withId id: Int, _ isFavorite: Bool) {
+    func makeFavoriteItem(withId id: Int, _ isFavorite: Bool) {
         for index in items.indices {
             if items[index].id == id {
                 items[index].isFavorite = isFavorite
+                updateCompletion?(index)
+            }
+        }
+    }
+    
+    func removeFromCart(withId id: Int) {
+        for index in items.indices {
+            if items[index].id == id {
+                items[index].isAddedToCart = false
                 updateCompletion?(index)
             }
         }

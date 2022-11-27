@@ -38,7 +38,9 @@ final class CartViewController: BaseViewController {
         return price
     }
     
-    lazy private var totalPrice = totalSubPrice + 10.0
+    private var totalPrice: Double {
+        totalSubPrice + 10.0
+    }
     
     init(_ shop: Shop) {
         self.shop = shop
@@ -59,6 +61,12 @@ final class CartViewController: BaseViewController {
         configureTableView()
         configureViews()
         setConstraints()
+    }
+    
+    private func updateUI() {
+        guard shop.cart.count != 0 else { checkoutStack.isHidden = true; return }
+        subTotalValue.text = "$\(totalSubPrice)"
+        totalValue.text = "$\(totalPrice)"
     }
     
     private func configureTableView() {
@@ -91,6 +99,7 @@ final class CartViewController: BaseViewController {
     }
     
     private func configureViews() {
+        guard shop.cart.count != 0 else { checkoutStack.isHidden = true; return }
         checkoutStack.axis = .vertical
         checkoutStack.distribution = .fill
         
@@ -177,7 +186,17 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Resources.Identifiers.cartCell, for: indexPath) as! CartCell
-        cell.setCart(with: shop.cart[indexPath.row])
+        let shopItem = shop.cart[indexPath.row]
+        cell.setCart(shopItem)
+        cell.deleteCompletion = { [weak self] cellForRemove in
+            self?.shop.removeFromCart(withId: shopItem.id!)
+            let actualIndexPath = self?.tableView.indexPath(for: cellForRemove)
+            DispatchQueue.main.async {
+                self?.shop.cart.remove(at: actualIndexPath!.row)
+                self?.tableView.deleteRows(at: [actualIndexPath!], with: .fade)
+                self?.updateUI()
+            }
+        }
         return cell
     }
     
@@ -187,17 +206,15 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
         
         let itemDetailVC = ItemDetailController(shopItem)
         itemDetailVC.favoriteCompletion = { [weak self] isFavorite in
-            self?.shop.favoriteItem(withId: shopItemId!, isFavorite)
+            self?.shop.makeFavoriteItem(withId: shopItemId!, isFavorite)
             if isFavorite {
                 let item = self?.shop.items[shopItemId!]
                 self?.shop.favorites.append(item!)
             } else {
                 self?.shop.favorites.remove(at: indexPath.row)
             }
-            tableView.reloadData()
         }
         navigationController?.pushViewController(itemDetailVC, animated: true)
         tableView.deselectRow(at: indexPath, animated: false)
     }
-    
 }

@@ -13,6 +13,9 @@ final class CartCell: UITableViewCell {
     private let nameItem = UILabel()
     private let itemImageView = UIImageView()
     
+    private let deleteButton = UIButton()
+    var deleteCompletion: ((UITableViewCell) -> Void)?
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -25,16 +28,21 @@ final class CartCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setCart(with item: ShopItem) {
+    func setCart(_ item: ShopItem) {
         nameItem.text = item.name
         priceLabel.text = item.price
         itemImageView.image = item.image
+    }
+    
+    @objc func deleteFromCartAction() {
+        deleteCompletion?(self)
     }
     
     private func setupViews() {
         addSubview(itemImageView)
         addSubview(priceLabel)
         addSubview(nameItem)
+        contentView.addSubview(deleteButton)
 
     }
     private func configureViews() {
@@ -48,12 +56,17 @@ final class CartCell: UITableViewCell {
         priceLabel.numberOfLines = 0
         priceLabel.font = Resources.Fonts.generalBold
         
+        deleteButton.setImage(Resources.Images.Common.delete, for: .normal)
+        deleteButton.tintColor = .black
+        deleteButton.addTarget(self, action: #selector(deleteFromCartAction), for: .touchUpInside)
+        makeSystemAnimation(for: deleteButton)
     }
     
     private func setConstraints() {
         itemImageView.translatesAutoresizingMaskIntoConstraints = false
         priceLabel.translatesAutoresizingMaskIntoConstraints = false
         nameItem.translatesAutoresizingMaskIntoConstraints = false
+        deleteButton.translatesAutoresizingMaskIntoConstraints = false
         
         
         NSLayoutConstraint.activate([
@@ -68,6 +81,9 @@ final class CartCell: UITableViewCell {
             
             priceLabel.topAnchor.constraint(equalTo: nameItem.bottomAnchor, constant: 20),
             priceLabel.leadingAnchor.constraint(equalTo: itemImageView.trailingAnchor, constant: 10),
+            
+            deleteButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
+            deleteButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10)
             
         ])
     }

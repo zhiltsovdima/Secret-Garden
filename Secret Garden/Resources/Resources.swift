@@ -91,6 +91,7 @@ enum Resources {
             static let addToFavorite = UIImage(systemName: "heart")
             static let addToFavoriteFill = UIImage(systemName: "heart.fill")
             static let cart = UIImage(systemName: "cart.circle")
+            static let delete = UIImage(systemName: "xmark")
         }
         enum Home {
             static let tip = UIImage(named: "PlantForTip")

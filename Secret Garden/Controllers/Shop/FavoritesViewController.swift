@@ -102,7 +102,7 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
                 self?.tableView.deleteRows(at: [unfavIndexPath!], with: .fade)
                 self?.isItEmpty()
             }
-            self?.shop.favoriteItem(withId: favItem.id!, false)
+            self?.shop.makeFavoriteItem(withId: favItem.id!, false)
         }
         
         return cell
@@ -114,7 +114,7 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
         
         let itemDetailVC = ItemDetailController(shopItem)
         itemDetailVC.favoriteCompletion = { [weak self] isFavorite in
-            self?.shop.favoriteItem(withId: shopItemId!, isFavorite)
+            self?.shop.makeFavoriteItem(withId: shopItemId!, isFavorite)
             if isFavorite {
                 let item = self?.shop.items[shopItemId!]
                 self?.shop.favorites.append(item!)
