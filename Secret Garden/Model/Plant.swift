@@ -10,6 +10,19 @@ import UIKit
 struct Plant: Codable {
     var name: String
     var image: PlantImage
+    
+    var latinName: String?
+    var origin: String?
+    var tempMax: Int?
+    var tempMin: Int?
+    var ideaLight: String?
+    var watering: String?
+    var insects: String?
+    
+    init(name: String, image: PlantImage) {
+        self.name = name
+        self.image = image
+    }
 }
 
 struct PlantImage: Codable {

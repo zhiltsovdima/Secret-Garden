@@ -30,6 +30,17 @@ enum Resources {
             static let name = "Name"
             static let save = "Save"
             static let cancel = "Cancel"
+            
+            enum Detail {
+                static let careLevel = "Care Level"
+                static let petFriendly = "Pet Friendly"
+                static let size = "Size"
+                static let origin = "Origin"
+                static let light = "Light"
+                static let humidity = "Humidity"
+                static let temperature = "Temperature"
+                static let insects = "Insects"
+            }
         }
         enum AddPlant {
             static let titleController = "Add a new plant"
@@ -51,16 +62,6 @@ enum Resources {
         }
         enum Shop {
             
-            enum Detail {
-                static let careLevel = "Care Level"
-                static let petFriendly = "Pet Friendly"
-                static let size = "Size"
-                static let origin = "Origin"
-                static let light = "Light"
-                static let humidity = "Humidity"
-                static let temperature = "Temperature"
-            }
-            
             static let addToCart = "Add to Cart"
             static let added = "Added"
             static let collectionNameInDataBase = "SecretGarden"
@@ -69,8 +70,6 @@ enum Resources {
             static let total = "Total"
             static let subTotal = "Sub Total"
             static let shipping = "Shipping"
-
-
 
         }
     }
@@ -97,7 +96,7 @@ enum Resources {
             static let tip = UIImage(named: "PlantForTip")
         }
         
-        enum Shop {
+        enum Characteristics {
             static let size = UIImage(systemName: "ruler.fill")
             static let careLevel = UIImage(systemName: "chart.bar.fill")
             static let petFriendly = UIImage(systemName: "pawprint.fill")
@@ -105,6 +104,7 @@ enum Resources {
             static let light = UIImage(systemName: "sun.max.fill")
             static let humidity = UIImage(systemName: "drop.fill")
             static let temperature = UIImage(systemName: "thermometer")
+            static let insects = UIImage(systemName: "ladybug")
         }
     }
     

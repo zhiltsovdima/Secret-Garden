@@ -22,39 +22,39 @@ class ItemDetailController: BaseViewController {
     private let upperDetailsStack = UIStackView()
     
     private let careLevelView = UIView()
-    private let careLevelImage = UIImageView(image: Resources.Images.Shop.careLevel)
+    private let careLevelImage = UIImageView(image: Resources.Images.Characteristics.careLevel)
     private let careLevelLabel = UILabel()
     private let careValueLabel = UILabel()
     
     private let petView = UIView()
-    private let petFriendlyImage = UIImageView(image: Resources.Images.Shop.petFriendly)
+    private let petFriendlyImage = UIImageView(image: Resources.Images.Characteristics.petFriendly)
     private let petFriendlyLabel = UILabel()
     private let petValueLabel = UILabel()
     
     private let sizeView = UIView()
-    private let sizeImage = UIImageView(image: Resources.Images.Shop.size)
+    private let sizeImage = UIImageView(image: Resources.Images.Characteristics.size)
     private let sizeLabel = UILabel()
     private let sizeValueLabel = UILabel()
     
     private let bottonDetailsStack = UIStackView()
     
     private let lightView = UIView()
-    private let lightImage = UIImageView(image: Resources.Images.Shop.light)
+    private let lightImage = UIImageView(image: Resources.Images.Characteristics.light)
     private let lightLabel = UILabel()
     private let lightValueLabel = UILabel()
     
     private let humidityView = UIView()
-    private let humidityImage = UIImageView(image: Resources.Images.Shop.humidity)
+    private let humidityImage = UIImageView(image: Resources.Images.Characteristics.humidity)
     private let humidityLabel = UILabel()
     private let humidityValueLabel = UILabel()
     
     private let temperatureView = UIView()
-    private let temperatureImage = UIImageView(image: Resources.Images.Shop.temperature)
+    private let temperatureImage = UIImageView(image: Resources.Images.Characteristics.temperature)
     private let temperatureLabel = UILabel()
     private let temperatureValueLabel = UILabel()
     
     private let originView = UIView()
-    private let originImage = UIImageView(image: Resources.Images.Shop.origin)
+    private let originImage = UIImageView(image: Resources.Images.Characteristics.origin)
     private let originLabel = UILabel()
     private let originValueLabel = UILabel()
     
@@ -191,7 +191,7 @@ class ItemDetailController: BaseViewController {
         upperDetailsStack.axis = .horizontal
         upperDetailsStack.distribution = .fillEqually
         
-        careLevelLabel.text = Resources.Strings.Shop.Detail.careLevel
+        careLevelLabel.text = Resources.Strings.Common.Detail.careLevel
         careLevelLabel.font = Resources.Fonts.subHeaders
         careLevelLabel.textColor = Resources.Colors.subHeader
         careLevelLabel.numberOfLines = 0
@@ -200,7 +200,7 @@ class ItemDetailController: BaseViewController {
         careValueLabel.numberOfLines = 0
 
         
-        petFriendlyLabel.text = Resources.Strings.Shop.Detail.petFriendly
+        petFriendlyLabel.text = Resources.Strings.Common.Detail.petFriendly
         petFriendlyLabel.font = Resources.Fonts.subHeaders
         petFriendlyLabel.textColor = Resources.Colors.subHeader
         petFriendlyLabel.numberOfLines = 0
@@ -208,7 +208,7 @@ class ItemDetailController: BaseViewController {
         petValueLabel.font = Resources.Fonts.generalBold
         petValueLabel.numberOfLines = 0
         
-        sizeLabel.text = Resources.Strings.Shop.Detail.size
+        sizeLabel.text = Resources.Strings.Common.Detail.size
         sizeLabel.font = Resources.Fonts.subHeaders
         sizeLabel.textColor = Resources.Colors.subHeader
         sizeLabel.numberOfLines = 0
@@ -221,7 +221,7 @@ class ItemDetailController: BaseViewController {
         bottonDetailsStack.axis = .horizontal
         bottonDetailsStack.distribution = .fillEqually
         
-        lightLabel.text = Resources.Strings.Shop.Detail.light
+        lightLabel.text = Resources.Strings.Common.Detail.light
         lightLabel.font = Resources.Fonts.subHeaders
         lightLabel.textColor = Resources.Colors.subHeader
         lightLabel.numberOfLines = 0
@@ -229,7 +229,7 @@ class ItemDetailController: BaseViewController {
         lightValueLabel.font = Resources.Fonts.generalBold
         lightValueLabel.numberOfLines = 0
 
-        humidityLabel.text = Resources.Strings.Shop.Detail.humidity
+        humidityLabel.text = Resources.Strings.Common.Detail.humidity
         humidityLabel.font = Resources.Fonts.subHeaders
         humidityLabel.textColor = Resources.Colors.subHeader
         humidityLabel.numberOfLines = 0
@@ -237,7 +237,7 @@ class ItemDetailController: BaseViewController {
         humidityValueLabel.font = Resources.Fonts.generalBold
         humidityValueLabel.numberOfLines = 0
 
-        temperatureLabel.text = Resources.Strings.Shop.Detail.temperature
+        temperatureLabel.text = Resources.Strings.Common.Detail.temperature
         temperatureLabel.font = Resources.Fonts.subHeaders
         temperatureLabel.textColor = Resources.Colors.subHeader
         temperatureLabel.numberOfLines = 0
@@ -245,7 +245,7 @@ class ItemDetailController: BaseViewController {
         temperatureValueLabel.font = Resources.Fonts.generalBold
         temperatureValueLabel.numberOfLines = 0
         
-        originLabel.text = Resources.Strings.Shop.Detail.origin
+        originLabel.text = Resources.Strings.Common.Detail.origin
         originLabel.font = Resources.Fonts.subHeaders
         originLabel.textColor = Resources.Colors.subHeader
         originLabel.numberOfLines = 0
