@@ -10,9 +10,15 @@ import Firebase
 import FirebaseStorage
 import FirebaseDatabaseSwift
 
-final class APIManager {
+protocol APIManagerDelegate {
+    func didUpdate(with characteristics: PlantCharacteristics, index: Int)
+}
+
+struct APIManager {
     
-    static let shared = APIManager()
+    static var shared = APIManager()
+    
+    var delegate: APIManagerDelegate?
     
     private func configureFB() -> Firestore {
         let dataBase = Firestore.firestore()
@@ -80,6 +86,67 @@ final class APIManager {
             }
             image = UIImage(data: data!)!
             completion(image)
+        }
+    }
+    
+    // MARK: - Fetching Plant's Characteristics
+    
+    func performRequest(namePlant: String, index: Int) {
+        
+        let name = namePlant.lowercased()
+        
+        let headers = [
+            "X-RapidAPI-Key": "b05530de65msh6cfb2133d9fa5bdp1b3829jsn681eaacbbab4",
+            "X-RapidAPI-Host": "house-plants.p.rapidapi.com"
+        ]
+
+        let request = NSMutableURLRequest(url: NSURL(string: "https://house-plants.p.rapidapi.com/common/\(name)")! as URL,
+                                                cachePolicy: .useProtocolCachePolicy,
+                                            timeoutInterval: 10.0)
+        request.httpMethod = "GET"
+        request.allHTTPHeaderFields = headers
+
+        let session = URLSession.shared
+        let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
+            if (error != nil) {
+                print(error!)
+            } else {
+                let httpResponse = response as? HTTPURLResponse
+                print(httpResponse!)
+            }
+            if let safeData = data {
+                if let characteristics = parseJSON(safeData) {
+                    delegate?.didUpdate(with: characteristics, index: index)
+                }
+            }
+        })
+
+        dataTask.resume()
+    }
+    
+    func parseJSON(_ plantData: Data) -> PlantCharacteristics? {
+        let decoder = JSONDecoder()
+        do {
+            let decodedData = try decoder.decode(PlantData.self, from: plantData)
+            
+            let latin = decodedData.latin
+            let origin = decodedData.origin
+            let temp = "From \(decodedData.tempmin.celsius) to \(decodedData.tempmax.celsius)"
+            let idealLight = decodedData.ideallight
+            let watering = decodedData.watering
+            let insects = decodedData.insects
+            
+            
+            let characteristic = PlantCharacteristics(latinName: latin,
+                                                      origin: origin,
+                                                      temperature: temp,
+                                                      ideaLight: idealLight,
+                                                      watering: watering,
+                                                      insects: insects)
+            return characteristic
+        } catch {
+            print(error)
+            return nil
         }
     }
 }

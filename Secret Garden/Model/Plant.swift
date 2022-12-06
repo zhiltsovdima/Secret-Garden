@@ -11,18 +11,29 @@ struct Plant: Codable {
     var name: String
     var image: PlantImage
     
-    var latinName: String?
-    var origin: String?
-    var tempMax: Int?
-    var tempMin: Int?
-    var ideaLight: String?
-    var watering: String?
-    var insects: String?
+//    var latinName: String?
+//    var origin: String?
+//    var tempMax: Int?
+//    var tempMin: Int?
+//    var ideaLight: String?
+//    var watering: String?
+//    var insects: String?
+    
+    var characteristics: PlantCharacteristics?
     
     init(name: String, image: PlantImage) {
         self.name = name
         self.image = image
     }
+}
+
+struct PlantCharacteristics: Codable {
+    var latinName: String?
+    var origin: String?
+    var temperature: String?
+    var ideaLight: String?
+    var watering: String?
+    var insects: [String]?
 }
 
 struct PlantImage: Codable {
