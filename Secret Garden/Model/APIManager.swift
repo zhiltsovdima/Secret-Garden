@@ -110,7 +110,8 @@ struct APIManager {
         let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
             if (error != nil) {
                 print(error!)
-            } else {
+            }
+            if (response != nil) {
                 let httpResponse = response as? HTTPURLResponse
                 print(httpResponse!)
             }
@@ -127,20 +128,25 @@ struct APIManager {
     func parseJSON(_ plantData: Data) -> PlantCharacteristics? {
         let decoder = JSONDecoder()
         do {
-            let decodedData = try decoder.decode(PlantData.self, from: plantData)
+            let decodedData = try decoder.decode(PlantsData.self, from: plantData)
             
-            let latin = decodedData.latin
-            let origin = decodedData.origin
-            let temp = "From \(decodedData.tempmin.celsius) to \(decodedData.tempmax.celsius)"
-            let idealLight = decodedData.ideallight
-            let watering = decodedData.watering
-            let insects = decodedData.insects
+            guard decodedData.items.count > 0 else { return nil }
+            
+            let dataForPlant = decodedData.items.first!
+            
+            let latin = dataForPlant.latin
+            let origin = dataForPlant.origin
+            let temp = "From \(dataForPlant.tempmin.celsius) to \(dataForPlant.tempmax.celsius)"
+            let idealLight = dataForPlant.ideallight
+            let watering = dataForPlant.watering
+            let insectsArray = dataForPlant.insects
+            let insects = insectsArray.joined(separator: "\n")
             
             
             let characteristic = PlantCharacteristics(latinName: latin,
                                                       origin: origin,
                                                       temperature: temp,
-                                                      ideaLight: idealLight,
+                                                      idealLight: idealLight,
                                                       watering: watering,
                                                       insects: insects)
             return characteristic

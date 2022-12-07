@@ -48,8 +48,7 @@ final class PlantCell: UITableViewCell {
         plantImageView.contentMode = .scaleAspectFill
  
         plantTitleLabel.numberOfLines = 0
-        plantTitleLabel.minimumScaleFactor = 20.0
-        plantTitleLabel.adjustsFontSizeToFitWidth = true
+        plantTitleLabel.font = Resources.Fonts.general?.withSize(18)
 
         settingsButton.setImage(Resources.Images.Common.moreOptions, for: .normal)
         settingsButton.addTarget(self, action: #selector(settingsButtonAction), for: .touchUpInside)
@@ -69,7 +68,6 @@ final class PlantCell: UITableViewCell {
         NSLayoutConstraint.activate([
             plantTitleLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             plantTitleLabel.leadingAnchor.constraint(equalTo: plantImageView.trailingAnchor, constant: 20),
-            plantTitleLabel.heightAnchor.constraint(equalToConstant: 40),
             plantTitleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30)
         ])
         

@@ -7,6 +7,10 @@
 
 import Foundation
 
+struct PlantsData: Codable {
+    let items: [PlantData]
+}
+
 struct PlantData: Codable {
     
     let latin: String
