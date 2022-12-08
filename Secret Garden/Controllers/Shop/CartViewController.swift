@@ -25,6 +25,10 @@ final class CartViewController: BaseViewController {
     private let totalValue = UILabel()
     private let checkoutButton = BaseButton()
     
+    private let emptyCartImage = UIImageView()
+    private let emptyCartLabel = UILabel()
+    private let emptyCartButton = BaseButton()
+    
     private var totalSubPrice: Double {
         var price = 0.0
         shop.cart.forEach { item in
@@ -63,8 +67,20 @@ final class CartViewController: BaseViewController {
         setConstraints()
     }
     
+    @objc private func emptyButtonAction() {
+        navigationController?.popViewController(animated: true)
+    }
+    
     private func updateUI() {
-        guard shop.cart.count != 0 else { checkoutStack.isHidden = true; return }
+        guard shop.cart.count != 0 else {
+            tableView.isHidden = true
+            checkoutStack.isHidden = true
+            
+            emptyCartImage.isHidden = false
+            emptyCartLabel.isHidden = false
+            emptyCartButton.isHidden = false
+            return
+        }
         subTotalValue.text = "$\(totalSubPrice)"
         totalValue.text = "$\(totalPrice)"
     }
@@ -96,10 +112,34 @@ final class CartViewController: BaseViewController {
         totalPriceView.addSubview(totalLabel)
         totalPriceView.addSubview(totalValue)
         
+        view.addSubview(emptyCartImage)
+        view.addSubview(emptyCartLabel)
+        view.addSubview(emptyCartButton)
+        
     }
     
     private func configureViews() {
-        guard shop.cart.count != 0 else { checkoutStack.isHidden = true; return }
+        emptyCartImage.image = Resources.Images.Common.shopPlant
+        emptyCartImage.contentMode = .scaleAspectFit
+        emptyCartImage.isHidden = true
+        emptyCartLabel.text = Resources.Strings.Shop.emptyLabel
+        emptyCartLabel.font = Resources.Fonts.generalBold
+        emptyCartLabel.textAlignment = .center
+        emptyCartLabel.isHidden = true
+        
+        emptyCartButton.setTitle(Resources.Strings.Shop.emptyButton, for: .normal)
+        emptyCartButton.isHidden = true
+        emptyCartButton.addTarget(self, action: #selector(emptyButtonAction), for: .touchUpInside)
+        
+        guard shop.cart.count != 0 else {
+            tableView.isHidden = true
+            checkoutStack.isHidden = true
+            
+            emptyCartImage.isHidden = false
+            emptyCartLabel.isHidden = false
+            emptyCartButton.isHidden = false
+            return
+        }
         checkoutStack.axis = .vertical
         checkoutStack.distribution = .fill
         
@@ -136,6 +176,10 @@ final class CartViewController: BaseViewController {
         totalLabel.translatesAutoresizingMaskIntoConstraints = false
         totalValue.translatesAutoresizingMaskIntoConstraints = false
         checkoutButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        emptyCartImage.translatesAutoresizingMaskIntoConstraints = false
+        emptyCartLabel.translatesAutoresizingMaskIntoConstraints = false
+        emptyCartButton.translatesAutoresizingMaskIntoConstraints = false
                 
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -174,6 +218,19 @@ final class CartViewController: BaseViewController {
 
             checkoutButton.heightAnchor.constraint(equalToConstant: 60),
             
+            emptyCartImage.bottomAnchor.constraint(equalTo: emptyCartLabel.topAnchor),
+            emptyCartImage.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
+            emptyCartImage.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20),
+            emptyCartImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            
+            emptyCartLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            emptyCartLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            
+            emptyCartButton.topAnchor.constraint(equalTo: emptyCartLabel.bottomAnchor, constant: 20),
+            emptyCartButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            emptyCartButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            emptyCartButton.heightAnchor.constraint(equalToConstant: 60)
+
         ])
     }
 }

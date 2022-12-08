@@ -70,7 +70,8 @@ enum Resources {
             static let total = "Total"
             static let subTotal = "Sub Total"
             static let shipping = "Shipping"
-
+            static let emptyLabel = "Please add to Cart something!"
+            static let emptyButton = "Back to the Shop"
         }
     }
     
@@ -82,6 +83,7 @@ enum Resources {
         }
         enum Common {
             static let defaultPlant = UIImage(named: "DefaultPlant")
+            static let shopPlant = UIImage(named: "ShopPlant")
             static let emptyCollection = UIImage(named: "EmptyCollection")
             static let camera = UIImage(systemName: "camera.circle.fill")
             static let moreOptions = UIImage(systemName: "ellipsis")
