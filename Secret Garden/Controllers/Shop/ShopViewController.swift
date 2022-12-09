@@ -11,6 +11,13 @@ final class ShopViewController: BaseViewController {
     
     private let shop = Shop()
     
+    private var filteredItems = [ShopItem]() {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
+    private var isSelectedCategory = false
+    
     private lazy var collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: flowLayout)
     
     private let flowLayout = UICollectionViewFlowLayout()
@@ -112,17 +119,24 @@ extension ShopViewController {
 extension ShopViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return shop.items.count
+        
+        if !isSelectedCategory {
+            return shop.items.count
+        } else {
+            return filteredItems.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Resources.Identifiers.itemCell, for: indexPath) as! ItemCell
         
-        let shopItem = shop.items[indexPath.item]
+        let shopItem = !isSelectedCategory ? shop.items[indexPath.item] : filteredItems[indexPath.item]
+        let shopItemId = shopItem.id!
         cell.setItem(shopItem)
+        
         cell.favoriteCompletion = { [weak self] isFavorite in
-            self?.shop.makeFavoriteItem(withId: indexPath.item, isFavorite)
-            let changedItem = self?.shop.items[indexPath.item]
+            self?.shop.makeFavoriteItem(withId: shopItemId, isFavorite)
+            let changedItem = self?.shop.items[shopItemId]
             if isFavorite {
                 self?.shop.favorites.insert(changedItem!, at: 0)
             } else {
@@ -132,8 +146,8 @@ extension ShopViewController: UICollectionViewDelegate, UICollectionViewDataSour
             }
         }
         cell.cartCompletion = { [weak self] in
-            self?.shop.items[indexPath.item].isAddedToCart = true
-            let newItem = self?.shop.items[indexPath.item]
+            self?.shop.items[shopItemId].isAddedToCart = true
+            let newItem = self?.shop.items[shopItemId]
             self?.shop.cart.insert(newItem!, at: 0)
         }
         cell.goToCartCompletion = {
@@ -144,20 +158,14 @@ extension ShopViewController: UICollectionViewDelegate, UICollectionViewDataSour
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader,
-                                                                     withReuseIdentifier: Resources.Identifiers.categoriesView,
-                                                                     for: indexPath) as! CategoriesView
-        header.congifure()
-        return header
-    }
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let shopItem = shop.items[indexPath.item]
+        let shopItem = !isSelectedCategory ? shop.items[indexPath.item] : filteredItems[indexPath.item]
+        let shopItemId = shopItem.id!
+        
         let itemDetailVC = ItemDetailController(shopItem)
         itemDetailVC.favoriteCompletion = { [weak self] isFavorite in
-            self?.shop.makeFavoriteItem(withId: indexPath.item, isFavorite)
-            let changedItem = self?.shop.items[indexPath.item]
+            self?.shop.makeFavoriteItem(withId: shopItemId, isFavorite)
+            let changedItem = self?.shop.items[shopItemId]
             if isFavorite {
                 self?.shop.favorites.insert(changedItem!, at: 0)
             } else {
@@ -165,20 +173,53 @@ extension ShopViewController: UICollectionViewDelegate, UICollectionViewDataSour
                     item.id == changedItem!.id
                 }
             }
-            collectionView.reloadItems(at: [indexPath])
+            collectionView.reloadItems(at: [IndexPath(item: shopItemId, section: 0)])
         }
         itemDetailVC.cartCompletion = { [weak self] in
-            self?.shop.items[indexPath.item].isAddedToCart = true
-            let newItem = self?.shop.items[indexPath.item]
+            self?.shop.items[shopItemId].isAddedToCart = true
+            let newItem = self?.shop.items[shopItemId]
             self?.shop.cart.insert(newItem!, at: 0)
-            collectionView.reloadItems(at: [indexPath])
+            collectionView.reloadItems(at: [IndexPath(item: shopItemId, section: 0)])
         }
         itemDetailVC.goToCartCompletion = {
             let cartVC = CartViewController(self.shop)
-            collectionView.reloadItems(at: [indexPath])
+            collectionView.reloadItems(at: [IndexPath(item: shopItemId, section: 0)])
             self.navigationController?.pushViewController(cartVC, animated: true)
         }
         navigationController?.pushViewController(itemDetailVC, animated: true)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader,
+                                                                     withReuseIdentifier: Resources.Identifiers.categoriesView,
+                                                                     for: indexPath) as! CategoriesView
+        header.congifure()
+        header.selectedCategoryHandler = { [weak self] selectedCategory in
+            switch selectedCategory {
+            case Resources.Strings.Shop.Categories.indoor:
+                self?.isSelectedCategory = true
+                self?.filteredItems = (self?.shop.items.filter({ item in
+                    if item.category?.lowercased() == Resources.Strings.Shop.Categories.indoor.lowercased() {
+                        return true
+                    } else {
+                        return false
+                    }
+                }))!
+            case Resources.Strings.Shop.Categories.outdoor:
+                self?.isSelectedCategory = true
+                self?.filteredItems = (self?.shop.items.filter({ item in
+                    if item.category?.lowercased() == Resources.Strings.Shop.Categories.outdoor.lowercased() {
+                        return true
+                    } else {
+                        return false
+                    }
+                }))!
+            default:
+                self?.isSelectedCategory = false
+                self?.filteredItems = []
+            }
+        }
+        return header
     }
 }
 

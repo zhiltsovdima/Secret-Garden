@@ -62,6 +62,13 @@ enum Resources {
         }
         enum Shop {
             
+            enum Categories {
+                static let all = "All"
+                static let indoor = "Indoor"
+                static let outdoor = "Outdoor"
+                static let fertilizer = "Fertilizer"
+            }
+            
             static let addToCart = "Add to Cart"
             static let added = "Added"
             static let collectionNameInDataBase = "SecretGarden"

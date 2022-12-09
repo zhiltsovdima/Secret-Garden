@@ -9,10 +9,20 @@ import UIKit
 
 final class CategoriesView: UICollectionReusableView {
     
-    private var categories = ["All", "Outdoors", "Indoors", "test", "test", "test", "test", "test"]
+    private var categories = [Resources.Strings.Shop.Categories.all,
+                              Resources.Strings.Shop.Categories.indoor,
+                              Resources.Strings.Shop.Categories.outdoor,
+                              Resources.Strings.Shop.Categories.fertilizer,
+                              "test",
+                              "test",
+                              "test",
+                              "test"]
     private let flowLayout = UICollectionViewFlowLayout()
-    private lazy var collectionView = UICollectionView(frame: self.bounds, collectionViewLayout: flowLayout)
+    lazy var collectionView = UICollectionView(frame: self.bounds, collectionViewLayout: flowLayout)
     
+    var selectedCategoryHandler: ((String) -> Void)?
+    
+        
     func congifure() {
         setDelegates()
         collectionView.register(CategoryCell.self, forCellWithReuseIdentifier: Resources.Identifiers.categoryCell)
@@ -45,8 +55,22 @@ extension CategoriesView: UICollectionViewDelegate, UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Resources.Identifiers.categoryCell, for: indexPath) as! CategoryCell
         
         cell.setCategory(categories[indexPath.item])
+        
+        if indexPath.item == 0 {
+            collectionView.selectItem(at: indexPath, animated: false, scrollPosition: [])
+            cell.isSelected = true
+        } else {
+            cell.isSelected = false
+        }
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let selectedCategoryName = categories[indexPath.item]
+        selectedCategoryHandler?(selectedCategoryName)
+    }
+
 }
 
 extension CategoriesView: UICollectionViewDelegateFlowLayout {
