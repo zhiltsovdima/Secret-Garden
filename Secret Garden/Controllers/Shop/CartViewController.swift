@@ -46,6 +46,8 @@ final class CartViewController: BaseViewController {
         totalSubPrice + 10.0
     }
     
+    var updateDetailVCHandler: ((Int) -> Void)?
+    
     init(_ shop: Shop) {
         self.shop = shop
         super.init(nibName: nil, bundle: nil)
@@ -68,10 +70,11 @@ final class CartViewController: BaseViewController {
     }
     
     @objc private func emptyButtonAction() {
-        navigationController?.popViewController(animated: true)
+        navigationController?.popToRootViewController(animated: true)
     }
     
-    private func updateUI() {
+    private func updateUI(itemID: Int) {
+        updateDetailVCHandler?(itemID)
         guard shop.cart.count != 0 else {
             tableView.isHidden = true
             checkoutStack.isHidden = true
@@ -251,25 +254,26 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
             DispatchQueue.main.async {
                 self?.shop.cart.remove(at: actualIndexPath!.row)
                 self?.tableView.deleteRows(at: [actualIndexPath!], with: .fade)
-                self?.updateUI()
+                self?.updateUI(itemID: shopItem.id!)
             }
         }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let shopItemId = shop.cart[indexPath.row].id
-        let shopItem = shop.items[shopItemId!]
+        let shopItemId = shop.cart[indexPath.row].id!
+        let shopItem = shop.items[shopItemId]
         
         let itemDetailVC = ItemDetailController(shopItem)
         itemDetailVC.favoriteCompletion = { [weak self] isFavorite in
-            self?.shop.makeFavoriteItem(withId: shopItemId!, isFavorite)
+            self?.shop.makeFavoriteItem(withId: shopItemId, isFavorite)
             if isFavorite {
-                let item = self?.shop.items[shopItemId!]
+                let item = self?.shop.items[shopItemId]
                 self?.shop.favorites.append(item!)
             } else {
                 self?.shop.favorites.remove(at: indexPath.row)
             }
+            self?.updateUI(itemID: shopItemId)
         }
         navigationController?.pushViewController(itemDetailVC, animated: true)
         tableView.deselectRow(at: indexPath, animated: false)

@@ -48,8 +48,14 @@ final class ShopViewController: BaseViewController {
     
     private func updateUI() {
         shop.updateCompletion = { index in
-            DispatchQueue.main.async {
-                self.collectionView.reloadItems(at: [IndexPath(item: index, section: 0)])
+            if self.isSelectedCategory {
+                let categoryName = self.shop.items[index].category!
+                self.updateFilteredItems(categoryName: categoryName)
+            } else {
+                DispatchQueue.main.async {
+                    //self.collectionView.reloadData()
+                    self.collectionView.reloadItems(at: [IndexPath(item: index, section: 0)])
+                }
             }
         }
     }
@@ -130,7 +136,7 @@ extension ShopViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Resources.Identifiers.itemCell, for: indexPath) as! ItemCell
         
-        let shopItem = !isSelectedCategory ? shop.items[indexPath.item] : filteredItems[indexPath.item]
+        let shopItem = isSelectedCategory ? filteredItems[indexPath.item] : shop.items[indexPath.item]
         let shopItemId = shopItem.id!
         cell.setItem(shopItem)
         
@@ -143,6 +149,9 @@ extension ShopViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 self?.shop.favorites.removeAll { item in
                     item.id == changedItem!.id
                 }
+            }
+            if self?.isSelectedCategory == true {
+                self?.updateFilteredItems(categoryName: shopItem.category!)
             }
         }
         cell.cartCompletion = { [weak self] in
@@ -159,7 +168,7 @@ extension ShopViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let shopItem = !isSelectedCategory ? shop.items[indexPath.item] : filteredItems[indexPath.item]
+        let shopItem = isSelectedCategory ? filteredItems[indexPath.item] : shop.items[indexPath.item]
         let shopItemId = shopItem.id!
         
         let itemDetailVC = ItemDetailController(shopItem)
@@ -173,17 +182,24 @@ extension ShopViewController: UICollectionViewDelegate, UICollectionViewDataSour
                     item.id == changedItem!.id
                 }
             }
-            collectionView.reloadItems(at: [IndexPath(item: shopItemId, section: 0)])
+            if self?.isSelectedCategory == true {
+                self?.updateFilteredItems(categoryName: shopItem.category!)
+            } else {
+                collectionView.reloadItems(at: [IndexPath(item: indexPath.item, section: 0)])
+            }
         }
         itemDetailVC.cartCompletion = { [weak self] in
             self?.shop.items[shopItemId].isAddedToCart = true
             let newItem = self?.shop.items[shopItemId]
             self?.shop.cart.insert(newItem!, at: 0)
-            collectionView.reloadItems(at: [IndexPath(item: shopItemId, section: 0)])
+            collectionView.reloadItems(at: [IndexPath(item: indexPath.item, section: 0)])
         }
         itemDetailVC.goToCartCompletion = {
             let cartVC = CartViewController(self.shop)
-            collectionView.reloadItems(at: [IndexPath(item: shopItemId, section: 0)])
+            collectionView.reloadItems(at: [IndexPath(item: indexPath.item, section: 0)])
+            cartVC.updateDetailVCHandler = { id in
+                itemDetailVC.shopItem = self.shop.items[id]
+            }
             self.navigationController?.pushViewController(cartVC, animated: true)
         }
         navigationController?.pushViewController(itemDetailVC, animated: true)
@@ -198,28 +214,26 @@ extension ShopViewController: UICollectionViewDelegate, UICollectionViewDataSour
             switch selectedCategory {
             case Resources.Strings.Shop.Categories.indoor:
                 self?.isSelectedCategory = true
-                self?.filteredItems = (self?.shop.items.filter({ item in
-                    if item.category?.lowercased() == Resources.Strings.Shop.Categories.indoor.lowercased() {
-                        return true
-                    } else {
-                        return false
-                    }
-                }))!
+                self?.updateFilteredItems(categoryName: Resources.Strings.Shop.Categories.indoor)
             case Resources.Strings.Shop.Categories.outdoor:
                 self?.isSelectedCategory = true
-                self?.filteredItems = (self?.shop.items.filter({ item in
-                    if item.category?.lowercased() == Resources.Strings.Shop.Categories.outdoor.lowercased() {
-                        return true
-                    } else {
-                        return false
-                    }
-                }))!
+                self?.updateFilteredItems(categoryName: Resources.Strings.Shop.Categories.outdoor)
             default:
                 self?.isSelectedCategory = false
                 self?.filteredItems = []
             }
         }
         return header
+    }
+    
+    private func updateFilteredItems(categoryName: String) {
+        filteredItems = shop.items.filter({ item in
+            if item.category?.lowercased() == categoryName.lowercased() {
+                return true
+            } else {
+                return false
+            }
+        })
     }
 }
 

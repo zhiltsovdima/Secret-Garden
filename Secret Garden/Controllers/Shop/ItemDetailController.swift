@@ -9,9 +9,17 @@ import UIKit
 
 class ItemDetailController: BaseViewController {
     
-    private let shopItem: ShopItem
+    var shopItem: ShopItem {
+        didSet {
+            setButtons()
+        }
+    }
     
     private let scrollView = UIScrollView()
+    
+    private var favoriteImage: UIImage? {
+        shopItem.isFavorite ? Resources.Images.Common.addToFavoriteFill : Resources.Images.Common.addToFavorite
+    }
     
     private let imageView = UIImageView()
     private let nameItem = UILabel()
@@ -69,12 +77,12 @@ class ItemDetailController: BaseViewController {
     var cartCompletion: (() -> Void)?
     var goToCartCompletion: (() -> Void)?
     
-    
+
     init(_ shopItem: ShopItem) {
         self.shopItem = shopItem
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -89,8 +97,20 @@ class ItemDetailController: BaseViewController {
         setConstraints()
     }
     
+    private func setButtons() {
+        if shopItem.isAddedToCart {
+            addToCartButton.setTitle(Resources.Strings.Shop.added, for: .normal)
+            addToCartButton.backgroundColor = .black
+
+        } else {
+            addToCartButton.setTitle(Resources.Strings.Shop.addToCart, for: .normal)
+            addToCartButton.backgroundColor = Resources.Colors.accent
+        }
+        
+        navigationItem.rightBarButtonItem?.image = favoriteImage
+    }
+    
     private func addNavBarButton() {
-        let favoriteImage = shopItem.isFavorite ? Resources.Images.Common.addToFavoriteFill : Resources.Images.Common.addToFavorite
         let button = UIBarButtonItem(image: favoriteImage, style: .done, target: self, action: #selector(addToFavorite))
         navigationItem.rightBarButtonItem = button
     }
@@ -106,10 +126,9 @@ class ItemDetailController: BaseViewController {
     }
     
     @objc private func addToCartAction() {
-        guard addToCartButton.backgroundColor == Resources.Colors.backgroundColor else { goToCartCompletion?(); return }
+        guard addToCartButton.backgroundColor == Resources.Colors.accent else { goToCartCompletion?(); return }
         addToCartButton.backgroundColor = .black
-        addToCartButton.titleLabel?.tintColor = Resources.Colors.backgroundColor
-        addToCartButton.titleLabel?.text = Resources.Strings.Shop.added
+        addToCartButton.setTitle(Resources.Strings.Shop.added, for: .normal)
         cartCompletion?()
     }
 
@@ -264,14 +283,8 @@ class ItemDetailController: BaseViewController {
         priceValueLabel.text = shopItem.price
         priceValueLabel.font = Resources.Fonts.header
         
-        if shopItem.isAddedToCart {
-            addToCartButton.setTitle(Resources.Strings.Shop.added, for: .normal)
-            addToCartButton.backgroundColor = .black
-
-        } else {
-            addToCartButton.setTitle(Resources.Strings.Shop.addToCart, for: .normal)
-            addToCartButton.backgroundColor = Resources.Colors.accent
-        }
+        setButtons()
+        
         addToCartButton.titleLabel?.font = Resources.Fonts.general?.withSize(18)
         addToCartButton.addTarget(self, action: #selector(addToCartAction), for: .touchUpInside)
     }
