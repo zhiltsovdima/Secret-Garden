@@ -9,6 +9,16 @@ import UIKit
 
 extension UIView {
     
+    func addUpperBorder(with color: UIColor, height: CGFloat) {
+        let separator = UIView()
+        separator.backgroundColor = color
+        separator.frame = CGRect(x: 0,
+                                 y: 0,
+                                 width: frame.width,
+                                 height: height)
+        addSubview(separator)
+    }
+    
     func makeSystemAnimation(for button: UIButton) {
         button.addTarget(self, action: #selector(handleIn), for: [
             .touchDown,
