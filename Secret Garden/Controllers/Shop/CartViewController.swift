@@ -60,32 +60,52 @@ final class CartViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "My Cart"
-        navigationItem.largeTitleDisplayMode = .never
-        
+        setAppearance()
         addViews()
         configureTableView()
         configureViews()
         setConstraints()
+        checkingCartEmpty()
     }
     
-    @objc private func emptyButtonAction() {
-        navigationController?.popToRootViewController(animated: true)
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        totalPriceView.addUpperBorder(with: .lightGray, height: 1.0)
     }
     
-    private func updateUI(itemID: Int) {
-        updateDetailVCHandler?(itemID)
-        guard shop.cart.count != 0 else {
+    private func checkingCartEmpty() {
+        if shop.cart.isEmpty {
             tableView.isHidden = true
             checkoutStack.isHidden = true
             
             emptyCartImage.isHidden = false
             emptyCartLabel.isHidden = false
             emptyCartButton.isHidden = false
-            return
+        } else {
+            tableView.isHidden = false
+            checkoutStack.isHidden = false
+            
+            emptyCartImage.isHidden = true
+            emptyCartLabel.isHidden = true
+            emptyCartButton.isHidden = true
+            
+            subTotalValue.text = "$\(totalSubPrice)"
+            totalValue.text = "$\(totalPrice)"
         }
-        subTotalValue.text = "$\(totalSubPrice)"
-        totalValue.text = "$\(totalPrice)"
+    }
+    
+    @objc private func emptyCartButtonAction() {
+        navigationController?.popToRootViewController(animated: true)
+    }
+}
+
+// MARK: - Views Settings
+
+extension CartViewController {
+    
+    private func setAppearance() {
+        title = "My Cart"
+        navigationItem.largeTitleDisplayMode = .never
     }
     
     private func configureTableView() {
@@ -118,31 +138,18 @@ final class CartViewController: BaseViewController {
         view.addSubview(emptyCartImage)
         view.addSubview(emptyCartLabel)
         view.addSubview(emptyCartButton)
-        
     }
     
     private func configureViews() {
         emptyCartImage.image = Resources.Images.Common.shopPlant
         emptyCartImage.contentMode = .scaleAspectFit
-        emptyCartImage.isHidden = true
         emptyCartLabel.text = Resources.Strings.Shop.emptyLabel
         emptyCartLabel.font = Resources.Fonts.generalBold
         emptyCartLabel.textAlignment = .center
-        emptyCartLabel.isHidden = true
         
         emptyCartButton.setTitle(Resources.Strings.Shop.emptyButton, for: .normal)
-        emptyCartButton.isHidden = true
-        emptyCartButton.addTarget(self, action: #selector(emptyButtonAction), for: .touchUpInside)
+        emptyCartButton.addTarget(self, action: #selector(emptyCartButtonAction), for: .touchUpInside)
         
-        guard shop.cart.count != 0 else {
-            tableView.isHidden = true
-            checkoutStack.isHidden = true
-            
-            emptyCartImage.isHidden = false
-            emptyCartLabel.isHidden = false
-            emptyCartButton.isHidden = false
-            return
-        }
         checkoutStack.axis = .vertical
         checkoutStack.distribution = .fill
         
@@ -233,10 +240,11 @@ final class CartViewController: BaseViewController {
             emptyCartButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             emptyCartButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             emptyCartButton.heightAnchor.constraint(equalToConstant: 60)
-
         ])
     }
 }
+
+// MARK: - UITableView Delegate
 
 extension CartViewController: UITableViewDelegate, UITableViewDataSource {
     
@@ -247,14 +255,15 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Resources.Identifiers.cartCell, for: indexPath) as! CartCell
         let shopItem = shop.cart[indexPath.row]
+        let shopItemId = shopItem.id!
         cell.setCart(shopItem)
-        cell.deleteCompletion = { [weak self] cellForRemove in
-            self?.shop.removeFromCart(withId: shopItem.id!)
-            let actualIndexPath = self?.tableView.indexPath(for: cellForRemove)
+        cell.removeFromCartCompletion = { cellForRemove in
+            let actualIndexPath = self.tableView.indexPath(for: cellForRemove)
             DispatchQueue.main.async {
-                self?.shop.cart.remove(at: actualIndexPath!.row)
-                self?.tableView.deleteRows(at: [actualIndexPath!], with: .fade)
-                self?.updateUI(itemID: shopItem.id!)
+                self.shop.makeAddedToCart(withId: shopItemId, to: false)
+                self.tableView.deleteRows(at: [actualIndexPath!], with: .fade)
+                self.updateDetailVCHandler?(shopItemId)
+                self.checkingCartEmpty()
             }
         }
         return cell
@@ -265,15 +274,12 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
         let shopItem = shop.items[shopItemId]
         
         let itemDetailVC = ItemDetailController(shopItem)
-        itemDetailVC.favoriteCompletion = { [weak self] isFavorite in
-            self?.shop.makeFavoriteItem(withId: shopItemId, isFavorite)
-            if isFavorite {
-                let item = self?.shop.items[shopItemId]
-                self?.shop.favorites.append(item!)
-            } else {
-                self?.shop.favorites.remove(at: indexPath.row)
-            }
-            self?.updateUI(itemID: shopItemId)
+        itemDetailVC.favoriteCompletion = { isFavorite in
+            self.shop.makeFavoriteItem(withId: shopItemId, to: isFavorite)
+            self.updateDetailVCHandler?(shopItemId)
+        }
+        itemDetailVC.goToCartCompletion = {
+            self.navigationController?.popViewController(animated: true)
         }
         navigationController?.pushViewController(itemDetailVC, animated: true)
         tableView.deselectRow(at: indexPath, animated: false)

@@ -8,11 +8,12 @@
 import UIKit
 
 final class PlantCell: UITableViewCell {
-        
-    var plantImageView = UIImageView()
-    var plantTitleLabel = UILabel()
+    
+    private var plantImageView = UIImageView()
+    private var plantTitleLabel = UILabel()
     
     var settingsButton = UIButton()
+    
     var buttonCompletionHandler: (() -> Void)?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -32,9 +33,15 @@ final class PlantCell: UITableViewCell {
         plantTitleLabel.text = plant.name
     }
     
-    @objc func settingsButtonAction() {
+    @objc private func settingsButtonAction() {
         buttonCompletionHandler?()
     }
+    
+}
+
+// MARK: - Views Settings
+
+extension PlantCell {
     
     private func setupViews() {
         addSubview(plantImageView)
@@ -57,22 +64,19 @@ final class PlantCell: UITableViewCell {
     
     private func setConstraints() {
         plantImageView.translatesAutoresizingMaskIntoConstraints = false
+        plantTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        settingsButton.translatesAutoresizingMaskIntoConstraints = false
+
         NSLayoutConstraint.activate([
             plantImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
             plantImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
             plantImageView.heightAnchor.constraint(equalToConstant: 150),
-            plantImageView.widthAnchor.constraint(equalToConstant: 150)
-        ])
+            plantImageView.widthAnchor.constraint(equalToConstant: 150),
 
-        plantTitleLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
             plantTitleLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             plantTitleLabel.leadingAnchor.constraint(equalTo: plantImageView.trailingAnchor, constant: 20),
-            plantTitleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30)
-        ])
-        
-        settingsButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
+            plantTitleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
+   
             settingsButton.widthAnchor.constraint(equalToConstant: 30),
             settingsButton.heightAnchor.constraint(equalToConstant: 30),
             settingsButton.topAnchor.constraint(equalTo: topAnchor, constant: 25),

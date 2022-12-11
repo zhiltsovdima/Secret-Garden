@@ -7,34 +7,34 @@
 
 import UIKit
 
-class DetailPlantController: DetailBaseController {
+final class DetailPlantController: DetailBaseController {
     
     private let plant: Plant
     
-    let namePlant = UILabel()
-    let latinName = UILabel()
+    private let namePlant = UILabel()
+    private let latinName = UILabel()
+
+    private let originImage = UIImageView(image: Resources.Images.Characteristics.origin)
+    private let originLabel = UILabel()
+    private let originValue = UILabel()
     
-    let originImage = UIImageView(image: Resources.Images.Characteristics.origin)
-    let originLabel = UILabel()
-    let originValue = UILabel()
+    private let temperatureImage = UIImageView(image: Resources.Images.Characteristics.temperature)
+    private let temperatureLabel = UILabel()
+    private let temperatureValue = UILabel()
     
-    let temperatureImage = UIImageView(image: Resources.Images.Characteristics.temperature)
-    let temperatureLabel = UILabel()
-    let temperatureValue = UILabel()
+    private let ideaLightImage = UIImageView(image: Resources.Images.Characteristics.light)
+    private let idealLight = UILabel()
+    private let ideaLightValue = UILabel()
     
-    let ideaLightImage = UIImageView(image: Resources.Images.Characteristics.light)
-    let idealLight = UILabel()
-    let ideaLightValue = UILabel()
+    private let wateringImage = UIImageView(image: Resources.Images.Characteristics.humidity)
+    private let wateringLabel = UILabel()
+    private let wateringValue = UILabel()
     
-    let wateringImage = UIImageView(image: Resources.Images.Characteristics.humidity)
-    let wateringLabel = UILabel()
-    let wateringValue = UILabel()
-    
-    let insectsImage = UIImageView(image: Resources.Images.Characteristics.insects)
-    let insectsLabel = UILabel()
-    let insectsValue = UILabel()
+    private let insectsImage = UIImageView(image: Resources.Images.Characteristics.insects)
+    private let insectsLabel = UILabel()
+    private let insectsValue = UILabel()
         
-    init(of plant: Plant) {
+    init(_ plant: Plant) {
         self.plant = plant
         super.init(nibName: nil, bundle: nil)
     }

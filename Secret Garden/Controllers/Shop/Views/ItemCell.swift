@@ -7,8 +7,8 @@
 
 import UIKit
 
-class ItemCell: UICollectionViewCell {
-    
+final class ItemCell: UICollectionViewCell {
+        
     private var imageView = UIImageView()
     private var name: String?
     private let favoriteButton = UIButton()
@@ -17,6 +17,31 @@ class ItemCell: UICollectionViewCell {
     
     private var isFetched: Bool {
         return imageView.image != nil ? true : false
+    }
+    private var isItFavorite: Bool? {
+        didSet {
+            if isItFavorite! {
+                favoriteButton.backgroundColor = .black
+                favoriteButton.tintColor = Resources.Colors.backgroundColor
+            } else {
+                favoriteButton.backgroundColor = Resources.Colors.backgroundColor
+                favoriteButton.tintColor = .black
+            }
+        }
+    }
+    
+    private var isItAddedToCart: Bool? {
+        didSet {
+            if isItAddedToCart! {
+                addToCartButton.backgroundColor = .black
+                addToCartButton.setTitle(Resources.Strings.Shop.added, for: .normal)
+                addToCartButton.setTitleColor(Resources.Colors.backgroundColor, for: .normal)
+            } else {
+                addToCartButton.backgroundColor = Resources.Colors.backgroundColor
+                addToCartButton.setTitle(Resources.Strings.Shop.addToCart, for: .normal)
+                addToCartButton.setTitleColor(.black, for: .normal)
+            }
+        }
     }
     
     var favoriteCompletion: ((Bool) -> Void)?
@@ -34,55 +59,39 @@ class ItemCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setItem(_ item: ShopItem) {
-        name = item.name
-        imageView.image = item.image
-        favoriteButton.backgroundColor = item.isFavorite ? .black : Resources.Colors.backgroundColor
-        favoriteButton.tintColor = item.isFavorite ? Resources.Colors.backgroundColor : .black
-        if item.isAddedToCart {
-            addToCartButton.backgroundColor = .black
-            addToCartButton.setTitle(Resources.Strings.Shop.added, for: .normal)
-            addToCartButton.setTitleColor(Resources.Colors.backgroundColor, for: .normal)
-        } else {
-            addToCartButton.backgroundColor = Resources.Colors.backgroundColor
-            addToCartButton.setTitle(Resources.Strings.Shop.addToCart, for: .normal)
-            addToCartButton.setTitleColor(.black, for: .normal)
-        }
-        if isFetched {
-            spinner.stopAnimating()
-        } else {
-            spinner.startAnimating()
-        }
-        
-    }
-    
     override func layoutSubviews() {
         favoriteButton.layer.cornerRadius = favoriteButton.frame.height * 0.5
         addToCartButton.layer.cornerRadius = addToCartButton.frame.height * 0.5
     }
     
-    @objc private func addToFavorites() {
-        
-        if favoriteButton.backgroundColor == Resources.Colors.backgroundColor {
-            favoriteButton.backgroundColor = .black
-            favoriteButton.tintColor = Resources.Colors.backgroundColor
-            favoriteCompletion?(true)
+    func setItem(_ item: ShopItem) {
+        name = item.name
+        imageView.image = item.image
+        isItFavorite = item.isFavorite
+        isItAddedToCart = item.isAddedToCart
+
+        if isFetched {
+            spinner.stopAnimating()
         } else {
-            favoriteButton.backgroundColor = Resources.Colors.backgroundColor
-            favoriteButton.tintColor = .black
-            favoriteCompletion?(false)
+            spinner.startAnimating()
         }
     }
     
-    @objc private func addToCart() {
-        
-        guard addToCartButton.backgroundColor == Resources.Colors.backgroundColor else { goToCartCompletion?(); return }
-        addToCartButton.backgroundColor = .black
-        addToCartButton.setTitle(Resources.Strings.Shop.added, for: .normal)
-        addToCartButton.setTitleColor(Resources.Colors.backgroundColor, for: .normal)
-        cartCompletion?()
+    @objc private func addToFavorites() {
+        isItFavorite = isItFavorite! ? false : true
+        favoriteCompletion?(isItFavorite!)
     }
     
+    @objc private func addToCart() {
+        if isItAddedToCart! {
+            goToCartCompletion?()
+        } else {
+            isItAddedToCart = true
+            cartCompletion?()
+        }
+    }
+    
+    // MARK: - Configure Views
     private func configure() {
         
         addSubview(imageView)
@@ -106,29 +115,24 @@ class ItemCell: UICollectionViewCell {
     
     private func setConstraints() {
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+        favoriteButton.translatesAutoresizingMaskIntoConstraints = false
+        addToCartButton.translatesAutoresizingMaskIntoConstraints = false
+
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: topAnchor),
             imageView.leadingAnchor.constraint(equalTo: leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            imageView.bottomAnchor.constraint(equalTo: bottomAnchor)
-        ])
-        
-        spinner.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
+            imageView.bottomAnchor.constraint(equalTo: bottomAnchor),
+
             spinner.centerXAnchor.constraint(equalTo: centerXAnchor),
-            spinner.centerYAnchor.constraint(equalTo: centerYAnchor)
-        ])
-        
-        favoriteButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
+            spinner.centerYAnchor.constraint(equalTo: centerYAnchor),
+
             favoriteButton.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.25),
             favoriteButton.heightAnchor.constraint(equalTo: favoriteButton.widthAnchor),
             favoriteButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-            favoriteButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10)
-        ])
-        
-        addToCartButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
+            favoriteButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
+
             addToCartButton.heightAnchor.constraint(equalTo: favoriteButton.heightAnchor),
             addToCartButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             addToCartButton.trailingAnchor.constraint(equalTo: favoriteButton.leadingAnchor, constant: -10),

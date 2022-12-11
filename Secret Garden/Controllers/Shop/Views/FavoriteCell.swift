@@ -38,6 +38,8 @@ final class FavoriteCell: UITableViewCell {
         unfavoriteCompletion?(self)
     }
     
+    // MARK: - Setup Views
+    
     private func setupViews() {
         addSubview(itemImageView)
         addSubview(priceLabel)

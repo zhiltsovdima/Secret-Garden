@@ -69,19 +69,20 @@ struct APIManager {
         }
     }
     
-    func getImage(imageName: String?, completion: @escaping (UIImage) -> Void) {
+    func getImage(name: String?, completion: @escaping (UIImage) -> Void) {
         let storage = Storage.storage()
         let reference = storage.reference()
         let pathRef = reference.child("pictures")
         
         var image = Resources.Images.Common.defaultPlant!
         
-        guard let imageName else { completion(image); return }
-        let fileRef = pathRef.child(imageName + ".jpg")
+        guard let name else { completion(image); return }
         
+        let fileRef = pathRef.child(name + ".jpg")
         fileRef.getData(maxSize: 1024*1024) { (data, error) in
             guard error == nil else {
                 completion(image)
+                print("Get Image error: \(error!)")
                 return
             }
             image = UIImage(data: data!)!
@@ -109,11 +110,11 @@ struct APIManager {
         let session = URLSession.shared
         let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
             if (error != nil) {
-                print(error!)
+                print("Request Error: \(error!)")
             }
             if (response != nil) {
                 let httpResponse = response as? HTTPURLResponse
-                print(httpResponse!)
+                print("Response: \(httpResponse!)")
             }
             if let safeData = data {
                 if let characteristics = parseJSON(safeData) {
@@ -151,7 +152,7 @@ struct APIManager {
                                                       insects: insects)
             return characteristic
         } catch {
-            print(error)
+            print("Decode Error: \(error)")
             return nil
         }
     }

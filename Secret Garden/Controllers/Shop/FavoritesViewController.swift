@@ -27,11 +27,20 @@ final class FavoritesViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Favorites"
-        navigationItem.largeTitleDisplayMode = .never
-        
+        setAppearance()
         configureTableView()
         configurePlaceholder()
+        isItEmpty()
+    }
+    
+    private func updateUI(_ indexPath: IndexPath) {
+        tableView.deleteRows(at: [indexPath], with: .fade)
+        isItEmpty()
+    }
+    
+    private func setAppearance() {
+        title = "Favorites"
+        navigationItem.largeTitleDisplayMode = .never
     }
     
     private func configureTableView() {
@@ -86,7 +95,6 @@ extension FavoritesViewController {
 extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        isItEmpty()
         return shop.favorites.count
     }
     
@@ -94,35 +102,35 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: Resources.Identifiers.favoriteCell, for: indexPath) as! FavoriteCell
         
         let favItem = shop.favorites[indexPath.row]
+        let favItemId = favItem.id!
         cell.setFavorite(favItem)
-        cell.unfavoriteCompletion = { [weak self] unfavCell in
-            let unfavIndexPath = self?.tableView.indexPath(for: unfavCell)
+        cell.unfavoriteCompletion = { unfavCell in
+            let unfavIndexPath = self.tableView.indexPath(for: unfavCell)
             DispatchQueue.main.async {
-                self?.shop.favorites.remove(at: unfavIndexPath!.row)
-                self?.tableView.deleteRows(at: [unfavIndexPath!], with: .fade)
-                self?.isItEmpty()
+                self.shop.makeFavoriteItem(withId: favItemId, to: false)
+                self.updateUI(unfavIndexPath!)
             }
-            self?.shop.makeFavoriteItem(withId: favItem.id!, false)
         }
-        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let shopItemId = shop.favorites[indexPath.row].id
-        let shopItem = shop.items[shopItemId!]
+        let shopItemId = shop.favorites[indexPath.row].id!
+        let shopItem = shop.items[shopItemId]
         
         let itemDetailVC = ItemDetailController(shopItem)
-        itemDetailVC.favoriteCompletion = { [weak self] isFavorite in
-            self?.shop.makeFavoriteItem(withId: shopItemId!, isFavorite)
-            if isFavorite {
-                let item = self?.shop.items[shopItemId!]
-                self?.shop.favorites.append(item!)
-            } else {
-                self?.shop.favorites.remove(at: indexPath.row)
-                self?.isItEmpty()
+        itemDetailVC.favoriteCompletion = { isFavorite in
+            DispatchQueue.main.async {
+                self.shop.makeFavoriteItem(withId: shopItemId, to: isFavorite)
+                self.updateUI(indexPath)
             }
-            tableView.reloadData()
+        }
+        itemDetailVC.cartCompletion = {
+            self.shop.makeAddedToCart(withId: shopItemId, to: true)
+        }
+        itemDetailVC.goToCartCompletion = {
+            let cartVC = CartViewController(self.shop)
+            self.navigationController?.pushViewController(cartVC, animated: true)
         }
         navigationController?.pushViewController(itemDetailVC, animated: true)
         tableView.deselectRow(at: indexPath, animated: false)

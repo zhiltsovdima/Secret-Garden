@@ -22,7 +22,7 @@ final class EditPlantViewController: DetailBaseController {
     
     let actualIndexPath: IndexPath
     
-    var completionHandler: ((Plant, IndexPath)-> Void)?
+    var saveEditedPlantHandler: ((Plant, IndexPath)-> Void)?
     
     init(_ plantToEdit: Plant, _ actualIndexPath: IndexPath) {
         self.plantToEdit = plantToEdit
@@ -39,8 +39,12 @@ final class EditPlantViewController: DetailBaseController {
                 
         setupViews()
         setConstraints()
-        configureTextField()
+        setDelegate()
 
+    }
+    
+    private func setDelegate() {
+        nameTextField.delegate = self
     }
     
     override func setupViews() {
@@ -57,12 +61,15 @@ final class EditPlantViewController: DetailBaseController {
         detailInfoView.addSubview(nameTextField)
         nameTextField.backgroundColor = Resources.Colors.backgroundFields
         nameTextField.text = plantToEdit.name
+        nameTextField.font = Resources.Fonts.general
         
         detailInfoView.addSubview(nameLabel)
         nameLabel.text = Resources.Strings.Common.name
+        nameLabel.font = Resources.Fonts.generalBold
         
         detailInfoView.addSubview(imageLabel)
         imageLabel.text = "Image"
+        imageLabel.font = Resources.Fonts.generalBold
         
         detailInfoView.addSubview(chooseImageButton)
         chooseImageButton.backgroundColor = Resources.Colors.backgroundFields
@@ -70,7 +77,7 @@ final class EditPlantViewController: DetailBaseController {
         chooseImageButton.layer.borderColor = UIColor.lightGray.cgColor
         chooseImageButton.layer.borderWidth = 0.5
         chooseImageButton.setTitleColor(.black, for: .normal)
-        chooseImageButton.titleLabel?.font = UIFont(name: "Helvetica", size: 12)
+        chooseImageButton.titleLabel?.font = Resources.Fonts.general?.withSize(12)
         chooseImageButton.setTitle("Choose new", for: .normal)
         chooseImageButton.addTarget(self, action: #selector(choosePhotoAlert), for: .touchUpInside)
         
@@ -83,45 +90,36 @@ final class EditPlantViewController: DetailBaseController {
         super.setConstraints()
         
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
+        nameView.translatesAutoresizingMaskIntoConstraints = false
+        nameTextField.translatesAutoresizingMaskIntoConstraints = false
+        imageLabel.translatesAutoresizingMaskIntoConstraints = false
+        chooseImageButton.translatesAutoresizingMaskIntoConstraints = false
+        saveButton.translatesAutoresizingMaskIntoConstraints = false
+
         NSLayoutConstraint.activate([
             nameLabel.topAnchor.constraint(equalTo: detailInfoView.topAnchor, constant: 20),
             nameLabel.leadingAnchor.constraint(equalTo: detailInfoView.leadingAnchor, constant: 20),
-            nameLabel.heightAnchor.constraint(equalToConstant: 30)
-        ])
-        
-        nameView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
+            nameLabel.heightAnchor.constraint(equalToConstant: 30),
+
             nameView.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 5),
             nameView.leadingAnchor.constraint(equalTo: detailInfoView.leadingAnchor, constant: 20),
             nameView.trailingAnchor.constraint(equalTo: detailInfoView.trailingAnchor, constant: -20),
-            nameView.heightAnchor.constraint(equalToConstant: 40)
-        ])
-        
-        nameTextField.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
+            nameView.heightAnchor.constraint(equalToConstant: 40),
+ 
             nameTextField.topAnchor.constraint(equalTo: nameView.topAnchor, constant: 5),
             nameTextField.leadingAnchor.constraint(equalTo: nameView.leadingAnchor, constant: 5),
             nameTextField.trailingAnchor.constraint(equalTo: nameView.trailingAnchor, constant: -5),
-            nameTextField.heightAnchor.constraint(equalToConstant: 30)
-        ])
-        
-        imageLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
+            nameTextField.heightAnchor.constraint(equalToConstant: 30),
+
             imageLabel.topAnchor.constraint(equalTo: nameView.bottomAnchor, constant: 10),
             imageLabel.leadingAnchor.constraint(equalTo: detailInfoView.leadingAnchor, constant: 20),
-            imageLabel.heightAnchor.constraint(equalToConstant: 30)
-        ])
-        
-        chooseImageButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
+            imageLabel.heightAnchor.constraint(equalToConstant: 30),
+
             chooseImageButton.topAnchor.constraint(equalTo: imageLabel.bottomAnchor, constant: 5),
             chooseImageButton.leadingAnchor.constraint(equalTo: detailInfoView.leadingAnchor, constant: 20),
             chooseImageButton.widthAnchor.constraint(equalToConstant: 100),
-            chooseImageButton.heightAnchor.constraint(equalToConstant: 30)
-        ])
-        
-        saveButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
+            chooseImageButton.heightAnchor.constraint(equalToConstant: 30),
+    
             saveButton.centerXAnchor.constraint(equalTo: detailInfoView.centerXAnchor),
             saveButton.heightAnchor.constraint(equalToConstant: 50),
             saveButton.widthAnchor.constraint(equalToConstant: 150),
@@ -129,18 +127,12 @@ final class EditPlantViewController: DetailBaseController {
         ])
     }
     
-    private func configureTextField() {
-        nameTextField.delegate = self
-    }
-    
     @objc private func saveButtonTapped() {
-        guard let newName = nameTextField.text else { print("Error! Enter the new name")
-            return
-        }
+        guard let newName = nameTextField.text else { print("Error! Enter the new name"); return }
         let newImage = PlantImage(plantImageView.image!)
         let editedPlant = Plant(name: newName, image: newImage)
         
-        completionHandler?(editedPlant, actualIndexPath)
+        saveEditedPlantHandler?(editedPlant, actualIndexPath)
         dismiss(animated: true)
     }
 }

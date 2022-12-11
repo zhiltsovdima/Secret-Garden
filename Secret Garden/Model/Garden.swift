@@ -11,16 +11,20 @@ class Garden {
     var plants = [Plant]() {
         didSet {
             saveToFile()
-            print("save to file")
+            //print("save to file")
         }
-    }
-    
-    init() {
-        loadFromFile()
     }
     
     var archiveURL: URL {
         return getArchiveURL()
+    }
+    
+    var isItEmpty: Bool {
+        plants.isEmpty
+    }
+    
+    init() {
+        loadFromFile()
     }
     
     func getArchiveURL() -> URL {
@@ -52,7 +56,7 @@ class Garden {
     
     func loadFromFile() {
         guard FileManager.default.fileExists(atPath: archiveURL.path) else { return }
-        print("load from file")
+        //print("load from file")
 
         do {
             let jsonData = try Data(contentsOf: archiveURL)
@@ -66,6 +70,10 @@ class Garden {
         let imageData = PlantImage(image)
         let plant = Plant(name: name, image: imageData)
         plants.insert(plant, at: 0)
+    }
+    
+    func addNewPlant(_ newPlant: Plant) {
+        plants.insert(newPlant, at: 0)
     }
     
     func removePlant(at index: Int) {

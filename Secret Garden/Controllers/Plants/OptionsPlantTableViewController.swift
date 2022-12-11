@@ -21,14 +21,17 @@ final class OptionsPlantTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: Resources.Identifiers.plantOptionsCell)
-        tableView.isScrollEnabled = false
+        configureView()
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         preferredContentSize.height = tableView.contentSize.height - 1
+    }
+    
+    private func configureView() {
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: Resources.Identifiers.plantOptionsCell)
+        tableView.isScrollEnabled = false
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

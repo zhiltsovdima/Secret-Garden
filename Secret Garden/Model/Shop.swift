@@ -7,30 +7,6 @@
 
 import UIKit
 
-struct ShopItem {
-    
-    let name: String
-    let latinName: String
-    let category: String?
-    let description: String?
-    let price: String?
-    let size: String?
-    let petFriendly: String?
-    let careLevel: String?
-    let origin: String?
-    let light: String?
-    let humidity: String?
-    let temperature: String?
-    let imageString: String?
-    
-    var image: UIImage?
-    
-    var isFavorite = false
-    var isAddedToCart = false
-    var id: Int?
-    
-}
-
 class Shop {
     
     var items = [ShopItem]()
@@ -43,36 +19,41 @@ class Shop {
         fetchData()
     }
     
-    var updateCompletion: ((Int) -> Void)?
+    var updateViewCompletion: ((Int) -> Void)?
     
-    func makeFavoriteItem(withId id: Int, _ isFavorite: Bool) {
-        for index in items.indices {
-            if items[index].id == id {
-                items[index].isFavorite = isFavorite
-                updateCompletion?(index)
+    func makeFavoriteItem(withId index: Int, to isFavorite: Bool) {
+        items[index].isFavorite = isFavorite
+        if isFavorite {
+            favorites.insert(items[index], at: 0)
+        } else {
+            favorites.removeAll { item in
+                item.id == index
             }
         }
+        updateViewCompletion?(index)
     }
     
-    func removeFromCart(withId id: Int) {
-        for index in items.indices {
-            if items[index].id == id {
-                items[index].isAddedToCart = false
-                updateCompletion?(index)
+    func makeAddedToCart(withId index: Int, to isAdded: Bool) {
+        items[index].isAddedToCart = isAdded
+        if isAdded {
+            cart.insert(items[index], at: 0)
+        } else {
+            cart.removeAll { item in
+                item.id == index
             }
         }
+        updateViewCompletion?(index)
     }
     
     private func fetchData() {
-        
         APIManager.shared.getPost(collectionName: Resources.Strings.Shop.collectionNameInDataBase) { shopItems in
             
             self.items = shopItems
             for index in self.items.indices {
                 let imageName = self.items[index].imageString
-                APIManager.shared.getImage(imageName: imageName) { fetchedImage in
+                APIManager.shared.getImage(name: imageName) { fetchedImage in
                     self.items[index].image = fetchedImage
-                    self.updateCompletion?(index)
+                    self.updateViewCompletion?(index)
                 }
                 self.items[index].id = index
             }

@@ -9,7 +9,7 @@ import UIKit
 
 final class CategoriesView: UICollectionReusableView {
     
-    private var categories = [Resources.Strings.Shop.Categories.all,
+    private let categories = [Resources.Strings.Shop.Categories.all,
                               Resources.Strings.Shop.Categories.indoor,
                               Resources.Strings.Shop.Categories.outdoor,
                               Resources.Strings.Shop.Categories.fertilizer,
@@ -20,7 +20,7 @@ final class CategoriesView: UICollectionReusableView {
     private let flowLayout = UICollectionViewFlowLayout()
     lazy var collectionView = UICollectionView(frame: self.bounds, collectionViewLayout: flowLayout)
     
-    var selectedCategoryHandler: ((String) -> Void)?
+    var selectCategoryHandler: ((String) -> Void)?
     
         
     func congifure() {
@@ -45,8 +45,8 @@ final class CategoriesView: UICollectionReusableView {
 //MARK: - UICollectionViewDelegate
 
 extension CategoriesView: UICollectionViewDelegate, UICollectionViewDataSource {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
         return categories.count
     }
     
@@ -62,17 +62,18 @@ extension CategoriesView: UICollectionViewDelegate, UICollectionViewDataSource {
         } else {
             cell.isSelected = false
         }
+        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let selectedCategoryName = categories[indexPath.item]
-        selectedCategoryHandler?(selectedCategoryName)
+        selectCategoryHandler?(selectedCategoryName)
     }
-
 }
 
+// MARK: - UICollectionView FlowLayout
 extension CategoriesView: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

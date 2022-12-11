@@ -14,7 +14,8 @@ final class CartCell: UITableViewCell {
     private let itemImageView = UIImageView()
     
     private let deleteButton = UIButton()
-    var deleteCompletion: ((UITableViewCell) -> Void)?
+    
+    var removeFromCartCompletion: ((UITableViewCell) -> Void)?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -35,8 +36,10 @@ final class CartCell: UITableViewCell {
     }
     
     @objc func deleteFromCartAction() {
-        deleteCompletion?(self)
+        removeFromCartCompletion?(self)
     }
+    
+    // MARK: - Setup Views
     
     private func setupViews() {
         addSubview(itemImageView)
