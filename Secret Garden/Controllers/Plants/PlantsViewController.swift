@@ -17,18 +17,21 @@ final class PlantsViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        title = Resources.Strings.TabBar.garden
-        navigationItem.largeTitleDisplayMode = .never
-        addNavBarButton()
         
+        setAppearence()
+        setDelegates()
+        addNavBarButton()
         configureTableView()
         configurePlaceholder()
     }
     
+    private func setAppearence() {
+        title = Resources.Strings.TabBar.garden
+        navigationItem.largeTitleDisplayMode = .never
+    }
+    
     private func configureTableView() {
         view.addSubview(tableView)
-        setTableViewDelegates()
         tableView.rowHeight = 200
         tableView.separatorStyle = .none
         tableView.register(PlantCell.self, forCellReuseIdentifier: Resources.Identifiers.plantCell)
@@ -42,9 +45,11 @@ final class PlantsViewController: BaseViewController {
         ])
     }
     
-    private func setTableViewDelegates() {
+    private func setDelegates() {
         tableView.delegate = self
         tableView.dataSource = self
+        
+        APIManager.shared.delegate = self
     }
 }
 
@@ -53,7 +58,7 @@ final class PlantsViewController: BaseViewController {
 extension PlantsViewController {
     
     private func isItEmpty() {
-        if garden.plants.isEmpty {
+        if garden.isItEmpty {
             tableView.isHidden = true
             placeholder.isHidden = false
         } else {
@@ -89,13 +94,30 @@ extension PlantsViewController {
         let addPlantController = AddPlantController()
         addPlantController.completionHandler = { [weak self] addedPlant in
             DispatchQueue.main.async {
-                self?.garden.plants.insert(addedPlant, at: 0)
+                self?.garden.addNewPlant(addedPlant)
                 self?.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
                 self?.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
                 self?.isItEmpty()
             }
+            self?.fetchData(for: addedPlant, index: 0)
         }
         navigationController?.pushViewController(addPlantController, animated: true)
+    }
+}
+
+// MARK: - Fetching Data
+
+extension PlantsViewController: APIManagerDelegate {
+    
+    private func fetchData(for plant: Plant, index: Int) {
+        APIManager.shared.performRequest(namePlant: plant.name, index: index)
+    }
+    
+    func didUpdate(with characteristics: PlantCharacteristics, index: Int) {
+        DispatchQueue.main.async {
+            self.garden.plants[index].characteristics = characteristics
+            self.tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .none)
+        }
     }
 }
 
@@ -132,7 +154,7 @@ extension PlantsViewController: UITableViewDelegate, UITableViewDataSource {
                 optionsVC.editPlantCompletionHandler = { actualCell in
                     let actualIndexPath = self?.tableView.indexPath(for: actualCell!)
                     let editVC = EditPlantViewController(plant, actualIndexPath!)
-                    editVC.completionHandler = { editedPlant, actualIndexPath in
+                    editVC.saveEditedPlantHandler = { editedPlant, actualIndexPath in
                         DispatchQueue.main.async {
                             self?.garden.plants[actualIndexPath.row] = editedPlant
                             self?.tableView.reloadRows(at: [actualIndexPath], with: .automatic)
@@ -156,7 +178,9 @@ extension PlantsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let plant = garden.plants[indexPath.row]
-        let detailVC = DetailPlantController(of: plant)
+        
+        let detailVC = DetailPlantController(plant)
+        
         navigationController?.pushViewController(detailVC, animated: true)
         
         tableView.deselectRow(at: indexPath, animated: true)

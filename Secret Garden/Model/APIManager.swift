@@ -129,11 +129,11 @@ struct APIManager {
     func parseJSON(_ plantData: Data) -> PlantCharacteristics? {
         let decoder = JSONDecoder()
         do {
-            let decodedData = try decoder.decode(PlantsData.self, from: plantData)
+            let decodedData = try decoder.decode([PlantData].self, from: plantData)
             
-            guard decodedData.items.count > 0 else { return nil }
+            guard decodedData.count > 0 else { return nil }
             
-            let dataForPlant = decodedData.items.first!
+            let dataForPlant = decodedData.first!
             
             let latin = dataForPlant.latin
             let origin = dataForPlant.origin
