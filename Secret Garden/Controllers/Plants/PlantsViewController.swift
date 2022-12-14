@@ -14,6 +14,8 @@ final class PlantsViewController: BaseViewController {
     private let garden = Garden()
     
     private let placeholder = UIImageView(image: Resources.Images.Common.emptyCollection)
+    
+    private var updateCompletion: (() -> Void)?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -117,6 +119,8 @@ extension PlantsViewController: APIManagerDelegate {
         DispatchQueue.main.async {
             self.garden.plants[index].characteristics = characteristics
             self.tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .none)
+            self.updateCompletion?()
+            self.updateCompletion = nil
         }
     }
 }
@@ -159,6 +163,7 @@ extension PlantsViewController: UITableViewDelegate, UITableViewDataSource {
                             self?.garden.plants[actualIndexPath.row] = editedPlant
                             self?.tableView.reloadRows(at: [actualIndexPath], with: .automatic)
                         }
+                        self?.fetchData(for: editedPlant, index: actualIndexPath.row)
                     }
                     self?.present(editVC, animated: true)
                 }
@@ -178,11 +183,18 @@ extension PlantsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let plant = garden.plants[indexPath.row]
-        
-        let detailVC = DetailPlantController(plant)
+       
+        let detailVC = DetailPlantController()
+        if plant.characteristics == nil {
+            fetchData(for: plant, index: indexPath.row)
+            updateCompletion = {
+                detailVC.setPlant(self.garden.plants[indexPath.row])
+                detailVC.updateUI()
+            }
+        }
+        detailVC.setPlant(plant)
         
         navigationController?.pushViewController(detailVC, animated: true)
-        
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }

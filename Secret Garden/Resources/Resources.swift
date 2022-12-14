@@ -38,6 +38,7 @@ enum Resources {
                 static let origin = "Origin"
                 static let light = "Light"
                 static let humidity = "Humidity"
+                static let watering = "Watering"
                 static let temperature = "Temperature"
                 static let insects = "Insects"
             }
@@ -125,6 +126,7 @@ enum Resources {
         static let categoryCell = "CategoryCell"
         static let favoriteCell = "FavoriteCell"
         static let cartCell = "CartCell"
+        static let characteristicCell = "CharacteristicCell"
 
     }
     

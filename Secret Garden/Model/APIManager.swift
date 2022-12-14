@@ -137,19 +137,19 @@ struct APIManager {
             
             let latin = dataForPlant.latin
             let origin = dataForPlant.origin
-            let temp = "From \(dataForPlant.tempmin.celsius) to \(dataForPlant.tempmax.celsius)"
+            let temp = "From \(dataForPlant.tempmin.celsius)C to \(dataForPlant.tempmax.celsius)C"
             let idealLight = dataForPlant.ideallight
             let watering = dataForPlant.watering
             let insectsArray = dataForPlant.insects
-            let insects = insectsArray.joined(separator: "\n")
-            
+            let insects = insectsArray.joined(separator: ", ")
             
             let characteristic = PlantCharacteristics(latinName: latin,
-                                                      origin: origin,
-                                                      temperature: temp,
-                                                      idealLight: idealLight,
-                                                      watering: watering,
-                                                      insects: insects)
+                                                      dictionary: [Resources.Strings.Common.Detail.origin: origin,
+                                                                   Resources.Strings.Common.Detail.temperature: temp,
+                                                                   Resources.Strings.Common.Detail.light: idealLight,
+                                                                   Resources.Strings.Common.Detail.watering: watering,
+                                                                   Resources.Strings.Common.Detail.insects: insects
+                                                      ])
             return characteristic
         } catch {
             print("Decode Error: \(error)")
