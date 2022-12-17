@@ -9,28 +9,63 @@ import XCTest
 @testable import Secret_Garden
 
 final class Secret_GardenTests: XCTestCase {
+    
+    var shop: Shop!
+    let item = ShopItem( id: 0,
+                         name: "name",
+                         latinName: "latinName",
+                         category: nil,
+                         description: nil,
+                         price: nil,
+                         size: nil,
+                         petFriendly: nil,
+                         careLevel: nil,
+                         origin: nil,
+                         light: nil,
+                         humidity: nil,
+                         temperature: nil,
+                         imageString: nil
+    )
 
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        shop = Shop()
+        shop.items.append(item)
+
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        shop = nil
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    
+    func testMakeFavoriteItem() throws {
+        
+        var expectedFavorite = false
+        var actualFavorite: Bool {
+            shop.items[0].isFavorite
         }
+        XCTAssertEqual(expectedFavorite, actualFavorite)
+        XCTAssertTrue(shop.favorites.isEmpty)
+        
+        expectedFavorite = true
+        shop.makeFavoriteItem(withId: 0, to: true)
+        XCTAssertEqual(expectedFavorite, actualFavorite)
+        XCTAssertFalse(shop.favorites.isEmpty)
+
+    }
+    
+    func testMakeAddedToCart() throws {
+        var expectedAdded = false
+        var actualAdded: Bool {
+            shop.items[0].isAddedToCart
+        }
+        XCTAssertEqual(expectedAdded, actualAdded)
+        XCTAssertTrue(shop.cart.isEmpty)
+        
+        expectedAdded = true
+        shop.makeAddedToCart(withId: 0, to: true)
+        XCTAssertEqual(expectedAdded, actualAdded)
+        XCTAssertFalse(shop.cart.isEmpty)
+
     }
 
 }

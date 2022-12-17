@@ -28,7 +28,25 @@
 		<key>Secret Garden.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>0</integer>
+			<integer>1</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>62E9AF7E290C2FF600175A21</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>62E9AF94290C2FF700175A21</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>62E9AF9E290C2FF700175A21</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>
