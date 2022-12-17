@@ -97,6 +97,7 @@ extension PlantsViewController {
         addPlantController.completionHandler = { [weak self] addedPlant in
             DispatchQueue.main.async {
                 self?.garden.addNewPlant(addedPlant)
+                self?.garden.saveToFile()
                 self?.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
                 self?.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
                 self?.isItEmpty()
@@ -118,6 +119,7 @@ extension PlantsViewController: APIManagerDelegate {
     func didUpdate(with characteristics: PlantCharacteristics, index: Int) {
         DispatchQueue.main.async {
             self.garden.plants[index].characteristics = characteristics
+            self.garden.saveToFile()
             self.tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .none)
             self.updateCompletion?()
             self.updateCompletion = nil
@@ -161,6 +163,7 @@ extension PlantsViewController: UITableViewDelegate, UITableViewDataSource {
                     editVC.saveEditedPlantHandler = { editedPlant, actualIndexPath in
                         DispatchQueue.main.async {
                             self?.garden.plants[actualIndexPath.row] = editedPlant
+                            self?.garden.saveToFile()
                             self?.tableView.reloadRows(at: [actualIndexPath], with: .automatic)
                         }
                         self?.fetchData(for: editedPlant, index: actualIndexPath.row)
@@ -171,6 +174,7 @@ extension PlantsViewController: UITableViewDelegate, UITableViewDataSource {
                     let actualIndexPath = self?.tableView.indexPath(for: actualCell!)
                     DispatchQueue.main.async {
                         self?.garden.removePlant(at: actualIndexPath!.row)
+                        self?.garden.saveToFile()
                         self?.tableView.deleteRows(at: [actualIndexPath!], with: .automatic)
                         self?.isItEmpty()
                     }

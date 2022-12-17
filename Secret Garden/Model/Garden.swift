@@ -8,12 +8,7 @@
 import UIKit
 
 class Garden {
-    var plants = [Plant]() {
-        didSet {
-            saveToFile()
-            //print("save to file")
-        }
-    }
+    var plants = [Plant]()
     
     var archiveURL: URL {
         return getArchiveURL()
@@ -56,8 +51,6 @@ class Garden {
     
     func loadFromFile() {
         guard FileManager.default.fileExists(atPath: archiveURL.path) else { return }
-        //print("load from file")
-
         do {
             let jsonData = try Data(contentsOf: archiveURL)
             plants = try JSONDecoder().decode([Plant].self, from: jsonData)

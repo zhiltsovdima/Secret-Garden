@@ -23,15 +23,6 @@ struct PlantCharacteristics: Codable {
     var latinName: String
     var dictionary: [String: String]
     
-    func getArrayOfKeys() -> [String] {
-        return [Resources.Strings.Common.Detail.light,
-                Resources.Strings.Common.Detail.temperature,
-                Resources.Strings.Common.Detail.watering,
-                Resources.Strings.Common.Detail.insects,
-                Resources.Strings.Common.Detail.origin
-        ]
-    }
-    
     func getArrayOfValues() -> [String] {
         return [dictionary[Resources.Strings.Common.Detail.light]!,
                 dictionary[Resources.Strings.Common.Detail.temperature]!,

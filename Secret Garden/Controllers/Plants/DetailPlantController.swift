@@ -29,7 +29,7 @@ final class DetailPlantController: DetailBaseController {
     func setPlant(_ plant: Plant) {
         self.plant = plant
         self.characteristicsValues = plant.characteristics?.getArrayOfValues() ?? []
-        self.characteristicsNames = plant.characteristics?.getArrayOfKeys() ?? []
+        self.characteristicsNames = Resources.Strings.Common.Detail.all
     }
     
     func updateUI() {
