@@ -41,6 +41,12 @@ enum Resources {
                 static let watering = "Watering"
                 static let temperature = "Temperature"
                 static let insects = "Insects"
+                
+                static let all = [Strings.Common.Detail.light,
+                                  Strings.Common.Detail.temperature,
+                                  Strings.Common.Detail.watering,
+                                  Strings.Common.Detail.insects,
+                                  Strings.Common.Detail.origin]
             }
         }
         enum AddPlant {
@@ -49,10 +55,15 @@ enum Resources {
             static let camera = "Take a photo"
             static let photoLibrary = "Open the Photo Library"
             static let placeholder = "Give your plant a name"
+            static let emptyImage = "You have to add the Image"
+            static let emptyName = "You have to add the plant name"
+            static let notValidName = "Your plant name must contain only letters"
         }
         enum Home {
             static let tipTitle = "Совет дня"
             static let tipBody = "Начинай свой день со стакана воды"
+            static let descriptionTitle = "На данный момент я еще не реализовал интересный, функциональный и красивый экран Home, поэтому пока что здесь будет простое описание функционала всего приложения."
+            static let descriptionBody = "\n\n Экран Garden:\n - можно добавить в коллекцию растений новое, указав тип растения и добавив его фото\n - удалить/отредактировать растение\n - открыть детальный обзор растения и получить его характеристики(при условии что такой тип растения есть в бд)\n\n Экран Shop:\n - посмотреть имеющиеся товары в магазине, есть фильтр по категориям товаров\n - посмотреть детальный обзор товара\n - добавить товар в корзину/избранное"
         }
         enum Options {
             static let edit = "Edit"
@@ -71,7 +82,7 @@ enum Resources {
             }
             
             static let addToCart = "Add to Cart"
-            static let added = "Added"
+            static let added = "Go to Cart"
             static let collectionNameInDataBase = "SecretGarden"
             static let price = "Price"
             static let checkout = "Checkout"
