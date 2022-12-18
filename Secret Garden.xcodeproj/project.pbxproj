@@ -369,6 +369,7 @@
 				62E9AF7B290C2FF600175A21 /* Sources */,
 				62E9AF7C290C2FF600175A21 /* Frameworks */,
 				62E9AF7D290C2FF600175A21 /* Resources */,
+				620C692A294F39B1008F005E /* Show Version on LaunchScreen */,
 			);
 			buildRules = (
 			);
@@ -498,6 +499,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		620C692A294F39B1008F005E /* Show Version on LaunchScreen */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Show Version on LaunchScreen";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#   ON/OFF Script Toggle (script ON with #, script OFF without #)\n#exit 0\n\n#   App vesion / Build version constants\nsourceFilePath=\"$PROJECT_DIR/$PROJECT_NAME/Supporting Files/Base.lproj/LaunchScreen.storyboard\"\nversionNumber=\"$MARKETING_VERSION\"\n# buildNumber=\"$CURRENT_PROJECT_VERSION\"\n\n#   Output version & build numbers into a label on LaunchScreen.storyboard\nsed -i .bak -e \"/userLabel=\\\"APP_VERSION\\\"/s/text=\\\"[^\\\"]*\\\"/text=\\\"$versionNumber\\\"/\" \"$sourceFilePath\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		62E9AF7B290C2FF600175A21 /* Sources */ = {
@@ -708,8 +730,10 @@
 				DEVELOPMENT_TEAM = J846X7UY52;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Secret Garden/Supporting Files/Info.plist";
+				INFOPLIST_KEY_NSCameraUsageDescription = "We need access to your Camera";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need access to your photo library";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -739,8 +763,10 @@
 				DEVELOPMENT_TEAM = J846X7UY52;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Secret Garden/Supporting Files/Info.plist";
+				INFOPLIST_KEY_NSCameraUsageDescription = "We need access to your Camera";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need access to your photo library";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
