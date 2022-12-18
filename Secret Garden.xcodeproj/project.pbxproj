@@ -503,7 +503,8 @@
 /* Begin PBXShellScriptBuildPhase section */
 		620C692A294F39B1008F005E /* Show Version on LaunchScreen */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			alwaysOutOfDate = 1;
+			buildActionMask = 12;
 			files = (
 			);
 			inputFileListPaths = (
