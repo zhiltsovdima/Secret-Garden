@@ -94,7 +94,7 @@ struct APIManager {
     
     func performRequest(namePlant: String, index: Int) {
         
-        let name = namePlant.lowercased()
+        let name = namePlant.lowercased().replacingOccurrences(of: " ", with: "")
         
         let headers = [
             "X-RapidAPI-Key": "b05530de65msh6cfb2133d9fa5bdp1b3829jsn681eaacbbab4",
