@@ -7,7 +7,7 @@ UIKit app for storing your plants collection and the ability to browse the produ
 <img src="https://user-images.githubusercontent.com/50846656/208389107-25288bae-c35a-4412-8b9e-db84caeb624e.PNG" width = 20% height = 20%>
 <img src="https://user-images.githubusercontent.com/50846656/208389120-9330aece-374f-465d-8e65-5c711300df8f.PNG" width = 20% height = 20%>
 <img src="https://user-images.githubusercontent.com/50846656/208391394-831977ef-2238-4316-a65a-1226cfa5e5f9.PNG" width = 20% height = 20%>
-<img src="https://user-images.githubusercontent.com/50846656/208391424-89896483-ee75-42ca-a7f6-f960e0e8380a.PNG" width = 20% height = 20%>
+<img src="https://user-images.githubusercontent.com/50846656/208433142-f10290e7-066a-425e-a44d-50c9fbe20c3d.PNG" width = 20% height = 20%>
 <img src="https://user-images.githubusercontent.com/50846656/208391472-ac5cf102-07ae-4a50-9aa2-2a9ad623765d.PNG" width = 20% height = 20%>
 
 Tech Stack: UIKit, MVC, SPM, FireBase, FileManager
