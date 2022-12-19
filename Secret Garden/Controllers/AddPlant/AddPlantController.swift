@@ -16,6 +16,7 @@ final class AddPlantController: BaseViewController {
     private let saveButton = BaseButton()
     
     private let notValidNewPlant = UILabel()
+    private let examplePlant = UILabel()
     
     private var plantImage: UIImage? {
         return plantImageView.image != Resources.Images.Common.camera ? plantImageView.image : nil
@@ -82,6 +83,7 @@ extension AddPlantController {
         
         view.addSubview(nameLabel)
         nameLabel.text = Resources.Strings.Common.name
+        nameLabel.font = Resources.Fonts.generalBold
         nameLabel.textColor = .black
         
         view.addSubview(viewForTextField)
@@ -92,6 +94,7 @@ extension AddPlantController {
         
         view.addSubview(nameTextField)
         nameTextField.textColor = .black
+        nameTextField.font = Resources.Fonts.general
         nameTextField.backgroundColor = Resources.Colors.backgroundFields
         nameTextField.placeholder = Resources.Strings.AddPlant.placeholder
         
@@ -100,6 +103,11 @@ extension AddPlantController {
         notValidNewPlant.numberOfLines = 0
         notValidNewPlant.textColor = .red
         notValidNewPlant.isHidden = true
+        
+        view.addSubview(examplePlant)
+        examplePlant.font = Resources.Fonts.subHeaders
+        examplePlant.textColor = .lightGray
+        examplePlant.text = Resources.Strings.AddPlant.examplePlant
         
         view.addSubview(saveButton)
         saveButton.setTitle(Resources.Strings.Common.save, for: .normal)
@@ -114,6 +122,7 @@ extension AddPlantController {
         viewForTextField.translatesAutoresizingMaskIntoConstraints = false
         nameTextField.translatesAutoresizingMaskIntoConstraints = false
         notValidNewPlant.translatesAutoresizingMaskIntoConstraints = false
+        examplePlant.translatesAutoresizingMaskIntoConstraints = false
         saveButton.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
@@ -139,10 +148,14 @@ extension AddPlantController {
             notValidNewPlant.bottomAnchor.constraint(equalTo: viewForTextField.topAnchor, constant: -5),
             notValidNewPlant.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             
+            examplePlant.topAnchor.constraint(equalTo: viewForTextField.bottomAnchor, constant: 5),
+            examplePlant.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            examplePlant.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            
             saveButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             saveButton.heightAnchor.constraint(equalToConstant: 50),
             saveButton.widthAnchor.constraint(equalToConstant: 150),
-            saveButton.topAnchor.constraint(equalTo: viewForTextField.bottomAnchor, constant: 20)
+            saveButton.topAnchor.constraint(equalTo: examplePlant.bottomAnchor, constant: 10)
         ])
     }
     
@@ -165,6 +178,13 @@ extension AddPlantController: UITextFieldDelegate {
             notValidNewPlant.isHidden = false
             return false
         }
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let allowedCharacter = CharacterSet.letters
+        let allowedCharacter1 = CharacterSet.whitespaces
+        let characterSet = CharacterSet(charactersIn: string)
+        return allowedCharacter.isSuperset(of: characterSet) || allowedCharacter1.isSuperset(of: characterSet)
     }
 }
 

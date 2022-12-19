@@ -270,7 +270,7 @@ extension ItemDetailController {
         originLabel.textColor = Resources.Colors.subHeader
         originLabel.numberOfLines = 0
         originValueLabel.text = shopItem.origin
-        originValueLabel.font = Resources.Fonts.general
+        originValueLabel.font = Resources.Fonts.generalBold
         originValueLabel.numberOfLines = 0
 
         

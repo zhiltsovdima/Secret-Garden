@@ -9,19 +9,19 @@ import UIKit
 
 final class EditPlantViewController: DetailBaseController {
     
-    let plantToEdit: Plant
+    private let plantToEdit: Plant
+        
+    private let nameLabel = UILabel()
+    private let notValidParameters = UILabel()
     
-    let nameTextField = UITextField()
-    
-    let nameLabel = UILabel()
-    let nameView = UIView()
-    
-    let imageLabel = UILabel()
-    let chooseImageButton = UIButton()
-    let saveButton = BaseButton()
-    
-    let actualIndexPath: IndexPath
-    
+    private let viewForTextField = UIView()
+    private let nameTextField = UITextField()
+     
+    private let imageLabel = UILabel()
+    private let chooseImageButton = UIButton()
+    private let saveButton = BaseButton()
+    private let actualIndexPath: IndexPath
+
     var saveEditedPlantHandler: ((Plant, IndexPath)-> Void)?
     
     init(_ plantToEdit: Plant, _ actualIndexPath: IndexPath) {
@@ -52,11 +52,11 @@ final class EditPlantViewController: DetailBaseController {
         
         plantImageView.image = plantToEdit.image.getImage()
         
-        detailInfoView.addSubview(nameView)
-        nameView.backgroundColor = Resources.Colors.backgroundFields
-        nameView.layer.borderColor = UIColor.lightGray.cgColor
-        nameView.layer.borderWidth = 0.5
-        nameView.layer.cornerRadius = 5
+        detailInfoView.addSubview(viewForTextField)
+        viewForTextField.backgroundColor = Resources.Colors.backgroundFields
+        viewForTextField.layer.borderColor = UIColor.lightGray.cgColor
+        viewForTextField.layer.borderWidth = 0.5
+        viewForTextField.layer.cornerRadius = 5
         
         detailInfoView.addSubview(nameTextField)
         nameTextField.backgroundColor = Resources.Colors.backgroundFields
@@ -66,6 +66,12 @@ final class EditPlantViewController: DetailBaseController {
         detailInfoView.addSubview(nameLabel)
         nameLabel.text = Resources.Strings.Common.name
         nameLabel.font = Resources.Fonts.generalBold
+        
+        detailInfoView.addSubview(notValidParameters)
+        notValidParameters.font = Resources.Fonts.general?.withSize(12)
+        notValidParameters.numberOfLines = 0
+        notValidParameters.textColor = .red
+        notValidParameters.isHidden = true
         
         detailInfoView.addSubview(imageLabel)
         imageLabel.text = "Image"
@@ -90,7 +96,8 @@ final class EditPlantViewController: DetailBaseController {
         super.setConstraints()
         
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        nameView.translatesAutoresizingMaskIntoConstraints = false
+        notValidParameters.translatesAutoresizingMaskIntoConstraints = false
+        viewForTextField.translatesAutoresizingMaskIntoConstraints = false
         nameTextField.translatesAutoresizingMaskIntoConstraints = false
         imageLabel.translatesAutoresizingMaskIntoConstraints = false
         chooseImageButton.translatesAutoresizingMaskIntoConstraints = false
@@ -99,21 +106,23 @@ final class EditPlantViewController: DetailBaseController {
         NSLayoutConstraint.activate([
             nameLabel.topAnchor.constraint(equalTo: detailInfoView.topAnchor, constant: 20),
             nameLabel.leadingAnchor.constraint(equalTo: detailInfoView.leadingAnchor, constant: 20),
-            nameLabel.heightAnchor.constraint(equalToConstant: 30),
+            
+            notValidParameters.leadingAnchor.constraint(equalTo: nameLabel.trailingAnchor, constant: 10),
+            notValidParameters.bottomAnchor.constraint(equalTo: viewForTextField.topAnchor, constant: -5),
+            notValidParameters.trailingAnchor.constraint(equalTo: detailInfoView.trailingAnchor, constant: -20),
 
-            nameView.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 5),
-            nameView.leadingAnchor.constraint(equalTo: detailInfoView.leadingAnchor, constant: 20),
-            nameView.trailingAnchor.constraint(equalTo: detailInfoView.trailingAnchor, constant: -20),
-            nameView.heightAnchor.constraint(equalToConstant: 40),
+            viewForTextField.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 5),
+            viewForTextField.leadingAnchor.constraint(equalTo: detailInfoView.leadingAnchor, constant: 20),
+            viewForTextField.trailingAnchor.constraint(equalTo: detailInfoView.trailingAnchor, constant: -20),
+            viewForTextField.heightAnchor.constraint(equalToConstant: 40),
  
-            nameTextField.topAnchor.constraint(equalTo: nameView.topAnchor, constant: 5),
-            nameTextField.leadingAnchor.constraint(equalTo: nameView.leadingAnchor, constant: 5),
-            nameTextField.trailingAnchor.constraint(equalTo: nameView.trailingAnchor, constant: -5),
+            nameTextField.topAnchor.constraint(equalTo: viewForTextField.topAnchor, constant: 5),
+            nameTextField.leadingAnchor.constraint(equalTo: viewForTextField.leadingAnchor, constant: 5),
+            nameTextField.trailingAnchor.constraint(equalTo: viewForTextField.trailingAnchor, constant: -5),
             nameTextField.heightAnchor.constraint(equalToConstant: 30),
 
-            imageLabel.topAnchor.constraint(equalTo: nameView.bottomAnchor, constant: 10),
+            imageLabel.topAnchor.constraint(equalTo: viewForTextField.bottomAnchor, constant: 10),
             imageLabel.leadingAnchor.constraint(equalTo: detailInfoView.leadingAnchor, constant: 20),
-            imageLabel.heightAnchor.constraint(equalToConstant: 30),
 
             chooseImageButton.topAnchor.constraint(equalTo: imageLabel.bottomAnchor, constant: 5),
             chooseImageButton.leadingAnchor.constraint(equalTo: detailInfoView.leadingAnchor, constant: 20),
@@ -128,8 +137,13 @@ final class EditPlantViewController: DetailBaseController {
     }
     
     @objc private func saveButtonTapped() {
-        guard let newName = nameTextField.text else { print("Error! Enter the new name"); return }
+        guard nameTextField.hasText else {
+            notValidParameters.text = Resources.Strings.AddPlant.emptyName
+            notValidParameters.isHidden = false
+            return
+        }
         let newImage = PlantImage(plantImageView.image!)
+        let newName = nameTextField.text!
         let editedPlant = Plant(name: newName, image: newImage)
         
         saveEditedPlantHandler?(editedPlant, actualIndexPath)
@@ -182,8 +196,22 @@ extension EditPlantViewController {
 extension EditPlantViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
+        if textField.hasText {
+            textField.resignFirstResponder()
+            notValidParameters.isHidden = true
+            return true
+        } else {
+            notValidParameters.text = Resources.Strings.AddPlant.emptyName
+            notValidParameters.isHidden = false
+            return false
+        }
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let allowedCharacter = CharacterSet.letters
+        let allowedCharacter1 = CharacterSet.whitespaces
+        let characterSet = CharacterSet(charactersIn: string)
+        return allowedCharacter.isSuperset(of: characterSet) || allowedCharacter1.isSuperset(of: characterSet)
     }
 }
 

@@ -78,6 +78,7 @@ final class FavoriteCell: UITableViewCell {
         
             nameItem.topAnchor.constraint(equalTo: topAnchor, constant: 10),
             nameItem.leadingAnchor.constraint(equalTo: itemImageView.trailingAnchor, constant: 10),
+            nameItem.trailingAnchor.constraint(equalTo: favoriteButton.leadingAnchor, constant: -30),
             
             priceLabel.topAnchor.constraint(equalTo: nameItem.bottomAnchor, constant: 5),
             priceLabel.leadingAnchor.constraint(equalTo: itemImageView.trailingAnchor, constant: 10),

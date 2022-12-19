@@ -58,6 +58,7 @@ enum Resources {
             static let emptyImage = "You have to add the Image"
             static let emptyName = "You have to add the plant name"
             static let notValidName = "Your plant name must contain only letters"
+            static let examplePlant = "For example: Croton or Peace lily"
         }
         enum Home {
             static let tipTitle = "Совет дня"
