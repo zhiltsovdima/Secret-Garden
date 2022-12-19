@@ -21,20 +21,19 @@ final class DetailPlantController: DetailBaseController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupViews()
         setConstraints()
     }
     
-    func setPlant(_ plant: Plant) {
+    func setPlant(_ plant: Plant?) {
         self.plant = plant
-        self.characteristicsValues = plant.characteristics?.getArrayOfValues() ?? []
+        self.characteristicsValues = plant?.characteristics?.getArrayOfValues() ?? []
         self.characteristicsNames = Resources.Strings.Common.Detail.all
     }
     
     func updateUI() {
-        tableView.reloadData()
         latinName.text = plant?.characteristics?.latinName
+        tableView.reloadData()
     }
     
     override func setupViews() {

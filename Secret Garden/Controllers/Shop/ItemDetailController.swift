@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ItemDetailController: BaseViewController {
+final class ItemDetailController: BaseViewController {
     
     var shopItem: ShopItem {
         didSet {
@@ -80,12 +80,17 @@ class ItemDetailController: BaseViewController {
     
     
     init(_ shopItem: ShopItem) {
+        print("init detail")
         self.shopItem = shopItem
         super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit {
+        print("deinit detail")
     }
     
     override func viewDidLoad() {

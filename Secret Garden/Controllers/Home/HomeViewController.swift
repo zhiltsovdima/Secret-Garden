@@ -52,6 +52,7 @@ final class HomeViewController: BaseViewController {
         descriptionLabel.text = Resources.Strings.Home.descriptionTitle + Resources.Strings.Home.descriptionBody
         descriptionLabel.numberOfLines = 0
         descriptionLabel.font = Resources.Fonts.general
+        descriptionLabel.adjustsFontSizeToFitWidth = true
     }
     
     private func setConstraints() {
@@ -90,7 +91,7 @@ final class HomeViewController: BaseViewController {
             descriptionLabel.topAnchor.constraint(equalTo: descriptionView.topAnchor, constant: 20),
             descriptionLabel.leadingAnchor.constraint(equalTo: descriptionView.leadingAnchor, constant: 20),
             descriptionLabel.trailingAnchor.constraint(equalTo: descriptionView.trailingAnchor, constant: -20),
-            descriptionLabel.bottomAnchor.constraint(greaterThanOrEqualTo: descriptionView.bottomAnchor, constant: -20)
+            descriptionLabel.bottomAnchor.constraint(lessThanOrEqualTo: descriptionView.bottomAnchor, constant: -20)
         ])
     }
     

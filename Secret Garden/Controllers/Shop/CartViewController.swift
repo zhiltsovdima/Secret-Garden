@@ -257,13 +257,13 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
         let shopItem = shop.cart[indexPath.row]
         let shopItemId = shopItem.id!
         cell.setCart(shopItem)
-        cell.removeFromCartCompletion = { cellForRemove in
-            let actualIndexPath = self.tableView.indexPath(for: cellForRemove)
+        cell.removeFromCartCompletion = { [weak self] cellForRemove in
+            let actualIndexPath = self?.tableView.indexPath(for: cellForRemove)
             DispatchQueue.main.async {
-                self.shop.makeAddedToCart(withId: shopItemId, to: false)
-                self.tableView.deleteRows(at: [actualIndexPath!], with: .fade)
-                self.updateDetailVCHandler?(shopItemId)
-                self.checkingCartEmpty()
+                self?.shop.makeAddedToCart(withId: shopItemId, to: false)
+                self?.tableView.deleteRows(at: [actualIndexPath!], with: .fade)
+                self?.updateDetailVCHandler?(shopItemId)
+                self?.checkingCartEmpty()
             }
         }
         return cell
@@ -274,9 +274,9 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
         let shopItem = shop.items[shopItemId]
         
         let itemDetailVC = ItemDetailController(shopItem)
-        itemDetailVC.favoriteCompletion = { isFavorite in
-            self.shop.makeFavoriteItem(withId: shopItemId, to: isFavorite)
-            self.updateDetailVCHandler?(shopItemId)
+        itemDetailVC.favoriteCompletion = { [weak self] isFavorite in
+            self?.shop.makeFavoriteItem(withId: shopItemId, to: isFavorite)
+            self?.updateDetailVCHandler?(shopItemId)
         }
         itemDetailVC.goToCartCompletion = {
             self.navigationController?.popViewController(animated: true)

@@ -46,16 +46,16 @@ class Shop {
     }
     
     private func fetchData() {
-        APIManager.shared.getPost(collectionName: Resources.Strings.Shop.collectionNameInDataBase) { shopItems in
+        APIManager.shared.getPost(collectionName: Resources.Strings.Shop.collectionNameInDataBase) { [weak self] shopItems in
             
-            self.items = shopItems
-            for index in self.items.indices {
-                let imageName = self.items[index].imageString
+            self?.items = shopItems
+            for index in self!.items.indices {
+                let imageName = self?.items[index].imageString
                 APIManager.shared.getImage(name: imageName) { fetchedImage in
-                    self.items[index].image = fetchedImage
-                    self.updateViewCompletion?(index)
+                    self?.items[index].image = fetchedImage
+                    self?.updateViewCompletion?(index)
                 }
-                self.items[index].id = index
+                self?.items[index].id = index
             }
         }
     }

@@ -191,8 +191,8 @@ extension PlantsViewController: UITableViewDelegate, UITableViewDataSource {
         let detailVC = DetailPlantController()
         if plant.characteristics == nil {
             fetchData(for: plant, index: indexPath.row)
-            updateCompletion = {
-                detailVC.setPlant(self.garden.plants[indexPath.row])
+            updateCompletion = { [weak self] in
+                detailVC.setPlant(self?.garden.plants[indexPath.row])
                 detailVC.updateUI()
             }
         }

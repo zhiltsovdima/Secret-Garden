@@ -12,11 +12,8 @@ final class CategoriesView: UICollectionReusableView {
     private let categories = [Resources.Strings.Shop.Categories.all,
                               Resources.Strings.Shop.Categories.indoor,
                               Resources.Strings.Shop.Categories.outdoor,
-                              Resources.Strings.Shop.Categories.fertilizer,
-                              "test",
-                              "test",
-                              "test",
-                              "test"]
+                              Resources.Strings.Shop.Categories.fertilizer]
+    
     private let flowLayout = UICollectionViewFlowLayout()
     lazy var collectionView = UICollectionView(frame: self.bounds, collectionViewLayout: flowLayout)
     

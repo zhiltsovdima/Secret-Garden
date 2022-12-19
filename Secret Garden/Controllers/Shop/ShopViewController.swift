@@ -158,15 +158,15 @@ extension ShopViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         cell.setItem(shopItem)
         
-        cell.favoriteCompletion = { isFavorite in
-            self.shop.makeFavoriteItem(withId: shopItemId, to: isFavorite)
+        cell.favoriteCompletion = { [weak self] isFavorite in
+            self?.shop.makeFavoriteItem(withId: shopItemId, to: isFavorite)
         }
-        cell.cartCompletion = {
-            self.shop.makeAddedToCart(withId: shopItemId, to: true)
+        cell.cartCompletion = { [weak self] in
+            self?.shop.makeAddedToCart(withId: shopItemId, to: true)
         }
-        cell.goToCartCompletion = {
-            let cartVC = CartViewController(self.shop)
-            self.navigationController?.pushViewController(cartVC, animated: true)
+        cell.goToCartCompletion = { [weak self] in
+            let cartVC = CartViewController(self!.shop)
+            self?.navigationController?.pushViewController(cartVC, animated: true)
         }
         return cell
     }
@@ -176,20 +176,21 @@ extension ShopViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let shopItemId = shopItem.id!
         
         let itemDetailVC = ItemDetailController(shopItem)
-        itemDetailVC.favoriteCompletion = { isFavorite in
-            self.shop.makeFavoriteItem(withId: shopItemId, to: isFavorite)
+        itemDetailVC.favoriteCompletion = { [weak self] isFavorite in
+            self?.shop.makeFavoriteItem(withId: shopItemId, to: isFavorite)
         }
-        itemDetailVC.cartCompletion = {
-            self.shop.makeAddedToCart(withId: shopItemId, to: true)
+        itemDetailVC.cartCompletion = { [weak self] in
+            self?.shop.makeAddedToCart(withId: shopItemId, to: true)
         }
-        itemDetailVC.goToCartCompletion = {
-            let cartVC = CartViewController(self.shop)
+        itemDetailVC.goToCartCompletion = { [weak self] in
+            let cartVC = CartViewController(self!.shop)
+            //FIXME: - updateDetailVCHandler makes a retain cycle
             cartVC.updateDetailVCHandler = { id in
                 if itemDetailVC.shopItem.id == id {
-                    itemDetailVC.shopItem = self.shop.items[id]
+                    itemDetailVC.shopItem = self!.shop.items[id]
                 }
             }
-            self.navigationController?.pushViewController(cartVC, animated: true)
+            self?.navigationController?.pushViewController(cartVC, animated: true)
         }
         navigationController?.pushViewController(itemDetailVC, animated: true)
     }
@@ -209,6 +210,9 @@ extension ShopViewController: UICollectionViewDelegate, UICollectionViewDataSour
             case Resources.Strings.Shop.Categories.outdoor:
                 self?.isSelectedCategory = true
                 self?.updateFilteredItems(categoryName: Resources.Strings.Shop.Categories.outdoor)
+            case Resources.Strings.Shop.Categories.fertilizer:
+                self?.isSelectedCategory = true
+                self?.updateFilteredItems(categoryName: Resources.Strings.Shop.Categories.fertilizer)
             default:
                 self?.isSelectedCategory = false
                 self?.filteredItems = []

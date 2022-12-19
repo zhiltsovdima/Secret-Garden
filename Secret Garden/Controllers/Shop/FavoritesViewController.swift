@@ -104,11 +104,11 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
         let favItem = shop.favorites[indexPath.row]
         let favItemId = favItem.id!
         cell.setFavorite(favItem)
-        cell.unfavoriteCompletion = { unfavCell in
-            let unfavIndexPath = self.tableView.indexPath(for: unfavCell)
+        cell.unfavoriteCompletion = { [weak self] unfavCell in
+            let unfavIndexPath = self?.tableView.indexPath(for: unfavCell)
             DispatchQueue.main.async {
-                self.shop.makeFavoriteItem(withId: favItemId, to: false)
-                self.updateUI(unfavIndexPath!)
+                self?.shop.makeFavoriteItem(withId: favItemId, to: false)
+                self?.updateUI(unfavIndexPath!)
             }
         }
         return cell
@@ -119,18 +119,18 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
         let shopItem = shop.items[shopItemId]
         
         let itemDetailVC = ItemDetailController(shopItem)
-        itemDetailVC.favoriteCompletion = { isFavorite in
+        itemDetailVC.favoriteCompletion = { [weak self] isFavorite in
             DispatchQueue.main.async {
-                self.shop.makeFavoriteItem(withId: shopItemId, to: isFavorite)
-                self.updateUI(indexPath)
+                self?.shop.makeFavoriteItem(withId: shopItemId, to: isFavorite)
+                self?.updateUI(indexPath)
             }
         }
-        itemDetailVC.cartCompletion = {
-            self.shop.makeAddedToCart(withId: shopItemId, to: true)
+        itemDetailVC.cartCompletion = { [weak self] in
+            self?.shop.makeAddedToCart(withId: shopItemId, to: true)
         }
-        itemDetailVC.goToCartCompletion = {
-            let cartVC = CartViewController(self.shop)
-            self.navigationController?.pushViewController(cartVC, animated: true)
+        itemDetailVC.goToCartCompletion = { [weak self] in
+            let cartVC = CartViewController(self!.shop)
+            self?.navigationController?.pushViewController(cartVC, animated: true)
         }
         navigationController?.pushViewController(itemDetailVC, animated: true)
         tableView.deselectRow(at: indexPath, animated: false)
