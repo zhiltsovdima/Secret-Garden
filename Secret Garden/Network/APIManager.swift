@@ -11,7 +11,7 @@ import FirebaseStorage
 import FirebaseDatabaseSwift
 
 protocol APIManagerDelegate {
-    func didUpdate(with characteristics: PlantCharacteristics, index: Int)
+    func didUpdate(with features: PlantFeatures, index: Int)
 }
 
 struct APIManager {
@@ -126,7 +126,7 @@ struct APIManager {
         dataTask.resume()
     }
     
-    func parseJSON(_ plantData: Data) -> PlantCharacteristics? {
+    func parseJSON(_ plantData: Data) -> PlantFeatures? {
         let decoder = JSONDecoder()
         do {
             let decodedData = try decoder.decode([PlantData].self, from: plantData)
@@ -143,14 +143,15 @@ struct APIManager {
             let insectsArray = dataForPlant.insects
             let insects = insectsArray.joined(separator: ", ")
             
-            let characteristic = PlantCharacteristics(latinName: latin,
-                                                      dictionary: [Resources.Strings.Common.Detail.origin: origin,
-                                                                   Resources.Strings.Common.Detail.temperature: temp,
-                                                                   Resources.Strings.Common.Detail.light: idealLight,
-                                                                   Resources.Strings.Common.Detail.watering: watering,
-                                                                   Resources.Strings.Common.Detail.insects: insects
-                                                      ])
-            return characteristic
+            let features = PlantFeatures(latinName: latin,
+                                         values: [
+                                            idealLight,
+                                            temp,
+                                            watering,
+                                            insects,
+                                            origin
+                                         ])
+            return features
         } catch {
             print("Decode Error: \(error)")
             return nil

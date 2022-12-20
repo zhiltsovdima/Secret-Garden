@@ -9,39 +9,26 @@ import UIKit
 
 struct Plant: Codable {
     var name: String
-    var image: PlantImage
+    var imageData: PlantImageData
     
-    var characteristics: PlantCharacteristics?
+    var features: PlantFeatures?
     
-    init(name: String, image: PlantImage) {
+    init(name: String, image: PlantImageData) {
         self.name = name
-        self.image = image
+        self.imageData = image
     }
 }
 
-struct PlantCharacteristics: Codable {
+struct PlantFeatures: Codable {
     var latinName: String
-    var dictionary: [String: String]
-    
-    func getArrayOfValues() -> [String] {
-        return [dictionary[Resources.Strings.Common.Detail.light]!,
-                dictionary[Resources.Strings.Common.Detail.temperature]!,
-                dictionary[Resources.Strings.Common.Detail.watering]!,
-                dictionary[Resources.Strings.Common.Detail.insects]!,
-                dictionary[Resources.Strings.Common.Detail.origin]!
-        ]
-    }
+    var values: [String]
 }
 
-struct PlantImage: Codable {
-    let imageData: Data?
+struct PlantImageData: Codable {
+    private let imageData: Data?
     
-    func getImage() -> UIImage? {
-        if let imageData {
-            return UIImage(data: imageData)
-        } else {
-            return nil
-        }
+    var image: UIImage? {
+        imageData.map { UIImage(data: $0)! }
     }
     
     init(_ image: UIImage) {

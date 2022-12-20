@@ -10,17 +10,13 @@ import Foundation
 struct PlantData: Codable {
     let latin: String
     let origin: String
-    let tempmax: TempMax
-    let tempmin: TempMin
+    let tempmax: Temp
+    let tempmin: Temp
     let ideallight: String
     let watering: String
     let insects: [String]
 }
 
-struct TempMax: Codable {
-    let celsius: Int
-}
-
-struct TempMin: Codable {
+struct Temp: Codable {
     let celsius: Int
 }

@@ -50,7 +50,7 @@ final class EditPlantViewController: DetailBaseController {
     override func setupViews() {
         super.setupViews()
         
-        plantImageView.image = plantToEdit.image.getImage()
+        plantImageView.image = plantToEdit.imageData.image
         
         detailInfoView.addSubview(viewForTextField)
         viewForTextField.backgroundColor = Resources.Colors.backgroundFields
@@ -142,7 +142,7 @@ final class EditPlantViewController: DetailBaseController {
             notValidParameters.isHidden = false
             return
         }
-        let newImage = PlantImage(plantImageView.image!)
+        let newImage = PlantImageData(plantImageView.image!)
         let newName = nameTextField.text!
         let editedPlant = Plant(name: newName, image: newImage)
         

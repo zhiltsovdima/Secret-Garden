@@ -29,7 +29,7 @@
 		626FA071291CFCB000FEB461 /* DetailBaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626FA070291CFCB000FEB461 /* DetailBaseController.swift */; };
 		626FA075291E82F100FEB461 /* UIImage + ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626FA074291E82F100FEB461 /* UIImage + ext.swift */; };
 		62A69DB12931FFB0007228EB /* CartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A69DB02931FFB0007228EB /* CartCell.swift */; };
-		62B10A2C29487D2000C80F07 /* CharacteristicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B10A2B29487D2000C80F07 /* CharacteristicCell.swift */; };
+		62B10A2C29487D2000C80F07 /* FeatureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B10A2B29487D2000C80F07 /* FeatureCell.swift */; };
 		62D4EEEF294CBF2F00360851 /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 62D4EEEE294CBF2F00360851 /* FirebaseDatabaseSwift */; };
 		62D4EEF1294CBF2F00360851 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 62D4EEF0294CBF2F00360851 /* FirebaseFirestoreSwift */; };
 		62D4EEF3294CBF4500360851 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 62D4EEF2294CBF4500360851 /* FirebaseStorage */; };
@@ -91,7 +91,7 @@
 		626FA070291CFCB000FEB461 /* DetailBaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailBaseController.swift; sourceTree = "<group>"; };
 		626FA074291E82F100FEB461 /* UIImage + ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage + ext.swift"; sourceTree = "<group>"; };
 		62A69DB02931FFB0007228EB /* CartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartCell.swift; sourceTree = "<group>"; };
-		62B10A2B29487D2000C80F07 /* CharacteristicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacteristicCell.swift; sourceTree = "<group>"; };
+		62B10A2B29487D2000C80F07 /* FeatureCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureCell.swift; sourceTree = "<group>"; };
 		62E9AF7F290C2FF600175A21 /* Secret Garden.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Secret Garden.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		62E9AF82290C2FF600175A21 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		62E9AF84290C2FF600175A21 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -246,8 +246,8 @@
 				62E9AFC5290EB5DD00175A21 /* Base */,
 				62E9AFDF2915019300175A21 /* Home */,
 				62E9AFDC2915012B00175A21 /* Plants */,
-				62E9AFDD2915015F00175A21 /* Shop */,
 				62E9AFDE2915018400175A21 /* AddPlant */,
+				62E9AFDD2915015F00175A21 /* Shop */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -297,7 +297,7 @@
 			isa = PBXGroup;
 			children = (
 				62E9AFCC2911106E00175A21 /* PlantCell.swift */,
-				62B10A2B29487D2000C80F07 /* CharacteristicCell.swift */,
+				62B10A2B29487D2000C80F07 /* FeatureCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -530,7 +530,7 @@
 				620332EA2921583F00ADE1A1 /* CategoryCell.swift in Sources */,
 				62A69DB12931FFB0007228EB /* CartCell.swift in Sources */,
 				622AF21F292CCBB100A1A994 /* FavoritesViewController.swift in Sources */,
-				62B10A2C29487D2000C80F07 /* CharacteristicCell.swift in Sources */,
+				62B10A2C29487D2000C80F07 /* FeatureCell.swift in Sources */,
 				62E9AFD72913BA9800175A21 /* UIView + ext.swift in Sources */,
 				62E9AFBC290D409500175A21 /* HomeViewController.swift in Sources */,
 				62E9AFD129116D9E00175A21 /* AddPlantController.swift in Sources */,

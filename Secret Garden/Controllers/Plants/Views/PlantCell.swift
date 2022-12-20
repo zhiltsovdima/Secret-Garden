@@ -29,7 +29,7 @@ final class PlantCell: UITableViewCell {
     }
     
     func set(plant: Plant) {
-        plantImageView.image = plant.image.getImage()
+        plantImageView.image = plant.imageData.image
         plantTitleLabel.text = plant.name
     }
     

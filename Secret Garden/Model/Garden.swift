@@ -60,7 +60,7 @@ class Garden {
     }
     
     func addNewPlant(name: String, image: UIImage) {
-        let imageData = PlantImage(image)
+        let imageData = PlantImageData(image)
         let plant = Plant(name: name, image: imageData)
         plants.insert(plant, at: 0)
     }

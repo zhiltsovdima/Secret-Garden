@@ -15,8 +15,8 @@ final class AddPlantController: BaseViewController {
     private let nameTextField = UITextField()
     private let saveButton = BaseButton()
     
-    private let notValidNewPlant = UILabel()
-    private let examplePlant = UILabel()
+    private let notValidNewPlantLabel = UILabel()
+    private let examplePlantsLabel = UILabel()
     
     private var plantImage: UIImage? {
         return plantImageView.image != Resources.Images.Common.camera ? plantImageView.image : nil
@@ -41,16 +41,16 @@ final class AddPlantController: BaseViewController {
         if name != nil, image != nil {
             return true
         } else if name == nil && image == nil {
-            notValidNewPlant.text = Resources.Strings.AddPlant.emptyName + "\n" + Resources.Strings.AddPlant.emptyImage
-            notValidNewPlant.isHidden = false
+            notValidNewPlantLabel.text = Resources.Strings.AddPlant.emptyName + "\n" + Resources.Strings.AddPlant.emptyImage
+            notValidNewPlantLabel.isHidden = false
             return false
         } else if image == nil {
-            notValidNewPlant.text = Resources.Strings.AddPlant.emptyImage
-            notValidNewPlant.isHidden = false
+            notValidNewPlantLabel.text = Resources.Strings.AddPlant.emptyImage
+            notValidNewPlantLabel.isHidden = false
             return false
         } else {
-            notValidNewPlant.text = Resources.Strings.AddPlant.emptyName
-            notValidNewPlant.isHidden = false
+            notValidNewPlantLabel.text = Resources.Strings.AddPlant.emptyName
+            notValidNewPlantLabel.isHidden = false
             return false
         }
     }
@@ -58,7 +58,7 @@ final class AddPlantController: BaseViewController {
     @objc private func saveButtonTapped() {
         let isValidate = validateNewPlant(name: plantName, image: plantImage)
         if isValidate {
-            let plant = Plant(name: plantName!, image: PlantImage(plantImage!))
+            let plant = Plant(name: plantName!, image: PlantImageData(plantImage!))
             completionHandler?(plant)
             navigationController?.popViewController(animated: true)
         }
@@ -98,16 +98,16 @@ extension AddPlantController {
         nameTextField.backgroundColor = Resources.Colors.backgroundFields
         nameTextField.placeholder = Resources.Strings.AddPlant.placeholder
         
-        view.addSubview(notValidNewPlant)
-        notValidNewPlant.font = Resources.Fonts.general?.withSize(12)
-        notValidNewPlant.numberOfLines = 0
-        notValidNewPlant.textColor = .red
-        notValidNewPlant.isHidden = true
+        view.addSubview(notValidNewPlantLabel)
+        notValidNewPlantLabel.font = Resources.Fonts.general?.withSize(12)
+        notValidNewPlantLabel.numberOfLines = 0
+        notValidNewPlantLabel.textColor = .red
+        notValidNewPlantLabel.isHidden = true
         
-        view.addSubview(examplePlant)
-        examplePlant.font = Resources.Fonts.subHeaders
-        examplePlant.textColor = .lightGray
-        examplePlant.text = Resources.Strings.AddPlant.examplePlant
+        view.addSubview(examplePlantsLabel)
+        examplePlantsLabel.font = Resources.Fonts.subHeaders
+        examplePlantsLabel.textColor = .lightGray
+        examplePlantsLabel.text = Resources.Strings.AddPlant.examplePlant
         
         view.addSubview(saveButton)
         saveButton.setTitle(Resources.Strings.Common.save, for: .normal)
@@ -121,8 +121,8 @@ extension AddPlantController {
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         viewForTextField.translatesAutoresizingMaskIntoConstraints = false
         nameTextField.translatesAutoresizingMaskIntoConstraints = false
-        notValidNewPlant.translatesAutoresizingMaskIntoConstraints = false
-        examplePlant.translatesAutoresizingMaskIntoConstraints = false
+        notValidNewPlantLabel.translatesAutoresizingMaskIntoConstraints = false
+        examplePlantsLabel.translatesAutoresizingMaskIntoConstraints = false
         saveButton.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
@@ -144,18 +144,18 @@ extension AddPlantController {
             nameTextField.trailingAnchor.constraint(equalTo: viewForTextField.trailingAnchor, constant: -5),
             nameTextField.bottomAnchor.constraint(equalTo: viewForTextField.bottomAnchor, constant: -5),
             
-            notValidNewPlant.leadingAnchor.constraint(equalTo: nameLabel.trailingAnchor, constant: 10),
-            notValidNewPlant.bottomAnchor.constraint(equalTo: viewForTextField.topAnchor, constant: -5),
-            notValidNewPlant.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            notValidNewPlantLabel.leadingAnchor.constraint(equalTo: nameLabel.trailingAnchor, constant: 10),
+            notValidNewPlantLabel.bottomAnchor.constraint(equalTo: viewForTextField.topAnchor, constant: -5),
+            notValidNewPlantLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             
-            examplePlant.topAnchor.constraint(equalTo: viewForTextField.bottomAnchor, constant: 5),
-            examplePlant.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            examplePlant.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            examplePlantsLabel.topAnchor.constraint(equalTo: viewForTextField.bottomAnchor, constant: 5),
+            examplePlantsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            examplePlantsLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             
             saveButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             saveButton.heightAnchor.constraint(equalToConstant: 50),
             saveButton.widthAnchor.constraint(equalToConstant: 150),
-            saveButton.topAnchor.constraint(equalTo: examplePlant.bottomAnchor, constant: 10)
+            saveButton.topAnchor.constraint(equalTo: examplePlantsLabel.bottomAnchor, constant: 10)
         ])
     }
     
@@ -171,11 +171,11 @@ extension AddPlantController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField.hasText {
             textField.resignFirstResponder()
-            notValidNewPlant.isHidden = true
+            notValidNewPlantLabel.isHidden = true
             return true
         } else {
-            notValidNewPlant.text = Resources.Strings.AddPlant.emptyName
-            notValidNewPlant.isHidden = false
+            notValidNewPlantLabel.text = Resources.Strings.AddPlant.emptyName
+            notValidNewPlantLabel.isHidden = false
             return false
         }
     }
@@ -215,7 +215,7 @@ extension AddPlantController: UIImagePickerControllerDelegate, UINavigationContr
         
         if let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             plantImageView.image = originalImage
-            notValidNewPlant.isHidden = true
+            notValidNewPlantLabel.isHidden = true
         }
         dismiss(animated: true)
     }

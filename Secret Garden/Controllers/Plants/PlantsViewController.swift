@@ -116,9 +116,9 @@ extension PlantsViewController: APIManagerDelegate {
         APIManager.shared.performRequest(namePlant: plant.name, index: index)
     }
     
-    func didUpdate(with characteristics: PlantCharacteristics, index: Int) {
+    func didUpdate(with features: PlantFeatures, index: Int) {
         DispatchQueue.main.async {
-            self.garden.plants[index].characteristics = characteristics
+            self.garden.plants[index].features = features
             self.garden.saveToFile()
             self.tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .none)
             self.updateCompletion?()
@@ -189,7 +189,7 @@ extension PlantsViewController: UITableViewDelegate, UITableViewDataSource {
         let plant = garden.plants[indexPath.row]
        
         let detailVC = DetailPlantController()
-        if plant.characteristics == nil {
+        if plant.features == nil {
             fetchData(for: plant, index: indexPath.row)
             updateCompletion = { [weak self] in
                 detailVC.setPlant(self?.garden.plants[indexPath.row])

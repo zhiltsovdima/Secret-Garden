@@ -11,8 +11,10 @@ final class DetailPlantController: DetailBaseController {
     
     private var plant: Plant?
     
-    private var characteristicsValues = [String]()
-    private var characteristicsNames = [String]()
+    private var featuresNames = Resources.Strings.Common.Detail.all
+    private var featuresValues: [String] {
+        plant?.features?.values ?? []
+    }
     
     private let tableView = UITableView()
     
@@ -27,19 +29,17 @@ final class DetailPlantController: DetailBaseController {
     
     func setPlant(_ plant: Plant?) {
         self.plant = plant
-        self.characteristicsValues = plant?.characteristics?.getArrayOfValues() ?? []
-        self.characteristicsNames = Resources.Strings.Common.Detail.all
     }
     
     func updateUI() {
-        latinName.text = plant?.characteristics?.latinName
+        latinName.text = plant?.features?.latinName
         tableView.reloadData()
     }
     
     override func setupViews() {
         super.setupViews()
         
-        tableView.register(CharacteristicCell.self, forCellReuseIdentifier: Resources.Identifiers.characteristicCell)
+        tableView.register(FeatureCell.self, forCellReuseIdentifier: Resources.Identifiers.featureCell)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.estimatedRowHeight = 50
@@ -49,14 +49,14 @@ final class DetailPlantController: DetailBaseController {
         tableView.isScrollEnabled = false
         detailInfoView.addSubview(tableView)
         
-        plantImageView.image = plant?.image.getImage()
+        plantImageView.image = plant?.imageData.image
         
         namePlant.text = plant?.name
         namePlant.numberOfLines = 0
         namePlant.font = Resources.Fonts.header
         detailInfoView.addSubview(namePlant)
         
-        latinName.text = plant?.characteristics?.latinName
+        latinName.text = plant?.features?.latinName
         latinName.numberOfLines = 0
         latinName.font = Resources.Fonts.subHeaders
         latinName.textColor = Resources.Colors.subHeader
@@ -89,15 +89,15 @@ final class DetailPlantController: DetailBaseController {
 extension DetailPlantController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return characteristicsValues.count
+        return featuresValues.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: Resources.Identifiers.characteristicCell, for: indexPath) as! CharacteristicCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: Resources.Identifiers.featureCell, for: indexPath) as! FeatureCell
         
-        let value = characteristicsValues[indexPath.row]
-        let name = characteristicsNames[indexPath.row]
-        cell.set(characteristicName: name, characteristicValue: value)
+        let value = featuresValues[indexPath.row]
+        let name = featuresNames[indexPath.row]
+        cell.set(featureName: name, featureValue: value)
         return cell
     }
     

@@ -138,7 +138,7 @@ enum Resources {
         static let categoryCell = "CategoryCell"
         static let favoriteCell = "FavoriteCell"
         static let cartCell = "CartCell"
-        static let characteristicCell = "CharacteristicCell"
+        static let featureCell = "FeatureCell"
 
     }
     
