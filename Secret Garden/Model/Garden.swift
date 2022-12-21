@@ -10,10 +10,6 @@ import UIKit
 class Garden {
     var plants = [Plant]()
     
-    var archiveURL: URL {
-        return getArchiveURL()
-    }
-    
     var isItEmpty: Bool {
         plants.isEmpty
     }
@@ -22,27 +18,37 @@ class Garden {
         loadFromFile()
     }
     
-    func getArchiveURL() -> URL {
-        let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        let documentFolder = documentDirectory.appendingPathComponent(Resources.Strings.FolderForSaveData.garden)
+    func checkAndCreateDirectory(at url: URL) {
+        let isExist = checkExistingOfFile(at: url)
+        guard !isExist else { return }
         do {
-            try FileManager.default.createDirectory(at: documentFolder, withIntermediateDirectories: true)
+            try FileManager.default.createDirectory(at: url, withIntermediateDirectories: false)
         } catch {
-            print("Error: \(error)")
+            print(error)
         }
-        let archiveURL = documentFolder.appendingPathComponent(Resources.Strings.FolderForSaveData.garden)
-        //print("Archive URL: \(archiveURL)")
-        return archiveURL
+    }
+    
+    func checkExistingOfFile(at url: URL) -> Bool {
+        return FileManager.default.fileExists(atPath: url.path)
+    }
+    
+    func pathForStoringData() -> URL? {
+        guard let appSuppDirectory = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first else { return nil }
+        checkAndCreateDirectory(at: appSuppDirectory)
+
+        let folderForStoring = appSuppDirectory.appendingPathComponent(Resources.Strings.pathForStoringData.folderName)
+        checkAndCreateDirectory(at: folderForStoring)
+        let pathForStoring = folderForStoring.appendingPathComponent(Resources.Strings.pathForStoringData.fileName)
+        
+        return pathForStoring
     }
     
     func saveToFile() {
-        
+        guard let path = pathForStoringData() else { return }
         let jsonData = try? JSONEncoder().encode(plants)
-        
         if let jsonData {
-            let pathToSave = archiveURL
             do {
-                try jsonData.write(to: pathToSave)
+                try jsonData.write(to: path)
             } catch {
                 print(error)
             }
@@ -50,9 +56,10 @@ class Garden {
     }
     
     func loadFromFile() {
-        guard FileManager.default.fileExists(atPath: archiveURL.path) else { return }
+        guard let path = pathForStoringData() else { return }
+        guard checkExistingOfFile(at: path) else { return }
         do {
-            let jsonData = try Data(contentsOf: archiveURL)
+            let jsonData = try Data(contentsOf: path)
             plants = try JSONDecoder().decode([Plant].self, from: jsonData)
         } catch {
             print("Error: \(error)")

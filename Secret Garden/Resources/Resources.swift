@@ -70,8 +70,9 @@ enum Resources {
             static let edit = "Edit"
             static let delete = "Delete"
         }
-        enum FolderForSaveData {
-            static let garden = "Garden"
+        enum pathForStoringData {
+            static let folderName = "Secret_Garden"
+            static let fileName = "Garden_Data"
         }
         enum Shop {
             
