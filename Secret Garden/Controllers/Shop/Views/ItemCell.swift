@@ -47,6 +47,9 @@ final class ItemCell: UICollectionViewCell {
             DispatchQueue.main.async {
                 self.imageView.image = fetchedImage
                 self.spinner.stopAnimating()
+                self.isUserInteractionEnabled = true
+                self.addToCartButton.isHidden = false
+                self.favoriteButton.isHidden = false
                 self.spinner.isHidden = true
             }
         }
@@ -92,7 +95,6 @@ final class ItemCell: UICollectionViewCell {
         
         addSubview(imageView)
         addSubview(spinner)
-        spinner.startAnimating()
 
         contentView.addSubview(favoriteButton)
         favoriteButton.setImage(Resources.Images.Common.addToFavorite, for: .normal)
@@ -108,6 +110,12 @@ final class ItemCell: UICollectionViewCell {
         addToCartButton.layer.borderWidth = 0.1
         addToCartButton.addTarget(self, action: #selector(addToCart), for: .touchUpInside)
 
+        if imageView.image == nil {
+            isUserInteractionEnabled = false
+            spinner.startAnimating()
+            addToCartButton.isHidden = true
+            favoriteButton.isHidden = true
+        }
     }
     
     private func setConstraints() {

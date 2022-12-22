@@ -30,6 +30,7 @@
 		626FA075291E82F100FEB461 /* UIImage + ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626FA074291E82F100FEB461 /* UIImage + ext.swift */; };
 		62A69DB12931FFB0007228EB /* CartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A69DB02931FFB0007228EB /* CartCell.swift */; };
 		62B10A2C29487D2000C80F07 /* FeatureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B10A2B29487D2000C80F07 /* FeatureCell.swift */; };
+		62B36A3A2954D8220052454B /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B36A392954D8220052454B /* NetworkManager.swift */; };
 		62D4EEEF294CBF2F00360851 /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 62D4EEEE294CBF2F00360851 /* FirebaseDatabaseSwift */; };
 		62D4EEF1294CBF2F00360851 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 62D4EEF0294CBF2F00360851 /* FirebaseFirestoreSwift */; };
 		62D4EEF3294CBF4500360851 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 62D4EEF2294CBF4500360851 /* FirebaseStorage */; };
@@ -92,6 +93,7 @@
 		626FA074291E82F100FEB461 /* UIImage + ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage + ext.swift"; sourceTree = "<group>"; };
 		62A69DB02931FFB0007228EB /* CartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartCell.swift; sourceTree = "<group>"; };
 		62B10A2B29487D2000C80F07 /* FeatureCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureCell.swift; sourceTree = "<group>"; };
+		62B36A392954D8220052454B /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		62E9AF7F290C2FF600175A21 /* Secret Garden.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Secret Garden.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		62E9AF82290C2FF600175A21 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		62E9AF84290C2FF600175A21 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 			isa = PBXGroup;
 			children = (
 				620332F82923E90B00ADE1A1 /* APIManager.swift */,
+				62B36A392954D8220052454B /* NetworkManager.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -537,6 +540,7 @@
 				62E9AFB5290D187100175A21 /* TabBarController.swift in Sources */,
 				62E9AFB9290D1C5C00175A21 /* Resources.swift in Sources */,
 				62E9AF83290C2FF600175A21 /* AppDelegate.swift in Sources */,
+				62B36A3A2954D8220052454B /* NetworkManager.swift in Sources */,
 				62E9AFCD2911106E00175A21 /* PlantCell.swift in Sources */,
 				626FA075291E82F100FEB461 /* UIImage + ext.swift in Sources */,
 				620332E82920D32500ADE1A1 /* CategoriesView.swift in Sources */,
