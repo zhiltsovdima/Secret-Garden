@@ -29,15 +29,15 @@ class FeatureCell: UITableViewCell {
     private func setImage(_ name: String) {
         switch name {
         case Resources.Strings.Common.Detail.origin:
-            featureImage.image = Resources.Images.Characteristics.origin
+            featureImage.image = Resources.Images.Features.origin
         case Resources.Strings.Common.Detail.light:
-            featureImage.image = Resources.Images.Characteristics.light
+            featureImage.image = Resources.Images.Features.light
         case Resources.Strings.Common.Detail.watering:
-            featureImage.image = Resources.Images.Characteristics.humidity
+            featureImage.image = Resources.Images.Features.humidity
         case Resources.Strings.Common.Detail.temperature:
-            featureImage.image = Resources.Images.Characteristics.temperature
+            featureImage.image = Resources.Images.Features.temperature
         case Resources.Strings.Common.Detail.insects:
-            featureImage.image = Resources.Images.Characteristics.insects
+            featureImage.image = Resources.Images.Features.insects
         default:
             break
         }

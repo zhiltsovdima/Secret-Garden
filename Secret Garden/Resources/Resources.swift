@@ -119,7 +119,7 @@ enum Resources {
             static let tip = UIImage(named: "PlantForTip")
         }
         
-        enum Characteristics {
+        enum Features {
             static let size = UIImage(systemName: "ruler.fill")
             static let careLevel = UIImage(systemName: "chart.bar.fill")
             static let petFriendly = UIImage(systemName: "pawprint.fill")
