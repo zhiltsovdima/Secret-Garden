@@ -37,8 +37,8 @@ struct APIManager {
             let items = documents.map { queryDocumentSnapshot in
                 let data = queryDocumentSnapshot.data()
                 
-                let name = data["name"] as? String ?? ""
-                let latinName = data["latinName"] as? String ?? ""
+                let name = data["name"] as? String
+                let latinName = data["latinName"] as? String
                 let category = data["category"] as? String
                 let description = data["description"] as? String
                 let image = data["image"] as? String
@@ -90,7 +90,7 @@ struct APIManager {
         }
     }
     
-    // MARK: - Fetching Plant's Characteristics
+    // MARK: - Fetching Plant's Features
     
     func performRequest(namePlant: String, index: Int) {
         
