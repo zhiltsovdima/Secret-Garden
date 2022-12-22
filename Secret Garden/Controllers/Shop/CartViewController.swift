@@ -11,6 +11,10 @@ final class CartViewController: BaseViewController {
     
     private let shop: Shop
     
+    private var cart: [ShopItem] {
+        return shop.items.filter { $0.isAddedToCart }
+    }
+    
     private let tableView = UITableView()
     
     private let checkoutStack = UIStackView()
@@ -31,7 +35,7 @@ final class CartViewController: BaseViewController {
     
     private var totalSubPrice: Double {
         var price = 0.0
-        shop.cart.forEach { item in
+        cart.forEach { item in
             let wordForRemove = "$"
             var priceStr = item.price
             if let range = priceStr?.range(of: wordForRemove) {
@@ -73,8 +77,13 @@ final class CartViewController: BaseViewController {
         totalPriceView.addUpperBorder(with: .lightGray, height: 1.0)
     }
     
+    private func updateUI(_ indexPath: IndexPath) {
+        tableView.deleteRows(at: [indexPath], with: .fade)
+        checkingCartEmpty()
+    }
+    
     private func checkingCartEmpty() {
-        if shop.cart.isEmpty {
+        if cart.isEmpty {
             tableView.isHidden = true
             checkoutStack.isHidden = true
             
@@ -249,36 +258,35 @@ extension CartViewController {
 extension CartViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        shop.cart.count
+        cart.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Resources.Identifiers.cartCell, for: indexPath) as! CartCell
-        let shopItem = shop.cart[indexPath.row]
+        let shopItem = cart[indexPath.row]
         let shopItemId = shopItem.id!
         cell.setCart(shopItem)
         cell.removeFromCartCompletion = { [weak self] cellForRemove in
             let actualIndexPath = self?.tableView.indexPath(for: cellForRemove)
             DispatchQueue.main.async {
-                self?.shop.makeAddedToCart(withId: shopItemId, to: false)
-                self?.tableView.deleteRows(at: [actualIndexPath!], with: .fade)
+                self?.shop.makeAddedToCart(withId: shopItemId)
+                self?.updateUI(actualIndexPath!)
                 self?.updateDetailVCHandler?(shopItemId)
-                self?.checkingCartEmpty()
             }
         }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let shopItemId = shop.cart[indexPath.row].id!
-        let shopItem = shop.items[shopItemId]
+        let shopItem = cart[indexPath.row]
+        let shopItemId = shopItem.id!
         
         let itemDetailVC = ItemDetailController(shopItem)
-        itemDetailVC.favoriteCompletion = { [weak self] isFavorite in
-            self?.shop.makeFavoriteItem(withId: shopItemId, to: isFavorite)
+        itemDetailVC.favoriteCompletion = { [weak self] in
+            self?.shop.makeFavoriteItem(withId: shopItemId)
             self?.updateDetailVCHandler?(shopItemId)
         }
-        itemDetailVC.goToCartCompletion = {
+        itemDetailVC.goToCartCompletion = { completion in
             self.navigationController?.popViewController(animated: true)
         }
         navigationController?.pushViewController(itemDetailVC, animated: true)

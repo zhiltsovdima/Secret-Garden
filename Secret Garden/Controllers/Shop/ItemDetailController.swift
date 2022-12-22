@@ -9,12 +9,7 @@ import UIKit
 
 final class ItemDetailController: BaseViewController {
     
-    var shopItem: ShopItem {
-        didSet {
-            setCartButtonAppearance()
-            setFavoriteButtonAppearance()
-        }
-    }
+    var shopItem: ShopItem
     
     private let scrollView = UIScrollView()
     
@@ -31,39 +26,39 @@ final class ItemDetailController: BaseViewController {
     private let upperDetailsStack = UIStackView()
     
     private let careLevelView = UIView()
-    private let careLevelImage = UIImageView(image: Resources.Images.Characteristics.careLevel)
+    private let careLevelImage = UIImageView(image: Resources.Images.Features.careLevel)
     private let careLevelLabel = UILabel()
     private let careValueLabel = UILabel()
     
     private let petView = UIView()
-    private let petFriendlyImage = UIImageView(image: Resources.Images.Characteristics.petFriendly)
+    private let petFriendlyImage = UIImageView(image: Resources.Images.Features.petFriendly)
     private let petFriendlyLabel = UILabel()
     private let petValueLabel = UILabel()
     
     private let sizeView = UIView()
-    private let sizeImage = UIImageView(image: Resources.Images.Characteristics.size)
+    private let sizeImage = UIImageView(image: Resources.Images.Features.size)
     private let sizeLabel = UILabel()
     private let sizeValueLabel = UILabel()
     
     private let bottonDetailsStack = UIStackView()
     
     private let lightView = UIView()
-    private let lightImage = UIImageView(image: Resources.Images.Characteristics.light)
+    private let lightImage = UIImageView(image: Resources.Images.Features.light)
     private let lightLabel = UILabel()
     private let lightValueLabel = UILabel()
     
     private let humidityView = UIView()
-    private let humidityImage = UIImageView(image: Resources.Images.Characteristics.humidity)
+    private let humidityImage = UIImageView(image: Resources.Images.Features.humidity)
     private let humidityLabel = UILabel()
     private let humidityValueLabel = UILabel()
     
     private let temperatureView = UIView()
-    private let temperatureImage = UIImageView(image: Resources.Images.Characteristics.temperature)
+    private let temperatureImage = UIImageView(image: Resources.Images.Features.temperature)
     private let temperatureLabel = UILabel()
     private let temperatureValueLabel = UILabel()
     
     private let originView = UIView()
-    private let originImage = UIImageView(image: Resources.Images.Characteristics.origin)
+    private let originImage = UIImageView(image: Resources.Images.Features.origin)
     private let originLabel = UILabel()
     private let originValueLabel = UILabel()
     
@@ -74,23 +69,18 @@ final class ItemDetailController: BaseViewController {
     
     private let addToCartButton = BaseButton()
     
-    var favoriteCompletion: ((Bool) -> Void)?
+    var favoriteCompletion: (() -> Void)?
     var cartCompletion: (() -> Void)?
-    var goToCartCompletion: (() -> Void)?
+    var goToCartCompletion: ((@escaping (Int) -> Void) -> Void)?
     
     
     init(_ shopItem: ShopItem) {
-        print("init detail")
         self.shopItem = shopItem
         super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    deinit {
-        print("deinit detail")
     }
     
     override func viewDidLoad() {
@@ -103,15 +93,22 @@ final class ItemDetailController: BaseViewController {
         setConstraints()
     }
     
-    @objc private func addToFavoriteAction() {
-        shopItem.isFavorite = !shopItem.isFavorite
-        favoriteCompletion?(shopItem.isFavorite)
+    @objc private func changeFavoriteAction() {
+        favoriteCompletion?()
+        setFavoriteButtonAppearance()
     }
     
     @objc private func addToCartAction() {
-        guard !shopItem.isAddedToCart else { goToCartCompletion?(); return }
-        shopItem.isAddedToCart = true
+        guard !shopItem.isAddedToCart else {
+            goToCartCompletion? { [weak self] id in
+                guard self?.shopItem.id == id else { return }
+                self?.setFavoriteButtonAppearance()
+                self?.setCartButtonAppearance()
+            }
+            return
+        }
         cartCompletion?()
+        setCartButtonAppearance()
     }
 }
 
@@ -119,11 +116,11 @@ final class ItemDetailController: BaseViewController {
 
 extension ItemDetailController {
     
-    private func setFavoriteButtonAppearance() {
+    func setFavoriteButtonAppearance() {
         navigationItem.rightBarButtonItem?.image = favoriteImage
     }
     
-    private func setCartButtonAppearance() {
+    func setCartButtonAppearance() {
         if shopItem.isAddedToCart {
             addToCartButton.setTitle(Resources.Strings.Shop.added, for: .normal)
             addToCartButton.backgroundColor = .black
@@ -134,7 +131,7 @@ extension ItemDetailController {
     }
     
     private func addNavBarButton() {
-        let button = UIBarButtonItem(image: favoriteImage, style: .done, target: self, action: #selector(addToFavoriteAction))
+        let button = UIBarButtonItem(image: favoriteImage, style: .done, target: self, action: #selector(changeFavoriteAction))
         navigationItem.rightBarButtonItem = button
     }
     

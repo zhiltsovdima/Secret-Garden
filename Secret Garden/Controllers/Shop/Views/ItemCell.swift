@@ -8,6 +8,8 @@
 import UIKit
 
 final class ItemCell: UICollectionViewCell {
+    
+    private var shopItem: ShopItem?
         
     private var imageView = UIImageView()
     private var name: String?
@@ -15,42 +17,14 @@ final class ItemCell: UICollectionViewCell {
     private let addToCartButton = UIButton()
     private let spinner = UIActivityIndicatorView()
     
-    private var isFetched: Bool {
-        return imageView.image != nil ? true : false
-    }
-    private var isItFavorite: Bool? {
-        didSet {
-            if isItFavorite! {
-                favoriteButton.backgroundColor = .black
-                favoriteButton.tintColor = Resources.Colors.backgroundColor
-            } else {
-                favoriteButton.backgroundColor = Resources.Colors.backgroundColor
-                favoriteButton.tintColor = .black
-            }
-        }
-    }
-    
-    private var isItAddedToCart: Bool? {
-        didSet {
-            if isItAddedToCart! {
-                addToCartButton.backgroundColor = .black
-                addToCartButton.setTitle(Resources.Strings.Shop.added, for: .normal)
-                addToCartButton.setTitleColor(Resources.Colors.backgroundColor, for: .normal)
-            } else {
-                addToCartButton.backgroundColor = Resources.Colors.backgroundColor
-                addToCartButton.setTitle(Resources.Strings.Shop.addToCart, for: .normal)
-                addToCartButton.setTitleColor(.black, for: .normal)
-            }
-        }
-    }
-    
-    var favoriteCompletion: ((Bool) -> Void)?
+    var favoriteCompletion: (() -> Void)?
     var cartCompletion: (() -> Void)?
     var goToCartCompletion: (() -> Void)?
+    var updateCellCompletion: (() -> Void)?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+
         configure()
         setConstraints()
     }
@@ -65,29 +39,51 @@ final class ItemCell: UICollectionViewCell {
     }
     
     func setItem(_ item: ShopItem) {
-        name = item.name
-        imageView.image = item.image
-        isItFavorite = item.isFavorite
-        isItAddedToCart = item.isAddedToCart
-
-        if isFetched {
-            spinner.stopAnimating()
-        } else {
-            spinner.startAnimating()
+        shopItem = item
+        setFavoriteButtonAppearance()
+        setCartButtonAppearance()
+        
+        item.downloadData { fetchedImage in
+            DispatchQueue.main.async {
+                self.imageView.image = fetchedImage
+                self.spinner.stopAnimating()
+                self.spinner.isHidden = true
+            }
         }
     }
     
-    @objc private func addToFavorites() {
-        isItFavorite = isItFavorite! ? false : true
-        favoriteCompletion?(isItFavorite!)
+    @objc private func changeFavorite() {
+        favoriteCompletion?()
     }
     
     @objc private func addToCart() {
-        if isItAddedToCart! {
-            goToCartCompletion?()
+        guard let isAdded = shopItem?.isAddedToCart else { return }
+        guard !isAdded else { goToCartCompletion?(); return }
+        cartCompletion?()
+    }
+    
+    // MARK: - Update Buttons
+    private func setFavoriteButtonAppearance() {
+        guard let isFavorite = shopItem?.isFavorite else { return }
+        if isFavorite {
+            favoriteButton.backgroundColor = .black
+            favoriteButton.tintColor = Resources.Colors.backgroundColor
         } else {
-            isItAddedToCart = true
-            cartCompletion?()
+            favoriteButton.backgroundColor = Resources.Colors.backgroundColor
+            favoriteButton.tintColor = .black
+        }
+    }
+    
+    private func setCartButtonAppearance() {
+        guard let isAdded = shopItem?.isAddedToCart else { return }
+        if isAdded {
+            addToCartButton.backgroundColor = .black
+            addToCartButton.setTitle(Resources.Strings.Shop.added, for: .normal)
+            addToCartButton.setTitleColor(Resources.Colors.backgroundColor, for: .normal)
+        } else {
+            addToCartButton.backgroundColor = Resources.Colors.backgroundColor
+            addToCartButton.setTitle(Resources.Strings.Shop.addToCart, for: .normal)
+            addToCartButton.setTitleColor(.black, for: .normal)
         }
     }
     
@@ -96,12 +92,13 @@ final class ItemCell: UICollectionViewCell {
         
         addSubview(imageView)
         addSubview(spinner)
+        spinner.startAnimating()
 
         contentView.addSubview(favoriteButton)
         favoriteButton.setImage(Resources.Images.Common.addToFavorite, for: .normal)
         
         favoriteButton.layer.borderWidth = 0.1
-        favoriteButton.addTarget(self, action: #selector(addToFavorites), for: .touchUpInside)
+        favoriteButton.addTarget(self, action: #selector(changeFavorite), for: .touchUpInside)
         
         contentView.addSubview(addToCartButton)
         addToCartButton.setTitle(Resources.Strings.Shop.addToCart, for: .normal)

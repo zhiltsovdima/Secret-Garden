@@ -51,26 +51,21 @@ final class ShopViewController: BaseViewController {
 extension ShopViewController {
     
     private func updateUIFromModel() {
-        shop.updateViewCompletion = { [weak self] index in
-            if self?.isSelectedCategory == true {
-                let categoryName = self?.shop.items[index].category!
-                self?.updateFilteredItems(categoryName: categoryName!)
-            } else {
+        shop.updateViewCompletion = { [weak self] index, indexPath in
+            guard let isSelectedCategory = self?.isSelectedCategory else { return }
+            guard isSelectedCategory else {
                 DispatchQueue.main.async {
                     self?.collectionView.reloadItems(at: [IndexPath(item: index, section: 0)])
                 }
+                return
             }
+            guard let indexPath else { self?.collectionView.reloadData(); return }
+            self?.collectionView.reloadItems(at: [indexPath])
         }
     }
     
     private func updateFilteredItems(categoryName: String) {
-        filteredItems = shop.items.filter({ item in
-            if item.category?.lowercased() == categoryName.lowercased() {
-                return true
-            } else {
-                return false
-            }
-        })
+        filteredItems = shop.items.filter { $0.category?.lowercased() == categoryName.lowercased() }
     }
 }
 
@@ -107,6 +102,7 @@ extension ShopViewController {
     private func setDelegates() {
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.prefetchDataSource = self
     }
     
 }
@@ -158,11 +154,11 @@ extension ShopViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         cell.setItem(shopItem)
         
-        cell.favoriteCompletion = { [weak self] isFavorite in
-            self?.shop.makeFavoriteItem(withId: shopItemId, to: isFavorite)
+        cell.favoriteCompletion = { [weak self] in
+            self?.shop.makeFavoriteItem(withId: shopItemId, at: indexPath)
         }
         cell.cartCompletion = { [weak self] in
-            self?.shop.makeAddedToCart(withId: shopItemId, to: true)
+            self?.shop.makeAddedToCart(withId: shopItemId, at: indexPath)
         }
         cell.goToCartCompletion = { [weak self] in
             let cartVC = CartViewController(self!.shop)
@@ -176,20 +172,15 @@ extension ShopViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let shopItemId = shopItem.id!
         
         let itemDetailVC = ItemDetailController(shopItem)
-        itemDetailVC.favoriteCompletion = { [weak self] isFavorite in
-            self?.shop.makeFavoriteItem(withId: shopItemId, to: isFavorite)
+        itemDetailVC.favoriteCompletion = { [weak self] in
+            self?.shop.makeFavoriteItem(withId: shopItemId, at: indexPath)
         }
         itemDetailVC.cartCompletion = { [weak self] in
-            self?.shop.makeAddedToCart(withId: shopItemId, to: true)
+            self?.shop.makeAddedToCart(withId: shopItemId, at: indexPath)
         }
-        itemDetailVC.goToCartCompletion = { [weak self] in
+        itemDetailVC.goToCartCompletion = { [weak self] updateCompletion in
             let cartVC = CartViewController(self!.shop)
-            //FIXME: - updateDetailVCHandler makes a retain cycle
-            cartVC.updateDetailVCHandler = { id in
-                if itemDetailVC.shopItem.id == id {
-                    itemDetailVC.shopItem = self!.shop.items[id]
-                }
-            }
+            cartVC.updateDetailVCHandler = updateCompletion
             self?.navigationController?.pushViewController(cartVC, animated: true)
         }
         navigationController?.pushViewController(itemDetailVC, animated: true)
@@ -219,6 +210,18 @@ extension ShopViewController: UICollectionViewDelegate, UICollectionViewDataSour
             }
         }
         return header
+    }
+}
+
+// MARK: - UICollectionViewPrefetching
+
+extension ShopViewController: UICollectionViewDataSourcePrefetching {
+    
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        for indexPath in indexPaths {
+            let shopItem = shop.items[indexPath.item]
+            shopItem.downloadData(completion: nil)
+        }
     }
 }
 
