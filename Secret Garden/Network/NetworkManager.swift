@@ -18,19 +18,19 @@ enum APIType {
     case all
     
     var stringURL: String {
-        "https://house-plants.p.rapidapi.com/"
+        "https://house-plants.p.rapidapi.com"
     }
     var headers: [String: String] {
-        return ["X-RapidAPI-Key": "b05530de65msh6cfb2133d9fa5bdp1b3829jsn681eaacbbab4",
-                "X-RapidAPI-Host": "house-plants.p.rapidapi.com"
+        ["X-RapidAPI-Key": "b05530de65msh6cfb2133d9fa5bdp1b3829jsn681eaacbbab4",
+         "X-RapidAPI-Host": "house-plants.p.rapidapi.com"
         ]
     }
     
     var path: String {
         switch self {
-        case .common: return "common/"
-        case .latin: return "latin/"
-        case .all: return "all"
+        case .common: return "/common/"
+        case .latin: return "/latin/"
+        case .all: return "/all"
         }
     }
     
@@ -51,51 +51,33 @@ class NetworkManager {
     
     static let shared = NetworkManager()
     
-    func getPlant(by name: String?, completion: @escaping (Result<PlantFeatures, NetworkError>) -> Void) {
+    func getPlant(by name: String?, completion: @escaping (Result<Features, NetworkError>) -> Void) {
         let request = APIType.common.makeRequest(name)
         let task = URLSession.shared.dataTask(with: request) { [weak self] (data, response, error) in
-            guard let self = self else { return }
+            guard let self else { return completion(Result.failure(NetworkError.unknown)) }
             if let error {
                 completion(.failure(NetworkError.handleError(error)))
             }
-            guard let response, let data else { return }
             do {
                 let safeData = try NetworkError.processResponse(data: data, response: response)
                 let result = self.parseData(safeData)
                 completion(result)
             } catch {
-                completion(.failure(NetworkError.handleError(error)))
+                let netError = error as! NetworkError
+                completion(.failure(netError))
             }
         }
         task.resume()
     }
         
-    private func parseData(_ data: Data) -> Result<PlantFeatures, NetworkError> {
+    private func parseData(_ data: Data) -> Result<Features, NetworkError> {
         do {
-            let decodedData = try JSONDecoder().decode([PlantData].self, from: data)
-            
-            guard decodedData.count > 0 else { return Result.failure(NetworkError.message(reason: "There is no data for this name")) }
-            
-            let dataForPlant = decodedData.first!
-            
-            let latin = dataForPlant.latin
-            let origin = dataForPlant.origin
-            let temp = "From \(dataForPlant.tempmin.celsius)C to \(dataForPlant.tempmax.celsius)C"
-            let idealLight = dataForPlant.ideallight
-            let watering = dataForPlant.watering
-            let insectsArray = dataForPlant.insects
-            let insects = insectsArray.joined(separator: ", ")
-            
-            let features = PlantFeatures(latinName: latin,
-                                         values: [
-                                            idealLight,
-                                            temp,
-                                            watering,
-                                            insects,
-                                            origin
-                                         ])
-            
-            return Result.success(features)
+            let features = try JSONDecoder().decode([Features].self, from: data)
+            guard features.count > 0 else {
+                return Result.failure(NetworkError.message(reason: "There is no data for this name"))
+            }
+            let featuresForPlant = features.first!
+            return Result.success(featuresForPlant)
         } catch {
             return Result.failure(NetworkError.handleError(error))
         }
