@@ -17,16 +17,16 @@ enum APIType {
     case latin
     case all
     
-    var stringURL: String {
+    private var stringURL: String {
         "https://house-plants.p.rapidapi.com"
     }
-    var headers: [String: String] {
+    private var headers: [String: String] {
         ["X-RapidAPI-Key": "b05530de65msh6cfb2133d9fa5bdp1b3829jsn681eaacbbab4",
          "X-RapidAPI-Host": "house-plants.p.rapidapi.com"
         ]
     }
     
-    var path: String {
+    private var path: String {
         switch self {
         case .common: return "/common/"
         case .latin: return "/latin/"
@@ -34,7 +34,7 @@ enum APIType {
         }
     }
     
-    func makeRequest(_ plant: String?) -> URLRequest {
+    fileprivate func makeRequest(_ plant: String?) -> URLRequest {
         var fullPath = path
         if let plant {
             fullPath.append(plant.lowercased().replacingOccurrences(of: " ", with: ""))
@@ -54,12 +54,13 @@ class NetworkManager {
     func getPlant(by name: String?, completion: @escaping (Result<Features, NetworkError>) -> Void) {
         let request = APIType.common.makeRequest(name)
         let task = URLSession.shared.dataTask(with: request) { [weak self] (data, response, error) in
-            guard let self else { return completion(Result.failure(NetworkError.unknown)) }
-            if let error {
-                completion(.failure(NetworkError.handleError(error)))
+            guard let self else { return completion(Result.failure(NetworkError.failed))}
+            guard error == nil else {
+                completion(.failure(NetworkError.handleError(error!)))
+                return
             }
             do {
-                let safeData = try NetworkError.processResponse(data: data, response: response)
+                let safeData = try NetworkError.handleNetworkResponse(data, response)
                 let result = self.parseData(safeData)
                 completion(result)
             } catch {
@@ -74,7 +75,7 @@ class NetworkManager {
         do {
             let features = try JSONDecoder().decode([Features].self, from: data)
             guard features.count > 0 else {
-                return Result.failure(NetworkError.message(reason: "There is no data for this name"))
+                return Result.failure(NetworkError.noDataForThisName)
             }
             let featuresForPlant = features.first!
             return Result.success(featuresForPlant)
