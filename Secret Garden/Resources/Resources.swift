@@ -70,7 +70,7 @@ enum Resources {
             static let edit = "Edit"
             static let delete = "Delete"
         }
-        enum pathForStoringData {
+        enum PathForStoringData {
             static let folderName = "Secret_Garden"
             static let fileName = "Garden_Data"
         }
@@ -85,7 +85,6 @@ enum Resources {
             
             static let addToCart = "Add to Cart"
             static let added = "Go to Cart"
-            static let collectionNameInDataBase = "SecretGarden"
             static let price = "Price"
             static let checkout = "Checkout"
             static let total = "Total"
@@ -93,6 +92,9 @@ enum Resources {
             static let shipping = "Shipping"
             static let emptyLabel = "Please add to Cart something!"
             static let emptyButton = "Back to the Shop"
+        }
+        enum DataBase {
+            static let collectionNameInDataBase = "SecretGarden"
         }
     }
     
