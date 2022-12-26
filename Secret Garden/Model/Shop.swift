@@ -28,8 +28,7 @@ class Shop {
     }
     
     private func fetchData() {
-        APIManager.shared.getPost(collectionName: Resources.Strings.Shop.collectionNameInDataBase) { [weak self] shopItems in
-            
+        DBManager.shared.getPost() { [weak self] shopItems in
             self?.items = shopItems
             for index in self!.items.indices {
                 self?.items[index].id = index

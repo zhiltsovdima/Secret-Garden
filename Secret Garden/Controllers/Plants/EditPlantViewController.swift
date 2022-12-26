@@ -22,7 +22,7 @@ final class EditPlantViewController: DetailBaseController {
     private let saveButton = BaseButton()
     private let actualIndexPath: IndexPath
 
-    var saveEditedPlantHandler: ((Plant, IndexPath)-> Void)?
+    var saveEditedPlantHandler: ((IndexPath)-> Void)?
     
     init(_ plantToEdit: Plant, _ actualIndexPath: IndexPath) {
         self.plantToEdit = plantToEdit
@@ -144,9 +144,12 @@ final class EditPlantViewController: DetailBaseController {
         }
         let newImage = PlantImageData(plantImageView.image!)
         let newName = nameTextField.text!
-        let editedPlant = Plant(name: newName, image: newImage)
-        
-        saveEditedPlantHandler?(editedPlant, actualIndexPath)
+        plantToEdit.name = newName
+        plantToEdit.imageData = newImage
+        plantToEdit.features = nil
+        DispatchQueue.main.async {
+            self.saveEditedPlantHandler?(self.actualIndexPath)
+        }
         dismiss(animated: true)
     }
 }

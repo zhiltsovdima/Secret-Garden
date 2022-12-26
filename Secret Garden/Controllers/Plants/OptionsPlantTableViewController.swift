@@ -55,7 +55,9 @@ final class OptionsPlantTableViewController: UITableViewController {
                 self.editPlantCompletionHandler?(self.actualCell)
             }
         case 1:
-            deletePlantCompletionHandler?(actualCell)
+            DispatchQueue.main.async {
+                self.deletePlantCompletionHandler?(self.actualCell)
+            }
             dismiss(animated: true)
         default:
             dismiss(animated: true)

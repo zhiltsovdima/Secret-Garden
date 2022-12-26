@@ -36,9 +36,9 @@ class Garden {
         guard let appSuppDirectory = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first else { return nil }
         checkAndCreateDirectory(at: appSuppDirectory)
 
-        let folderForStoring = appSuppDirectory.appendingPathComponent(Resources.Strings.pathForStoringData.folderName)
+        let folderForStoring = appSuppDirectory.appendingPathComponent(Resources.Strings.PathForStoringData.folderName)
         checkAndCreateDirectory(at: folderForStoring)
-        let pathForStoring = folderForStoring.appendingPathComponent(Resources.Strings.pathForStoringData.fileName)
+        let pathForStoring = folderForStoring.appendingPathComponent(Resources.Strings.PathForStoringData.fileName)
         
         return pathForStoring
     }
@@ -62,7 +62,8 @@ class Garden {
             let jsonData = try Data(contentsOf: path)
             plants = try JSONDecoder().decode([Plant].self, from: jsonData)
         } catch {
-            print("Error: \(error)")
+            let netError = NetworkError.handleError(error)
+            print(netError.rawValue)
         }
     }
     

@@ -15,8 +15,6 @@ final class PlantsViewController: BaseViewController {
     
     private let placeholder = UIImageView(image: Resources.Images.Common.emptyCollection)
     
-    private var updateCompletion: (() -> Void)?
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -49,9 +47,7 @@ final class PlantsViewController: BaseViewController {
     
     private func setDelegates() {
         tableView.delegate = self
-        tableView.dataSource = self
-        
-        APIManager.shared.delegate = self
+        tableView.dataSource = self        
     }
 }
 
@@ -102,28 +98,8 @@ extension PlantsViewController {
                 self?.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
                 self?.isItEmpty()
             }
-            self?.fetchData(for: addedPlant, index: 0)
         }
         navigationController?.pushViewController(addPlantController, animated: true)
-    }
-}
-
-// MARK: - Fetching Data
-
-extension PlantsViewController: APIManagerDelegate {
-    
-    private func fetchData(for plant: Plant, index: Int) {
-        APIManager.shared.performRequest(namePlant: plant.name, index: index)
-    }
-    
-    func didUpdate(with features: PlantFeatures, index: Int) {
-        DispatchQueue.main.async {
-            self.garden.plants[index].features = features
-            self.garden.saveToFile()
-            self.tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .none)
-            self.updateCompletion?()
-            self.updateCompletion = nil
-        }
     }
 }
 
@@ -138,49 +114,43 @@ extension PlantsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Resources.Identifiers.plantCell, for: indexPath)
         
-        if let plantCell = cell as? PlantCell {
-            let plant = garden.plants[indexPath.row]
-            plantCell.set(plant: plant)
-            plantCell.buttonCompletionHandler = { [weak self, unowned plantCell] in
-                let optionsVC = OptionsPlantTableViewController()
-                optionsVC.modalPresentationStyle = .popover
-                let popoverVC = optionsVC.popoverPresentationController
-                popoverVC?.delegate = self
-                popoverVC?.sourceView = plantCell.settingsButton
-                popoverVC?.sourceRect = CGRect(x: plantCell.settingsButton.bounds.minX - 70,
-                                               y: plantCell.settingsButton.bounds.midY + 7,
-                                               width: 0,
-                                               height: 0
-                )
-                popoverVC?.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
-
-                optionsVC.preferredContentSize.width = self!.view.bounds.width / 3.0
-                
-                optionsVC.actualCell = plantCell
-                optionsVC.editPlantCompletionHandler = { actualCell in
-                    let actualIndexPath = self?.tableView.indexPath(for: actualCell!)
-                    let editVC = EditPlantViewController(plant, actualIndexPath!)
-                    editVC.saveEditedPlantHandler = { editedPlant, actualIndexPath in
-                        DispatchQueue.main.async {
-                            self?.garden.plants[actualIndexPath.row] = editedPlant
-                            self?.garden.saveToFile()
-                            self?.tableView.reloadRows(at: [actualIndexPath], with: .automatic)
-                        }
-                        self?.fetchData(for: editedPlant, index: actualIndexPath.row)
-                    }
-                    self?.present(editVC, animated: true)
+        guard let plantCell = cell as? PlantCell else { return cell }
+        let plant = garden.plants[indexPath.row]
+        plantCell.set(plant: plant)
+        plantCell.buttonCompletionHandler = { [weak self, unowned plantCell] in
+            let optionsVC = OptionsPlantTableViewController()
+            optionsVC.modalPresentationStyle = .popover
+            let popoverVC = optionsVC.popoverPresentationController
+            popoverVC?.delegate = self
+            popoverVC?.sourceView = plantCell.settingsButton
+            popoverVC?.sourceRect = CGRect(x: plantCell.settingsButton.bounds.minX - 70,
+                                           y: plantCell.settingsButton.bounds.midY + 7,
+                                           width: 0,
+                                           height: 0
+            )
+            popoverVC?.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
+            
+            optionsVC.preferredContentSize.width = self!.view.bounds.width / 3.0
+            
+            optionsVC.actualCell = plantCell
+            optionsVC.editPlantCompletionHandler = { actualCell in
+                let actualIndexPath = self?.tableView.indexPath(for: actualCell!)
+                let editVC = EditPlantViewController(plant, actualIndexPath!)
+                editVC.saveEditedPlantHandler = { actualIndexPath in
+                    self?.tableView.reloadRows(at: [actualIndexPath], with: .automatic)
+                    self?.garden.saveToFile()
                 }
-                optionsVC.deletePlantCompletionHandler = { actualCell in
-                    let actualIndexPath = self?.tableView.indexPath(for: actualCell!)
-                    DispatchQueue.main.async {
-                        self?.garden.removePlant(at: actualIndexPath!.row)
-                        self?.garden.saveToFile()
-                        self?.tableView.deleteRows(at: [actualIndexPath!], with: .automatic)
-                        self?.isItEmpty()
-                    }
-                }
-                self?.present(optionsVC, animated: true)
+                self?.present(editVC, animated: true)
             }
+            optionsVC.deletePlantCompletionHandler = { actualCell in
+                let actualIndexPath = self?.tableView.indexPath(for: actualCell!)
+                self?.garden.removePlant(at: actualIndexPath!.row)
+                self?.garden.saveToFile()
+                self?.tableView.deleteRows(at: [actualIndexPath!], with: .automatic)
+                self?.isItEmpty()
+            }
+            self?.present(optionsVC, animated: true)
+            
         }
         return cell
     }
@@ -189,13 +159,6 @@ extension PlantsViewController: UITableViewDelegate, UITableViewDataSource {
         let plant = garden.plants[indexPath.row]
        
         let detailVC = DetailPlantController()
-        if plant.features == nil {
-            fetchData(for: plant, index: indexPath.row)
-            updateCompletion = { [weak self] in
-                detailVC.setPlant(self?.garden.plants[indexPath.row])
-                detailVC.updateUI()
-            }
-        }
         detailVC.setPlant(plant)
         
         navigationController?.pushViewController(detailVC, animated: true)

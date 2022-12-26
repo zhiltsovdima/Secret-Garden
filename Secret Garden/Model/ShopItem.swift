@@ -61,7 +61,7 @@ class ShopItem {
         isDownloading = true
         
         guard let imageString else { return }
-        APIManager.shared.getImage(name: imageString) { [weak self] fetchedImage in
+        DBManager.shared.getImage(name: imageString) { [weak self] fetchedImage in
             self?.image = fetchedImage
             self?.callback?(self?.image)
             self?.callback = nil

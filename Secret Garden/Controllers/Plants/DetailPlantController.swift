@@ -12,14 +12,15 @@ final class DetailPlantController: DetailBaseController {
     private var plant: Plant?
     
     private var featuresNames = Resources.Strings.Common.Detail.all
-    private var featuresValues: [String] {
-        plant?.features?.values ?? []
-    }
+    private var featuresValues: [String] = []
     
     private let tableView = UITableView()
     
     private let namePlant = UILabel()
     private let latinName = UILabel()
+    
+    private let spinner = UIActivityIndicatorView()
+    private let errorMessage = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,15 +30,49 @@ final class DetailPlantController: DetailBaseController {
     
     func setPlant(_ plant: Plant?) {
         self.plant = plant
+        
+        plant?.downloadFeatures(completion: { [weak self] features, errorMessage in
+            DispatchQueue.main.async {
+                guard let features else {
+                    self?.errorMessage.text = errorMessage
+                    self?.updateUI()
+                    return
+                }
+                let insects = features.insects.joined(separator: ", ")
+                self?.featuresValues = [features.idealLight,
+                                  features.temperature,
+                                  features.watering,
+                                  insects,
+                                  features.origin
+                ]
+                self?.updateUI()
+            }
+        })
     }
     
     func updateUI() {
-        latinName.text = plant?.features?.latinName
-        tableView.reloadData()
+        switch featuresValues.isEmpty {
+        case true:
+            spinner.stopAnimating()
+            spinner.isHidden = true
+            errorMessage.isHidden = false
+        case false:
+            latinName.text = plant?.features?.latinName
+            tableView.reloadData()
+            tableView.isHidden = false
+            spinner.stopAnimating()
+            spinner.isHidden = true
+        }
     }
     
     override func setupViews() {
         super.setupViews()
+        
+        detailInfoView.addSubview(spinner)
+        spinner.startAnimating()
+        detailInfoView.addSubview(errorMessage)
+        errorMessage.isHidden = true
+        errorMessage.font = Resources.Fonts.generalBold
         
         tableView.register(FeatureCell.self, forCellReuseIdentifier: Resources.Identifiers.featureCell)
         tableView.delegate = self
@@ -47,6 +82,7 @@ final class DetailPlantController: DetailBaseController {
         tableView.separatorStyle = .none
         tableView.allowsSelection = false
         tableView.isScrollEnabled = false
+        tableView.isHidden = true
         detailInfoView.addSubview(tableView)
         
         plantImageView.image = plant?.imageData.image
@@ -56,7 +92,7 @@ final class DetailPlantController: DetailBaseController {
         namePlant.font = Resources.Fonts.header
         detailInfoView.addSubview(namePlant)
         
-        latinName.text = plant?.features?.latinName
+        //latinName.text = plant?.features?.latinName
         latinName.numberOfLines = 0
         latinName.font = Resources.Fonts.subHeaders
         latinName.textColor = Resources.Colors.subHeader
@@ -70,6 +106,8 @@ final class DetailPlantController: DetailBaseController {
         latinName.translatesAutoresizingMaskIntoConstraints = false
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+        errorMessage.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             namePlant.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
@@ -81,7 +119,12 @@ final class DetailPlantController: DetailBaseController {
             tableView.topAnchor.constraint(equalTo: latinName.bottomAnchor, constant: 20),
             tableView.leadingAnchor.constraint(equalTo: detailInfoView.leadingAnchor, constant: 10),
             tableView.trailingAnchor.constraint(equalTo: detailInfoView.trailingAnchor, constant: -10),
-            tableView.bottomAnchor.constraint(equalTo: detailInfoView.bottomAnchor)
+            tableView.bottomAnchor.constraint(equalTo: detailInfoView.bottomAnchor),
+            
+            spinner.centerXAnchor.constraint(equalTo: detailInfoView.centerXAnchor),
+            spinner.centerYAnchor.constraint(equalTo: detailInfoView.centerYAnchor),
+            errorMessage.centerXAnchor.constraint(equalTo: detailInfoView.centerXAnchor),
+            errorMessage.centerYAnchor.constraint(equalTo: detailInfoView.centerYAnchor)
         ])
     }
 }
