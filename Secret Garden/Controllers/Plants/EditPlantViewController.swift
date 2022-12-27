@@ -147,6 +147,7 @@ final class EditPlantViewController: DetailBaseController {
         plantToEdit.name = newName
         plantToEdit.imageData = newImage
         plantToEdit.features = nil
+        plantToEdit.isFetched = false
         DispatchQueue.main.async {
             self.saveEditedPlantHandler?(self.actualIndexPath)
         }

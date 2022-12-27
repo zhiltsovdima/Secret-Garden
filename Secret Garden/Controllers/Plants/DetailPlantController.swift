@@ -40,11 +40,10 @@ final class DetailPlantController: DetailBaseController {
                 }
                 let insects = features.insects.joined(separator: ", ")
                 self?.featuresValues = [features.idealLight,
-                                  features.temperature,
-                                  features.watering,
-                                  insects,
-                                  features.origin
-                ]
+                                        features.temperature,
+                                        features.watering,
+                                        insects,
+                                        features.origin]
                 self?.updateUI()
             }
         })
@@ -92,7 +91,6 @@ final class DetailPlantController: DetailBaseController {
         namePlant.font = Resources.Fonts.header
         detailInfoView.addSubview(namePlant)
         
-        //latinName.text = plant?.features?.latinName
         latinName.numberOfLines = 0
         latinName.font = Resources.Fonts.subHeaders
         latinName.textColor = Resources.Colors.subHeader
