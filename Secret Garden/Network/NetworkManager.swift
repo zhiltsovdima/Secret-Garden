@@ -21,7 +21,7 @@ enum APIType {
         "https://house-plants.p.rapidapi.com"
     }
     private var headers: [String: String] {
-        ["X-RapidAPI-Key": "b05530de65msh6cfb2133d9fa5bdp1b3829jsn681eaacbbab4",
+        ["X-RapidAPI-Key": PrivateKeys.APIPlantKey,
          "X-RapidAPI-Host": "house-plants.p.rapidapi.com"
         ]
     }

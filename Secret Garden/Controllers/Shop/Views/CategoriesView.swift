@@ -64,9 +64,15 @@ extension CategoriesView: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
         let selectedCategoryName = categories[indexPath.item]
         selectCategoryHandler?(selectedCategoryName)
+        let cell = collectionView.cellForItem(at: indexPath)
+        cell?.isUserInteractionEnabled = false
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath)
+        cell?.isUserInteractionEnabled = true
     }
 }
 

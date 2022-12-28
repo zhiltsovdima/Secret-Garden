@@ -27,6 +27,7 @@
 		626FA06F291CFC0E00FEB461 /* DetailPlantController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626FA06E291CFC0E00FEB461 /* DetailPlantController.swift */; };
 		626FA071291CFCB000FEB461 /* DetailBaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626FA070291CFCB000FEB461 /* DetailBaseController.swift */; };
 		626FA075291E82F100FEB461 /* UIImage + ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626FA074291E82F100FEB461 /* UIImage + ext.swift */; };
+		6270BBBB295CD3B700871C0F /* PrivateKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6270BBBA295CD3B700871C0F /* PrivateKeys.swift */; };
 		62A69DB12931FFB0007228EB /* CartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A69DB02931FFB0007228EB /* CartCell.swift */; };
 		62B10A2C29487D2000C80F07 /* FeatureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B10A2B29487D2000C80F07 /* FeatureCell.swift */; };
 		62B36A3A2954D8220052454B /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B36A392954D8220052454B /* NetworkManager.swift */; };
@@ -91,6 +92,7 @@
 		626FA06E291CFC0E00FEB461 /* DetailPlantController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPlantController.swift; sourceTree = "<group>"; };
 		626FA070291CFCB000FEB461 /* DetailBaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailBaseController.swift; sourceTree = "<group>"; };
 		626FA074291E82F100FEB461 /* UIImage + ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage + ext.swift"; sourceTree = "<group>"; };
+		6270BBBA295CD3B700871C0F /* PrivateKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateKeys.swift; sourceTree = "<group>"; };
 		62A69DB02931FFB0007228EB /* CartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartCell.swift; sourceTree = "<group>"; };
 		62B10A2B29487D2000C80F07 /* FeatureCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureCell.swift; sourceTree = "<group>"; };
 		62B36A392954D8220052454B /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -271,6 +273,7 @@
 			isa = PBXGroup;
 			children = (
 				62E9AFB8290D1C5C00175A21 /* Resources.swift */,
+				6270BBBA295CD3B700871C0F /* PrivateKeys.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -544,6 +547,7 @@
 				62E9AFB5290D187100175A21 /* TabBarController.swift in Sources */,
 				62E9AFB9290D1C5C00175A21 /* Resources.swift in Sources */,
 				62E9AF83290C2FF600175A21 /* AppDelegate.swift in Sources */,
+				6270BBBB295CD3B700871C0F /* PrivateKeys.swift in Sources */,
 				62B36A3A2954D8220052454B /* NetworkManager.swift in Sources */,
 				62E9AFCD2911106E00175A21 /* PlantCell.swift in Sources */,
 				626FA075291E82F100FEB461 /* UIImage + ext.swift in Sources */,
@@ -750,7 +754,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.zhiltsov.Secret-Garden";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -783,7 +787,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.zhiltsov.Secret-Garden";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
