@@ -47,10 +47,12 @@ enum APIType {
     }
 }
 
-class NetworkManager {
-    
-    static let shared = NetworkManager()
-    
+protocol NetworkManagerProtocol {
+    func getPlant(by name: String?, completion: @escaping (Result<Features, NetworkError>) -> Void)
+}
+
+class NetworkManager: NetworkManagerProtocol {
+        
     func getPlant(by name: String?, completion: @escaping (Result<Features, NetworkError>) -> Void) {
         let request = APIType.common.makeRequest(name)
         let task = URLSession.shared.dataTask(with: request) { [weak self] (data, response, error) in

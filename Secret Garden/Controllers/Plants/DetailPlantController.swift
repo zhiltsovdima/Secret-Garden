@@ -31,7 +31,8 @@ final class DetailPlantController: DetailBaseController {
     func setPlant(_ plant: Plant?) {
         self.plant = plant
         
-        plant?.downloadFeatures(completion: { [weak self] features, errorMessage in
+        let networkManager = createNetworkManager()
+        plant?.downloadFeatures(networkManager, completion: { [weak self] features, errorMessage in
             DispatchQueue.main.async {
                 guard let features else {
                     self?.errorMessage.text = errorMessage
@@ -49,7 +50,12 @@ final class DetailPlantController: DetailBaseController {
         })
     }
     
-    func updateUI() {
+    private func createNetworkManager() -> NetworkManagerProtocol {
+        let networkManager = NetworkManager()
+        return networkManager
+    }
+    
+    private func updateUI() {
         switch featuresValues.isEmpty {
         case true:
             spinner.stopAnimating()

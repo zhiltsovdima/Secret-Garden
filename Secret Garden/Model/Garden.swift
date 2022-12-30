@@ -18,7 +18,7 @@ class Garden {
         loadFromFile()
     }
     
-    func checkAndCreateDirectory(at url: URL) {
+    private func checkAndCreateDirectory(at url: URL) {
         let isExist = checkExistingOfFile(at: url)
         guard !isExist else { return }
         do {
@@ -28,11 +28,11 @@ class Garden {
         }
     }
     
-    func checkExistingOfFile(at url: URL) -> Bool {
+    private func checkExistingOfFile(at url: URL) -> Bool {
         return FileManager.default.fileExists(atPath: url.path)
     }
     
-    func pathForStoringData() -> URL? {
+    private func pathForStoringData() -> URL? {
         guard let appSuppDirectory = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first else { return nil }
         checkAndCreateDirectory(at: appSuppDirectory)
 
