@@ -76,7 +76,7 @@ extension ShopViewController {
     private func setNavbarAppearance() {
         title = Resources.Strings.TabBar.shop
         navigationItem.largeTitleDisplayMode = .always
-        navigationController?.navigationBar.tintColor = .black
+        navigationController?.navigationBar.tintColor = Resources.Colors.blackOnWhite
     }
     
     private func configureCollectionView() {
@@ -87,6 +87,7 @@ extension ShopViewController {
         collectionView.register(CategoriesView.self,
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                                 withReuseIdentifier: Resources.Identifiers.categoriesView)
+        collectionView.backgroundColor = Resources.Colors.backgroundColor
         
         view.addSubview(collectionView)
         flowLayout.scrollDirection = .vertical

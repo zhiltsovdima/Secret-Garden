@@ -119,6 +119,7 @@ extension CartViewController {
     
     private func configureTableView() {
         setTableViewDelegates()
+        tableView.backgroundColor = Resources.Colors.backgroundColor
         tableView.rowHeight = 150
         tableView.separatorStyle = .none
         tableView.register(CartCell.self, forCellReuseIdentifier: Resources.Identifiers.cartCell)

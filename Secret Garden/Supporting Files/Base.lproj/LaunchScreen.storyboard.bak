@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
-    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <device id="retina6_12" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -17,12 +17,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launchImage" translatesAutoresizingMaskIntoConstraints="NO" id="QcE-a4-9x2">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="230"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="230" id="xlc-NN-012"/>
-                                </constraints>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UlF-i6-AbR" userLabel="APP_VERSION">
                                 <rect key="frame" x="0.0" y="801.66666666666663" width="393" height="16.333333333333371"/>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
@@ -44,19 +38,16 @@
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="Background"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="UlF-i6-AbR" secondAttribute="trailing" id="1ZY-n7-wQW"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="AZD-wg-UE5" secondAttribute="trailing" id="ESq-bn-5ee"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="QcE-a4-9x2" secondAttribute="trailing" id="EcF-Kr-SD3"/>
                             <constraint firstItem="M1Y-rx-uS1" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Ehz-iL-GgH"/>
                             <constraint firstItem="UlF-i6-AbR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="GwE-jF-kvc"/>
                             <constraint firstItem="AZD-wg-UE5" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="K27-kf-3So"/>
                             <constraint firstItem="AZD-wg-UE5" firstAttribute="top" secondItem="M1Y-rx-uS1" secondAttribute="bottom" constant="8" symbolic="YES" id="Y93-JG-wum"/>
                             <constraint firstItem="M1Y-rx-uS1" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-50" id="bpS-wm-XTp"/>
                             <constraint firstItem="UlF-i6-AbR" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="chQ-mK-0KJ"/>
-                            <constraint firstItem="QcE-a4-9x2" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="dxj-iX-IDH"/>
-                            <constraint firstItem="QcE-a4-9x2" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="eIO-V6-l1N"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -67,9 +58,8 @@
     </scenes>
     <resources>
         <image name="Icon" width="642" height="556"/>
-        <image name="launchImage" width="998" height="663"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
+        <namedColor name="Background">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
     </resources>
 </document>

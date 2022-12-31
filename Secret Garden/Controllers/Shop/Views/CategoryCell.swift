@@ -14,8 +14,8 @@ final class CategoryCell: UICollectionViewCell {
     override var isSelected: Bool {
         didSet {
             if isSelected {
-                categoryLabel.textColor = .black
-                categoryLabel.layer.borderColor = UIColor.black.cgColor
+                categoryLabel.textColor = Resources.Colors.blackOnWhite
+                categoryLabel.layer.borderColor = Resources.Colors.blackOnWhite?.cgColor
             } else {
                 categoryLabel.textColor = .lightGray
                 categoryLabel.layer.borderColor = UIColor.lightGray.cgColor
@@ -39,6 +39,7 @@ final class CategoryCell: UICollectionViewCell {
     }
     
     private func configure() {
+        backgroundColor = Resources.Colors.backgroundColor
         addSubview(categoryLabel)
         categoryLabel.textAlignment = .center
         categoryLabel.layer.cornerRadius = 15

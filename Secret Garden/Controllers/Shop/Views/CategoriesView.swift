@@ -22,6 +22,7 @@ final class CategoriesView: UICollectionReusableView {
         
     func congifure() {
         setDelegates()
+        collectionView.backgroundColor = Resources.Colors.backgroundColor
         collectionView.register(CategoryCell.self, forCellWithReuseIdentifier: Resources.Identifiers.categoryCell)
         
         addSubview(collectionView)

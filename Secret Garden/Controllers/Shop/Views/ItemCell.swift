@@ -69,24 +69,24 @@ final class ItemCell: UICollectionViewCell {
     private func setFavoriteButtonAppearance() {
         guard let isFavorite = shopItem?.isFavorite else { return }
         if isFavorite {
-            favoriteButton.backgroundColor = .black
-            favoriteButton.tintColor = Resources.Colors.backgroundColor
+            favoriteButton.backgroundColor = Resources.Colors.shopButton
+            favoriteButton.tintColor = .white
         } else {
             favoriteButton.backgroundColor = Resources.Colors.backgroundColor
-            favoriteButton.tintColor = .black
+            favoriteButton.tintColor = Resources.Colors.blackOnWhite
         }
     }
     
     private func setCartButtonAppearance() {
         guard let isAdded = shopItem?.isAddedToCart else { return }
         if isAdded {
-            addToCartButton.backgroundColor = .black
+            addToCartButton.backgroundColor = Resources.Colors.shopButton
             addToCartButton.setTitle(Resources.Strings.Shop.added, for: .normal)
-            addToCartButton.setTitleColor(Resources.Colors.backgroundColor, for: .normal)
+            addToCartButton.setTitleColor(.white, for: .normal)
         } else {
             addToCartButton.backgroundColor = Resources.Colors.backgroundColor
             addToCartButton.setTitle(Resources.Strings.Shop.addToCart, for: .normal)
-            addToCartButton.setTitleColor(.black, for: .normal)
+            addToCartButton.setTitleColor(Resources.Colors.blackOnWhite, for: .normal)
         }
     }
     

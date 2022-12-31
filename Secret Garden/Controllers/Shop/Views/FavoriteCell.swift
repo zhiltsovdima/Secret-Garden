@@ -48,6 +48,8 @@ final class FavoriteCell: UITableViewCell {
     }
     
     private func configureViews() {
+        backgroundColor = Resources.Colors.backgroundColor
+        
         itemImageView.layer.cornerRadius = 10
         itemImageView.clipsToBounds = true
         itemImageView.contentMode = .scaleAspectFill
@@ -60,7 +62,7 @@ final class FavoriteCell: UITableViewCell {
         
         favoriteButton.addTarget(self, action: #selector(unfavItemAction), for: .touchUpInside)
         favoriteButton.setImage(Resources.Images.Common.addToFavoriteFill, for: .normal)
-        favoriteButton.tintColor = .black
+        favoriteButton.tintColor = Resources.Colors.blackOnWhite
         makeSystemAnimation(for: favoriteButton)
     }
     

@@ -32,6 +32,7 @@ final class PlantsViewController: BaseViewController {
     
     private func configureTableView() {
         view.addSubview(tableView)
+        tableView.backgroundColor = Resources.Colors.backgroundColor
         tableView.rowHeight = 200
         tableView.separatorStyle = .none
         tableView.register(PlantCell.self, forCellReuseIdentifier: Resources.Identifiers.plantCell)

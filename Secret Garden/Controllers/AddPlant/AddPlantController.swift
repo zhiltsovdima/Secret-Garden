@@ -84,7 +84,7 @@ extension AddPlantController {
         view.addSubview(nameLabel)
         nameLabel.text = Resources.Strings.Common.name
         nameLabel.font = Resources.Fonts.generalBold
-        nameLabel.textColor = .black
+        nameLabel.textColor = Resources.Colors.blackOnWhite
         
         view.addSubview(viewForTextField)
         viewForTextField.backgroundColor = Resources.Colors.backgroundFields
@@ -93,7 +93,7 @@ extension AddPlantController {
         viewForTextField.layer.cornerRadius = 5
         
         view.addSubview(nameTextField)
-        nameTextField.textColor = .black
+        nameTextField.textColor = Resources.Colors.blackOnWhite
         nameTextField.font = Resources.Fonts.general
         nameTextField.backgroundColor = Resources.Colors.backgroundFields
         nameTextField.placeholder = Resources.Strings.AddPlant.placeholder

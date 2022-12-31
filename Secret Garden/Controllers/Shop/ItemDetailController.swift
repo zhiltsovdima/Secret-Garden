@@ -118,12 +118,14 @@ extension ItemDetailController {
     
     func setFavoriteButtonAppearance() {
         navigationItem.rightBarButtonItem?.image = favoriteImage
+        navigationItem.rightBarButtonItem?.tintColor = shopItem.isFavorite ? Resources.Colors.secondAccent : Resources.Colors.blackOnWhite
     }
     
     func setCartButtonAppearance() {
         if shopItem.isAddedToCart {
             addToCartButton.setTitle(Resources.Strings.Shop.added, for: .normal)
-            addToCartButton.backgroundColor = .black
+            addToCartButton.setTitleColor(Resources.Colors.whiteOnBlack, for: .normal)
+            addToCartButton.backgroundColor = Resources.Colors.blackOnWhite
         } else {
             addToCartButton.setTitle(Resources.Strings.Shop.addToCart, for: .normal)
             addToCartButton.backgroundColor = Resources.Colors.accent

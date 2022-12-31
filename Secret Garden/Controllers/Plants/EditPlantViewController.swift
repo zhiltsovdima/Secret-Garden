@@ -62,6 +62,7 @@ final class EditPlantViewController: DetailBaseController {
         nameTextField.backgroundColor = Resources.Colors.backgroundFields
         nameTextField.text = plantToEdit.name
         nameTextField.font = Resources.Fonts.general
+        nameTextField.textColor = Resources.Colors.blackOnWhite
         
         detailInfoView.addSubview(nameLabel)
         nameLabel.text = Resources.Strings.Common.name
@@ -82,7 +83,7 @@ final class EditPlantViewController: DetailBaseController {
         chooseImageButton.layer.cornerRadius = 5
         chooseImageButton.layer.borderColor = UIColor.lightGray.cgColor
         chooseImageButton.layer.borderWidth = 0.5
-        chooseImageButton.setTitleColor(.black, for: .normal)
+        chooseImageButton.setTitleColor(Resources.Colors.blackOnWhite, for: .normal)
         chooseImageButton.titleLabel?.font = Resources.Fonts.general?.withSize(12)
         chooseImageButton.setTitle("Choose new", for: .normal)
         chooseImageButton.addTarget(self, action: #selector(choosePhotoAlert), for: .touchUpInside)

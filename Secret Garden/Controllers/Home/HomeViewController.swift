@@ -33,19 +33,20 @@ final class HomeViewController: BaseViewController {
         tipBackgroundView.addSubview(tipImageView)
         tipImageView.image = Resources.Images.Home.tip
         
-        
         tipBackgroundView.addSubview(tipTitleLabel)
         tipTitleLabel.text = Resources.Strings.Home.tipTitle
         tipTitleLabel.font = Resources.Fonts.generalBold
+        tipTitleLabel.textColor = .black
         
         tipBackgroundView.addSubview(tipBodyLabel)
         tipBodyLabel.numberOfLines = 0
         tipBodyLabel.text = Resources.Strings.Home.tipBody
         tipBodyLabel.font = Resources.Fonts.general
+        tipBodyLabel.textColor = .black
         
         view.addSubview(descriptionView)
         descriptionView.layer.borderWidth = 1
-        descriptionView.layer.borderColor = UIColor.black.cgColor
+        descriptionView.layer.borderColor = Resources.Colors.blackOnWhite?.cgColor
         descriptionView.layer.cornerRadius = 20
         
         descriptionView.addSubview(descriptionLabel)

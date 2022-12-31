@@ -50,6 +50,8 @@ extension PlantCell {
     }
     
     private func configureViews() {
+        backgroundColor = Resources.Colors.backgroundColor
+        
         plantImageView.layer.cornerRadius = 10
         plantImageView.clipsToBounds = true
         plantImageView.contentMode = .scaleAspectFill

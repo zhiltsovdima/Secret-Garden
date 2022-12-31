@@ -49,6 +49,7 @@ final class FavoritesViewController: BaseViewController {
     
     private func configureTableView() {
         setTableViewDelegates()
+        tableView.backgroundColor = Resources.Colors.backgroundColor
         tableView.rowHeight = 150
         tableView.separatorStyle = .none
         tableView.register(FavoriteCell.self, forCellReuseIdentifier: Resources.Identifiers.favoriteCell)

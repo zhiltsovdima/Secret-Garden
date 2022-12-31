@@ -49,6 +49,8 @@ final class CartCell: UITableViewCell {
 
     }
     private func configureViews() {
+        backgroundColor = Resources.Colors.backgroundColor
+        
         itemImageView.layer.cornerRadius = 10
         itemImageView.clipsToBounds = true
         itemImageView.contentMode = .scaleAspectFill
@@ -60,7 +62,7 @@ final class CartCell: UITableViewCell {
         priceLabel.font = Resources.Fonts.generalBold
         
         deleteButton.setImage(Resources.Images.Common.delete, for: .normal)
-        deleteButton.tintColor = .black
+        deleteButton.tintColor = Resources.Colors.blackOnWhite
         deleteButton.addTarget(self, action: #selector(deleteFromCartAction), for: .touchUpInside)
         makeSystemAnimation(for: deleteButton)
     }

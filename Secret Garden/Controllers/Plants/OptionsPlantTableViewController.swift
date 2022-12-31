@@ -32,6 +32,7 @@ final class OptionsPlantTableViewController: UITableViewController {
     private func configureView() {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: Resources.Identifiers.plantOptionsCell)
         tableView.isScrollEnabled = false
+        tableView.backgroundColor = Resources.Colors.backgroundFields
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -43,6 +44,7 @@ final class OptionsPlantTableViewController: UITableViewController {
         
         let optionName = options[indexPath.row]
         cell.textLabel?.text = optionName
+        cell.backgroundColor = Resources.Colors.backgroundFields
         
         return cell
     }

@@ -17,6 +17,12 @@ enum Resources {
         static let backgroundColor = UIColor(named: "Background")
         static let backgroundFields = UIColor(named: "FieldsBackground")
         
+        static let blackOnWhite = UIColor(named: "FontBlackOnWhite")
+        static let whiteOnBlack = UIColor(named: "FontWhiteOnBlack")
+        
+        static let shopButton = UIColor(named: "ShopButton")
+        static let secondAccent = UIColor(named: "SecondAccent")
+        
         static let subHeader: UIColor = .systemGray
     }
     
