@@ -44,6 +44,7 @@ class FeatureCell: UITableViewCell {
     }
     
     private func setupViews() {
+        backgroundColor = Resources.Colors.backgroundColor
         addSubview(featureImage)
         addSubview(featureLabel)
         featureLabel.numberOfLines = 0

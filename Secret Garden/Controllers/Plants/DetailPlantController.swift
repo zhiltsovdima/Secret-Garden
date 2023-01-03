@@ -31,8 +31,7 @@ final class DetailPlantController: DetailBaseController {
     func setPlant(_ plant: Plant?) {
         self.plant = plant
         
-        let networkManager = createNetworkManager()
-        plant?.downloadFeatures(networkManager, completion: { [weak self] features, errorMessage in
+        plant?.downloadFeatures(completion: { [weak self] features, errorMessage in
             DispatchQueue.main.async {
                 guard let features else {
                     self?.errorMessage.text = errorMessage
@@ -88,6 +87,7 @@ final class DetailPlantController: DetailBaseController {
         tableView.allowsSelection = false
         tableView.isScrollEnabled = false
         tableView.isHidden = true
+        tableView.backgroundColor = Resources.Colors.backgroundColor
         detailInfoView.addSubview(tableView)
         
         plantImageView.image = plant?.imageData.image

@@ -18,13 +18,13 @@ class Plant: Codable {
         self.imageData = image
     }
     
-    func downloadFeatures(_ networkManager: NetworkManagerProtocol, completion: ((Features?, String?) -> Void)?) {
+    func downloadFeatures(completion: ((Features?, String?) -> Void)?) {
         if let features {
             completion?(features, nil)
             return
         }
         guard !isFetched else { completion?(nil, NetworkError.noDataForThisName.rawValue); return }
-        networkManager.getPlant(by: name) { [weak self] result in
+        NetworkManager.shared.getPlant(by: name) { [weak self] result in
             switch result {
             case .success(let features):
                 self?.features = features
