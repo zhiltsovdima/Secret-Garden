@@ -16,6 +16,8 @@ class Coordinator: CoordinatorProtocol {
     private let assembly: AssemblyProtocol
     
     private var tabViewController: TabBarController!
+    private var plantsNavigationController: NavBarController!
+    private var shopNavigationController: NavBarController!
     
     init(_ assembly: AssemblyProtocol) {
         self.assembly = assembly
@@ -23,13 +25,16 @@ class Coordinator: CoordinatorProtocol {
     
     func start(window: UIWindow) {
         let homeView = assembly.createHome()
-        let plantsView = assembly.createPlants()
+        let plantsView = assembly.createPlants(output: self)
         let shopView = assembly.createShop()
+        
+        plantsNavigationController = NavBarController(rootViewController: plantsView)
+        shopNavigationController = NavBarController(rootViewController: shopView)
         
         let controllers = [
             homeView,
-            NavBarController(rootViewController: plantsView),
-            NavBarController(rootViewController: shopView)
+            plantsNavigationController!,
+            shopNavigationController!
         ]
         
         tabViewController = TabBarController(controllers)
@@ -37,4 +42,20 @@ class Coordinator: CoordinatorProtocol {
         window.rootViewController = tabViewController
         window.makeKeyAndVisible()
     }
+}
+
+// MARK: - PlantOutput
+
+extension Coordinator: PlantsOutput {
+    
+    func showAddNewPlant() {
+        let addNewPlantView = assembly.createAddNewPlant()
+        plantsNavigationController.pushViewController(addNewPlantView, animated: true)
+    }
+    
+    func showPlantDetail(_ plant: Plant) {
+        let detailPlantView = assembly.createDetailPlant(plant)
+        plantsNavigationController.pushViewController(detailPlantView, animated: true)
+    }
+    
 }
