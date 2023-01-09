@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class FavoritesViewController: BaseViewController {
+final class FavoritesViewController: UIViewController {
     
     private let shop: Shop
     
@@ -45,6 +45,7 @@ final class FavoritesViewController: BaseViewController {
     private func setAppearance() {
         title = "Favorites"
         navigationItem.largeTitleDisplayMode = .never
+        view.backgroundColor = Resources.Colors.backgroundColor
     }
     
     private func configureTableView() {

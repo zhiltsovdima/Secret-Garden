@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ShopViewController: BaseViewController {
+final class ShopViewController: UIViewController {
     
     private let shop = Shop()
     
@@ -77,6 +77,7 @@ extension ShopViewController {
         title = Resources.Strings.TabBar.shop
         navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.tintColor = Resources.Colors.blackOnWhite
+        view.backgroundColor = Resources.Colors.backgroundColor
     }
     
     private func configureCollectionView() {

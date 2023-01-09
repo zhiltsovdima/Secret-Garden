@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class HomeViewController: BaseViewController {
+final class HomeViewController: UIViewController {
     
     private let tipImageView = UIImageView()
     private let tipBackgroundView = UIView()
@@ -26,6 +26,7 @@ final class HomeViewController: BaseViewController {
     }
     
     private func setupViews() {
+        view.backgroundColor = Resources.Colors.backgroundColor
         view.addSubview(tipBackgroundView)
         tipBackgroundView.backgroundColor = Resources.Colors.tipBackground
         tipBackgroundView.layer.cornerRadius = 20

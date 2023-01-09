@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DetailBaseController: BaseViewController {
+class DetailBaseController: UIViewController{
     
     let plantImageView = UIImageView()
     
@@ -21,6 +21,7 @@ class DetailBaseController: BaseViewController {
     }
     
     func setupViews() {
+        view.backgroundColor = Resources.Colors.backgroundColor
         view.addSubview(plantImageView)
         plantImageView.contentMode = .scaleAspectFill
         plantImageView.backgroundColor = .yellow

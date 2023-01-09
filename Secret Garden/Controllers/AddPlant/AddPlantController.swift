@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class AddPlantController: BaseViewController {
+final class AddPlantController: UIViewController {
     
     private let plantImageView = UIImageView()
     private let nameLabel = UILabel()
@@ -30,6 +30,7 @@ final class AddPlantController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = Resources.Strings.AddPlant.titleController
+        view.backgroundColor = Resources.Colors.backgroundColor
         setupViews()
         setConstraints()
         configureTapGesture(to: plantImageView)

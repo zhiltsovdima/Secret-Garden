@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ItemDetailController: BaseViewController {
+final class ItemDetailController: UIViewController {
     
     var shopItem: ShopItem
     
@@ -138,6 +138,7 @@ extension ItemDetailController {
     }
     
     private func addViews() {
+        view.backgroundColor = Resources.Colors.backgroundColor
         view.addSubview(scrollView)
         
         scrollView.addSubview(imageView)

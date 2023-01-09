@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CartViewController: BaseViewController {
+final class CartViewController: UIViewController {
     
     private let shop: Shop
     
@@ -115,6 +115,7 @@ extension CartViewController {
     private func setAppearance() {
         title = "My Cart"
         navigationItem.largeTitleDisplayMode = .never
+        view.backgroundColor = Resources.Colors.backgroundColor
     }
     
     private func configureTableView() {
