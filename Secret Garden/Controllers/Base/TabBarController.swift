@@ -14,39 +14,36 @@ enum Tabs: Int {
 }
 
 final class TabBarController: UITabBarController {
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
         
-        configure()
+    init(_ controllers: [UIViewController]) {
+        super.init(nibName: nil, bundle: nil)
+        configure(controllers)
     }
-
-    private func configure() {
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func configure(_ controllers: [UIViewController]) {
         tabBar.tintColor = Resources.Colors.accent
         tabBar.backgroundColor = Resources.Colors.tabBarColor
-                
-        let homeViewController = HomeViewController()
-        let plantsViewController = PlantsViewController()
-        let shopViewController = ShopViewController()
         
-        let homeNavigationController = NavBarController(rootViewController: homeViewController)
-        let plantsNavigationController = NavBarController(rootViewController: plantsViewController)
-        let shopNavigationController = NavBarController(rootViewController: shopViewController)
-
-        homeNavigationController.tabBarItem = UITabBarItem(title: Resources.Strings.TabBar.home,
-                                                     image: Resources.Images.TabBar.home,
-                                                     tag: Tabs.home.rawValue)
-        plantsNavigationController.tabBarItem = UITabBarItem(title: Resources.Strings.TabBar.garden,
-                                                     image: Resources.Images.TabBar.garden,
-                                                     tag: Tabs.garden.rawValue)
-        shopNavigationController.tabBarItem = UITabBarItem(title: Resources.Strings.TabBar.shop,
-                                                     image: Resources.Images.TabBar.shop,
-                                                     tag: Tabs.shop.rawValue)
-        
-        setViewControllers([
-            homeNavigationController,
-            plantsNavigationController,
-            shopNavigationController
-        ], animated: false)
+        controllers.forEach { vc in
+            let navVC = vc as? NavBarController
+            if vc is HomeViewController {
+                vc.tabBarItem = UITabBarItem(title: Resources.Strings.TabBar.home,
+                                             image: Resources.Images.TabBar.home,
+                                             tag: Tabs.home.rawValue)
+            } else if navVC?.topViewController is PlantsViewController {
+                vc.tabBarItem = UITabBarItem(title: Resources.Strings.TabBar.garden,
+                                             image: Resources.Images.TabBar.garden,
+                                             tag: Tabs.garden.rawValue)
+            } else if navVC?.topViewController is ShopViewController {
+                vc.tabBarItem = UITabBarItem(title: Resources.Strings.TabBar.shop,
+                                             image: Resources.Images.TabBar.shop,
+                                             tag: Tabs.shop.rawValue)
+            }
+        }
+        setViewControllers(controllers, animated: false)
     }
 }
