@@ -49,13 +49,27 @@ class Coordinator: CoordinatorProtocol {
 extension Coordinator: PlantsOutput {
     
     func showAddNewPlant() {
-        let addNewPlantView = assembly.createAddNewPlant()
+        let addNewPlantView = assembly.createAddNewPlant(output: self)
         plantsNavigationController.pushViewController(addNewPlantView, animated: true)
     }
     
     func showPlantDetail(_ plant: Plant) {
         let detailPlantView = assembly.createDetailPlant(plant)
         plantsNavigationController.pushViewController(detailPlantView, animated: true)
+    }
+    
+    func showOptions() {
+        //let options = assembly.createOptions()
+        
+    }
+}
+
+// MARK: - AddPlantOutput
+
+extension Coordinator: AddPlantOutput {
+    
+    func succesSaving() {
+        plantsNavigationController.popViewController(animated: true)
     }
     
 }

@@ -12,8 +12,9 @@ protocol AssemblyProtocol {
     func createPlants(output: PlantsOutput) -> UIViewController
     func createShop() -> UIViewController
     
-    func createAddNewPlant() -> UIViewController
+    func createAddNewPlant(output: AddPlantOutput) -> UIViewController
     func createDetailPlant(_ plant: Plant) -> UIViewController
+    func createOptions() -> UITableViewController 
 
 }
 
@@ -28,6 +29,7 @@ class Assembly: AssemblyProtocol {
     func createPlants(output: PlantsOutput) -> UIViewController {
         let viewModel = PlantsViewModel(output: output, garden: garden)
         let view = PlantsViewController1(viewModel: viewModel)
+        viewModel.view = view
         return view
     }
     
@@ -35,8 +37,9 @@ class Assembly: AssemblyProtocol {
         return ShopViewController()
     }
     
-    func createAddNewPlant() -> UIViewController {
-        let addNewPlantView = AddPlantController()
+    func createAddNewPlant(output: AddPlantOutput) -> UIViewController {
+        let viewModel = AddPlantViewModel(output: output, garden: garden)
+        let addNewPlantView = AddPlantController(viewModel: viewModel)
         return addNewPlantView
     }
     
@@ -44,5 +47,11 @@ class Assembly: AssemblyProtocol {
         let detailPlantView = DetailPlantController()
         detailPlantView.setPlant(plant)
         return detailPlantView
+    }
+    
+    func createOptions() -> UITableViewController {
+        let optionsView = OptionsPlantTableViewController()
+        return optionsView
+        
     }
 }
