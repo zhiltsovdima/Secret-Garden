@@ -14,7 +14,9 @@ protocol AssemblyProtocol {
     
     func createAddNewPlant(output: AddPlantOutput) -> UIViewController
     func createDetailPlant(_ plant: Plant) -> UIViewController
-    func createOptions() -> UITableViewController 
+    func createOptions(output: PlantOptionsOutput, _ vc: UIViewController?, _ cell: PlantCell) -> UIViewController
+    
+    func createEditPlantVC(output: EditPlantOutput, _ indexPath: IndexPath) -> UIViewController
 
 }
 
@@ -28,8 +30,7 @@ class Assembly: AssemblyProtocol {
     
     func createPlants(output: PlantsOutput) -> UIViewController {
         let viewModel = PlantsViewModel(output: output, garden: garden)
-        let view = PlantsViewController1(viewModel: viewModel)
-        viewModel.view = view
+        let view = PlantsViewController(viewModel: viewModel)
         return view
     }
     
@@ -49,9 +50,32 @@ class Assembly: AssemblyProtocol {
         return detailPlantView
     }
     
-    func createOptions() -> UITableViewController {
-        let optionsView = OptionsPlantTableViewController()
-        return optionsView
+    func createOptions(output: PlantOptionsOutput, _ vc: UIViewController?, _ cell: PlantCell) -> UIViewController {
+        let vc = vc as! PlantsViewController
+        let indexPath = vc.tableView.indexPath(for: cell)
         
+        let viewModel = PlantOptionsViewModel(output: output, garden, indexPath!)
+        let optionsView = PlantOptionsTableViewController(viewModel: viewModel)
+        
+        optionsView.modalPresentationStyle = .popover
+        let popoverVC = optionsView.popoverPresentationController
+        popoverVC?.delegate = vc
+        popoverVC?.sourceView = cell.settingsButton
+        popoverVC?.sourceRect = CGRect(x: cell.settingsButton.bounds.minX - 70,
+                                       y: cell.settingsButton.bounds.midY + 7,
+                                       width: 0,
+                                       height: 0
+        )
+        popoverVC?.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
+        
+        optionsView.preferredContentSize.width = vc.view.bounds.width / 3.0
+        
+        return optionsView
+    }
+    
+    func createEditPlantVC(output: EditPlantOutput, _ indexPath: IndexPath) -> UIViewController {
+        let viewModel = EditPlantViewModel(output: output, garden, indexPath)
+        let editVC = EditPlantViewController(viewModel: viewModel)
+        return editVC
     }
 }
