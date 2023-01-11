@@ -9,6 +9,17 @@ import UIKit
 
 protocol CoordinatorProtocol {
     func start(window: UIWindow)
+    
+    func showAddNewPlant()
+    func showPlantDetail(_ plant: Plant)
+    func showOptions(_ cell: PlantCell)
+    
+    func succesAdding()
+    
+    func showEdit(_ indexPath: IndexPath)
+    func deletePlant()
+    
+    func succesEditing()
 }
 
 class Coordinator: CoordinatorProtocol {
@@ -58,9 +69,12 @@ extension Coordinator: PlantsOutput {
         plantsNavigationController.pushViewController(detailPlantView, animated: true)
     }
     
-    func showOptions() {
-        //let options = assembly.createOptions()
-        
+    func showOptions(_ cell: PlantCell) {
+        let optionsView = assembly.createOptions(output: self,
+                                                 plantsNavigationController.topViewController,
+                                                 cell)
+        plantsNavigationController.present(optionsView, animated: true)
+
     }
 }
 
@@ -68,8 +82,32 @@ extension Coordinator: PlantsOutput {
 
 extension Coordinator: AddPlantOutput {
     
-    func succesSaving() {
+    func succesAdding() {
         plantsNavigationController.popViewController(animated: true)
     }
+}
+
+// MARK: - PlantOptionsOutput
+
+extension Coordinator: PlantOptionsOutput {
     
+    func showEdit(_ indexPath: IndexPath) {
+        let editView = assembly.createEditPlantVC(output: self, indexPath)
+        plantsNavigationController.dismiss(animated: true)
+        plantsNavigationController.present(editView, animated: true)
+        
+    }
+    
+    func deletePlant() {
+        plantsNavigationController.dismiss(animated: true)
+    }
+}
+
+// MARK: - EditPlantOutput
+
+extension Coordinator: EditPlantOutput {
+    
+    func succesEditing() {
+        plantsNavigationController.dismiss(animated: true)
+    }
 }
