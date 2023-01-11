@@ -10,6 +10,6 @@ import Foundation
 // MARK: - PlantsOutput
 
 protocol AddPlantOutput: AnyObject {
-    func succesSaving()
+    func succesAdding()
 }
 

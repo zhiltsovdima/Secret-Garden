@@ -54,7 +54,7 @@ extension AddPlantViewModel: AddPlantViewModelProtocol {
         do {
             try validateNewPlant(name: name, image: image)
             garden.addNewPlant(name: name!, image: image!)
-            output?.succesSaving()
+            output?.succesAdding()
         } catch {
             let validateError = error as? ValidateError
             completion?(validateError?.rawValue)
