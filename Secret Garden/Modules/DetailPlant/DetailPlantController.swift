@@ -24,8 +24,8 @@ final class DetailPlantController: DetailBaseController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupViews()
-        setConstraints()
+        setupUI()
+        setupConstraints()
     }
     
     func setPlant(_ plant: Plant?) {
@@ -69,12 +69,12 @@ final class DetailPlantController: DetailBaseController {
         }
     }
     
-    override func setupViews() {
-        super.setupViews()
+    override func setupUI() {
+        super.setupUI()
         
-        detailInfoView.addSubview(spinner)
+        detailView.addSubview(spinner)
         spinner.startAnimating()
-        detailInfoView.addSubview(errorMessage)
+        detailView.addSubview(errorMessage)
         errorMessage.isHidden = true
         errorMessage.font = Resources.Fonts.generalBold
         
@@ -88,23 +88,23 @@ final class DetailPlantController: DetailBaseController {
         tableView.isScrollEnabled = false
         tableView.isHidden = true
         tableView.backgroundColor = Resources.Colors.backgroundColor
-        detailInfoView.addSubview(tableView)
+        detailView.addSubview(tableView)
         
         plantImageView.image = plant?.imageData.image
         
         namePlant.text = plant?.name
         namePlant.numberOfLines = 0
         namePlant.font = Resources.Fonts.header
-        detailInfoView.addSubview(namePlant)
+        detailView.addSubview(namePlant)
         
         latinName.numberOfLines = 0
         latinName.font = Resources.Fonts.subHeaders
         latinName.textColor = Resources.Colors.subHeader
-        detailInfoView.addSubview(latinName)
+        detailView.addSubview(latinName)
     }
     
-    override func setConstraints() {
-        super.setConstraints()
+    override func setupConstraints() {
+        super.setupConstraints()
         
         namePlant.translatesAutoresizingMaskIntoConstraints = false
         latinName.translatesAutoresizingMaskIntoConstraints = false
@@ -115,20 +115,20 @@ final class DetailPlantController: DetailBaseController {
         
         NSLayoutConstraint.activate([
             namePlant.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            namePlant.topAnchor.constraint(equalTo: detailInfoView.topAnchor, constant: 20),
+            namePlant.topAnchor.constraint(equalTo: detailView.topAnchor, constant: 20),
             
             latinName.topAnchor.constraint(equalTo: namePlant.bottomAnchor),
-            latinName.leadingAnchor.constraint(equalTo: detailInfoView.leadingAnchor, constant: 20),
+            latinName.leadingAnchor.constraint(equalTo: detailView.leadingAnchor, constant: 20),
             
             tableView.topAnchor.constraint(equalTo: latinName.bottomAnchor, constant: 20),
-            tableView.leadingAnchor.constraint(equalTo: detailInfoView.leadingAnchor, constant: 10),
-            tableView.trailingAnchor.constraint(equalTo: detailInfoView.trailingAnchor, constant: -10),
-            tableView.bottomAnchor.constraint(equalTo: detailInfoView.bottomAnchor),
+            tableView.leadingAnchor.constraint(equalTo: detailView.leadingAnchor, constant: 10),
+            tableView.trailingAnchor.constraint(equalTo: detailView.trailingAnchor, constant: -10),
+            tableView.bottomAnchor.constraint(equalTo: detailView.bottomAnchor),
             
-            spinner.centerXAnchor.constraint(equalTo: detailInfoView.centerXAnchor),
-            spinner.centerYAnchor.constraint(equalTo: detailInfoView.centerYAnchor),
-            errorMessage.centerXAnchor.constraint(equalTo: detailInfoView.centerXAnchor),
-            errorMessage.centerYAnchor.constraint(equalTo: detailInfoView.centerYAnchor)
+            spinner.centerXAnchor.constraint(equalTo: detailView.centerXAnchor),
+            spinner.centerYAnchor.constraint(equalTo: detailView.centerYAnchor),
+            errorMessage.centerXAnchor.constraint(equalTo: detailView.centerXAnchor),
+            errorMessage.centerYAnchor.constraint(equalTo: detailView.centerYAnchor)
         ])
     }
 }

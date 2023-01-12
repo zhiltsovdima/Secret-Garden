@@ -10,28 +10,26 @@ import UIKit
 class DetailBaseController: UIViewController{
     
     let plantImageView = UIImageView()
-    
-    let detailInfoView = UIView()
+    let detailView = UIView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupViews()
-        setConstraints()
+        setupUI()
+        setupConstraints()
     }
     
-    func setupViews() {
+    func setupUI() {
         view.backgroundColor = Resources.Colors.backgroundColor
         view.addSubview(plantImageView)
         plantImageView.contentMode = .scaleAspectFill
-        plantImageView.backgroundColor = .yellow
         
-        view.addSubview(detailInfoView)
-        detailInfoView.backgroundColor = Resources.Colors.backgroundColor
-        detailInfoView.layer.cornerRadius = 20
+        view.addSubview(detailView)
+        detailView.backgroundColor = Resources.Colors.backgroundColor
+        detailView.layer.cornerRadius = 20
     }
     
-    func setConstraints() {
+    func setupConstraints() {
         plantImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             plantImageView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -40,13 +38,59 @@ class DetailBaseController: UIViewController{
             plantImageView.heightAnchor.constraint(equalToConstant: (view.bounds.height / 3) + 20)
         ])
         
-        detailInfoView.translatesAutoresizingMaskIntoConstraints = false
+        detailView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            detailInfoView.heightAnchor.constraint(equalToConstant: view.bounds.height * 2/3),
-            detailInfoView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            detailInfoView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            detailInfoView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            detailView.heightAnchor.constraint(equalToConstant: view.bounds.height * 2/3),
+            detailView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            detailView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            detailView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
             
         ])
+    }
+    
+    func createLabel(text: String, textColor: UIColor?, font: UIFont?) -> UILabel {
+        let label = UILabel()
+        label.text = text
+        label.textColor = textColor
+        label.font = font
+        label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        detailView.addSubview(label)
+        return label
+    }
+    func createButton(isBase: Bool, title: String, selector: Selector) -> UIButton {
+        guard isBase else { return createNormalButton(title: title, selector: selector) }
+        let button = BaseButton()
+        button.setTitle(title, for: .normal)
+        button.addTarget(self, action: selector, for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        detailView.addSubview(button)
+        return button
+    }
+    private func createNormalButton(title: String, selector: Selector) -> UIButton {
+        let button = UIButton()
+        button.backgroundColor = Resources.Colors.backgroundFields
+        button.layer.cornerRadius = 5
+        button.layer.borderColor = UIColor.lightGray.cgColor
+        button.layer.borderWidth = 0.5
+        button.setTitleColor(Resources.Colors.blackOnWhite, for: .normal)
+        button.titleLabel?.font = Resources.Fonts.general?.withSize(12)
+        button.setTitle(title, for: .normal)
+        button.addTarget(self, action: selector, for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        detailView.addSubview(button)
+        return button
+    }
+    func createTextField(placeholder: String) -> UITextField {
+        let textField = UITextField()
+        textField.textColor = Resources.Colors.blackOnWhite
+        textField.font = Resources.Fonts.general
+        textField.backgroundColor = Resources.Colors.backgroundFields
+        textField.placeholder = placeholder
+        textField.adjustsFontSizeToFitWidth = true
+        textField.borderStyle = .roundedRect
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        detailView.addSubview(textField)
+        return textField
     }
 }

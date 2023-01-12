@@ -10,12 +10,18 @@ import UIKit
 class Garden {
     var plants = [Plant]()
     
+    var updatePlantsCompletion: ((TypeOfChangeModel, Int?) -> Void)?
+    
     var isItEmpty: Bool {
         plants.isEmpty
     }
     
     init() {
         loadFromFile()
+    }
+    
+    func getAllPlants() -> [Plant] {
+        return plants
     }
     
     private func checkAndCreateDirectory(at url: URL) {
@@ -67,17 +73,27 @@ class Garden {
         }
     }
     
+    func updatePlant(name: String?, image: UIImage?, _ rowInt: Int) {
+        plants[rowInt].name = name!
+        plants[rowInt].imageData = PlantImageData(image!)
+        plants[rowInt].isFetched = false
+        updatePlantsCompletion?(.update, rowInt)
+    }
+    
     func addNewPlant(name: String, image: UIImage) {
         let imageData = PlantImageData(image)
         let plant = Plant(name: name, image: imageData)
         plants.insert(plant, at: 0)
+        updatePlantsCompletion?(.insert, nil)
     }
     
     func addNewPlant(_ newPlant: Plant) {
         plants.insert(newPlant, at: 0)
+        updatePlantsCompletion?(.insert, nil)
     }
     
     func removePlant(at index: Int) {
         plants.remove(at: index)
+        updatePlantsCompletion?(.delete, index)
     }
 }

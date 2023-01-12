@@ -18,7 +18,7 @@ final class PlantCell: UITableViewCell {
 
     private var plantImageView = UIImageView()
     private var plantTitleLabel = UILabel()
-    private var settingsButton = UIButton()
+    var settingsButton = UIButton()
         
     var buttonCompletionHandler: (() -> Void)?
     

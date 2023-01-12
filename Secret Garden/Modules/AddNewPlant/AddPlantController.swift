@@ -53,7 +53,7 @@ final class AddPlantController: UIViewController {
     }
 
     private func updateValidStatus() {
-        viewModel.completion = { [weak self] statusText in
+        viewModel.validateCompletion = { [weak self] statusText in
             self?.validStatusLabel.text = statusText
         }
     }

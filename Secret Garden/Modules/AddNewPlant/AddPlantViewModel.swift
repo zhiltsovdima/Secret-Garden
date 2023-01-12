@@ -7,7 +7,7 @@
 
 import UIKit.UIImage
 
-private enum ValidateError: String, Error {
+enum ValidateError: String, Error {
     case empty = "Please, add the data"
     case emptyName = "You have to add the plant name"
     case emptyImage = "You have to add the Image"
@@ -16,7 +16,7 @@ private enum ValidateError: String, Error {
 // MARK: - AddPlantViewModelProtocol
 
 protocol AddPlantViewModelProtocol: AnyObject {
-    var completion: ((String?) -> Void)? { get set }
+    var validateCompletion: ((String?) -> Void)? { get set }
     func saveButtonTapped(name: String?, image: UIImage?)
 }
 
@@ -28,7 +28,7 @@ final class AddPlantViewModel {
 
     private let garden: Garden
     
-    var completion: ((String?) -> Void)?
+    var validateCompletion: ((String?) -> Void)?
             
     init(output: AddPlantOutput, garden: Garden) {
         self.output = output
@@ -57,7 +57,7 @@ extension AddPlantViewModel: AddPlantViewModelProtocol {
             output?.succesAdding()
         } catch {
             let validateError = error as? ValidateError
-            completion?(validateError?.rawValue)
+            validateCompletion?(validateError?.rawValue)
         }
     }
 }

@@ -26,12 +26,18 @@
 		623A9F2D296C108000A3A17A /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623A9F2C296C108000A3A17A /* Coordinator.swift */; };
 		623A9F31296C6AF400A3A17A /* PlantsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623A9F30296C6AF400A3A17A /* PlantsViewModel.swift */; };
 		623A9F34296C722400A3A17A /* PlantsIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623A9F33296C722400A3A17A /* PlantsIO.swift */; };
+		623A9F37296CC41900A3A17A /* AddPlantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623A9F36296CC41900A3A17A /* AddPlantViewModel.swift */; };
+		623A9F39296D782300A3A17A /* AddPlantIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623A9F38296D782300A3A17A /* AddPlantIO.swift */; };
 		6248B16E2944B4B80075CE25 /* ShopItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6248B16D2944B4B80075CE25 /* ShopItem.swift */; };
 		626FA06D291BB7AC00FEB461 /* Garden.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626FA06C291BB7AC00FEB461 /* Garden.swift */; };
 		626FA06F291CFC0E00FEB461 /* DetailPlantController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626FA06E291CFC0E00FEB461 /* DetailPlantController.swift */; };
 		626FA071291CFCB000FEB461 /* DetailBaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626FA070291CFCB000FEB461 /* DetailBaseController.swift */; };
 		626FA075291E82F100FEB461 /* UIImage + ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626FA074291E82F100FEB461 /* UIImage + ext.swift */; };
 		6270BBBB295CD3B700871C0F /* PrivateKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6270BBBA295CD3B700871C0F /* PrivateKeys.swift */; };
+		627B6A2C296EBCA00072C1D7 /* PlantOptionsIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627B6A2B296EBCA00072C1D7 /* PlantOptionsIO.swift */; };
+		627B6A2E296EBD310072C1D7 /* PlantOptionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627B6A2D296EBD310072C1D7 /* PlantOptionsViewModel.swift */; };
+		627B6A31296EF5C60072C1D7 /* EditPlantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627B6A30296EF5C60072C1D7 /* EditPlantViewModel.swift */; };
+		627B6A33296EF5D20072C1D7 /* EditPlantIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627B6A32296EF5D20072C1D7 /* EditPlantIO.swift */; };
 		62A69DB12931FFB0007228EB /* CartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A69DB02931FFB0007228EB /* CartCell.swift */; };
 		62B10A2C29487D2000C80F07 /* FeatureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B10A2B29487D2000C80F07 /* FeatureCell.swift */; };
 		62B36A3A2954D8220052454B /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B36A392954D8220052454B /* NetworkManager.swift */; };
@@ -57,7 +63,7 @@
 		62E9AFD129116D9E00175A21 /* AddPlantController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9AFD029116D9E00175A21 /* AddPlantController.swift */; };
 		62E9AFD72913BA9800175A21 /* UIView + ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9AFD62913BA9800175A21 /* UIView + ext.swift */; };
 		62E9AFDA2913BD9100175A21 /* BaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9AFD92913BD9100175A21 /* BaseButton.swift */; };
-		62E9B0032916D4D300175A21 /* OptionsPlantTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9B0022916D4D300175A21 /* OptionsPlantTableViewController.swift */; };
+		62E9B0032916D4D300175A21 /* PlantOptionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9B0022916D4D300175A21 /* PlantOptionsTableViewController.swift */; };
 		62E9B0052917C77E00175A21 /* EditPlantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9B0042917C77E00175A21 /* EditPlantViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -94,12 +100,18 @@
 		623A9F2C296C108000A3A17A /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		623A9F30296C6AF400A3A17A /* PlantsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantsViewModel.swift; sourceTree = "<group>"; };
 		623A9F33296C722400A3A17A /* PlantsIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantsIO.swift; sourceTree = "<group>"; };
+		623A9F36296CC41900A3A17A /* AddPlantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlantViewModel.swift; sourceTree = "<group>"; };
+		623A9F38296D782300A3A17A /* AddPlantIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlantIO.swift; sourceTree = "<group>"; };
 		6248B16D2944B4B80075CE25 /* ShopItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopItem.swift; sourceTree = "<group>"; };
 		626FA06C291BB7AC00FEB461 /* Garden.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Garden.swift; sourceTree = "<group>"; };
 		626FA06E291CFC0E00FEB461 /* DetailPlantController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPlantController.swift; sourceTree = "<group>"; };
 		626FA070291CFCB000FEB461 /* DetailBaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailBaseController.swift; sourceTree = "<group>"; };
 		626FA074291E82F100FEB461 /* UIImage + ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage + ext.swift"; sourceTree = "<group>"; };
 		6270BBBA295CD3B700871C0F /* PrivateKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateKeys.swift; sourceTree = "<group>"; };
+		627B6A2B296EBCA00072C1D7 /* PlantOptionsIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantOptionsIO.swift; sourceTree = "<group>"; };
+		627B6A2D296EBD310072C1D7 /* PlantOptionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantOptionsViewModel.swift; sourceTree = "<group>"; };
+		627B6A30296EF5C60072C1D7 /* EditPlantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPlantViewModel.swift; sourceTree = "<group>"; };
+		627B6A32296EF5D20072C1D7 /* EditPlantIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPlantIO.swift; sourceTree = "<group>"; };
 		62A69DB02931FFB0007228EB /* CartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartCell.swift; sourceTree = "<group>"; };
 		62B10A2B29487D2000C80F07 /* FeatureCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureCell.swift; sourceTree = "<group>"; };
 		62B36A392954D8220052454B /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -126,7 +138,7 @@
 		62E9AFD029116D9E00175A21 /* AddPlantController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlantController.swift; sourceTree = "<group>"; };
 		62E9AFD62913BA9800175A21 /* UIView + ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + ext.swift"; sourceTree = "<group>"; };
 		62E9AFD92913BD9100175A21 /* BaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseButton.swift; sourceTree = "<group>"; };
-		62E9B0022916D4D300175A21 /* OptionsPlantTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsPlantTableViewController.swift; sourceTree = "<group>"; };
+		62E9B0022916D4D300175A21 /* PlantOptionsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantOptionsTableViewController.swift; sourceTree = "<group>"; };
 		62E9B0042917C77E00175A21 /* EditPlantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPlantViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -178,6 +190,10 @@
 			isa = PBXGroup;
 			children = (
 				623A9F2F296C6AB600A3A17A /* Plants */,
+				627B6A2A296EBC760072C1D7 /* PlantOptions */,
+				627B6A2F296EF5720072C1D7 /* EditPlant */,
+				62F7FD4D296FFD3F0055B60F /* DetailPlant */,
+				623A9F35296CBB8500A3A17A /* AddNewPlant */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -188,18 +204,47 @@
 				62E9AFBD290D40AF00175A21 /* PlantsViewController.swift */,
 				623A9F30296C6AF400A3A17A /* PlantsViewModel.swift */,
 				623A9F33296C722400A3A17A /* PlantsIO.swift */,
-				623A9F32296C71A800A3A17A /* Cells */,
+				623A9F32296C71A800A3A17A /* Cell */,
 			);
 			path = Plants;
 			sourceTree = "<group>";
 		};
-		623A9F32296C71A800A3A17A /* Cells */ = {
+		623A9F32296C71A800A3A17A /* Cell */ = {
 			isa = PBXGroup;
 			children = (
 				62E9AFCC2911106E00175A21 /* PlantCell.swift */,
-				62B10A2B29487D2000C80F07 /* FeatureCell.swift */,
 			);
-			path = Cells;
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		623A9F35296CBB8500A3A17A /* AddNewPlant */ = {
+			isa = PBXGroup;
+			children = (
+				62E9AFD029116D9E00175A21 /* AddPlantController.swift */,
+				623A9F36296CC41900A3A17A /* AddPlantViewModel.swift */,
+				623A9F38296D782300A3A17A /* AddPlantIO.swift */,
+			);
+			path = AddNewPlant;
+			sourceTree = "<group>";
+		};
+		627B6A2A296EBC760072C1D7 /* PlantOptions */ = {
+			isa = PBXGroup;
+			children = (
+				62E9B0022916D4D300175A21 /* PlantOptionsTableViewController.swift */,
+				627B6A2D296EBD310072C1D7 /* PlantOptionsViewModel.swift */,
+				627B6A2B296EBCA00072C1D7 /* PlantOptionsIO.swift */,
+			);
+			path = PlantOptions;
+			sourceTree = "<group>";
+		};
+		627B6A2F296EF5720072C1D7 /* EditPlant */ = {
+			isa = PBXGroup;
+			children = (
+				62E9B0042917C77E00175A21 /* EditPlantViewController.swift */,
+				627B6A30296EF5C60072C1D7 /* EditPlantViewModel.swift */,
+				627B6A32296EF5D20072C1D7 /* EditPlantIO.swift */,
+			);
+			path = EditPlant;
 			sourceTree = "<group>";
 		};
 		62D4EEE7294BB71400360851 /* Frameworks */ = {
@@ -288,7 +333,6 @@
 			children = (
 				62E9AFC5290EB5DD00175A21 /* Base */,
 				62E9AFDF2915019300175A21 /* Home */,
-				62E9AFDC2915012B00175A21 /* Plants */,
 				62E9AFDE2915018400175A21 /* AddPlant */,
 				62E9AFDD2915015F00175A21 /* Shop */,
 			);
@@ -337,13 +381,6 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		62E9AFCB2911101600175A21 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		62E9AFD82913BA9D00175A21 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -362,17 +399,6 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		62E9AFDC2915012B00175A21 /* Plants */ = {
-			isa = PBXGroup;
-			children = (
-				62E9AFCB2911101600175A21 /* Views */,
-				62E9B0022916D4D300175A21 /* OptionsPlantTableViewController.swift */,
-				62E9B0042917C77E00175A21 /* EditPlantViewController.swift */,
-				626FA06E291CFC0E00FEB461 /* DetailPlantController.swift */,
-			);
-			path = Plants;
-			sourceTree = "<group>";
-		};
 		62E9AFDD2915015F00175A21 /* Shop */ = {
 			isa = PBXGroup;
 			children = (
@@ -388,7 +414,6 @@
 		62E9AFDE2915018400175A21 /* AddPlant */ = {
 			isa = PBXGroup;
 			children = (
-				62E9AFD029116D9E00175A21 /* AddPlantController.swift */,
 			);
 			path = AddPlant;
 			sourceTree = "<group>";
@@ -399,6 +424,23 @@
 				62E9AFBB290D409500175A21 /* HomeViewController.swift */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		62F7FD4D296FFD3F0055B60F /* DetailPlant */ = {
+			isa = PBXGroup;
+			children = (
+				626FA06E291CFC0E00FEB461 /* DetailPlantController.swift */,
+				62F7FD4E296FFD910055B60F /* Cell */,
+			);
+			path = DetailPlant;
+			sourceTree = "<group>";
+		};
+		62F7FD4E296FFD910055B60F /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				62B10A2B29487D2000C80F07 /* FeatureCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -569,13 +611,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				627B6A2E296EBD310072C1D7 /* PlantOptionsViewModel.swift in Sources */,
+				623A9F39296D782300A3A17A /* AddPlantIO.swift in Sources */,
 				620332EA2921583F00ADE1A1 /* CategoryCell.swift in Sources */,
 				62A69DB12931FFB0007228EB /* CartCell.swift in Sources */,
 				622AF21F292CCBB100A1A994 /* FavoritesViewController.swift in Sources */,
 				62B10A2C29487D2000C80F07 /* FeatureCell.swift in Sources */,
 				623A9F34296C722400A3A17A /* PlantsIO.swift in Sources */,
+				627B6A31296EF5C60072C1D7 /* EditPlantViewModel.swift in Sources */,
 				62B36A3C2955F9FD0052454B /* Array + ext.swift in Sources */,
 				62E9AFD72913BA9800175A21 /* UIView + ext.swift in Sources */,
+				627B6A33296EF5D20072C1D7 /* EditPlantIO.swift in Sources */,
 				623A9F2D296C108000A3A17A /* Coordinator.swift in Sources */,
 				62E9AFBC290D409500175A21 /* HomeViewController.swift in Sources */,
 				62E9AFD129116D9E00175A21 /* AddPlantController.swift in Sources */,
@@ -583,6 +629,7 @@
 				623A9F31296C6AF400A3A17A /* PlantsViewModel.swift in Sources */,
 				623A9F2B296C106D00A3A17A /* Assembly.swift in Sources */,
 				62E9AFB9290D1C5C00175A21 /* Resources.swift in Sources */,
+				623A9F37296CC41900A3A17A /* AddPlantViewModel.swift in Sources */,
 				62E9AF83290C2FF600175A21 /* AppDelegate.swift in Sources */,
 				6270BBBB295CD3B700871C0F /* PrivateKeys.swift in Sources */,
 				62B36A3A2954D8220052454B /* NetworkManager.swift in Sources */,
@@ -593,11 +640,12 @@
 				622AF21B2927C16500A1A994 /* ItemDetailController.swift in Sources */,
 				62E9AFBE290D40AF00175A21 /* PlantsViewController.swift in Sources */,
 				620332E5291FA24700ADE1A1 /* ItemCell.swift in Sources */,
+				627B6A2C296EBCA00072C1D7 /* PlantOptionsIO.swift in Sources */,
 				622AF221292CCC3400A1A994 /* CartViewController.swift in Sources */,
 				6248B16E2944B4B80075CE25 /* ShopItem.swift in Sources */,
 				626FA06F291CFC0E00FEB461 /* DetailPlantController.swift in Sources */,
 				620332EC2923CB7A00ADE1A1 /* Shop.swift in Sources */,
-				62E9B0032916D4D300175A21 /* OptionsPlantTableViewController.swift in Sources */,
+				62E9B0032916D4D300175A21 /* PlantOptionsTableViewController.swift in Sources */,
 				62E9AFC0290D40B900175A21 /* ShopViewController.swift in Sources */,
 				626FA06D291BB7AC00FEB461 /* Garden.swift in Sources */,
 				622AF223292CDA8200A1A994 /* FavoriteCell.swift in Sources */,
@@ -775,7 +823,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = J846X7UY52;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Secret Garden/Supporting Files/Info.plist";
@@ -790,7 +838,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.zhiltsov.Secret-Garden";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -808,7 +856,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = J846X7UY52;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Secret Garden/Supporting Files/Info.plist";
@@ -823,7 +871,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.zhiltsov.Secret-Garden";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
