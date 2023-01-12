@@ -11,7 +11,7 @@ protocol CoordinatorProtocol {
     func start(window: UIWindow)
     
     func showAddNewPlant()
-    func showPlantDetail(_ plant: Plant)
+    func showPlantDetail(_ index: Int)
     func showOptions(_ cell: PlantCell)
     
     func succesAdding()
@@ -64,8 +64,8 @@ extension Coordinator: PlantsOutput {
         plantsNavigationController.pushViewController(addNewPlantView, animated: true)
     }
     
-    func showPlantDetail(_ plant: Plant) {
-        let detailPlantView = assembly.createDetailPlant(plant)
+    func showPlantDetail(_ index: Int) {
+        let detailPlantView = assembly.createDetailPlant(output: self, index)
         plantsNavigationController.pushViewController(detailPlantView, animated: true)
     }
     
@@ -110,4 +110,10 @@ extension Coordinator: EditPlantOutput {
     func succesEditing() {
         plantsNavigationController.dismiss(animated: true)
     }
+}
+
+// MARK: - DetailPlantOutput
+
+extension Coordinator: DetailPlantOutput {
+    
 }

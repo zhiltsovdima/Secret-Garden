@@ -9,7 +9,7 @@ import Foundation
 import UIKit.UIImage
 
 struct PlantModel {
-    var plantImage: UIImage
+    var plantImage: UIImage?
     var plantTitle: String
 }
 

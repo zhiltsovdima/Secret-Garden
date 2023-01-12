@@ -11,7 +11,7 @@ import Foundation
 
 protocol PlantsOutput: AnyObject {
     func showAddNewPlant()
-    func showPlantDetail(_ plant: Plant)
+    func showPlantDetail(_ index: Int)
     func showOptions(_ cell: PlantCell)
 }
 

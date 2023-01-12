@@ -10,7 +10,7 @@ import UIKit.UIImage
 
 struct DetailPlantModel {
     var name: String
-    var image: UIImage
+    var image: UIImage?
     var latinName: String?
     var errorMessage: String?
 }

@@ -83,8 +83,7 @@ extension PlantsViewModel: PlantsViewModelProtocol {
     }
     
     func rowTapped(_ rowInt: Int) {
-        let plant = garden.plants[rowInt]
-        output?.showPlantDetail(plant)
+        output?.showPlantDetail(rowInt)
     }
     
     func settingsTapped(_ cell: PlantCell) {
