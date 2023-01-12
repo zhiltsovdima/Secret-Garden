@@ -7,44 +7,36 @@
 
 import UIKit
 
+struct FeatureCellModel {
+    var featureImage: UIImage?
+    var featureValue: NSMutableAttributedString?
+}
+
 class FeatureCell: UITableViewCell {
+    
+    private var model: FeatureCellModel?
     
     private let featureImage = UIImageView()
     private let featureLabel = UILabel()
     
-    private let titleAttributes = [NSAttributedString.Key.font: Resources.Fonts.generalBold!]
-    private let generalAttributes = [NSAttributedString.Key.font: Resources.Fonts.general!]
-    
-    func set(featureName: String, featureValue: String) {
-        let atrString1 = NSMutableAttributedString(string: featureName + ": ",
-                                                    attributes: titleAttributes)
-        let atrString2 = NSMutableAttributedString(string: featureValue,
-                                                    attributes: generalAttributes)
-        atrString1.append(atrString2)
-        featureLabel.attributedText = atrString1
-        setImage(featureName)
-        setupViews()
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupUI()
     }
     
-    private func setImage(_ name: String) {
-        switch name {
-        case Resources.Strings.Common.Detail.origin:
-            featureImage.image = Resources.Images.Features.origin
-        case Resources.Strings.Common.Detail.light:
-            featureImage.image = Resources.Images.Features.light
-        case Resources.Strings.Common.Detail.watering:
-            featureImage.image = Resources.Images.Features.humidity
-        case Resources.Strings.Common.Detail.temperature:
-            featureImage.image = Resources.Images.Features.temperature
-        case Resources.Strings.Common.Detail.insects:
-            featureImage.image = Resources.Images.Features.insects
-        default:
-            break
-        }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupViews() {
+    func setup(with model: FeatureCellModel) {
+        self.model = model
+        featureImage.image = model.featureImage
+        featureLabel.attributedText = model.featureValue
+    }
+    
+    private func setupUI() {
         backgroundColor = Resources.Colors.backgroundColor
+    
         addSubview(featureImage)
         addSubview(featureLabel)
         featureLabel.numberOfLines = 0

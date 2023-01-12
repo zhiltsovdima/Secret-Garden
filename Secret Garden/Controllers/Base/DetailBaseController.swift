@@ -48,7 +48,7 @@ class DetailBaseController: UIViewController{
         ])
     }
     
-    func createLabel(text: String, textColor: UIColor?, font: UIFont?) -> UILabel {
+    func createLabel(text: String?, textColor: UIColor?, font: UIFont?) -> UILabel {
         let label = UILabel()
         label.text = text
         label.textColor = textColor

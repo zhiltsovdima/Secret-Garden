@@ -8,80 +8,68 @@
 import UIKit
 
 final class DetailPlantController: DetailBaseController {
-    
-    private var plant: Plant?
-    
-    private var featuresNames = Resources.Strings.Common.Detail.all
-    private var featuresValues: [String] = []
+        
+    private let viewModel: DetailPlantViewModelProtocol
     
     private let tableView = UITableView()
-    
-    private let namePlant = UILabel()
-    private let latinName = UILabel()
-    
     private let spinner = UIActivityIndicatorView()
-    private let errorMessage = UILabel()
+
+    lazy private var namePlant = createLabel(text: viewModel.viewData.name,
+                                             textColor: Resources.Colors.blackOnWhite,
+                                             font: Resources.Fonts.header)
+    lazy private var latinName = createLabel(text: viewModel.viewData.latinName,
+                                             textColor: UIColor.lightGray,
+                                             font: Resources.Fonts.subHeaders)
+    lazy private var errorMessage = createLabel(text: viewModel.viewData.errorMessage,
+                                                textColor: Resources.Colors.blackOnWhite,
+                                                font: Resources.Fonts.generalBold)
+    
+    init(viewModel: DetailPlantViewModelProtocol) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupUI()
+        updateUI()
         setupConstraints()
     }
     
-    func setPlant(_ plant: Plant?) {
-        self.plant = plant
-        
-        plant?.downloadFeatures(completion: { [weak self] features, errorMessage in
-            DispatchQueue.main.async {
-                guard let features else {
-                    self?.errorMessage.text = errorMessage
-                    self?.updateUI()
-                    return
-                }
-                let insects = features.insects.joined(separator: ", ")
-                self?.featuresValues = [features.idealLight,
-                                        features.temperature,
-                                        features.watering,
-                                        insects,
-                                        features.origin]
-                self?.updateUI()
+    func updateUI() {
+        viewModel.updateCompletion = { [weak self] isSuccess in
+            self?.spinner.stopAnimating()
+            switch isSuccess {
+            case true:
+                self?.latinName.text = self?.viewModel.viewData.latinName
+                self?.tableView.isHidden = false
+                self?.tableView.reloadData()
+            case false:
+                self?.errorMessage.text = self?.viewModel.viewData.errorMessage
+                self?.errorMessage.isHidden = false
             }
-        })
-    }
-    
-    private func createNetworkManager() -> NetworkManagerProtocol {
-        let networkManager = NetworkManager()
-        return networkManager
-    }
-    
-    private func updateUI() {
-        switch featuresValues.isEmpty {
-        case true:
-            spinner.stopAnimating()
-            spinner.isHidden = true
-            errorMessage.isHidden = false
-        case false:
-            latinName.text = plant?.features?.latinName
-            tableView.reloadData()
-            tableView.isHidden = false
-            spinner.stopAnimating()
-            spinner.isHidden = true
         }
     }
     
     override func setupUI() {
         super.setupUI()
         
+        plantImageView.image = viewModel.viewData.image
+        
         detailView.addSubview(spinner)
         spinner.startAnimating()
-        detailView.addSubview(errorMessage)
+        spinner.hidesWhenStopped = true
+        
         errorMessage.isHidden = true
-        errorMessage.font = Resources.Fonts.generalBold
         
         tableView.register(FeatureCell.self, forCellReuseIdentifier: Resources.Identifiers.featureCell)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.estimatedRowHeight = 50
         tableView.rowHeight = UITableView.automaticDimension
         tableView.separatorStyle = .none
         tableView.allowsSelection = false
@@ -89,32 +77,16 @@ final class DetailPlantController: DetailBaseController {
         tableView.isHidden = true
         tableView.backgroundColor = Resources.Colors.backgroundColor
         detailView.addSubview(tableView)
-        
-        plantImageView.image = plant?.imageData.image
-        
-        namePlant.text = plant?.name
-        namePlant.numberOfLines = 0
-        namePlant.font = Resources.Fonts.header
-        detailView.addSubview(namePlant)
-        
-        latinName.numberOfLines = 0
-        latinName.font = Resources.Fonts.subHeaders
-        latinName.textColor = Resources.Colors.subHeader
-        detailView.addSubview(latinName)
     }
     
     override func setupConstraints() {
         super.setupConstraints()
         
-        namePlant.translatesAutoresizingMaskIntoConstraints = false
-        latinName.translatesAutoresizingMaskIntoConstraints = false
-        
         tableView.translatesAutoresizingMaskIntoConstraints = false
         spinner.translatesAutoresizingMaskIntoConstraints = false
-        errorMessage.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            namePlant.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            namePlant.leadingAnchor.constraint(equalTo: detailView.leadingAnchor, constant: 20),
             namePlant.topAnchor.constraint(equalTo: detailView.topAnchor, constant: 20),
             
             latinName.topAnchor.constraint(equalTo: namePlant.bottomAnchor),
@@ -136,15 +108,12 @@ final class DetailPlantController: DetailBaseController {
 extension DetailPlantController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return featuresValues.count
+        return viewModel.tableData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Resources.Identifiers.featureCell, for: indexPath) as! FeatureCell
-        
-        let value = featuresValues[indexPath.row]
-        let name = featuresNames[indexPath.row]
-        cell.set(featureName: name, featureValue: value)
+        cell.setup(with: viewModel.tableData[indexPath.row])
         return cell
     }
     
