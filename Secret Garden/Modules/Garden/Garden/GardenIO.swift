@@ -7,11 +7,10 @@
 
 import Foundation
 
-// MARK: - PlantsOutput
+// MARK: - GardenOutput
 
-protocol PlantsOutput: AnyObject {
+protocol GardenOutput: AnyObject {
     func showAddNewPlant()
     func showPlantDetail(_ index: Int)
     func showOptions(_ cell: PlantCell)
 }
-

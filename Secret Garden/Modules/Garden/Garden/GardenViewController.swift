@@ -1,5 +1,5 @@
 //
-//  PlantsViewController.swift
+//  GardenViewController.swift
 //  Secret Garden
 //
 //  Created by Dima Zhiltsov on 29.10.2022.
@@ -7,22 +7,22 @@
 
 import UIKit
 
-// MARK: - PlantsViewControllerProtocol
+// MARK: - GardenViewControllerProtocol
 
-protocol PlantsViewControllerProtocol: AnyObject, UIPopoverPresentationControllerDelegate {
+protocol GardenViewControllerProtocol: AnyObject, UIPopoverPresentationControllerDelegate {
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle
 }
 
-// MARK: - PlantsViewController
+// MARK: - GardenViewController
 
-final class PlantsViewController: UIViewController {
+final class GardenViewController: UIViewController {
     
-    private let viewModel: PlantsViewModelProtocol
+    private let viewModel: GardenViewModelProtocol
     
     let tableView = UITableView()
     private let placeholder = UIImageView(image: Resources.Images.Common.emptyCollection)
     
-    init(viewModel: PlantsViewModelProtocol) {
+    init(viewModel: GardenViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -90,7 +90,7 @@ final class PlantsViewController: UIViewController {
 
 // MARK: - UITableViewDelegate & UITableViewDataSource
 
-extension PlantsViewController: UITableViewDelegate, UITableViewDataSource {
+extension GardenViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         viewModel.tableData.count
@@ -113,7 +113,7 @@ extension PlantsViewController: UITableViewDelegate, UITableViewDataSource {
 
 // MARK: - PlantsViewControllerProtocol
 
-extension PlantsViewController: PlantsViewControllerProtocol {
+extension GardenViewController: GardenViewControllerProtocol {
     
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
         return .none

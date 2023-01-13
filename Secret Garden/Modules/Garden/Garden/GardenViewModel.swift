@@ -1,5 +1,5 @@
 //
-//  PlantsViewModel.swift
+//  GardenViewModel.swift
 //  Secret Garden
 //
 //  Created by Dima Zhiltsov on 09.01.2023.
@@ -13,9 +13,9 @@ enum TypeOfChangeModel {
     case delete
 }
 
-// MARK: - PlantsViewModelProtocol
+// MARK: - GardenViewModelProtocol
 
-protocol PlantsViewModelProtocol: AnyObject {
+protocol GardenViewModelProtocol: AnyObject {
     
     var tableData: [PlantCellModel] { get }
     
@@ -29,11 +29,11 @@ protocol PlantsViewModelProtocol: AnyObject {
 
 }
 
-// MARK: - PlantsViewModel
+// MARK: - GardenViewModel
 
-final class PlantsViewModel {
+final class GardenViewModel {
 
-    private weak var output: PlantsOutput?
+    private weak var output: GardenOutput?
     private let garden: Garden
     var tableData = [PlantCellModel]()
     
@@ -41,7 +41,7 @@ final class PlantsViewModel {
     var insertTabelData: (() -> Void)?
     var deleteTabelData: ((Int) -> Void)?
     
-    init(output: PlantsOutput, garden: Garden) {
+    init(output: GardenOutput, garden: Garden) {
         self.output = output
         self.garden = garden
         self.updateModel()
@@ -49,9 +49,9 @@ final class PlantsViewModel {
     }
 }
 
-// MARK: - PlantsViewModelProtocol
+// MARK: - GardenViewModelProtocol
 
-extension PlantsViewModel: PlantsViewModelProtocol {
+extension GardenViewModel: GardenViewModelProtocol {
     
     private func setUpdate() {
         garden.updatePlantsCompletion = { [weak self] typeOfChange, rowInt in

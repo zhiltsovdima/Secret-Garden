@@ -44,7 +44,7 @@ final class TabCoordinator: Coordinator {
             childCoordinators.append(homeCoordinator)
             return homeCoordinator.getController()
         case .garden:
-            let plantsCoordinator = PlantsCoordinator(navigationController)
+            let plantsCoordinator = GardenCoordinator(navigationController)
             childCoordinators.append(plantsCoordinator)
             plantsCoordinator.start()
             return plantsCoordinator.getController()
