@@ -70,7 +70,7 @@
 		62F7FD5B29716E890055B60F /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62F7FD5A29716E890055B60F /* HomeCoordinator.swift */; };
 		62F7FD5D29716F560055B60F /* ShopCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62F7FD5C29716F560055B60F /* ShopCoordinator.swift */; };
 		62F7FD5F297179E10055B60F /* TabCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62F7FD5E297179E10055B60F /* TabCoordinator.swift */; };
-		62F7FD6329719EB90055B60F /* PlantDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62F7FD6229719EB90055B60F /* PlantDetailCoordinator.swift */; };
+		62F7FD6329719EB90055B60F /* DetailPlantCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62F7FD6229719EB90055B60F /* DetailPlantCoordinator.swift */; };
 		62F7FD662971A2070055B60F /* PlantOptionsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62F7FD652971A2070055B60F /* PlantOptionsCoordinator.swift */; };
 		62F7FD682971A70F0055B60F /* EditPlantCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62F7FD672971A70F0055B60F /* EditPlantCoordinator.swift */; };
 /* End PBXBuildFile section */
@@ -153,7 +153,7 @@
 		62F7FD5A29716E890055B60F /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		62F7FD5C29716F560055B60F /* ShopCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopCoordinator.swift; sourceTree = "<group>"; };
 		62F7FD5E297179E10055B60F /* TabCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCoordinator.swift; sourceTree = "<group>"; };
-		62F7FD6229719EB90055B60F /* PlantDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantDetailCoordinator.swift; sourceTree = "<group>"; };
+		62F7FD6229719EB90055B60F /* DetailPlantCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPlantCoordinator.swift; sourceTree = "<group>"; };
 		62F7FD652971A2070055B60F /* PlantOptionsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantOptionsCoordinator.swift; sourceTree = "<group>"; };
 		62F7FD672971A70F0055B60F /* EditPlantCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPlantCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -416,6 +416,7 @@
 		62E9AFDD2915015F00175A21 /* Shop */ = {
 			isa = PBXGroup;
 			children = (
+				62F7FD5C29716F560055B60F /* ShopCoordinator.swift */,
 				620332E6292023C600ADE1A1 /* Views */,
 				62E9AFBF290D40B900175A21 /* ShopViewController.swift */,
 				622AF21A2927C16500A1A994 /* ItemDetailController.swift */,
@@ -440,6 +441,7 @@
 				626FA06E291CFC0E00FEB461 /* DetailPlantController.swift */,
 				62F7FD4F2970065B0055B60F /* DetailPlantViewModel.swift */,
 				62F7FD51297006660055B60F /* DetailPlantIO.swift */,
+				62F7FD6229719EB90055B60F /* DetailPlantCoordinator.swift */,
 				62F7FD4E296FFD910055B60F /* Cell */,
 			);
 			path = DetailPlant;
@@ -456,8 +458,6 @@
 		62F7FD53297161A40055B60F /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
-				62F7FD6229719EB90055B60F /* PlantDetailCoordinator.swift */,
-				62F7FD5C29716F560055B60F /* ShopCoordinator.swift */,
 				62F7FD582971674A0055B60F /* AddNewPlantCoordinator.swift */,
 			);
 			path = Coordinators;
@@ -669,7 +669,7 @@
 				62E9AFCD2911106E00175A21 /* PlantCell.swift in Sources */,
 				626FA075291E82F100FEB461 /* UIImage + ext.swift in Sources */,
 				620332E82920D32500ADE1A1 /* CategoriesView.swift in Sources */,
-				62F7FD6329719EB90055B60F /* PlantDetailCoordinator.swift in Sources */,
+				62F7FD6329719EB90055B60F /* DetailPlantCoordinator.swift in Sources */,
 				62F7FD5F297179E10055B60F /* TabCoordinator.swift in Sources */,
 				626FA071291CFCB000FEB461 /* DetailBaseController.swift in Sources */,
 				62F7FD592971674A0055B60F /* AddNewPlantCoordinator.swift in Sources */,
