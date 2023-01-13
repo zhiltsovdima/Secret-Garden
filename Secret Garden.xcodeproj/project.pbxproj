@@ -248,6 +248,7 @@
 				62E9B0022916D4D300175A21 /* PlantOptionsTableViewController.swift */,
 				627B6A2D296EBD310072C1D7 /* PlantOptionsViewModel.swift */,
 				627B6A2B296EBCA00072C1D7 /* PlantOptionsIO.swift */,
+				62F7FD652971A2070055B60F /* PlantOptionsCoordinator.swift */,
 			);
 			path = PlantOptions;
 			sourceTree = "<group>";
@@ -457,7 +458,6 @@
 				62F7FD6229719EB90055B60F /* PlantDetailCoordinator.swift */,
 				62F7FD5C29716F560055B60F /* ShopCoordinator.swift */,
 				62F7FD582971674A0055B60F /* AddNewPlantCoordinator.swift */,
-				62F7FD652971A2070055B60F /* PlantOptionsCoordinator.swift */,
 				62F7FD672971A70F0055B60F /* EditPlantCoordinator.swift */,
 			);
 			path = Coordinators;
