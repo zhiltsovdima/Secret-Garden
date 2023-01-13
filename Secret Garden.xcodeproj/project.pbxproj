@@ -238,6 +238,7 @@
 				62E9AFD029116D9E00175A21 /* AddPlantController.swift */,
 				623A9F36296CC41900A3A17A /* AddPlantViewModel.swift */,
 				623A9F38296D782300A3A17A /* AddPlantIO.swift */,
+				62F7FD582971674A0055B60F /* AddNewPlantCoordinator.swift */,
 			);
 			path = AddNewPlant;
 			sourceTree = "<group>";
@@ -458,7 +459,6 @@
 		62F7FD53297161A40055B60F /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
-				62F7FD582971674A0055B60F /* AddNewPlantCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
