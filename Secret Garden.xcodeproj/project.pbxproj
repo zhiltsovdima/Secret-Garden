@@ -259,6 +259,7 @@
 				62E9B0042917C77E00175A21 /* EditPlantViewController.swift */,
 				627B6A30296EF5C60072C1D7 /* EditPlantViewModel.swift */,
 				627B6A32296EF5D20072C1D7 /* EditPlantIO.swift */,
+				62F7FD672971A70F0055B60F /* EditPlantCoordinator.swift */,
 			);
 			path = EditPlant;
 			sourceTree = "<group>";
@@ -458,7 +459,6 @@
 				62F7FD6229719EB90055B60F /* PlantDetailCoordinator.swift */,
 				62F7FD5C29716F560055B60F /* ShopCoordinator.swift */,
 				62F7FD582971674A0055B60F /* AddNewPlantCoordinator.swift */,
-				62F7FD672971A70F0055B60F /* EditPlantCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
