@@ -28,6 +28,10 @@ final class GardenCoordinator: Coordinator {
     func getController() -> UINavigationController {
         return navigationController
     }
+    
+    func childDidFinish(_ childCoordinator: Coordinator) {
+        childCoordinators.removeAll(where: {$0 === childCoordinator})
+    }
 }
 
 extension GardenCoordinator: GardenOutput {
@@ -35,18 +39,21 @@ extension GardenCoordinator: GardenOutput {
     func showAddNewPlant() {
         let addNewPlantCoordinator = AddNewPlantCoordinator(navigationController, garden)
         addNewPlantCoordinator.start()
+        addNewPlantCoordinator.parentCoordinator = self
         childCoordinators.append(addNewPlantCoordinator)
     }
     
     func showPlantDetail(_ index: Int) {
         let detailPlantCoordinator = DetailPlantCoordinator(navigationController, garden, index: index)
         detailPlantCoordinator.start()
+        detailPlantCoordinator.parentCoordinator = self
         childCoordinators.append(detailPlantCoordinator)
     }
     
     func showOptions(_ cell: PlantCell) {
         let optionsCoordinator = PlantOptionsCoordinator(navigationController, garden, cell: cell)
         optionsCoordinator.start()
+        optionsCoordinator.parentCoordinator = self
         childCoordinators.append(optionsCoordinator)
     }
     

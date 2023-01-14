@@ -47,6 +47,10 @@ final class AddPlantController: UIViewController {
         configureTapGesture(to: view)
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        viewModel.viewWillDisappear()
+    }
+    
     private func setupUI() {
         title = Resources.Strings.AddPlant.titleController
         view.backgroundColor = Resources.Colors.backgroundColor

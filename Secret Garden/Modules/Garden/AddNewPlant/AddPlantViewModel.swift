@@ -18,6 +18,7 @@ enum ValidateError: String, Error {
 protocol AddPlantViewModelProtocol: AnyObject {
     var validateCompletion: ((String?) -> Void)? { get set }
     func saveButtonTapped(name: String?, image: UIImage?)
+    func viewWillDisappear()
 }
 
 // MARK: - AddPlantViewModel
@@ -59,5 +60,9 @@ extension AddPlantViewModel: AddPlantViewModelProtocol {
             let validateError = error as? ValidateError
             validateCompletion?(validateError?.rawValue)
         }
+    }
+    
+    func viewWillDisappear() {
+        output?.addPlantFinish()
     }
 }

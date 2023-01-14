@@ -13,6 +13,7 @@ protocol PlantOptionsViewModelProtocol: AnyObject {
     var tableData: [String] { get }
     func editButtonTapped()
     func deleteButtonTapped()
+    func viewWillDisappear()
 }
 
 // MARK: - PlantOptionsViewModel
@@ -47,5 +48,9 @@ extension PlantOptionsViewModel: PlantOptionsViewModelProtocol {
     func deleteButtonTapped() {
         garden.removePlant(at: indexPath.row)
         output?.deletePlant()
+    }
+    
+    func viewWillDisappear() {
+        output?.plantOptionsFinish()
     }
 }

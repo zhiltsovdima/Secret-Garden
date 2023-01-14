@@ -11,4 +11,5 @@ import Foundation
 
 protocol EditPlantOutput: AnyObject {
     func succesEditing()
+    func editPlantFinish()
 }

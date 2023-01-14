@@ -41,6 +41,10 @@ final class DetailPlantController: DetailBaseController {
         setupConstraints()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        viewModel.viewWillDisappear()
+    }
+    
     func updateUI() {
         viewModel.updateCompletion = { [weak self] isSuccess in
             self?.spinner.stopAnimating()

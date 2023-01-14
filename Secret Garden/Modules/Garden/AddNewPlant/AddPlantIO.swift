@@ -11,5 +11,6 @@ import Foundation
 
 protocol AddPlantOutput: AnyObject {
     func succesAdding()
+    func addPlantFinish()
 }
 

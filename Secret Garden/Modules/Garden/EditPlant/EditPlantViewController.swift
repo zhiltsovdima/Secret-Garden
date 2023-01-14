@@ -49,6 +49,10 @@ final class EditPlantViewController: DetailBaseController {
         
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        viewModel.viewWillDisappear()
+    }
+    
     override func setupUI() {
         super.setupUI()
         

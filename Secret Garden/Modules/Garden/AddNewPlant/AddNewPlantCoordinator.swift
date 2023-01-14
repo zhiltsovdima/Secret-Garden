@@ -10,6 +10,7 @@ import UIKit.UINavigationController
 final class AddNewPlantCoordinator: Coordinator {
     
     private(set) var childCoordinators: [Coordinator] = []
+    var parentCoordinator: GardenCoordinator?
     
     private let navigationController: UINavigationController
     private let garden: Garden
@@ -34,6 +35,10 @@ extension AddNewPlantCoordinator: AddPlantOutput {
     
     func showChooseImageAlert() {
         
+    }
+    
+    func addPlantFinish() {
+        parentCoordinator?.childDidFinish(self)
     }
 
 }

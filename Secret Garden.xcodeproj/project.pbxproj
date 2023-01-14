@@ -215,10 +215,10 @@
 		623A9F2F296C6AB600A3A17A /* Garden */ = {
 			isa = PBXGroup;
 			children = (
+				62F7FD56297163E30055B60F /* GardenCoordinator.swift */,
 				62E9AFBD290D40AF00175A21 /* GardenViewController.swift */,
 				623A9F30296C6AF400A3A17A /* GardenViewModel.swift */,
 				623A9F33296C722400A3A17A /* GardenIO.swift */,
-				62F7FD56297163E30055B60F /* GardenCoordinator.swift */,
 				623A9F32296C71A800A3A17A /* Cell */,
 			);
 			path = Garden;
@@ -235,10 +235,10 @@
 		623A9F35296CBB8500A3A17A /* AddNewPlant */ = {
 			isa = PBXGroup;
 			children = (
+				62F7FD582971674A0055B60F /* AddNewPlantCoordinator.swift */,
 				62E9AFD029116D9E00175A21 /* AddPlantController.swift */,
 				623A9F36296CC41900A3A17A /* AddPlantViewModel.swift */,
 				623A9F38296D782300A3A17A /* AddPlantIO.swift */,
-				62F7FD582971674A0055B60F /* AddNewPlantCoordinator.swift */,
 			);
 			path = AddNewPlant;
 			sourceTree = "<group>";
@@ -246,10 +246,10 @@
 		627B6A2A296EBC760072C1D7 /* PlantOptions */ = {
 			isa = PBXGroup;
 			children = (
+				62F7FD652971A2070055B60F /* PlantOptionsCoordinator.swift */,
 				62E9B0022916D4D300175A21 /* PlantOptionsTableViewController.swift */,
 				627B6A2D296EBD310072C1D7 /* PlantOptionsViewModel.swift */,
 				627B6A2B296EBCA00072C1D7 /* PlantOptionsIO.swift */,
-				62F7FD652971A2070055B60F /* PlantOptionsCoordinator.swift */,
 			);
 			path = PlantOptions;
 			sourceTree = "<group>";
@@ -257,10 +257,10 @@
 		627B6A2F296EF5720072C1D7 /* EditPlant */ = {
 			isa = PBXGroup;
 			children = (
+				62F7FD672971A70F0055B60F /* EditPlantCoordinator.swift */,
 				62E9B0042917C77E00175A21 /* EditPlantViewController.swift */,
 				627B6A30296EF5C60072C1D7 /* EditPlantViewModel.swift */,
 				627B6A32296EF5D20072C1D7 /* EditPlantIO.swift */,
-				62F7FD672971A70F0055B60F /* EditPlantCoordinator.swift */,
 			);
 			path = EditPlant;
 			sourceTree = "<group>";
@@ -439,10 +439,10 @@
 		62F7FD4D296FFD3F0055B60F /* DetailPlant */ = {
 			isa = PBXGroup;
 			children = (
+				62F7FD6229719EB90055B60F /* DetailPlantCoordinator.swift */,
 				626FA06E291CFC0E00FEB461 /* DetailPlantController.swift */,
 				62F7FD4F2970065B0055B60F /* DetailPlantViewModel.swift */,
 				62F7FD51297006660055B60F /* DetailPlantIO.swift */,
-				62F7FD6229719EB90055B60F /* DetailPlantCoordinator.swift */,
 				62F7FD4E296FFD910055B60F /* Cell */,
 			);
 			path = DetailPlant;

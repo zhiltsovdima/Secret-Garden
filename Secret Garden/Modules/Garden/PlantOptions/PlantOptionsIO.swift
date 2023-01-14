@@ -12,4 +12,5 @@ import Foundation
 protocol PlantOptionsOutput: AnyObject {
     func showEdit(_ indexPath: IndexPath)
     func deletePlant()
+    func plantOptionsFinish()
 }

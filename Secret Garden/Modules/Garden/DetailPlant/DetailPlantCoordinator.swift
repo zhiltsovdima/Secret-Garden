@@ -10,6 +10,7 @@ import UIKit.UINavigationController
 final class DetailPlantCoordinator: Coordinator {
     
     private(set) var childCoordinators: [Coordinator] = []
+    var parentCoordinator: GardenCoordinator?
     
     private let navigationController: UINavigationController
     private let garden: Garden
@@ -30,5 +31,8 @@ final class DetailPlantCoordinator: Coordinator {
 
 extension DetailPlantCoordinator: DetailPlantOutput {
     
+    func detailPlantFinish() {
+        parentCoordinator?.childDidFinish(self)
+    }
 
 }

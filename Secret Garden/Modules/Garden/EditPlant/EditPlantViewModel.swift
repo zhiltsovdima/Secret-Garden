@@ -19,6 +19,7 @@ protocol EditPlantViewModelProtocol: AnyObject {
     var viewData: PlantModel! { get }
     var validateCompletion: ((String?) -> Void)? { get set }
     func saveButtonTapped(name: String?, image: UIImage?)
+    func viewWillDisappear()
 }
 
 // MARK: - EditPlantViewModel
@@ -69,6 +70,9 @@ extension EditPlantViewModel: EditPlantViewModelProtocol {
             let validateError = error as? ValidateError
             validateCompletion?(validateError?.rawValue)
         }
-        
+    }
+    
+    func viewWillDisappear() {
+        output?.editPlantFinish()
     }
 }

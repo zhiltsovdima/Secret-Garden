@@ -10,4 +10,5 @@ import Foundation
 // MARK: - DetailPlantOutput
 
 protocol DetailPlantOutput: AnyObject {
+    func detailPlantFinish()
 }

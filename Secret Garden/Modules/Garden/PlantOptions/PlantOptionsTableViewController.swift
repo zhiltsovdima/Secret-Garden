@@ -26,6 +26,10 @@ final class PlantOptionsTableViewController: UITableViewController {
         preferredContentSize.height = tableView.contentSize.height - 1
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        viewModel.viewWillDisappear()
+    }
+    
     private func setupTableView() {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: Resources.Identifiers.plantOptionsCell)
         tableView.isScrollEnabled = false

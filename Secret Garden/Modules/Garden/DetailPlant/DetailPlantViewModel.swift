@@ -22,6 +22,7 @@ protocol DetailPlantViewModelProtocol: AnyObject {
     var tableData: [FeatureCellModel] { get }
     
     var updateCompletion: ((Bool) -> Void)? { get set }
+    func viewWillDisappear()
 }
 
 // MARK: - DetailPlantViewModel
@@ -98,6 +99,8 @@ final class DetailPlantViewModel {
 
 extension DetailPlantViewModel: DetailPlantViewModelProtocol {
     
-    
+    func viewWillDisappear() {
+        output?.detailPlantFinish()
+    }
     
 }
