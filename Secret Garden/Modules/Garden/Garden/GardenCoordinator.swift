@@ -9,7 +9,7 @@ import UIKit.UINavigationController
 
 final class GardenCoordinator: Coordinator {
     
-    private(set) var childCoordinators: [Coordinator] = []
+    var childCoordinators: [Coordinator] = []
     
     private var navigationController: UINavigationController
     

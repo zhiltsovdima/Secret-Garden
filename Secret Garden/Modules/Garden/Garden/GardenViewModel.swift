@@ -35,7 +35,7 @@ final class GardenViewModel {
 
     private weak var output: GardenOutput?
     private let garden: Garden
-    var tableData = [PlantCellModel]()
+    private(set) var tableData = [PlantCellModel]()
     
     var updateTabelData: ((Int?) -> Void)?
     var insertTabelData: (() -> Void)?
