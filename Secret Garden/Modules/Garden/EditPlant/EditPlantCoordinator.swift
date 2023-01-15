@@ -7,12 +7,14 @@
 
 import UIKit.UINavigationController
 
-final class EditPlantCoordinator: Coordinator {
+final class EditPlantCoordinator: Coordinator, ImagePickable {
     
     var childCoordinators: [Coordinator] = []
     var parentCoordinator: PlantOptionsCoordinator?
+    private var completion: ((UIImage) -> Void)?
     
     private let navigationController: UINavigationController
+    private var modalNavigationController: UINavigationController?
     private let garden: Garden
     private let indexPath: IndexPath
         
@@ -23,15 +25,38 @@ final class EditPlantCoordinator: Coordinator {
     }
     
     func start() {
+        navigationController.dismiss(animated: true)
+        modalNavigationController = UINavigationController()
+        
         let viewModel = EditPlantViewModel(output: self, garden, indexPath)
         let editView = EditPlantViewController(viewModel: viewModel)
-        navigationController.dismiss(animated: true)
-        navigationController.present(editView, animated: true)
+        modalNavigationController?.setViewControllers([editView], animated: false)
+        guard let modalNavigationController else { return }
+        navigationController.present(modalNavigationController, animated: true)
     }
     
+    func showImagePicker(sourceType: UIImagePickerController.SourceType) {
+        guard let modalNavigationController else { return }
+        let imagePickerCoordinator = ImagePickerCoordinator(modalNavigationController, sourceType: sourceType)
+        imagePickerCoordinator.parentCoordinator = self
+        imagePickerCoordinator.start()
+        childCoordinators.append(imagePickerCoordinator)
+    }
+
+    func didFinishPicking(_ image: UIImage) {
+        completion?(image)
+    }
 }
 
 extension EditPlantCoordinator: EditPlantOutput {
+    
+    func showAddNewPhotoAlert(completion: @escaping (UIImage) -> Void) {
+        self.completion = completion
+        let choosePhotoAlertCoordinator = AlertCoordinator(navigationController)
+        choosePhotoAlertCoordinator.parentCoordinator = self
+        choosePhotoAlertCoordinator.start()
+        childCoordinators.append(choosePhotoAlertCoordinator)
+    }
     
     func succesEditing() {
         navigationController.dismiss(animated: true)

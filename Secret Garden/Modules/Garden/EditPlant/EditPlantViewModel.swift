@@ -18,6 +18,8 @@ struct PlantModel {
 protocol EditPlantViewModelProtocol: AnyObject {
     var viewData: PlantModel! { get }
     var validateCompletion: ((String?) -> Void)? { get set }
+    var updateImageCompletion: ((UIImage) -> Void)? { get set }
+    func addNewPhotoTapped()
     func saveButtonTapped(name: String?, image: UIImage?)
     func viewWillDisappear()
 }
@@ -33,7 +35,7 @@ final class EditPlantViewModel {
     private let indexPath: IndexPath
     
     var validateCompletion: ((String?) -> Void)?
-
+    var updateImageCompletion: ((UIImage) -> Void)?
             
     init(output: EditPlantOutput, _ garden: Garden, _ indexPath: IndexPath) {
         self.output = output
@@ -60,6 +62,12 @@ final class EditPlantViewModel {
 // MARK: - EditPlantViewModelProtocol
 
 extension EditPlantViewModel: EditPlantViewModelProtocol {
+    
+    func addNewPhotoTapped() {
+        output?.showAddNewPhotoAlert { [weak self] image in
+            self?.updateImageCompletion?(image)
+        }
+    }
     
     func saveButtonTapped(name: String?, image: UIImage?) {
         do {

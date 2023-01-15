@@ -64,6 +64,7 @@
 		62E9B0052917C77E00175A21 /* EditPlantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9B0042917C77E00175A21 /* EditPlantViewController.swift */; };
 		62EC9B1629743A740014CD84 /* ImagePickerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62EC9B1529743A740014CD84 /* ImagePickerCoordinator.swift */; };
 		62EC9B18297464E90014CD84 /* AlertCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62EC9B17297464E90014CD84 /* AlertCoordinator.swift */; };
+		62EC9B1B297487790014CD84 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62EC9B1A297487790014CD84 /* Protocols.swift */; };
 		62F7FD502970065B0055B60F /* DetailPlantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62F7FD4F2970065B0055B60F /* DetailPlantViewModel.swift */; };
 		62F7FD52297006660055B60F /* DetailPlantIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62F7FD51297006660055B60F /* DetailPlantIO.swift */; };
 		62F7FD55297161B60055B60F /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62F7FD54297161B60055B60F /* AppCoordinator.swift */; };
@@ -149,6 +150,7 @@
 		62E9B0042917C77E00175A21 /* EditPlantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPlantViewController.swift; sourceTree = "<group>"; };
 		62EC9B1529743A740014CD84 /* ImagePickerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerCoordinator.swift; sourceTree = "<group>"; };
 		62EC9B17297464E90014CD84 /* AlertCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertCoordinator.swift; sourceTree = "<group>"; };
+		62EC9B1A297487790014CD84 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		62F7FD4F2970065B0055B60F /* DetailPlantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPlantViewModel.swift; sourceTree = "<group>"; };
 		62F7FD51297006660055B60F /* DetailPlantIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPlantIO.swift; sourceTree = "<group>"; };
 		62F7FD54297161B60055B60F /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
@@ -309,14 +311,15 @@
 		62E9AF81290C2FF600175A21 /* Secret Garden */ = {
 			isa = PBXGroup;
 			children = (
+				62E9AFB7290D189300175A21 /* Application */,
 				62F7FD53297161A40055B60F /* Coordinators */,
 				623A9F2E296C6AA000A3A17A /* Modules */,
-				62E9AFB7290D189300175A21 /* Application */,
 				62E9AFC82911054400175A21 /* Model */,
 				62D4EEF4294DAE4400360851 /* Network */,
 				62E9AFB6290D187E00175A21 /* Controllers */,
-				62E9AFBA290D1C6400175A21 /* Resources */,
+				62EC9B192974875E0014CD84 /* Protocols */,
 				62E9AFD82913BA9D00175A21 /* Extensions */,
+				62E9AFBA290D1C6400175A21 /* Resources */,
 				62E9AFB3290C304800175A21 /* Supporting Files */,
 			);
 			path = "Secret Garden";
@@ -436,6 +439,14 @@
 				62E9AFBB290D409500175A21 /* HomeViewController.swift */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		62EC9B192974875E0014CD84 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				62EC9B1A297487790014CD84 /* Protocols.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		62F7FD4D296FFD3F0055B60F /* DetailPlant */ = {
@@ -672,6 +683,7 @@
 				62F7FD5B29716E890055B60F /* HomeCoordinator.swift in Sources */,
 				62E9AF83290C2FF600175A21 /* AppDelegate.swift in Sources */,
 				6270BBBB295CD3B700871C0F /* PrivateKeys.swift in Sources */,
+				62EC9B1B297487790014CD84 /* Protocols.swift in Sources */,
 				62B36A3A2954D8220052454B /* NetworkManager.swift in Sources */,
 				62E9AFCD2911106E00175A21 /* PlantCell.swift in Sources */,
 				626FA075291E82F100FEB461 /* UIImage + ext.swift in Sources */,

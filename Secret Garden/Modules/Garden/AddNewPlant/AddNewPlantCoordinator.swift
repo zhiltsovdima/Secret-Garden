@@ -7,7 +7,7 @@
 
 import UIKit.UINavigationController
 
-final class AddNewPlantCoordinator: Coordinator {
+final class AddNewPlantCoordinator: Coordinator, ImagePickable {
     
     var childCoordinators: [Coordinator] = []
     var parentCoordinator: GardenCoordinator?
@@ -33,17 +33,13 @@ final class AddNewPlantCoordinator: Coordinator {
         imagePickerCoordinator.start()
         childCoordinators.append(imagePickerCoordinator)
     }
+    
+    func didFinishPicking(_ image: UIImage) {
+        completion?(image)
+    }
 }
 
 extension AddNewPlantCoordinator: AddPlantOutput {
-    
-    func succesAdding() {
-        navigationController.popViewController(animated: true)
-    }
-    
-    func addPlantFinish() {
-        parentCoordinator?.childDidFinish(self)
-    }
     
     func showAddNewPhotoAlert(completion: @escaping (UIImage) -> Void) {
         self.completion = completion
@@ -53,8 +49,12 @@ extension AddNewPlantCoordinator: AddPlantOutput {
         childCoordinators.append(choosePhotoAlertCoordinator)
     }
     
-    func didFinishPicking(_ image: UIImage) {
-        completion?(image)
+    func succesAdding() {
+        navigationController.popViewController(animated: true)
+    }
+    
+    func addPlantFinish() {
+        parentCoordinator?.childDidFinish(self)
     }
 
 }

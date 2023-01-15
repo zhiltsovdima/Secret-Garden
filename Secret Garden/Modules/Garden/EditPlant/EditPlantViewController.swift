@@ -24,7 +24,7 @@ final class EditPlantViewController: DetailBaseController {
                                               font: Resources.Fonts.generalBold)
     lazy private var chooseImageButton = createButton(isBase: false,
                                                       title: "Choose new",
-                                                      selector: #selector(choosePhotoAlert))
+                                                      selector: #selector(addNewPhotoTapped))
     lazy private var saveButton = createButton(isBase: true,
                                                title: Resources.Strings.Common.save,
                                                selector: #selector(saveButtonTapped))
@@ -65,10 +65,16 @@ final class EditPlantViewController: DetailBaseController {
         viewModel.validateCompletion = { [weak self] statusText in
             self?.validStatusLabel.text = statusText
         }
+        viewModel.updateImageCompletion = { [weak self] image in
+            self?.plantImageView.image = image
+        }
     }
     
     @objc private func saveButtonTapped() {
         viewModel.saveButtonTapped(name: nameTextField.text, image: plantImageView.image)
+    }
+    @objc private func addNewPhotoTapped() {
+        viewModel.addNewPhotoTapped()
     }
     
     override func setupConstraints() {
@@ -100,48 +106,6 @@ final class EditPlantViewController: DetailBaseController {
             saveButton.widthAnchor.constraint(equalToConstant: 150),
             saveButton.topAnchor.constraint(equalTo: chooseImageButton.bottomAnchor, constant: 20)
         ])
-    }
-}
-
-// MARK: - UIImagePickerController
-
-extension EditPlantViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-
-    private func showImagePickerController(sourceType: UIImagePickerController.SourceType) {
-        let imagePickerController = UIImagePickerController()
-        imagePickerController.delegate = self
-        imagePickerController.sourceType = sourceType
-        present(imagePickerController, animated: true)
-    }
-
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-
-        if let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            plantImageView.image = originalImage
-        }
-        dismiss(animated: true)
-    }
-}
-
-// MARK: - UIAlertController
-
-extension EditPlantViewController {
-    
-    @objc private func choosePhotoAlert() {
-        let alertController = UIAlertController(title: Resources.Strings.AddPlant.titleAlert, message: nil, preferredStyle: .actionSheet)
-        let cameraAction = UIAlertAction(title: Resources.Strings.AddPlant.camera, style: .default) { [weak self] action in
-            self?.showImagePickerController(sourceType: .camera)
-        }
-        let photoLibraryAction = UIAlertAction(title: Resources.Strings.AddPlant.photoLibrary, style: .default) { [weak self] action in
-            self?.showImagePickerController(sourceType: .photoLibrary)
-        }
-        let cancelAction = UIAlertAction(title: Resources.Strings.Common.cancel, style: .cancel)
-        
-        alertController.addAction(cameraAction)
-        alertController.addAction(photoLibraryAction)
-        alertController.addAction(cancelAction)
-        present(alertController, animated: true)
-        
     }
 }
 

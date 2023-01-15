@@ -78,6 +78,7 @@ class DetailBaseController: UIViewController{
         button.setTitle(title, for: .normal)
         button.addTarget(self, action: selector, for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
+        detailView.makeSystemAnimation(for: button)
         detailView.addSubview(button)
         return button
     }

@@ -18,9 +18,9 @@ enum ValidateError: String, Error {
 protocol AddPlantViewModelProtocol: AnyObject {
     var validateCompletion: ((String?) -> Void)? { get set }
     var updateImageCompletion: ((UIImage) -> Void)? { get set }
+    func addNewPhotoTapped()
     func saveButtonTapped(name: String?, image: UIImage?)
     func viewWillDisappear()
-    func addNewPhotoTapped()
 }
 
 // MARK: - AddPlantViewModel
@@ -54,6 +54,12 @@ final class AddPlantViewModel {
 
 extension AddPlantViewModel: AddPlantViewModelProtocol {
     
+    func addNewPhotoTapped() {
+        output?.showAddNewPhotoAlert { [weak self] image in
+            self?.updateImageCompletion?(image)
+        }
+    }
+    
     func saveButtonTapped(name: String?, image: UIImage?) {
         do {
             try validateNewPlant(name: name, image: image)
@@ -68,10 +74,5 @@ extension AddPlantViewModel: AddPlantViewModelProtocol {
     func viewWillDisappear() {
         output?.addPlantFinish()
     }
-    
-    func addNewPhotoTapped() {
-        output?.showAddNewPhotoAlert { [weak self] image in
-            self?.updateImageCompletion?(image)
-        }
-    }
+
 }
