@@ -62,6 +62,8 @@
 		62E9AFDA2913BD9100175A21 /* BaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9AFD92913BD9100175A21 /* BaseButton.swift */; };
 		62E9B0032916D4D300175A21 /* PlantOptionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9B0022916D4D300175A21 /* PlantOptionsTableViewController.swift */; };
 		62E9B0052917C77E00175A21 /* EditPlantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9B0042917C77E00175A21 /* EditPlantViewController.swift */; };
+		62EC9B1629743A740014CD84 /* ImagePickerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62EC9B1529743A740014CD84 /* ImagePickerCoordinator.swift */; };
+		62EC9B18297464E90014CD84 /* AlertCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62EC9B17297464E90014CD84 /* AlertCoordinator.swift */; };
 		62F7FD502970065B0055B60F /* DetailPlantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62F7FD4F2970065B0055B60F /* DetailPlantViewModel.swift */; };
 		62F7FD52297006660055B60F /* DetailPlantIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62F7FD51297006660055B60F /* DetailPlantIO.swift */; };
 		62F7FD55297161B60055B60F /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62F7FD54297161B60055B60F /* AppCoordinator.swift */; };
@@ -145,6 +147,8 @@
 		62E9AFD92913BD9100175A21 /* BaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseButton.swift; sourceTree = "<group>"; };
 		62E9B0022916D4D300175A21 /* PlantOptionsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantOptionsTableViewController.swift; sourceTree = "<group>"; };
 		62E9B0042917C77E00175A21 /* EditPlantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPlantViewController.swift; sourceTree = "<group>"; };
+		62EC9B1529743A740014CD84 /* ImagePickerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerCoordinator.swift; sourceTree = "<group>"; };
+		62EC9B17297464E90014CD84 /* AlertCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertCoordinator.swift; sourceTree = "<group>"; };
 		62F7FD4F2970065B0055B60F /* DetailPlantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPlantViewModel.swift; sourceTree = "<group>"; };
 		62F7FD51297006660055B60F /* DetailPlantIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPlantIO.swift; sourceTree = "<group>"; };
 		62F7FD54297161B60055B60F /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
@@ -205,7 +209,6 @@
 		623A9F2E296C6AA000A3A17A /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				62F7FD5E297179E10055B60F /* TabCoordinator.swift */,
 				62E9AFDF2915019300175A21 /* Home */,
 				62F7FD692971B30A0055B60F /* Garden */,
 			);
@@ -361,7 +364,6 @@
 			children = (
 				62E9AF82290C2FF600175A21 /* AppDelegate.swift */,
 				62E9AF84290C2FF600175A21 /* SceneDelegate.swift */,
-				62F7FD54297161B60055B60F /* AppCoordinator.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -459,6 +461,10 @@
 		62F7FD53297161A40055B60F /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
+				62F7FD54297161B60055B60F /* AppCoordinator.swift */,
+				62F7FD5E297179E10055B60F /* TabCoordinator.swift */,
+				62EC9B17297464E90014CD84 /* AlertCoordinator.swift */,
+				62EC9B1529743A740014CD84 /* ImagePickerCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -645,6 +651,7 @@
 			files = (
 				627B6A2E296EBD310072C1D7 /* PlantOptionsViewModel.swift in Sources */,
 				623A9F39296D782300A3A17A /* AddPlantIO.swift in Sources */,
+				62EC9B1629743A740014CD84 /* ImagePickerCoordinator.swift in Sources */,
 				62F7FD5D29716F560055B60F /* ShopCoordinator.swift in Sources */,
 				620332EA2921583F00ADE1A1 /* CategoryCell.swift in Sources */,
 				62A69DB12931FFB0007228EB /* CartCell.swift in Sources */,
@@ -692,6 +699,7 @@
 				62E9B0052917C77E00175A21 /* EditPlantViewController.swift in Sources */,
 				62E9AFC72911051500175A21 /* Plant.swift in Sources */,
 				620332F92923E90B00ADE1A1 /* DBManager.swift in Sources */,
+				62EC9B18297464E90014CD84 /* AlertCoordinator.swift in Sources */,
 				62B36A3E29573F110052454B /* NetworkError.swift in Sources */,
 				62E9AF85290C2FF600175A21 /* SceneDelegate.swift in Sources */,
 				62E9AFC2290EAB4500175A21 /* NavBarController.swift in Sources */,

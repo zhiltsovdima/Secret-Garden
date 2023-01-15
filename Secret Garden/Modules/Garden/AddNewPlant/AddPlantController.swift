@@ -42,7 +42,7 @@ final class AddPlantController: UIViewController {
         
         setupUI()
         setupConstraints()
-        updateValidStatus()
+        setUpdatesUI()
         configureTapGesture(to: plantImageView)
         configureTapGesture(to: view)
     }
@@ -56,9 +56,12 @@ final class AddPlantController: UIViewController {
         view.backgroundColor = Resources.Colors.backgroundColor
     }
 
-    private func updateValidStatus() {
+    private func setUpdatesUI() {
         viewModel.validateCompletion = { [weak self] statusText in
             self?.validStatusLabel.text = statusText
+        }
+        viewModel.updateImageCompletion = { [weak self] image in
+            self?.plantImageView.image = image
         }
     }
     
@@ -69,8 +72,8 @@ final class AddPlantController: UIViewController {
     @objc private func handleTap() {
         view.endEditing(true)
     }
-    @objc private func tapPhoto() {
-        choosePhotoAlert()
+    @objc private func addPhotoTapped() {
+        viewModel.addNewPhotoTapped()
     }
 }
 
@@ -172,52 +175,9 @@ extension AddPlantController {
     private func configureTapGesture(to selectedView: UIView) {
         if let imageView = selectedView as? UIImageView {
             imageView.isUserInteractionEnabled = true
-            imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapPhoto)))
+            imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(addPhotoTapped)))
         } else {
             selectedView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
         }
-    }
-}
-
-// MARK: - UIImagePickerController
-
-extension AddPlantController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
-    private func showImagePickerController(sourceType: UIImagePickerController.SourceType) {
-        let imagePickerController = UIImagePickerController()
-        imagePickerController.delegate = self
-        imagePickerController.sourceType = sourceType
-        present(imagePickerController, animated: true)
-    }
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
-        if let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            let image = originalImage.jpegCompress(.low).map { UIImage(data: $0) } ?? Resources.Images.Common.defaultPlant
-            plantImageView.image = image
-            validStatusLabel.text = ""
-        }
-        dismiss(animated: true)
-    }
-}
-
-// MARK: - UIAlertController
-
-extension AddPlantController {
-    
-    private func choosePhotoAlert() {
-        let alertController = UIAlertController(title: Resources.Strings.AddPlant.titleAlert, message: nil, preferredStyle: .actionSheet)
-        let cameraAction = UIAlertAction(title: Resources.Strings.AddPlant.camera, style: .default) { [weak self] action in
-            self?.showImagePickerController(sourceType: .camera)
-        }
-        let photoLibraryAction = UIAlertAction(title: Resources.Strings.AddPlant.photoLibrary, style: .default) { [weak self] action in
-            self?.showImagePickerController(sourceType: .photoLibrary)
-        }
-        let cancelAction = UIAlertAction(title: Resources.Strings.Common.cancel, style: .cancel)
-        
-        alertController.addAction(cameraAction)
-        alertController.addAction(photoLibraryAction)
-        alertController.addAction(cancelAction)
-        present(alertController, animated: true)
     }
 }

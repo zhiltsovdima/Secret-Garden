@@ -5,12 +5,13 @@
 //  Created by Dima Zhiltsov on 10.01.2023.
 //
 
-import Foundation
+import UIKit.UIImage
 
 // MARK: - PlantsOutput
 
 protocol AddPlantOutput: AnyObject {
     func succesAdding()
     func addPlantFinish()
+    func showAddNewPhotoAlert(completion: @escaping (UIImage) -> Void)
 }
 
