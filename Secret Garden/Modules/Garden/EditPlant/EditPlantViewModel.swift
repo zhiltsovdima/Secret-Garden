@@ -73,6 +73,7 @@ extension EditPlantViewModel: EditPlantViewModelProtocol {
         do {
             try validateNewPlant(name: name, image: image)
             garden.updatePlant(name: name, image: image, indexPath.row)
+            garden.saveToFile()
             coordinator?.succesEditing()
         } catch {
             let validateError = error as? ValidateError

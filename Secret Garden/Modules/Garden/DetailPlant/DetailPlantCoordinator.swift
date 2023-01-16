@@ -15,12 +15,12 @@ protocol DetailPlantCoordinatorProtocol: AnyObject {
 final class DetailPlantCoordinator: Coordinator {
     
     var childCoordinators: [Coordinator] = []
-    var parentCoordinator: GardenCoordinator?
+    var parentCoordinator: Coordinator?
     
     private let navigationController: UINavigationController
     private let garden: Garden
     private let index: Int
-        
+    
     init(_ navigationController: UINavigationController, _ garden: Garden, index: Int) {
         self.navigationController = navigationController
         self.garden = garden
@@ -33,6 +33,8 @@ final class DetailPlantCoordinator: Coordinator {
         navigationController.pushViewController(detailView, animated: true)
     }
 }
+
+// MARK: - DetailPlantCoordinatorProtocol
 
 extension DetailPlantCoordinator: DetailPlantCoordinatorProtocol {
     

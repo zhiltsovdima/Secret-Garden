@@ -211,8 +211,8 @@
 			isa = PBXGroup;
 			children = (
 				62F7FD56297163E30055B60F /* GardenCoordinator.swift */,
-				62E9AFBD290D40AF00175A21 /* GardenViewController.swift */,
 				623A9F30296C6AF400A3A17A /* GardenViewModel.swift */,
+				62E9AFBD290D40AF00175A21 /* GardenViewController.swift */,
 				623A9F32296C71A800A3A17A /* Cell */,
 			);
 			path = Garden;
@@ -230,8 +230,8 @@
 			isa = PBXGroup;
 			children = (
 				62F7FD582971674A0055B60F /* AddNewPlantCoordinator.swift */,
-				62E9AFD029116D9E00175A21 /* AddPlantController.swift */,
 				623A9F36296CC41900A3A17A /* AddPlantViewModel.swift */,
+				62E9AFD029116D9E00175A21 /* AddPlantController.swift */,
 			);
 			path = AddNewPlant;
 			sourceTree = "<group>";
@@ -240,8 +240,8 @@
 			isa = PBXGroup;
 			children = (
 				62F7FD652971A2070055B60F /* PlantOptionsCoordinator.swift */,
-				62E9B0022916D4D300175A21 /* PlantOptionsTableViewController.swift */,
 				627B6A2D296EBD310072C1D7 /* PlantOptionsViewModel.swift */,
+				62E9B0022916D4D300175A21 /* PlantOptionsTableViewController.swift */,
 			);
 			path = PlantOptions;
 			sourceTree = "<group>";
@@ -250,8 +250,8 @@
 			isa = PBXGroup;
 			children = (
 				62F7FD672971A70F0055B60F /* EditPlantCoordinator.swift */,
-				62E9B0042917C77E00175A21 /* EditPlantViewController.swift */,
 				627B6A30296EF5C60072C1D7 /* EditPlantViewModel.swift */,
+				62E9B0042917C77E00175A21 /* EditPlantViewController.swift */,
 			);
 			path = EditPlant;
 			sourceTree = "<group>";
@@ -439,8 +439,8 @@
 			isa = PBXGroup;
 			children = (
 				62F7FD6229719EB90055B60F /* DetailPlantCoordinator.swift */,
-				626FA06E291CFC0E00FEB461 /* DetailPlantController.swift */,
 				62F7FD4F2970065B0055B60F /* DetailPlantViewModel.swift */,
+				626FA06E291CFC0E00FEB461 /* DetailPlantController.swift */,
 				62F7FD4E296FFD910055B60F /* Cell */,
 			);
 			path = DetailPlant;

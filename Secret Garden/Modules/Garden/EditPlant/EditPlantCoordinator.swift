@@ -13,10 +13,10 @@ protocol EditPlantCoordinatorProtocol: AnyObject {
     func showAddNewPhotoAlert(completion: @escaping (UIImage) -> Void)
 }
 
-final class EditPlantCoordinator: Coordinator, ImagePickable {
+final class EditPlantCoordinator: Coordinator {
     
     var childCoordinators: [Coordinator] = []
-    var parentCoordinator: PlantOptionsCoordinator?
+    var parentCoordinator: Coordinator?
     private var completion: ((UIImage) -> Void)?
     
     private let navigationController: UINavigationController
@@ -40,6 +40,11 @@ final class EditPlantCoordinator: Coordinator, ImagePickable {
         guard let modalNavigationController else { return }
         navigationController.present(modalNavigationController, animated: true)
     }
+}
+
+// MARK: - ImagePickableProtocol
+
+extension EditPlantCoordinator: ImagePickable {
     
     func showImagePicker(sourceType: UIImagePickerController.SourceType) {
         guard let modalNavigationController else { return }
@@ -53,6 +58,8 @@ final class EditPlantCoordinator: Coordinator, ImagePickable {
         completion?(image)
     }
 }
+
+// MARK: - EditPlantCoordinatorProtocol
 
 extension EditPlantCoordinator: EditPlantCoordinatorProtocol {
     

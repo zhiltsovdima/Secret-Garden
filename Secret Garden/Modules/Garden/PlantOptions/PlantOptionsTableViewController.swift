@@ -10,7 +10,7 @@ import UIKit
 final class PlantOptionsTableViewController: UITableViewController {
     
     private let viewModel: PlantOptionsViewModelProtocol
-
+    
     init(viewModel: PlantOptionsViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -35,6 +35,11 @@ final class PlantOptionsTableViewController: UITableViewController {
         tableView.isScrollEnabled = false
         tableView.backgroundColor = Resources.Colors.backgroundFields
     }
+}
+ 
+// MARK: - TableView Delegate & DataSource
+
+extension PlantOptionsTableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.tableData.count

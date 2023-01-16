@@ -13,10 +13,10 @@ protocol AddNewPlantCoordinatorProtocol: AnyObject {
     func showAddNewPhotoAlert(completion: @escaping (UIImage) -> Void)
 }
 
-final class AddNewPlantCoordinator: Coordinator, ImagePickable {
+final class AddNewPlantCoordinator: Coordinator {
     
     var childCoordinators: [Coordinator] = []
-    var parentCoordinator: GardenCoordinator?
+    var parentCoordinator: Coordinator?
     private var completion: ((UIImage) -> Void)?
     
     private let navigationController: UINavigationController
@@ -32,6 +32,11 @@ final class AddNewPlantCoordinator: Coordinator, ImagePickable {
         let addNewPlantView = AddPlantController(viewModel: viewModel)
         navigationController.pushViewController(addNewPlantView, animated: true)
     }
+}
+
+// MARK: - ImagePickableProtocol
+
+extension AddNewPlantCoordinator: ImagePickable {
     
     func showImagePicker(sourceType: UIImagePickerController.SourceType) {
         let imagePickerCoordinator = ImagePickerCoordinator(navigationController, sourceType: sourceType)
@@ -44,6 +49,8 @@ final class AddNewPlantCoordinator: Coordinator, ImagePickable {
         completion?(image)
     }
 }
+
+// MARK: - AddNewPlantCoordinatorProtocol
 
 extension AddNewPlantCoordinator: AddNewPlantCoordinatorProtocol {
     

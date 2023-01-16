@@ -34,11 +34,10 @@ final class GardenCoordinator: Coordinator {
     func getController() -> UINavigationController {
         return navigationController
     }
-    
-    func childDidFinish(_ childCoordinator: Coordinator) {
-        childCoordinators.removeAll(where: {$0 === childCoordinator})
-    }
+
 }
+
+// MARK: - GardenCoordinatorProtocol
 
 extension GardenCoordinator: GardenCoordinatorProtocol {
     

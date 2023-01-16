@@ -9,14 +9,14 @@ import UIKit.UINavigationController
 
 protocol PlantOptionsCoordinatorProtocol: AnyObject {
     func showEdit(_ indexPath: IndexPath)
-    func deletePlant()
+    func succesDeleting()
     func plantOptionsFinish()
 }
 
 final class PlantOptionsCoordinator: NSObject, Coordinator {
     
     var childCoordinators: [Coordinator] = []
-    var parentCoordinator: GardenCoordinator?
+    var parentCoordinator: Coordinator?
     
     private let navigationController: UINavigationController
     private let garden: Garden
@@ -56,6 +56,8 @@ final class PlantOptionsCoordinator: NSObject, Coordinator {
     }    
 }
 
+// MARK: - PlantOptionsCoordinatorProtocol
+
 extension PlantOptionsCoordinator: PlantOptionsCoordinatorProtocol {
     
     func showEdit(_ indexPath: IndexPath) {
@@ -65,7 +67,7 @@ extension PlantOptionsCoordinator: PlantOptionsCoordinatorProtocol {
         childCoordinators.append(editPlantCoordinator)
     }
     
-    func deletePlant() {
+    func succesDeleting() {
         navigationController.dismiss(animated: true)
     }
     
@@ -74,6 +76,8 @@ extension PlantOptionsCoordinator: PlantOptionsCoordinatorProtocol {
     }
 
 }
+
+// MARK: - UIPopoverPresentationControllerDelegate
 
 extension PlantOptionsCoordinator: UIPopoverPresentationControllerDelegate {
     
