@@ -7,6 +7,12 @@
 
 import UIKit.UINavigationController
 
+protocol AddNewPlantCoordinatorProtocol: AnyObject {
+    func succesAdding()
+    func addPlantFinish()
+    func showAddNewPhotoAlert(completion: @escaping (UIImage) -> Void)
+}
+
 final class AddNewPlantCoordinator: Coordinator, ImagePickable {
     
     var childCoordinators: [Coordinator] = []
@@ -22,7 +28,7 @@ final class AddNewPlantCoordinator: Coordinator, ImagePickable {
     }
     
     func start() {
-        let viewModel = AddPlantViewModel(output: self, garden: garden)
+        let viewModel = AddPlantViewModel(coordinator: self, garden: garden)
         let addNewPlantView = AddPlantController(viewModel: viewModel)
         navigationController.pushViewController(addNewPlantView, animated: true)
     }
@@ -39,7 +45,7 @@ final class AddNewPlantCoordinator: Coordinator, ImagePickable {
     }
 }
 
-extension AddNewPlantCoordinator: AddPlantOutput {
+extension AddNewPlantCoordinator: AddNewPlantCoordinatorProtocol {
     
     func showAddNewPhotoAlert(completion: @escaping (UIImage) -> Void) {
         self.completion = completion

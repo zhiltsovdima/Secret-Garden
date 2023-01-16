@@ -25,12 +25,12 @@ final class PlantOptionsViewModel {
         Resources.Strings.Options.delete
     ]
     
-    private weak var output: PlantOptionsOutput?
+    private weak var coordinator: PlantOptionsCoordinatorProtocol?
     private let garden: Garden
     private let indexPath: IndexPath
             
-    init(output: PlantOptionsOutput, _ garden: Garden, _ indexPath: IndexPath) {
-        self.output = output
+    init(coordinator: PlantOptionsCoordinatorProtocol, _ garden: Garden, _ indexPath: IndexPath) {
+        self.coordinator = coordinator
         self.garden = garden
         self.indexPath = indexPath
     }
@@ -42,15 +42,15 @@ final class PlantOptionsViewModel {
 extension PlantOptionsViewModel: PlantOptionsViewModelProtocol {
     
     func editButtonTapped() {
-        output?.showEdit(indexPath)
+        coordinator?.showEdit(indexPath)
     }
     
     func deleteButtonTapped() {
         garden.removePlant(at: indexPath.row)
-        output?.deletePlant()
+        coordinator?.deletePlant()
     }
     
     func viewWillDisappear() {
-        output?.plantOptionsFinish()
+        coordinator?.plantOptionsFinish()
     }
 }

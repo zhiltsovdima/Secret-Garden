@@ -30,15 +30,15 @@ final class EditPlantViewModel {
     
     var viewData: PlantModel!
     
-    private weak var output: EditPlantOutput?
+    private weak var coordinator: EditPlantCoordinatorProtocol?
     private let garden: Garden
     private let indexPath: IndexPath
     
     var validateCompletion: ((String?) -> Void)?
     var updateImageCompletion: ((UIImage) -> Void)?
             
-    init(output: EditPlantOutput, _ garden: Garden, _ indexPath: IndexPath) {
-        self.output = output
+    init(coordinator: EditPlantCoordinatorProtocol, _ garden: Garden, _ indexPath: IndexPath) {
+        self.coordinator = coordinator
         self.garden = garden
         self.indexPath = indexPath
         self.getViewData()
@@ -64,7 +64,7 @@ final class EditPlantViewModel {
 extension EditPlantViewModel: EditPlantViewModelProtocol {
     
     func addNewPhotoTapped() {
-        output?.showAddNewPhotoAlert { [weak self] image in
+        coordinator?.showAddNewPhotoAlert { [weak self] image in
             self?.updateImageCompletion?(image)
         }
     }
@@ -73,7 +73,7 @@ extension EditPlantViewModel: EditPlantViewModelProtocol {
         do {
             try validateNewPlant(name: name, image: image)
             garden.updatePlant(name: name, image: image, indexPath.row)
-            output?.succesEditing()
+            coordinator?.succesEditing()
         } catch {
             let validateError = error as? ValidateError
             validateCompletion?(validateError?.rawValue)
@@ -81,6 +81,6 @@ extension EditPlantViewModel: EditPlantViewModelProtocol {
     }
     
     func viewWillDisappear() {
-        output?.editPlantFinish()
+        coordinator?.editPlantFinish()
     }
 }

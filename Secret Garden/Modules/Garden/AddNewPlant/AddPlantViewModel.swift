@@ -27,15 +27,15 @@ protocol AddPlantViewModelProtocol: AnyObject {
 
 final class AddPlantViewModel {
     
-    private weak var output: AddPlantOutput?
+    private weak var coordinator: AddNewPlantCoordinatorProtocol?
 
     private let garden: Garden
     
     var validateCompletion: ((String?) -> Void)?
     var updateImageCompletion: ((UIImage) -> Void)?
             
-    init(output: AddPlantOutput, garden: Garden) {
-        self.output = output
+    init(coordinator: AddNewPlantCoordinatorProtocol, garden: Garden) {
+        self.coordinator = coordinator
         self.garden = garden
     }
 
@@ -55,7 +55,7 @@ final class AddPlantViewModel {
 extension AddPlantViewModel: AddPlantViewModelProtocol {
     
     func addNewPhotoTapped() {
-        output?.showAddNewPhotoAlert { [weak self] image in
+        coordinator?.showAddNewPhotoAlert { [weak self] image in
             self?.updateImageCompletion?(image)
         }
     }
@@ -64,7 +64,7 @@ extension AddPlantViewModel: AddPlantViewModelProtocol {
         do {
             try validateNewPlant(name: name, image: image)
             garden.addNewPlant(name: name!, image: image!)
-            output?.succesAdding()
+            coordinator?.succesAdding()
         } catch {
             let validateError = error as? ValidateError
             validateCompletion?(validateError?.rawValue)
@@ -72,7 +72,7 @@ extension AddPlantViewModel: AddPlantViewModelProtocol {
     }
     
     func viewWillDisappear() {
-        output?.addPlantFinish()
+        coordinator?.addPlantFinish()
     }
 
 }

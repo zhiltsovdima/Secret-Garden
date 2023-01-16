@@ -33,7 +33,7 @@ protocol GardenViewModelProtocol: AnyObject {
 
 final class GardenViewModel {
 
-    private weak var output: GardenOutput?
+    private weak var coordinator: GardenCoordinatorProtocol?
     private let garden: Garden
     private(set) var tableData = [PlantCellModel]()
     
@@ -41,8 +41,8 @@ final class GardenViewModel {
     var insertTabelData: (() -> Void)?
     var deleteTabelData: ((Int) -> Void)?
     
-    init(output: GardenOutput, garden: Garden) {
-        self.output = output
+    init(coordinator: GardenCoordinatorProtocol, garden: Garden) {
+        self.coordinator = coordinator
         self.garden = garden
         self.updateModel()
         self.setUpdate()
@@ -79,15 +79,15 @@ extension GardenViewModel: GardenViewModelProtocol {
     }
     
     func addNewPlantTapped() {
-        output?.showAddNewPlant()
+        coordinator?.showAddNewPlant()
     }
     
     func rowTapped(_ rowInt: Int) {
-        output?.showPlantDetail(rowInt)
+        coordinator?.showPlantDetail(rowInt)
     }
     
     func settingsTapped(_ cell: PlantCell) {
-        output?.showOptions(cell)
+        coordinator?.showOptions(cell)
     }
 
 

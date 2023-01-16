@@ -7,7 +7,13 @@
 
 import UIKit.UINavigationController
 
-final class PlantOptionsCoordinator: Coordinator {
+protocol PlantOptionsCoordinatorProtocol: AnyObject {
+    func showEdit(_ indexPath: IndexPath)
+    func deletePlant()
+    func plantOptionsFinish()
+}
+
+final class PlantOptionsCoordinator: NSObject, Coordinator {
     
     var childCoordinators: [Coordinator] = []
     var parentCoordinator: GardenCoordinator?
@@ -26,12 +32,12 @@ final class PlantOptionsCoordinator: Coordinator {
         guard let vc = navigationController.topViewController as? GardenViewController else { return }
         guard let indexPath = vc.tableView.indexPath(for: cell) else { return }
         
-        let viewModel = PlantOptionsViewModel(output: self, garden, indexPath)
+        let viewModel = PlantOptionsViewModel(coordinator: self, garden, indexPath)
         let optionsView = PlantOptionsTableViewController(viewModel: viewModel)
         
         optionsView.modalPresentationStyle = .popover
         let popoverVC = optionsView.popoverPresentationController
-        popoverVC?.delegate = vc
+        popoverVC?.delegate = self
         popoverVC?.sourceView = cell.settingsButton
         popoverVC?.sourceRect = CGRect(x: cell.settingsButton.bounds.minX - 70,
                                        y: cell.settingsButton.bounds.midY + 7,
@@ -50,7 +56,7 @@ final class PlantOptionsCoordinator: Coordinator {
     }    
 }
 
-extension PlantOptionsCoordinator: PlantOptionsOutput {
+extension PlantOptionsCoordinator: PlantOptionsCoordinatorProtocol {
     
     func showEdit(_ indexPath: IndexPath) {
         let editPlantCoordinator = EditPlantCoordinator(navigationController, garden, indexPath)
@@ -67,4 +73,12 @@ extension PlantOptionsCoordinator: PlantOptionsOutput {
         parentCoordinator?.childDidFinish(self)
     }
 
+}
+
+extension PlantOptionsCoordinator: UIPopoverPresentationControllerDelegate {
+    
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
+    }
+    
 }

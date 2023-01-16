@@ -9,8 +9,8 @@ import UIKit
 
 // MARK: - GardenViewControllerProtocol
 
-protocol GardenViewControllerProtocol: AnyObject, UIPopoverPresentationControllerDelegate {
-    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle
+protocol GardenViewControllerProtocol: AnyObject {
+    
 }
 
 // MARK: - GardenViewController
@@ -108,14 +108,5 @@ extension GardenViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         viewModel.rowTapped(indexPath.row)
         tableView.deselectRow(at: indexPath, animated: true)
-    }
-}
-
-// MARK: - PlantsViewControllerProtocol
-
-extension GardenViewController: GardenViewControllerProtocol {
-    
-    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
-        return .none
     }
 }

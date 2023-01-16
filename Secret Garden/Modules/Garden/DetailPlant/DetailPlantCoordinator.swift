@@ -7,6 +7,11 @@
 
 import UIKit.UINavigationController
 
+protocol DetailPlantCoordinatorProtocol: AnyObject {
+    func detailPlantFinish()
+
+}
+
 final class DetailPlantCoordinator: Coordinator {
     
     var childCoordinators: [Coordinator] = []
@@ -23,13 +28,13 @@ final class DetailPlantCoordinator: Coordinator {
     }
     
     func start() {
-        let viewModel = DetailPlantViewModel(output: self, garden, index)
+        let viewModel = DetailPlantViewModel(coordinator: self, garden, index)
         let detailView = DetailPlantController(viewModel: viewModel)
         navigationController.pushViewController(detailView, animated: true)
     }
 }
 
-extension DetailPlantCoordinator: DetailPlantOutput {
+extension DetailPlantCoordinator: DetailPlantCoordinatorProtocol {
     
     func detailPlantFinish() {
         parentCoordinator?.childDidFinish(self)

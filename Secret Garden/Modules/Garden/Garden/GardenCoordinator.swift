@@ -7,6 +7,12 @@
 
 import UIKit.UINavigationController
 
+protocol GardenCoordinatorProtocol: AnyObject {
+    func showAddNewPlant()
+    func showPlantDetail(_ index: Int)
+    func showOptions(_ cell: PlantCell)
+}
+
 final class GardenCoordinator: Coordinator {
     
     var childCoordinators: [Coordinator] = []
@@ -20,7 +26,7 @@ final class GardenCoordinator: Coordinator {
     }
     
     func start() {
-        let viewModel = GardenViewModel(output: self, garden: garden)
+        let viewModel = GardenViewModel(coordinator: self, garden: garden)
         let plantViewController = GardenViewController(viewModel: viewModel)
         navigationController.setViewControllers([plantViewController], animated: false)
     }
@@ -34,7 +40,7 @@ final class GardenCoordinator: Coordinator {
     }
 }
 
-extension GardenCoordinator: GardenOutput {
+extension GardenCoordinator: GardenCoordinatorProtocol {
     
     func showAddNewPlant() {
         let addNewPlantCoordinator = AddNewPlantCoordinator(navigationController, garden)
@@ -56,6 +62,5 @@ extension GardenCoordinator: GardenOutput {
         optionsCoordinator.parentCoordinator = self
         childCoordinators.append(optionsCoordinator)
     }
-    
     
 }

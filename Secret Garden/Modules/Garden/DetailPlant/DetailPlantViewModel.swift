@@ -34,12 +34,12 @@ final class DetailPlantViewModel {
     
     var updateCompletion: ((Bool) -> Void)?
         
-    private weak var output: DetailPlantOutput?
+    private weak var coordinator: DetailPlantCoordinatorProtocol?
     private let garden: Garden
     private let index: Int
             
-    init(output: DetailPlantOutput, _ garden: Garden, _ index: Int) {
-        self.output = output
+    init(coordinator: DetailPlantCoordinatorProtocol, _ garden: Garden, _ index: Int) {
+        self.coordinator = coordinator
         self.garden = garden
         self.index = index
         self.getViewData()
@@ -100,7 +100,7 @@ final class DetailPlantViewModel {
 extension DetailPlantViewModel: DetailPlantViewModelProtocol {
     
     func viewWillDisappear() {
-        output?.detailPlantFinish()
+        coordinator?.detailPlantFinish()
     }
     
 }
