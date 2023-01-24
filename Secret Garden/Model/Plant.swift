@@ -17,27 +17,6 @@ class Plant: Codable {
         self.name = name
         self.imageData = image
     }
-    
-    func downloadFeatures(completion: ((Features?, String?) -> Void)?) {
-        if let features {
-            completion?(features, nil)
-            return
-        }
-        guard !isFetched else { completion?(nil, NetworkError.noDataForThisName.rawValue); return }
-        NetworkManager.shared.getPlant(by: name) { [weak self] result in
-            switch result {
-            case .success(let features):
-                self?.features = features
-                self?.isFetched = true
-                completion?(features, nil)
-            case .failure(let error):
-                if error == NetworkError.noDataForThisName {
-                    self?.isFetched = true
-                }
-                completion?(nil, error.rawValue)
-            }
-        }
-    }
 }
 
 struct PlantImageData: Codable {
@@ -59,8 +38,8 @@ struct Features {
     let watering: String
     let insects: [String]
     
-    let tempMin: Int
-    let tempMax: Int
+    private let tempMin: Int
+    private let tempMax: Int
     
     var temperature: String {
         "From \(tempMin) to \(tempMax)"

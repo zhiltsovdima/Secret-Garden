@@ -15,7 +15,8 @@ final class GardenTests: XCTestCase {
     var image = Resources.Images.Common.defaultPlant!
     
     override func setUpWithError() throws {
-        garden = Garden()
+        let networkManager = MockNetworkManager()
+        garden = Garden(networkManager: networkManager)
     }
 
     override func tearDownWithError() throws {
@@ -43,6 +44,18 @@ final class GardenTests: XCTestCase {
         let newName = "Bar"
         garden.updatePlant(name: newName, image: image, rowInt)
         XCTAssertEqual(garden.plants[rowInt].name, newName)
+    }
+    
+    func testDownloadFeaturesFailed() throws {
+        let failure = "Failure"
+        garden.addNewPlant(name: failure, image: image)
+        let plant = garden.plants[0]
+        var error: String?
+        garden.downloadFeatures(for: plant) { features, errorMessage in
+            guard let errorMessage else { return }
+            error = errorMessage
+        }
+        XCTAssertNotNil(error)
     }
 
 }

@@ -7,22 +7,64 @@
 
 import UIKit
 
-class Garden {
-    var plants = [Plant]()
+class Garden: GardenProtocol {
+    private(set) var plants = [Plant]()
+    private let networkManager: NetworkManagerProtocol
     
     var updatePlantsCompletion: ((TypeOfChangeModel, Int?) -> Void)?
     
-    var isItEmpty: Bool {
-        plants.isEmpty
-    }
-    
-    init() {
-        loadFromFile()
+    init(networkManager: NetworkManagerProtocol) {
+        self.networkManager = networkManager
     }
     
     func getAllPlants() -> [Plant] {
         return plants
     }
+    
+    func updatePlant(name: String?, image: UIImage?, _ rowInt: Int) {
+        plants[rowInt].name = name!
+        plants[rowInt].imageData = PlantImageData(image!)
+        plants[rowInt].isFetched = false
+        updatePlantsCompletion?(.update, rowInt)
+    }
+    
+    func addNewPlant(name: String, image: UIImage) {
+        let imageData = PlantImageData(image)
+        let plant = Plant(name: name, image: imageData)
+        plants.insert(plant, at: 0)
+        updatePlantsCompletion?(.insert, nil)
+    }
+    
+    func removePlant(at index: Int) {
+        plants.remove(at: index)
+        updatePlantsCompletion?(.delete, index)
+    }
+    
+    func downloadFeatures(for plant: Plant, completion: ((Features?, String?) -> Void)?) {
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+//            completion?(FeaturesMock(), nil)
+//        }
+        if let features = plant.features {
+            completion?(features, nil)
+            return
+        }
+
+        guard !plant.isFetched else { completion?(nil, NetworkError.noDataForThisName.rawValue); return }
+        networkManager.getPlant(by: plant.name) { [unowned plant] result in
+            switch result {
+            case .success(let features):
+                plant.features = features
+                plant.isFetched = true
+                completion?(plant.features, nil)
+            case .failure(let error):
+                if error == NetworkError.noDataForThisName {
+                    plant.isFetched = true
+                }
+                completion?(nil, error.rawValue)
+            }
+        }
+    }
+
     
     private func checkAndCreateDirectory(at url: URL) {
         let isExist = checkExistingOfFile(at: url)
@@ -71,29 +113,5 @@ class Garden {
             let netError = NetworkError.handleError(error)
             print(netError.rawValue)
         }
-    }
-    
-    func updatePlant(name: String?, image: UIImage?, _ rowInt: Int) {
-        plants[rowInt].name = name!
-        plants[rowInt].imageData = PlantImageData(image!)
-        plants[rowInt].isFetched = false
-        updatePlantsCompletion?(.update, rowInt)
-    }
-    
-    func addNewPlant(name: String, image: UIImage) {
-        let imageData = PlantImageData(image)
-        let plant = Plant(name: name, image: imageData)
-        plants.insert(plant, at: 0)
-        updatePlantsCompletion?(.insert, nil)
-    }
-    
-    func addNewPlant(_ newPlant: Plant) {
-        plants.insert(newPlant, at: 0)
-        updatePlantsCompletion?(.insert, nil)
-    }
-    
-    func removePlant(at index: Int) {
-        plants.remove(at: index)
-        updatePlantsCompletion?(.delete, index)
     }
 }
