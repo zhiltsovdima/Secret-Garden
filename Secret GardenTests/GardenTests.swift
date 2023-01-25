@@ -51,10 +51,14 @@ final class GardenTests: XCTestCase {
         garden.addNewPlant(name: failure, image: image)
         let plant = garden.plants[0]
         var error: String?
+        let errorExpectation = expectation(description: "Expectation in " + #function)
+        
         garden.downloadFeatures(for: plant) { features, errorMessage in
             guard let errorMessage else { return }
             error = errorMessage
+            errorExpectation.fulfill()
         }
+        wait(for: [errorExpectation], timeout: 1.0)
         XCTAssertNotNil(error)
     }
 
