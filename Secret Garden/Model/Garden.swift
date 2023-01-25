@@ -41,9 +41,6 @@ class Garden: GardenProtocol {
     }
     
     func downloadFeatures(for plant: Plant, completion: ((Features?, String?) -> Void)?) {
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-//            completion?(FeaturesMock(), nil)
-//        }
         if let features = plant.features {
             completion?(features, nil)
             return
