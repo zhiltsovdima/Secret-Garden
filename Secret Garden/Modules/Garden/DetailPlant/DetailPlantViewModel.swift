@@ -49,7 +49,7 @@ final class DetailPlantViewModel {
         let plant = garden.getAllPlants()[index]
         viewData = DetailPlantModel(name: plant.name, image: plant.imageData.image)
         
-        plant.downloadFeatures { [weak self] features, errorMessage in
+        garden.downloadFeatures(for: plant, completion: { [weak self] features, errorMessage in
             guard let features else {
                 self?.viewData.errorMessage = errorMessage
                 self?.updateCompletion?(false)
@@ -81,7 +81,7 @@ final class DetailPlantViewModel {
             self?.tableData = featuresData.compactMap { FeatureCellModel(featureImage: $0.0, featureValue: $0.1)}
             self?.viewData.latinName = features.latinName
             self?.updateCompletion?(true)
-        }
+        })
     }
     
     private func convertString(name: String, value: String) -> NSMutableAttributedString {

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class Garden: GardenProtocol {
+class Garden {
     private(set) var plants = [Plant]()
     private let networkManager: NetworkManagerProtocol
     
