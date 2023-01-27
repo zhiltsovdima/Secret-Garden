@@ -9,6 +9,17 @@ import UIKit
 
 final class ShopViewController: UIViewController {
     
+    private let viewModel: ShopViewModelProtocol
+    
+    init(viewModel: ShopViewModelProtocol) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     private let shop = Shop()
     
     private var filteredItems = [ShopItem]() {
