@@ -29,8 +29,8 @@ class ShopItem {
     var isFavorite = false
     var isAddedToCart = false
     
-    private var isDownloading = false
-    private var callback: ((UIImage?) -> Void)?
+    var isDownloading = false
+    var callback: ((UIImage?) -> Void)?
     
     init(name: String?, latinName: String?, category: String?, description: String?, price: String?, size: String?, petFriendly: String?, careLevel: String?, origin: String?, light: String?, humidity: String?, temperature: String?, imageString: String?) {
         self.name = name
@@ -46,26 +46,5 @@ class ShopItem {
         self.humidity = humidity
         self.temperature = temperature
         self.imageString = imageString
-    }
-    
-    func downloadData(completion: ((UIImage?) -> Void)?) {
-        if let image {
-            completion?(image)
-            return
-        }
-        
-        guard !isDownloading else {
-            self.callback = completion
-            return
-        }
-        isDownloading = true
-        
-        guard let imageString else { return }
-        DBManager.shared.getImage(name: imageString) { [weak self] fetchedImage in
-            self?.image = fetchedImage
-            self?.callback?(self?.image)
-            self?.callback = nil
-            completion?(self?.image)
-        }
     }
 }

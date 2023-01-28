@@ -11,28 +11,52 @@ class Shop {
     
     var items = [ShopItem]()
     
-    init() {
+    private let dbManager: DBManager
+    
+    init(dbManager: DBManager) {
+        self.dbManager = dbManager
         fetchData()
     }
     
-    var updateViewCompletion: ((Int, IndexPath?) -> Void)?
+    var updateViewCompletion: ((IndexPath) -> Void)?
     
-    func makeFavoriteItem(withId index: Int, at indexPath: IndexPath? = nil) {
-        items[index].isFavorite = !items[index].isFavorite
-        updateViewCompletion?(index, indexPath)
+    func makeFavoriteItem(withId id: Int, at indexPath: IndexPath) {
+        items[id].isFavorite = !items[id].isFavorite
+        updateViewCompletion?(indexPath)
     }
     
-    func makeAddedToCart(withId index: Int, at indexPath: IndexPath? = nil) {
-        items[index].isAddedToCart = !items[index].isAddedToCart
-        updateViewCompletion?(index, indexPath)
+    func makeAddedToCart(withId id: Int, at indexPath: IndexPath) {
+        items[id].isAddedToCart = !items[id].isAddedToCart
+        updateViewCompletion?(indexPath)
     }
     
     private func fetchData() {
-        DBManager.shared.getPost() { [weak self] shopItems in
+        dbManager.getPost() { [weak self] shopItems in
             self?.items = shopItems
             for index in self!.items.indices {
                 self?.items[index].id = index
             }
+        }
+    }
+    
+    func downloadData(for shopItem: ShopItem, completion: ((UIImage?) -> Void)?) {
+        if let image = shopItem.image {
+            completion?(image)
+            return
+        }
+        
+        guard !shopItem.isDownloading else {
+            shopItem.callback = completion
+            return
+        }
+        shopItem.isDownloading = true
+        
+        guard let imageString = shopItem.imageString else { return }
+        dbManager.getImage(name: imageString) { fetchedImage in
+            shopItem.image = fetchedImage
+            shopItem.callback?(shopItem.image)
+            shopItem.callback = nil
+            completion?(shopItem.image)
         }
     }
 }
