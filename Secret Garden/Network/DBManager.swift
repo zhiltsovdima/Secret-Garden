@@ -11,9 +11,7 @@ import FirebaseStorage
 import FirebaseDatabaseSwift
 
 struct DBManager {
-    
-    static let shared = DBManager()
-        
+            
     private func configureFB() -> Firestore {
         let dataBase = Firestore.firestore()
         return dataBase

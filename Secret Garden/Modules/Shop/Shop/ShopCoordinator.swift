@@ -19,7 +19,7 @@ final class ShopCoordinator: Coordinator {
             
     private var navigationController: UINavigationController
     
-    lazy private var shop = Shop()
+    lazy private var shop = Shop(dbManager: dbManager)
     private let dbManager = DBManager()
         
     init(_ navigationController: UINavigationController) {
