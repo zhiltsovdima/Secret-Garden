@@ -40,22 +40,15 @@ class Shop {
     }
     
     func downloadData(for shopItem: ShopItem, completion: ((UIImage?) -> Void)?) {
-        if let image = shopItem.image {
-            completion?(image)
+        if shopItem.image != nil {
             return
         }
-        
-        guard !shopItem.isDownloading else {
-            shopItem.callback = completion
-            return
-        }
+
         shopItem.isDownloading = true
         
         guard let imageString = shopItem.imageString else { return }
         dbManager.getImage(name: imageString) { fetchedImage in
             shopItem.image = fetchedImage
-            shopItem.callback?(shopItem.image)
-            shopItem.callback = nil
             completion?(shopItem.image)
         }
     }

@@ -7,11 +7,12 @@
 
 import Foundation
 
-// MARK: - GardenViewModelProtocol
+// MARK: - ShopViewModelProtocol
 
 protocol ShopViewModelProtocol: AnyObject {
     var collectionData: [ShopItemCellModel] { get }
     var updateCellCompletion: ((IndexPath?) -> Void)? { get set }
+    
     func updateModel(by: ShopCategory)
     func updateImage(with indexPath: IndexPath)
     func navBarFavoritesButtonTapped()
@@ -21,7 +22,7 @@ protocol ShopViewModelProtocol: AnyObject {
 
 }
 
-// MARK: - GardenViewModel
+// MARK: - ShopViewModel
 
 final class ShopViewModel {
     
@@ -46,26 +47,17 @@ final class ShopViewModel {
     
 }
 
+// MARK: - ShopViewModelProtocol
+
 extension ShopViewModel: ShopViewModelProtocol {
     
     func updateModel(by category: ShopCategory) {
-        var shopItems: [ShopItem]
-        
-        switch category {
-        case .all:
-            shopItems = shop.items
-                .sorted(by: { $0.name! < $1.name! })
-        case .indoor:
-            shopItems = shop.items
-                .filter { $0.category?.lowercased() == category.rawValue.lowercased() }
-        case .outdoor:
-            shopItems = shop.items
-                .filter { $0.category?.lowercased() == category.rawValue.lowercased() }
-        case .fertilizer:
-            shopItems = shop.items
-                .filter { $0.category?.lowercased() == category.rawValue.lowercased() }
+        var shopItems = shop.items
+            .sorted(by: { $0.name! < $1.name! })
+        if category == .indoor || category == .outdoor || category == .fertilizer {
+            shopItems = shopItems
+                .filter { $0.category == category }
         }
-        
         collectionData = shopItems
             .compactMap { ShopItemCellModel(
                 id: $0.id!,

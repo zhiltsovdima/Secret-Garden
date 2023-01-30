@@ -146,16 +146,7 @@ extension ShopViewController: UICollectionViewDelegate, UICollectionViewDataSour
                                                                      for: indexPath) as! CategoriesView
         header.congifure()
         header.selectCategoryHandler = { [weak self] selectedCategory in
-            switch selectedCategory {
-            case .all:
-                self?.viewModel.updateModel(by: selectedCategory)
-            case .indoor:
-                self?.viewModel.updateModel(by: selectedCategory)
-            case .outdoor:
-                self?.viewModel.updateModel(by: selectedCategory)
-            case .fertilizer:
-                self?.viewModel.updateModel(by: selectedCategory)
-            }
+            self?.viewModel.updateModel(by: selectedCategory)
         }
         return header
     }

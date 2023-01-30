@@ -70,6 +70,7 @@ final class ItemCell: UICollectionViewCell {
             addToCartButton.isHidden = false
             favoriteButton.isHidden = false
         } else {
+            imageView.image = nil
             spinner.startAnimating()
             isUserInteractionEnabled = false
             addToCartButton.isHidden = true

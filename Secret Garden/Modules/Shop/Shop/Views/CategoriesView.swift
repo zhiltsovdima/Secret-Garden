@@ -7,13 +7,6 @@
 
 import UIKit
 
-enum ShopCategory: String {
-    case all = "All"
-    case indoor = "Indoor"
-    case outdoor = "Outdoor"
-    case fertilizer = "Fertilizer"
-}
-
 final class CategoriesView: UICollectionReusableView {
     
     private let categories: [ShopCategory] = [
@@ -23,32 +16,26 @@ final class CategoriesView: UICollectionReusableView {
         .fertilizer
     ]
     
-    private var selectedCategory: ShopCategory = .all
+    private lazy var startedCategory = categories[0]
     
-    private let flowLayout = UICollectionViewFlowLayout()
     lazy var collectionView = UICollectionView(frame: self.bounds, collectionViewLayout: flowLayout)
-    
+    private let flowLayout = UICollectionViewFlowLayout()
+
     var selectCategoryHandler: ((ShopCategory) -> Void)?
     
-        
-    func congifure(selectedCategory: ShopCategory) {
-        self.selectedCategory = selectedCategory
-        setDelegates()
+    func congifure() {
+        addSubview(collectionView)
+        collectionView.delegate = self
+        collectionView.dataSource = self
         collectionView.backgroundColor = Resources.Colors.backgroundColor
+        collectionView.showsHorizontalScrollIndicator = false
         collectionView.register(CategoryCell.self, forCellWithReuseIdentifier: Resources.Identifiers.categoryCell)
         
-        addSubview(collectionView)
-        collectionView.showsHorizontalScrollIndicator = false
         flowLayout.scrollDirection = .horizontal
         flowLayout.sectionInset.right = Resources.Constants.shopVC.itemsSpacing
         flowLayout.sectionInset.left = Resources.Constants.shopVC.itemsSpacing
         flowLayout.minimumInteritemSpacing = Resources.Constants.shopVC.itemsSpacing
         flowLayout.minimumLineSpacing = Resources.Constants.shopVC.itemsSpacing
-    }
-    
-    private func setDelegates() {
-        collectionView.delegate = self
-        collectionView.dataSource = self
     }
 }
 
@@ -65,32 +52,26 @@ extension CategoriesView: UICollectionViewDelegate, UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Resources.Identifiers.categoryCell, for: indexPath) as! CategoryCell
         
         cell.setCategory(categories[indexPath.item].rawValue)
-        
-        if categories[indexPath.item] == selectedCategory {
+        if categories[indexPath.item] == startedCategory {
             collectionView.selectItem(at: indexPath, animated: false, scrollPosition: [])
-            //cell.isSelected = true
+            cell.isSelected = true
+            selectCategoryHandler?(categories[indexPath.item])
         } else {
             cell.isSelected = false
         }
-        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let selectedCategory1 = categories[indexPath.item]
         let cell = collectionView.cellForItem(at: indexPath)
         cell?.isUserInteractionEnabled = false
-//        print("\(selectedCategory.rawValue) select")
-        selectCategoryHandler?(selectedCategory1)
-
+        let selectedCategory = categories[indexPath.item]
+        selectCategoryHandler?(selectedCategory)
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath)
         cell?.isUserInteractionEnabled = true
-//        let selectedCategory = categories[indexPath.item]
-//        print("\(selectedCategory.rawValue) deselect")
-
     }
 }
 
