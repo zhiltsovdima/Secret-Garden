@@ -113,7 +113,7 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
         cell.unfavoriteCompletion = { [weak self] unfavCell in
             let unfavIndexPath = self?.tableView.indexPath(for: unfavCell)
             DispatchQueue.main.async {
-                self?.shop.makeFavoriteItem(withId: favItemId)
+                //self?.shop.makeFavoriteItem(withId: favItemId)
                 self?.updateUI(unfavIndexPath!)
             }
         }
@@ -126,11 +126,11 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
         
         let itemDetailVC = ItemDetailController(shopItem)
         itemDetailVC.favoriteCompletion = { [weak self] in
-            self?.shop.makeFavoriteItem(withId: shopItemId)
+            //self?.shop.makeFavoriteItem(withId: shopItemId)
             self?.tableView.reloadData()
         }
         itemDetailVC.cartCompletion = { [weak self] in
-            self?.shop.makeAddedToCart(withId: shopItemId)
+            //self?.shop.makeAddedToCart(withId: shopItemId)
         }
         itemDetailVC.goToCartCompletion = { [weak self] updateCompletion in
             let cartVC = CartViewController(self!.shop)

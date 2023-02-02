@@ -27,6 +27,14 @@
 		625F95112986E5E300EB628A /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625F95002986E5E300EB628A /* ShopViewController.swift */; };
 		625F95122986E5E300EB628A /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625F95022986E5E300EB628A /* CartViewController.swift */; };
 		625F95132986E5E300EB628A /* ItemDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625F95042986E5E300EB628A /* ItemDetailController.swift */; };
+		625F951A2988399500EB628A /* FavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625F95192988399500EB628A /* FavoriteCell.swift */; };
+		625F951C298839A100EB628A /* CartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625F951B298839A100EB628A /* CartCell.swift */; };
+		625F951E298C50E100EB628A /* FavoritesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625F951D298C50E100EB628A /* FavoritesCoordinator.swift */; };
+		625F9520298C50FB00EB628A /* CartCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625F951F298C50FB00EB628A /* CartCoordinator.swift */; };
+		625F9524298C515800EB628A /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625F9523298C515800EB628A /* FavoritesViewModel.swift */; };
+		625F9526298C516E00EB628A /* CartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625F9525298C516E00EB628A /* CartViewModel.swift */; };
+		625F9528298C518800EB628A /* ItemDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625F9527298C518800EB628A /* ItemDetailCoordinator.swift */; };
+		625F952A298C51A800EB628A /* ItemDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625F9529298C51A800EB628A /* ItemDetailViewModel.swift */; };
 		626FA06D291BB7AC00FEB461 /* Garden.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626FA06C291BB7AC00FEB461 /* Garden.swift */; };
 		626FA06F291CFC0E00FEB461 /* DetailPlantController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626FA06E291CFC0E00FEB461 /* DetailPlantController.swift */; };
 		626FA071291CFCB000FEB461 /* DetailBaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626FA070291CFCB000FEB461 /* DetailBaseController.swift */; };
@@ -109,6 +117,14 @@
 		625F95002986E5E300EB628A /* ShopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
 		625F95022986E5E300EB628A /* CartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		625F95042986E5E300EB628A /* ItemDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemDetailController.swift; sourceTree = "<group>"; };
+		625F95192988399500EB628A /* FavoriteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteCell.swift; sourceTree = "<group>"; };
+		625F951B298839A100EB628A /* CartCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartCell.swift; sourceTree = "<group>"; };
+		625F951D298C50E100EB628A /* FavoritesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesCoordinator.swift; sourceTree = "<group>"; };
+		625F951F298C50FB00EB628A /* CartCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartCoordinator.swift; sourceTree = "<group>"; };
+		625F9523298C515800EB628A /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
+		625F9525298C516E00EB628A /* CartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewModel.swift; sourceTree = "<group>"; };
+		625F9527298C518800EB628A /* ItemDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailCoordinator.swift; sourceTree = "<group>"; };
+		625F9529298C51A800EB628A /* ItemDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailViewModel.swift; sourceTree = "<group>"; };
 		626FA06C291BB7AC00FEB461 /* Garden.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Garden.swift; sourceTree = "<group>"; };
 		626FA06E291CFC0E00FEB461 /* DetailPlantController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPlantController.swift; sourceTree = "<group>"; };
 		626FA070291CFCB000FEB461 /* DetailBaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailBaseController.swift; sourceTree = "<group>"; };
@@ -232,8 +248,8 @@
 		625F94F52986E5E300EB628A /* Shop */ = {
 			isa = PBXGroup;
 			children = (
-				625F94F62986E5E300EB628A /* Favorites */,
 				625F94F82986E5E300EB628A /* Shop */,
+				625F94F62986E5E300EB628A /* Favorites */,
 				625F95012986E5E300EB628A /* Cart */,
 				625F95032986E5E300EB628A /* ItemDetail */,
 			);
@@ -243,7 +259,10 @@
 		625F94F62986E5E300EB628A /* Favorites */ = {
 			isa = PBXGroup;
 			children = (
+				625F951D298C50E100EB628A /* FavoritesCoordinator.swift */,
+				625F9523298C515800EB628A /* FavoritesViewModel.swift */,
 				625F94F72986E5E300EB628A /* FavoritesViewController.swift */,
+				625F9521298C513000EB628A /* Cell */,
 			);
 			path = Favorites;
 			sourceTree = "<group>";
@@ -280,7 +299,10 @@
 		625F95012986E5E300EB628A /* Cart */ = {
 			isa = PBXGroup;
 			children = (
+				625F951F298C50FB00EB628A /* CartCoordinator.swift */,
+				625F9525298C516E00EB628A /* CartViewModel.swift */,
 				625F95022986E5E300EB628A /* CartViewController.swift */,
+				625F9522298C513A00EB628A /* Cell */,
 			);
 			path = Cart;
 			sourceTree = "<group>";
@@ -288,9 +310,27 @@
 		625F95032986E5E300EB628A /* ItemDetail */ = {
 			isa = PBXGroup;
 			children = (
+				625F9527298C518800EB628A /* ItemDetailCoordinator.swift */,
+				625F9529298C51A800EB628A /* ItemDetailViewModel.swift */,
 				625F95042986E5E300EB628A /* ItemDetailController.swift */,
 			);
 			path = ItemDetail;
+			sourceTree = "<group>";
+		};
+		625F9521298C513000EB628A /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				625F95192988399500EB628A /* FavoriteCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		625F9522298C513A00EB628A /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				625F951B298839A100EB628A /* CartCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		627B6A2A296EBC760072C1D7 /* PlantOptions */ = {
@@ -701,6 +741,7 @@
 				62E9AFD72913BA9800175A21 /* UIView + ext.swift in Sources */,
 				62E9AFBC290D409500175A21 /* HomeViewController.swift in Sources */,
 				62E9AFD129116D9E00175A21 /* AddPlantController.swift in Sources */,
+				625F952A298C51A800EB628A /* ItemDetailViewModel.swift in Sources */,
 				623A9F31296C6AF400A3A17A /* GardenViewModel.swift in Sources */,
 				62F7FD682971A70F0055B60F /* EditPlantCoordinator.swift in Sources */,
 				62E9AFB9290D1C5C00175A21 /* Resources.swift in Sources */,
@@ -710,6 +751,7 @@
 				6270BBBB295CD3B700871C0F /* PrivateKeys.swift in Sources */,
 				62EC9B1B297487790014CD84 /* Protocols.swift in Sources */,
 				62B36A3A2954D8220052454B /* NetworkManager.swift in Sources */,
+				625F951C298839A100EB628A /* CartCell.swift in Sources */,
 				62E9AFCD2911106E00175A21 /* PlantCell.swift in Sources */,
 				625F950D2986E5E300EB628A /* ShopCoordinator.swift in Sources */,
 				626FA075291E82F100FEB461 /* UIImage + ext.swift in Sources */,
@@ -724,14 +766,20 @@
 				626FA06F291CFC0E00FEB461 /* DetailPlantController.swift in Sources */,
 				625F95132986E5E300EB628A /* ItemDetailController.swift in Sources */,
 				620332EC2923CB7A00ADE1A1 /* Shop.swift in Sources */,
+				625F9520298C50FB00EB628A /* CartCoordinator.swift in Sources */,
+				625F951A2988399500EB628A /* FavoriteCell.swift in Sources */,
 				62E9B0032916D4D300175A21 /* PlantOptionsTableViewController.swift in Sources */,
 				62F7FD55297161B60055B60F /* AppCoordinator.swift in Sources */,
 				62F7FD662971A2070055B60F /* PlantOptionsCoordinator.swift in Sources */,
 				62F7FD57297163E30055B60F /* GardenCoordinator.swift in Sources */,
+				625F951E298C50E100EB628A /* FavoritesCoordinator.swift in Sources */,
 				626FA06D291BB7AC00FEB461 /* Garden.swift in Sources */,
 				62E9AFDA2913BD9100175A21 /* BaseButton.swift in Sources */,
+				625F9528298C518800EB628A /* ItemDetailCoordinator.swift in Sources */,
 				625F95112986E5E300EB628A /* ShopViewController.swift in Sources */,
+				625F9526298C516E00EB628A /* CartViewModel.swift in Sources */,
 				62E9B0052917C77E00175A21 /* EditPlantViewController.swift in Sources */,
+				625F9524298C515800EB628A /* FavoritesViewModel.swift in Sources */,
 				62E9AFC72911051500175A21 /* Plant.swift in Sources */,
 				620332F92923E90B00ADE1A1 /* DBManager.swift in Sources */,
 				625F95122986E5E300EB628A /* CartViewController.swift in Sources */,

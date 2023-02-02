@@ -123,7 +123,7 @@ extension CartViewController {
         tableView.backgroundColor = Resources.Colors.backgroundColor
         tableView.rowHeight = 150
         tableView.separatorStyle = .none
-        tableView.register(CartCell.self, forCellReuseIdentifier: Resources.Identifiers.cartCell)
+        //tableView.register(CartCell.self, forCellReuseIdentifier: Resources.Identifiers.cartCell)
     }
     
     private func setTableViewDelegates() {
@@ -271,7 +271,7 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
         cell.removeFromCartCompletion = { [weak self] cellForRemove in
             let actualIndexPath = self?.tableView.indexPath(for: cellForRemove)
             DispatchQueue.main.async {
-                self?.shop.makeAddedToCart(withId: shopItemId)
+                //self?.shop.makeAddedToCart(withId: shopItemId)
                 self?.updateUI(actualIndexPath!)
                 self?.updateDetailVCHandler?(shopItemId)
             }
@@ -285,7 +285,7 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
         
         let itemDetailVC = ItemDetailController(shopItem)
         itemDetailVC.favoriteCompletion = { [weak self] in
-            self?.shop.makeFavoriteItem(withId: shopItemId)
+            //self?.shop.makeFavoriteItem(withId: shopItemId)
             self?.updateDetailVCHandler?(shopItemId)
         }
         itemDetailVC.goToCartCompletion = { completion in
