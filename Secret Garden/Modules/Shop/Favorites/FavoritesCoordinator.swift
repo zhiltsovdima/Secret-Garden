@@ -8,7 +8,7 @@
 import UIKit.UINavigationController
 
 protocol FavoritesCoordinatorProtocol: AnyObject {
-    
+    func favoritesDidFinish()
 }
 
 final class FavoritesCoordinator: Coordinator {
@@ -24,6 +24,9 @@ final class FavoritesCoordinator: Coordinator {
     }
     
     func start() {
+        let viewModel = FavoritesViewModel(coordinator: self, shop: shop)
+        let favoritesView = FavoritesViewController(viewModel: viewModel)
+        navigationController.pushViewController(favoritesView, animated: true)
         
     }
     
@@ -31,4 +34,7 @@ final class FavoritesCoordinator: Coordinator {
 
 extension FavoritesCoordinator: FavoritesCoordinatorProtocol {
     
+    func favoritesDidFinish() {
+        parentCoordinator?.childDidFinish(self)
+    }
 }

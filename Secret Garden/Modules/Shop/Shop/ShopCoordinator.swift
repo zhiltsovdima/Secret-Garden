@@ -44,7 +44,10 @@ extension ShopCoordinator: ShopCoordinatorProtocol {
     }
     
     func showFavorites() {
-        
+        let favoritesCoordinator = FavoritesCoordinator(navigationController: navigationController, shop: shop)
+        favoritesCoordinator.start()
+        favoritesCoordinator.parentCoordinator = self
+        childCoordinators.append(favoritesCoordinator)
     }
     
     func showCart() {
