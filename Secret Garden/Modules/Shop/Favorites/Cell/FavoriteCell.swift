@@ -7,7 +7,16 @@
 
 import UIKit
 
+struct FavoriteCellModel {
+    var id: Int
+    var name: String
+    var price: String
+    var image: UIImage?
+}
+
 final class FavoriteCell: UITableViewCell {
+    
+    private var model: FavoriteCellModel?
     
     private let priceLabel = UILabel()
     private let nameItem = UILabel()
@@ -20,18 +29,18 @@ final class FavoriteCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setupViews()
-        configureViews()
-        setConstraints()
+        setupConstraints()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setFavorite(_ item: ShopItem) {
-        nameItem.text = item.name
-        priceLabel.text = item.price
-        itemImageView.image = item.image
+    func setup(with model: FavoriteCellModel) {
+        self.model = model
+        nameItem.text = model.name
+        priceLabel.text = model.price
+        itemImageView.image = model.image
     }
     
     @objc private func unfavItemAction() {
@@ -41,14 +50,12 @@ final class FavoriteCell: UITableViewCell {
     // MARK: - Setup Views
     
     private func setupViews() {
+        backgroundColor = Resources.Colors.backgroundColor
+
         addSubview(itemImageView)
         addSubview(priceLabel)
         addSubview(nameItem)
         contentView.addSubview(favoriteButton)
-    }
-    
-    private func configureViews() {
-        backgroundColor = Resources.Colors.backgroundColor
         
         itemImageView.layer.cornerRadius = 10
         itemImageView.clipsToBounds = true
@@ -66,7 +73,7 @@ final class FavoriteCell: UITableViewCell {
         makeSystemAnimation(for: favoriteButton)
     }
     
-    private func setConstraints() {
+    private func setupConstraints() {
         itemImageView.translatesAutoresizingMaskIntoConstraints = false
         priceLabel.translatesAutoresizingMaskIntoConstraints = false
         nameItem.translatesAutoresizingMaskIntoConstraints = false
