@@ -11,14 +11,14 @@ import Foundation
 
 protocol ShopViewModelProtocol: AnyObject {
     var collectionData: [ShopItemCellModel] { get }
-    var updateCellCompletion: ((IndexPath?) -> Void)? { get set }
+    var updateCellCompletion: ((Int?) -> Void)? { get set }
     
-    func updateModel(by: ShopCategory)
-    func updateImage(with indexPath: IndexPath)
+    func updateCollectionData(by: ShopCategory)
+    func updateImage(with index: Int)
     func navBarFavoritesButtonTapped()
     func navBarCartButtonTapped()
-    func favoriteButtonTapped(id: Int?, indexPath: IndexPath)
-    func cartButtonTapped(id: Int?, indexPath: IndexPath)
+    func favoriteButtonTapped(id: Int, indexPath: IndexPath)
+    func cartButtonTapped(id: Int, indexPath: IndexPath)
 
 }
 
@@ -31,7 +31,7 @@ final class ShopViewModel {
     private weak var coordinator: ShopCoordinatorProtocol?
     private let shop: Shop
     
-    var updateCellCompletion: ((IndexPath?) -> Void)?
+    var updateCellCompletion: ((Int?) -> Void)?
     
     init(coordinator: ShopCoordinatorProtocol, shop: Shop) {
         self.coordinator = coordinator
@@ -40,8 +40,15 @@ final class ShopViewModel {
     }
     
     private func setUpdate() {
-        shop.updateViewCompletion = { [weak self] indexPath in
-            self?.updateCellCompletion?(indexPath)
+        shop.updateViewCompletion = { [weak self] id, updatedPropery in
+            guard let index = self?.collectionData.firstIndex(where: { $0.id == id}) else { return }
+            switch updatedPropery {
+            case .favorite(let boolValue):
+                self?.collectionData[index].isFavorite = boolValue
+            case .cart(let boolValue):
+                self?.collectionData[index].isAddedToCart = boolValue
+            }
+            self?.updateCellCompletion?(index)
         }
     }
     
@@ -51,7 +58,7 @@ final class ShopViewModel {
 
 extension ShopViewModel: ShopViewModelProtocol {
     
-    func updateModel(by category: ShopCategory) {
+    func updateCollectionData(by category: ShopCategory) {
         var shopItems = shop.items
             .sorted(by: { $0.name! < $1.name! })
         if category == .indoor || category == .outdoor || category == .fertilizer {
@@ -69,11 +76,11 @@ extension ShopViewModel: ShopViewModelProtocol {
         updateCellCompletion?(nil)
     }
     
-    func updateImage(with indexPath: IndexPath) {
-        let id = collectionData[indexPath.item].id
+    func updateImage(with index: Int) {
+        let id = collectionData[index].id
         shop.downloadData(for: shop.items[id]) { [weak self] fetchedImage in
-            self?.collectionData[indexPath.item].image = fetchedImage
-            self?.updateCellCompletion?(indexPath)
+            self?.collectionData[index].image = fetchedImage
+            self?.updateCellCompletion?(index)
         }
     }
     
@@ -85,15 +92,13 @@ extension ShopViewModel: ShopViewModelProtocol {
         coordinator?.showCart()
     }
     
-    func favoriteButtonTapped(id: Int?, indexPath: IndexPath) {
-        guard let id else { return }
+    func favoriteButtonTapped(id: Int, indexPath: IndexPath) {
         collectionData[indexPath.item].isFavorite = !collectionData[indexPath.item].isFavorite
-        shop.makeFavoriteItem(withId: id, at: indexPath)
+        shop.makeFavoriteItem(withId: id)
     }
-    func cartButtonTapped(id: Int?, indexPath: IndexPath) {
-        guard let id else { return }
+    func cartButtonTapped(id: Int, indexPath: IndexPath) {
         collectionData[indexPath.item].isAddedToCart = !collectionData[indexPath.item].isAddedToCart
-        shop.makeAddedToCart(withId: id, at: indexPath)
+        shop.makeAddedToCart(withId: id)
     }
     
     

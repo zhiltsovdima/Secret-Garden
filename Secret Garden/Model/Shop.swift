@@ -7,6 +7,11 @@
 
 import UIKit
 
+enum UpdateProperty {
+    case favorite(Bool)
+    case cart(Bool)
+}
+
 class Shop {
     
     var items = [ShopItem]()
@@ -18,16 +23,18 @@ class Shop {
         fetchData()
     }
     
-    var updateViewCompletion: ((IndexPath) -> Void)?
+    var updateViewCompletion: ((Int, UpdateProperty) -> Void)?
     
-    func makeFavoriteItem(withId id: Int, at indexPath: IndexPath) {
+    func makeFavoriteItem(withId id: Int) {
         items[id].isFavorite = !items[id].isFavorite
-        updateViewCompletion?(indexPath)
+        let isFavorite = items[id].isFavorite
+        updateViewCompletion?(id, .favorite(isFavorite))
     }
     
-    func makeAddedToCart(withId id: Int, at indexPath: IndexPath) {
+    func makeAddedToCart(withId id: Int) {
         items[id].isAddedToCart = !items[id].isAddedToCart
-        updateViewCompletion?(indexPath)
+        let isAddedToCart = items[id].isAddedToCart
+        updateViewCompletion?(id, .cart(isAddedToCart))
     }
     
     private func fetchData() {

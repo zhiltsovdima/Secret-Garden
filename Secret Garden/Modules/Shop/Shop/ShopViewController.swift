@@ -53,9 +53,9 @@ final class ShopViewController: UIViewController {
     }
     
     private func updateUI() {
-        viewModel.updateCellCompletion = { [weak self] indexPath in
-            guard let indexPath else { self?.collectionView.reloadData(); return }
-            self?.collectionView.reloadItems(at: [indexPath])
+        viewModel.updateCellCompletion = { [weak self] updatedItem in
+            guard let updatedItem else { self?.collectionView.reloadData(); return }
+            self?.collectionView.reloadItems(at: [IndexPath(item: updatedItem, section: 0)])
         }
     }
     
@@ -121,7 +121,7 @@ extension ShopViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Resources.Identifiers.itemCell, for: indexPath) as! ItemCell
         cell.setup(with: viewModel.collectionData[indexPath.item])
-        viewModel.updateImage(with: indexPath)
+        viewModel.updateImage(with: indexPath.item)
         cell.favoriteCompletion = { [weak self] id in
             self?.viewModel.favoriteButtonTapped(id: id, indexPath: indexPath)
         }
@@ -146,7 +146,7 @@ extension ShopViewController: UICollectionViewDelegate, UICollectionViewDataSour
                                                                      for: indexPath) as! CategoriesView
         header.congifure()
         header.selectCategoryHandler = { [weak self] selectedCategory in
-            self?.viewModel.updateModel(by: selectedCategory)
+            self?.viewModel.updateCollectionData(by: selectedCategory)
         }
         return header
     }

@@ -80,13 +80,15 @@ final class ItemCell: UICollectionViewCell {
     }
     
     @objc private func changeFavorite() {
-        favoriteCompletion?(model?.id)
+        guard let model else { return }
+        favoriteCompletion?(model.id)
     }
     
     @objc private func addToCart() {
-        guard let isAdded = model?.isAddedToCart else { return }
+        guard let model else { return }
+        let isAdded = model.isAddedToCart
         guard !isAdded else { goToCartCompletion?(); return }
-        cartCompletion?(model?.id)
+        cartCompletion?(model.id)
     }
     
     // MARK: - Update Buttons
