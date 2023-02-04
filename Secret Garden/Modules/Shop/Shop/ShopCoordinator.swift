@@ -51,7 +51,10 @@ extension ShopCoordinator: ShopCoordinatorProtocol {
     }
     
     func showCart() {
-        
+        let cartCoordinator = CartCoordinator(navigationController: navigationController, shop: shop)
+        cartCoordinator.start()
+        cartCoordinator.parentCoordinator = self
+        childCoordinators.append(cartCoordinator)
     }
     
     

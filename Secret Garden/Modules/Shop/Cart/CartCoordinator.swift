@@ -8,7 +8,8 @@
 import UIKit.UINavigationController
 
 protocol CartCoordinatorProtocol: AnyObject {
-    
+    func backToShop()
+    func cartDidFinish()
 }
 
 final class CartCoordinator: Coordinator {
@@ -24,11 +25,20 @@ final class CartCoordinator: Coordinator {
     }
     
     func start() {
-        
+        let viewModel = CartViewModel(coordinator: self, shop: shop)
+        let cartView = CartViewController(viewModel: viewModel)
+        navigationController.pushViewController(cartView, animated: true)
     }
     
 }
 
 extension CartCoordinator: CartCoordinatorProtocol {
     
+    func backToShop() {
+        navigationController.popToRootViewController(animated: true)
+    }
+    
+    func cartDidFinish() {
+        parentCoordinator?.childDidFinish(self)
+    }
 }

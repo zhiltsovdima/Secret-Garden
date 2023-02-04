@@ -7,10 +7,19 @@
 
 import UIKit
 
+struct CartCellModel {
+    var id: Int
+    var name: String
+    var price: String
+    var image: UIImage?
+}
+
 final class CartCell: UITableViewCell {
     
-    private let priceLabel = UILabel()
+    private var model: CartCellModel?
+    
     private let nameItem = UILabel()
+    private let priceLabel = UILabel()
     private let itemImageView = UIImageView()
     
     private let deleteButton = UIButton()
@@ -21,18 +30,18 @@ final class CartCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setupViews()
-        configureViews()
-        setConstraints()
+        setupConstraints()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setCart(_ item: ShopItem) {
-        nameItem.text = item.name
-        priceLabel.text = item.price
-        itemImageView.image = item.image
+    func setup(with model: CartCellModel) {
+        self.model = model
+        nameItem.text = model.name
+        priceLabel.text = model.price
+        itemImageView.image = model.image
     }
     
     @objc func deleteFromCartAction() {
@@ -42,14 +51,12 @@ final class CartCell: UITableViewCell {
     // MARK: - Setup Views
     
     private func setupViews() {
+        backgroundColor = Resources.Colors.backgroundColor
+
         addSubview(itemImageView)
         addSubview(priceLabel)
         addSubview(nameItem)
         contentView.addSubview(deleteButton)
-
-    }
-    private func configureViews() {
-        backgroundColor = Resources.Colors.backgroundColor
         
         itemImageView.layer.cornerRadius = 10
         itemImageView.clipsToBounds = true
@@ -67,7 +74,7 @@ final class CartCell: UITableViewCell {
         makeSystemAnimation(for: deleteButton)
     }
     
-    private func setConstraints() {
+    private func setupConstraints() {
         itemImageView.translatesAutoresizingMaskIntoConstraints = false
         priceLabel.translatesAutoresizingMaskIntoConstraints = false
         nameItem.translatesAutoresizingMaskIntoConstraints = false

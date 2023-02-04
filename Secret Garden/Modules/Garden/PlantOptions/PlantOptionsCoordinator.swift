@@ -50,10 +50,6 @@ final class PlantOptionsCoordinator: NSObject, Coordinator {
         
         navigationController.present(optionsView, animated: true)
     }
-    
-    func childDidFinish(_ childCoordinator: Coordinator) {
-        childCoordinators.removeAll(where: {$0 === childCoordinator})
-    }    
 }
 
 // MARK: - PlantOptionsCoordinatorProtocol

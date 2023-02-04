@@ -9,12 +9,8 @@ import UIKit
 
 final class CartViewController: UIViewController {
     
-    private let shop: Shop
-    
-    private var cart: [ShopItem] {
-        return shop.items.filter { $0.isAddedToCart }
-    }
-    
+    private let viewModel: CartViewModelProtocol
+
     private let tableView = UITableView()
     
     private let checkoutStack = UIStackView()
@@ -29,31 +25,12 @@ final class CartViewController: UIViewController {
     private let totalValue = UILabel()
     private let checkoutButton = BaseButton()
     
-    private let emptyCartImage = UIImageView()
-    private let emptyCartLabel = UILabel()
-    private let emptyCartButton = BaseButton()
-    
-    private var totalSubPrice: Double {
-        var price = 0.0
-        cart.forEach { item in
-            let wordForRemove = "$"
-            var priceStr = item.price
-            if let range = priceStr?.range(of: wordForRemove) {
-                priceStr?.removeSubrange(range)
-            }
-            price += Double(priceStr ?? "0.0")!
-        }
-        return price
-    }
-    
-    private var totalPrice: Double {
-        totalSubPrice + 10.0
-    }
+    private let placeholderView = PlaceholderView()
     
     var updateDetailVCHandler: ((Int) -> Void)?
     
-    init(_ shop: Shop) {
-        self.shop = shop
+    init(viewModel: CartViewModelProtocol) {
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -64,12 +41,18 @@ final class CartViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setAppearance()
-        addViews()
-        configureTableView()
+        updateUI()
+        setupAppearance()
+        setupViews()
         configureViews()
-        setConstraints()
-        checkingCartEmpty()
+        setupTableView()
+        setupConstraints()
+        showPlaceholder()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        viewModel.viewWillDisappear()
     }
     
     override func viewWillLayoutSubviews() {
@@ -77,34 +60,30 @@ final class CartViewController: UIViewController {
         totalPriceView.addUpperBorder(with: .lightGray, height: 1.0)
     }
     
-    private func updateUI(_ indexPath: IndexPath) {
-        tableView.deleteRows(at: [indexPath], with: .fade)
-        checkingCartEmpty()
+    private func updateUI() {
+        viewModel.updateCellCompletion = { [weak self] indexPath in
+            self?.tableView.deleteRows(at: [indexPath], with: .fade)
+            self?.showPlaceholder()
+        }
     }
     
-    private func checkingCartEmpty() {
-        if cart.isEmpty {
+    func showPlaceholder() {
+        if viewModel.isEmptyTableData {
             tableView.isHidden = true
             checkoutStack.isHidden = true
-            
-            emptyCartImage.isHidden = false
-            emptyCartLabel.isHidden = false
-            emptyCartButton.isHidden = false
+            placeholderView.isHidden = false
         } else {
             tableView.isHidden = false
             checkoutStack.isHidden = false
+            placeholderView.isHidden = true
             
-            emptyCartImage.isHidden = true
-            emptyCartLabel.isHidden = true
-            emptyCartButton.isHidden = true
-            
-            subTotalValue.text = "$\(totalSubPrice)"
-            totalValue.text = "$\(totalPrice)"
+            subTotalValue.text = viewModel.subTotalPrice
+            totalValue.text = viewModel.totalPrice
         }
     }
     
     @objc private func emptyCartButtonAction() {
-        navigationController?.popToRootViewController(animated: true)
+        viewModel.backToShopButtonTapped()
     }
 }
 
@@ -112,26 +91,25 @@ final class CartViewController: UIViewController {
 
 extension CartViewController {
     
-    private func setAppearance() {
+    private func setupAppearance() {
         title = "My Cart"
         navigationItem.largeTitleDisplayMode = .never
         view.backgroundColor = Resources.Colors.backgroundColor
     }
     
-    private func configureTableView() {
-        setTableViewDelegates()
+    private func setupTableView() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        
         tableView.backgroundColor = Resources.Colors.backgroundColor
         tableView.rowHeight = 150
         tableView.separatorStyle = .none
-        //tableView.register(CartCell.self, forCellReuseIdentifier: Resources.Identifiers.cartCell)
+        tableView.register(CartCell.self, forCellReuseIdentifier: Resources.Identifiers.cartCell)
     }
     
-    private func setTableViewDelegates() {
-        tableView.delegate = self
-        tableView.dataSource = self
-    }
-    
-    private func addViews() {
+    private func setupViews() {
+        view.addSubview(placeholderView)
+        
         view.addSubview(tableView)
         view.addSubview(checkoutStack)
         checkoutStack.addArrangedSubview(upperView)
@@ -145,28 +123,17 @@ extension CartViewController {
         
         totalPriceView.addSubview(totalLabel)
         totalPriceView.addSubview(totalValue)
-        
-        view.addSubview(emptyCartImage)
-        view.addSubview(emptyCartLabel)
-        view.addSubview(emptyCartButton)
     }
     
     private func configureViews() {
-        emptyCartImage.image = Resources.Images.Common.shopPlant
-        emptyCartImage.contentMode = .scaleAspectFit
-        emptyCartLabel.text = Resources.Strings.Shop.emptyLabel
-        emptyCartLabel.font = Resources.Fonts.generalBold
-        emptyCartLabel.textAlignment = .center
-        
-        emptyCartButton.setTitle(Resources.Strings.Shop.emptyButton, for: .normal)
-        emptyCartButton.addTarget(self, action: #selector(emptyCartButtonAction), for: .touchUpInside)
+        placeholderView.placeholderButton.addTarget(self, action: #selector(emptyCartButtonAction), for: .touchUpInside)
         
         checkoutStack.axis = .vertical
         checkoutStack.distribution = .fill
         
         subTotalLabel.text = Resources.Strings.Shop.subTotal
         subTotalLabel.font = Resources.Fonts.general
-        subTotalValue.text = "$\(totalSubPrice)"
+        subTotalValue.text = viewModel.subTotalPrice
         subTotalValue.font = Resources.Fonts.generalBold
         subTotalValue.textAlignment = .right
         shippingLabel.text = Resources.Strings.Shop.shipping
@@ -177,14 +144,16 @@ extension CartViewController {
         
         totalLabel.text = Resources.Strings.Shop.total
         totalLabel.font = Resources.Fonts.general
-        totalValue.text = "$\(totalPrice)"
+        totalValue.text = viewModel.totalPrice
         totalValue.font = Resources.Fonts.generalBold
         totalValue.textAlignment = .right
 
         checkoutButton.setTitle(Resources.Strings.Shop.checkout, for: .normal)
     }
     
-    private func setConstraints() {
+    private func setupConstraints() {
+        
+        placeholderView.translatesAutoresizingMaskIntoConstraints = false
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -197,12 +166,13 @@ extension CartViewController {
         totalLabel.translatesAutoresizingMaskIntoConstraints = false
         totalValue.translatesAutoresizingMaskIntoConstraints = false
         checkoutButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        emptyCartImage.translatesAutoresizingMaskIntoConstraints = false
-        emptyCartLabel.translatesAutoresizingMaskIntoConstraints = false
-        emptyCartButton.translatesAutoresizingMaskIntoConstraints = false
                 
         NSLayoutConstraint.activate([
+            placeholderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            placeholderView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            placeholderView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            placeholderView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
@@ -237,61 +207,54 @@ extension CartViewController {
             totalValue.trailingAnchor.constraint(equalTo: totalPriceView.trailingAnchor),
             totalValue.bottomAnchor.constraint(equalTo: totalPriceView.bottomAnchor, constant: -20),
 
-            checkoutButton.heightAnchor.constraint(equalToConstant: 60),
-            
-            emptyCartImage.bottomAnchor.constraint(equalTo: emptyCartLabel.topAnchor),
-            emptyCartImage.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
-            emptyCartImage.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20),
-            emptyCartImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            
-            emptyCartLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            emptyCartLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            
-            emptyCartButton.topAnchor.constraint(equalTo: emptyCartLabel.bottomAnchor, constant: 20),
-            emptyCartButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            emptyCartButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            emptyCartButton.heightAnchor.constraint(equalToConstant: 60)
+            checkoutButton.heightAnchor.constraint(equalToConstant: 60)
         ])
     }
 }
 
-// MARK: - UITableView Delegate
+// MARK: - UITableView Delegate & DataSource
 
 extension CartViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        cart.count
+        viewModel.tableData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Resources.Identifiers.cartCell, for: indexPath) as! CartCell
-        let shopItem = cart[indexPath.row]
-        let shopItemId = shopItem.id!
-        cell.setCart(shopItem)
+        let id = viewModel.tableData[indexPath.row].id
+        cell.setup(with: viewModel.tableData[indexPath.row])
         cell.removeFromCartCompletion = { [weak self] cellForRemove in
-            let actualIndexPath = self?.tableView.indexPath(for: cellForRemove)
-            DispatchQueue.main.async {
-                //self?.shop.makeAddedToCart(withId: shopItemId)
-                self?.updateUI(actualIndexPath!)
-                self?.updateDetailVCHandler?(shopItemId)
-            }
+            guard let actualIndexPath = tableView.indexPath(for: cellForRemove) else { return }
+            self?.viewModel.removeButtonTapped(id: id, indexPath: actualIndexPath)
         }
+//        let shopItem = cart[indexPath.row]
+//        let shopItemId = shopItem.id!
+//        cell.setCart(shopItem)
+//        cell.removeFromCartCompletion = { [weak self] cellForRemove in
+//            let actualIndexPath = self?.tableView.indexPath(for: cellForRemove)
+//            DispatchQueue.main.async {
+//                //self?.shop.makeAddedToCart(withId: shopItemId)
+//                self?.updateUI(actualIndexPath!)
+//                self?.updateDetailVCHandler?(shopItemId)
+//            }
+//        }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let shopItem = cart[indexPath.row]
-        let shopItemId = shopItem.id!
-        
-        let itemDetailVC = ItemDetailController(shopItem)
-        itemDetailVC.favoriteCompletion = { [weak self] in
-            //self?.shop.makeFavoriteItem(withId: shopItemId)
-            self?.updateDetailVCHandler?(shopItemId)
-        }
-        itemDetailVC.goToCartCompletion = { completion in
-            self.navigationController?.popViewController(animated: true)
-        }
-        navigationController?.pushViewController(itemDetailVC, animated: true)
+//        let shopItem = cart[indexPath.row]
+//        let shopItemId = shopItem.id!
+//
+//        let itemDetailVC = ItemDetailController(shopItem)
+//        itemDetailVC.favoriteCompletion = { [weak self] in
+//            //self?.shop.makeFavoriteItem(withId: shopItemId)
+//            self?.updateDetailVCHandler?(shopItemId)
+//        }
+//        itemDetailVC.goToCartCompletion = { completion in
+//            self.navigationController?.popViewController(animated: true)
+//        }
+//        navigationController?.pushViewController(itemDetailVC, animated: true)
         tableView.deselectRow(at: indexPath, animated: false)
     }
 }
