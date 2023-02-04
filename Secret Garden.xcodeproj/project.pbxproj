@@ -35,6 +35,7 @@
 		625F9526298C516E00EB628A /* CartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625F9525298C516E00EB628A /* CartViewModel.swift */; };
 		625F9528298C518800EB628A /* ItemDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625F9527298C518800EB628A /* ItemDetailCoordinator.swift */; };
 		625F952A298C51A800EB628A /* ItemDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625F9529298C51A800EB628A /* ItemDetailViewModel.swift */; };
+		625F952D298ED4B200EB628A /* PlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625F952C298ED4B200EB628A /* PlaceholderView.swift */; };
 		626FA06D291BB7AC00FEB461 /* Garden.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626FA06C291BB7AC00FEB461 /* Garden.swift */; };
 		626FA06F291CFC0E00FEB461 /* DetailPlantController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626FA06E291CFC0E00FEB461 /* DetailPlantController.swift */; };
 		626FA071291CFCB000FEB461 /* DetailBaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626FA070291CFCB000FEB461 /* DetailBaseController.swift */; };
@@ -125,6 +126,7 @@
 		625F9525298C516E00EB628A /* CartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewModel.swift; sourceTree = "<group>"; };
 		625F9527298C518800EB628A /* ItemDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailCoordinator.swift; sourceTree = "<group>"; };
 		625F9529298C51A800EB628A /* ItemDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailViewModel.swift; sourceTree = "<group>"; };
+		625F952C298ED4B200EB628A /* PlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderView.swift; sourceTree = "<group>"; };
 		626FA06C291BB7AC00FEB461 /* Garden.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Garden.swift; sourceTree = "<group>"; };
 		626FA06E291CFC0E00FEB461 /* DetailPlantController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPlantController.swift; sourceTree = "<group>"; };
 		626FA070291CFCB000FEB461 /* DetailBaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailBaseController.swift; sourceTree = "<group>"; };
@@ -302,6 +304,7 @@
 				625F951F298C50FB00EB628A /* CartCoordinator.swift */,
 				625F9525298C516E00EB628A /* CartViewModel.swift */,
 				625F95022986E5E300EB628A /* CartViewController.swift */,
+				625F952B298ED49900EB628A /* Views */,
 				625F9522298C513A00EB628A /* Cell */,
 			);
 			path = Cart;
@@ -331,6 +334,14 @@
 				625F951B298839A100EB628A /* CartCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		625F952B298ED49900EB628A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				625F952C298ED4B200EB628A /* PlaceholderView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		627B6A2A296EBC760072C1D7 /* PlantOptions */ = {
@@ -745,6 +756,7 @@
 				623A9F31296C6AF400A3A17A /* GardenViewModel.swift in Sources */,
 				62F7FD682971A70F0055B60F /* EditPlantCoordinator.swift in Sources */,
 				62E9AFB9290D1C5C00175A21 /* Resources.swift in Sources */,
+				625F952D298ED4B200EB628A /* PlaceholderView.swift in Sources */,
 				623A9F37296CC41900A3A17A /* AddPlantViewModel.swift in Sources */,
 				62F7FD5B29716E890055B60F /* HomeCoordinator.swift in Sources */,
 				62E9AF83290C2FF600175A21 /* AppDelegate.swift in Sources */,
