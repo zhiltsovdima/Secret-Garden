@@ -33,8 +33,8 @@ final class ItemCell: UICollectionViewCell {
     private let addToCartButton = UIButton()
     private let spinner = UIActivityIndicatorView()
     
-    var favoriteCompletion: ((Int?) -> Void)?
-    var cartCompletion: ((Int?) -> Void)?
+    var favoriteCompletion: ((Int) -> Void)?
+    var cartCompletion: ((Int) -> Void)?
     var goToCartCompletion: (() -> Void)?
     var updateCellCompletion: (() -> Void)?
     

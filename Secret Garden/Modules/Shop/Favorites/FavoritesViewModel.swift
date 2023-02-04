@@ -9,6 +9,7 @@ import Foundation
 
 protocol FavoritesViewModelProtocol: AnyObject {
     var tableData: [FavoriteCellModel] { get }
+    var isEmptyTableData: Bool { get }
     var updateCellCompletion: ((IndexPath) -> Void)? { get set }
 
     func unfavoriteButtonTapped(id: Int, indexPath: IndexPath)
@@ -19,7 +20,12 @@ protocol FavoritesViewModelProtocol: AnyObject {
 
 final class FavoritesViewModel {
     
-    var tableData = [FavoriteCellModel]()
+    var tableData = [FavoriteCellModel]() {
+        didSet {
+            isEmptyTableData = tableData.isEmpty
+        }
+    }
+    var isEmptyTableData = true
     
     private weak var coordinator: FavoritesCoordinatorProtocol?
     private let shop: Shop
