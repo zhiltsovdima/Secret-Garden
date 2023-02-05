@@ -30,33 +30,36 @@ struct DBManager {
             let items = documents.map { queryDocumentSnapshot in
                 let data = queryDocumentSnapshot.data()
                 
-                let name = data["name"] as? String
-                let latinName = data["latinName"] as? String
+                let name = data["name"] as? String ?? "No data"
+                let latinName = data["latinName"] as? String ?? ""
                 let category = data["category"] as? String
-                let description = data["description"] as? String
+                let description = data["description"] as? String ?? ""
                 let image = data["image"] as? String
-                let price = data["price"] as? String
-                let size = data["size"] as? String
-                let petFriendly = data["petFriendly"] as? String
-                let careLevel = data["careLevel"] as? String
-                let origin = data["origin"] as? String
-                let light = data["light"] as? String
-                let humidity = data["humidity"] as? String
-                let temperature = data["temperature"] as? String
+                let price = data["price"] as? String ?? "??"
+                let size = data["size"] as? String ?? "No data"
+                let petFriendly = data["petFriendly"] as? String ?? "No data"
+                let careLevel = data["careLevel"] as? String ?? "No data"
+                let origin = data["origin"] as? String ?? "No data"
+                let light = data["light"] as? String ?? "No data"
+                let humidity = data["humidity"] as? String ?? "No data"
+                let temperature = data["temperature"] as? String ?? "No data"
+                
+                let features = ShopItemFeatures(careLevel: careLevel,
+                                                petFriendly: petFriendly,
+                                                size: size,
+                                                light: light,
+                                                humidity: humidity,
+                                                temperature: temperature,
+                                                origin: origin)
 
-                return ShopItem(name: name,
+                return ShopItem(id: UUID().uuidString,
+                                name: name,
                                 latinName: latinName,
                                 category: category,
                                 description: description,
                                 price: price,
-                                size: size,
-                                petFriendly: petFriendly,
-                                careLevel: careLevel,
-                                origin: origin,
-                                light: light,
-                                humidity: humidity,
-                                temperature: temperature,
-                                imageString: image)
+                                imageString: image,
+                                features: features)
             }
             completion(items)
         }

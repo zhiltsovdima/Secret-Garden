@@ -8,21 +8,14 @@
 import UIKit
 
 class ShopItem {
-    var id: Int?
-
-    let name: String?
-    let latinName: String?
+    var id: String
+    let name: String
+    let latinName: String
     let categoryString: String?
-    let description: String?
-    let price: String?
-    let size: String?
-    let petFriendly: String?
-    let careLevel: String?
-    let origin: String?
-    let light: String?
-    let humidity: String?
-    let temperature: String?
+    let description: String
+    let price: String
     let imageString: String?
+    let features: ShopItemFeatures
     
     var image: UIImage?
     var category: ShopCategory? {
@@ -44,21 +37,26 @@ class ShopItem {
     var isDownloading = false
     var callback: ((UIImage?) -> Void)?
     
-    init(name: String?, latinName: String?, category: String?, description: String?, price: String?, size: String?, petFriendly: String?, careLevel: String?, origin: String?, light: String?, humidity: String?, temperature: String?, imageString: String?) {
+    init(id: String, name: String, latinName: String, category: String?, description: String, price: String, imageString: String?, features: ShopItemFeatures) {
+        self.id = id
         self.name = name
         self.latinName = latinName
         self.categoryString = category
         self.description = description
         self.price = price
-        self.size = size
-        self.petFriendly = petFriendly
-        self.careLevel = careLevel
-        self.origin = origin
-        self.light = light
-        self.humidity = humidity
-        self.temperature = temperature
         self.imageString = imageString
+        self.features = features
     }
+}
+
+struct ShopItemFeatures {
+    let careLevel: String
+    let petFriendly: String
+    let size: String
+    let light: String
+    let humidity: String
+    let temperature: String
+    let origin: String
 }
 
 enum ShopCategory: String {

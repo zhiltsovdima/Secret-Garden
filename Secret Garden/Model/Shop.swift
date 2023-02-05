@@ -23,26 +23,23 @@ class Shop {
         fetchData()
     }
     
-    var updateViewCompletion: ((Int, UpdateProperty) -> Void)?
+    var updateViewCompletion: ((String, UpdateProperty) -> Void)?
     
-    func makeFavoriteItem(withId id: Int) {
-        items[id].isFavorite = !items[id].isFavorite
-        let isFavorite = items[id].isFavorite
-        updateViewCompletion?(id, .favorite(isFavorite))
+    func makeFavoriteItem(withId id: String) {
+        guard let item = items.first(where: { $0.id == id }) else { return }
+        item.isFavorite = !item.isFavorite
+        updateViewCompletion?(id, .favorite(item.isFavorite))
     }
     
-    func makeAddedToCart(withId id: Int) {
-        items[id].isAddedToCart = !items[id].isAddedToCart
-        let isAddedToCart = items[id].isAddedToCart
-        updateViewCompletion?(id, .cart(isAddedToCart))
+    func makeAddedToCart(withId id: String) {
+        guard let item = items.first(where: { $0.id == id }) else { return }
+        item.isAddedToCart = !item.isAddedToCart
+        updateViewCompletion?(id, .cart(item.isAddedToCart))
     }
     
     private func fetchData() {
         dbManager.getPost() { [weak self] shopItems in
             self?.items = shopItems
-            for index in self!.items.indices {
-                self?.items[index].id = index
-            }
         }
     }
     
@@ -53,7 +50,7 @@ class Shop {
 
         shopItem.isDownloading = true
         
-        guard let imageString = shopItem.imageString else { return }
+        guard let imageString = shopItem.imageString else { completion?(Resources.Images.Common.defaultPlant); return }
         dbManager.getImage(name: imageString) { fetchedImage in
             shopItem.image = fetchedImage
             completion?(shopItem.image)
