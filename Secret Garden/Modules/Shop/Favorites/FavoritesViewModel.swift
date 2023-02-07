@@ -12,7 +12,7 @@ protocol FavoritesViewModelProtocol: AnyObject {
     var isEmptyTableData: Bool { get }
     var updateCellCompletion: ((IndexPath) -> Void)? { get set }
 
-    func unfavoriteButtonTapped(id: Int, indexPath: IndexPath)
+    func unfavoriteButtonTapped(id: String, indexPath: IndexPath)
     func viewWillDisappear()
 }
 
@@ -42,9 +42,9 @@ final class FavoritesViewModel {
         tableData = shop.items
             .filter { $0.isFavorite == true }
             .compactMap { FavoriteCellModel(
-                id: $0.id!,
-                name: $0.name!,
-                price: $0.price!,
+                id: $0.id,
+                name: $0.name,
+                price: $0.price,
                 image: $0.image
             )}
     }
@@ -55,7 +55,7 @@ final class FavoritesViewModel {
 
 extension FavoritesViewModel: FavoritesViewModelProtocol {
     
-    func unfavoriteButtonTapped(id: Int, indexPath: IndexPath) {
+    func unfavoriteButtonTapped(id: String, indexPath: IndexPath) {
         shop.makeFavoriteItem(withId: id)
         tableData.remove(at: indexPath.row)
         updateCellCompletion?(indexPath)

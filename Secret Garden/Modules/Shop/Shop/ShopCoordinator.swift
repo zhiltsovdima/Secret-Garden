@@ -8,7 +8,7 @@
 import UIKit.UINavigationController
 
 protocol ShopCoordinatorProtocol: AnyObject {
-    func showItemDetail()
+    func showItemDetail(id: String)
     func showFavorites()
     func showCart()
 }
@@ -39,8 +39,11 @@ final class ShopCoordinator: Coordinator {
 
 extension ShopCoordinator: ShopCoordinatorProtocol {
     
-    func showItemDetail() {
-        
+    func showItemDetail(id: String) {
+        let itemDetailCoordinator = ItemDetailCoordinator(navigationController: navigationController, shop: shop, id: id)
+        itemDetailCoordinator.start()
+        itemDetailCoordinator.parentCoordinator = self
+        childCoordinators.append(itemDetailCoordinator)
     }
     
     func showFavorites() {

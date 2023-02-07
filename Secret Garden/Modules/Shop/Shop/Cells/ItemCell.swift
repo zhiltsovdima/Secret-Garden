@@ -8,13 +8,13 @@
 import UIKit
 
 class ShopItemCellModel {
-    var id: Int
+    var id: String
     var name: String
     var image: UIImage?
     var isFavorite: Bool
     var isAddedToCart: Bool
     
-    init(id: Int, name: String, image: UIImage? = nil, isFavorite: Bool, isAddedToCart: Bool) {
+    init(id: String, name: String, image: UIImage? = nil, isFavorite: Bool, isAddedToCart: Bool) {
         self.id = id
         self.name = name
         self.image = image
@@ -33,8 +33,8 @@ final class ItemCell: UICollectionViewCell {
     private let addToCartButton = UIButton()
     private let spinner = UIActivityIndicatorView()
     
-    var favoriteCompletion: ((Int) -> Void)?
-    var cartCompletion: ((Int) -> Void)?
+    var favoriteCompletion: ((String) -> Void)?
+    var cartCompletion: ((String) -> Void)?
     var goToCartCompletion: (() -> Void)?
     var updateCellCompletion: (() -> Void)?
     

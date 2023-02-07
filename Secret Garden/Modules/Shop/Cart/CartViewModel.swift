@@ -14,7 +14,7 @@ protocol CartViewModelProtocol: AnyObject {
     var totalPrice: String? { get }
     var updateCellCompletion: ((IndexPath) -> Void)? { get set }
 
-    func removeButtonTapped(id: Int, indexPath: IndexPath)
+    func removeButtonTapped(id: String, indexPath: IndexPath)
     func backToShopButtonTapped()
     func viewWillDisappear()
 }
@@ -49,9 +49,9 @@ final class CartViewModel {
         tableData = shop.items
             .filter { $0.isAddedToCart == true }
             .compactMap { CartCellModel(
-                id: $0.id!,
-                name: $0.name!,
-                price: $0.price!,
+                id: $0.id,
+                name: $0.name,
+                price: $0.price,
                 image: $0.image
             )}
     }
@@ -72,7 +72,7 @@ final class CartViewModel {
 
 extension CartViewModel: CartViewModelProtocol {
     
-    func removeButtonTapped(id: Int, indexPath: IndexPath) {
+    func removeButtonTapped(id: String, indexPath: IndexPath) {
         shop.makeAddedToCart(withId: id)
         tableData.remove(at: indexPath.row)
         updateCellCompletion?(indexPath)

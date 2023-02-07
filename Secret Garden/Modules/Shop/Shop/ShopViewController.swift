@@ -135,7 +135,7 @@ extension ShopViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        viewModel.collectionItemTapped(indexPath)
     }
     
     // MARK: - SupplementaryView

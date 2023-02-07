@@ -8,7 +8,7 @@
 import UIKit
 
 struct FavoriteCellModel {
-    var id: Int
+    var id: String
     var name: String
     var price: String
     var image: UIImage?
