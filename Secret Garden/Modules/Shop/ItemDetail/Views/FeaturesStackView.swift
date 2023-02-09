@@ -19,7 +19,7 @@ final class FeaturesStackView: UIStackView {
     private let humidityView = ShopFeatureView()
     private let temperatureView = ShopFeatureView()
     
-    private var originView = ShopFeatureView()
+    private let originView = ShopFeatureView()
     
     func setup(with featuresData: ShopItemFeatures) {
         self.featuresData = featuresData
