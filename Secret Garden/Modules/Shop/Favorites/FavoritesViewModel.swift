@@ -13,6 +13,7 @@ protocol FavoritesViewModelProtocol: AnyObject {
     var updateCellCompletion: ((IndexPath) -> Void)? { get set }
 
     func unfavoriteButtonTapped(id: String, indexPath: IndexPath)
+    func tableRowTapped(_ indexPath: IndexPath)
     func viewWillDisappear()
 }
 
@@ -59,6 +60,11 @@ extension FavoritesViewModel: FavoritesViewModelProtocol {
         shop.makeFavoriteItem(withId: id)
         tableData.remove(at: indexPath.row)
         updateCellCompletion?(indexPath)
+    }
+    
+    func tableRowTapped(_ indexPath: IndexPath) {
+        let id = tableData[indexPath.row].id
+        coordinator?.showItemDetail(id: id)
     }
     
     func viewWillDisappear() {

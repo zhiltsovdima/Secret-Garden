@@ -119,24 +119,7 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-//        let shopItem = favorites[indexPath.row]
-//        let shopItemId = shopItem.id!
-//
-//        let itemDetailVC = ItemDetailController(shopItem)
-//        itemDetailVC.favoriteCompletion = { [weak self] in
-//            self?.shop.makeFavoriteItem(withId: shopItemId)
-//            self?.tableView.reloadData()
-//        }
-//        itemDetailVC.cartCompletion = { [weak self] in
-//            self?.shop.makeAddedToCart(withId: shopItemId)
-//        }
-//        itemDetailVC.goToCartCompletion = { [weak self] updateCompletion in
-//            let cartVC = CartViewController(self!.shop)
-//            cartVC.updateDetailVCHandler = updateCompletion
-//            self?.navigationController?.pushViewController(cartVC, animated: true)
-//        }
-//        navigationController?.pushViewController(itemDetailVC, animated: true)
+        viewModel.tableRowTapped(indexPath)
         tableView.deselectRow(at: indexPath, animated: false)
     }
 }

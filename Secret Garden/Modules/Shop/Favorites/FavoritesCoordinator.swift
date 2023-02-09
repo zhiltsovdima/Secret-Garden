@@ -8,6 +8,7 @@
 import UIKit.UINavigationController
 
 protocol FavoritesCoordinatorProtocol: AnyObject {
+    func showItemDetail(id: String) 
     func favoritesDidFinish()
 }
 
@@ -29,12 +30,20 @@ final class FavoritesCoordinator: Coordinator {
         navigationController.pushViewController(favoritesView, animated: true)
         
     }
-    
 }
 
 extension FavoritesCoordinator: FavoritesCoordinatorProtocol {
     
+    func showItemDetail(id: String) {
+        let itemDetailCoordinator = ItemDetailCoordinator(navigationController: navigationController, shop: shop, id: id)
+        itemDetailCoordinator.start()
+        itemDetailCoordinator.parentCoordinator = self
+        childCoordinators.append(itemDetailCoordinator)
+    }
+    
     func favoritesDidFinish() {
-        parentCoordinator?.childDidFinish(self)
+        if childCoordinators.isEmpty {
+            parentCoordinator?.childDidFinish(self)
+        }
     }
 }
