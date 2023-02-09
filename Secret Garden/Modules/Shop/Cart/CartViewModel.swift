@@ -15,6 +15,7 @@ protocol CartViewModelProtocol: AnyObject {
     var updateCellCompletion: ((IndexPath) -> Void)? { get set }
 
     func removeButtonTapped(id: String, indexPath: IndexPath)
+    func tableRowTapped(_ indexPath: IndexPath)
     func backToShopButtonTapped()
     func viewWillDisappear()
 }
@@ -76,6 +77,11 @@ extension CartViewModel: CartViewModelProtocol {
         shop.makeAddedToCart(withId: id)
         tableData.remove(at: indexPath.row)
         updateCellCompletion?(indexPath)
+    }
+    
+    func tableRowTapped(_ indexPath: IndexPath) {
+        let id = tableData[indexPath.row].id
+        coordinator?.showItemDetail(id: id)
     }
     
     func backToShopButtonTapped() {

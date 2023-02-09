@@ -9,6 +9,7 @@ import UIKit.UINavigationController
 
 protocol CartCoordinatorProtocol: AnyObject {
     func backToShop()
+    func showItemDetail(id: String)
     func cartDidFinish()
 }
 
@@ -38,7 +39,16 @@ extension CartCoordinator: CartCoordinatorProtocol {
         navigationController.popToRootViewController(animated: true)
     }
     
+    func showItemDetail(id: String) {
+        let itemDetailCoordinator = ItemDetailCoordinator(navigationController: navigationController, shop: shop, id: id)
+        itemDetailCoordinator.start()
+        itemDetailCoordinator.parentCoordinator = self
+        childCoordinators.append(itemDetailCoordinator)
+    }
+    
     func cartDidFinish() {
-        parentCoordinator?.childDidFinish(self)
+        if childCoordinators.isEmpty {
+            parentCoordinator?.childDidFinish(self)
+        }
     }
 }

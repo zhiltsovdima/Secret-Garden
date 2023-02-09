@@ -228,33 +228,11 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
             guard let actualIndexPath = tableView.indexPath(for: cellForRemove) else { return }
             self?.viewModel.removeButtonTapped(id: id, indexPath: actualIndexPath)
         }
-//        let shopItem = cart[indexPath.row]
-//        let shopItemId = shopItem.id!
-//        cell.setCart(shopItem)
-//        cell.removeFromCartCompletion = { [weak self] cellForRemove in
-//            let actualIndexPath = self?.tableView.indexPath(for: cellForRemove)
-//            DispatchQueue.main.async {
-//                //self?.shop.makeAddedToCart(withId: shopItemId)
-//                self?.updateUI(actualIndexPath!)
-//                self?.updateDetailVCHandler?(shopItemId)
-//            }
-//        }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let shopItem = cart[indexPath.row]
-//        let shopItemId = shopItem.id!
-//
-//        let itemDetailVC = ItemDetailController(shopItem)
-//        itemDetailVC.favoriteCompletion = { [weak self] in
-//            //self?.shop.makeFavoriteItem(withId: shopItemId)
-//            self?.updateDetailVCHandler?(shopItemId)
-//        }
-//        itemDetailVC.goToCartCompletion = { completion in
-//            self.navigationController?.popViewController(animated: true)
-//        }
-//        navigationController?.pushViewController(itemDetailVC, animated: true)
+        viewModel.tableRowTapped(indexPath)
         tableView.deselectRow(at: indexPath, animated: false)
     }
 }
