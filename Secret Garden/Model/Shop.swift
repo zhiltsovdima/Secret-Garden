@@ -24,17 +24,20 @@ class Shop {
     }
     
     var updateViewCompletion: ((String, UpdateProperty) -> Void)?
+    var updateDetailViewCompletion: ((UpdateProperty) -> Void)?
     
     func makeFavoriteItem(withId id: String) {
         guard let item = items.first(where: { $0.id == id }) else { return }
         item.isFavorite = !item.isFavorite
         updateViewCompletion?(id, .favorite(item.isFavorite))
+        updateDetailViewCompletion?(.favorite(item.isFavorite))
     }
     
     func makeAddedToCart(withId id: String) {
         guard let item = items.first(where: { $0.id == id }) else { return }
         item.isAddedToCart = !item.isAddedToCart
         updateViewCompletion?(id, .cart(item.isAddedToCart))
+        updateDetailViewCompletion?(.cart(item.isAddedToCart))
     }
     
     private func fetchData() {
