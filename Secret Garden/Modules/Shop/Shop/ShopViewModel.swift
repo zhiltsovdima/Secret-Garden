@@ -47,6 +47,7 @@ final class ShopViewModel {
                 self?.collectionData[index].isFavorite = boolValue
             case .cart(let boolValue):
                 self?.collectionData[index].isAddedToCart = boolValue
+            default: break
             }
             self?.updateCellCompletion?(index)
         }

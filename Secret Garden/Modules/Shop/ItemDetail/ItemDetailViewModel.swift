@@ -23,6 +23,7 @@ protocol ItemDetailViewModelProtocol: AnyObject {
     
     func favoriteButtonTapped()
     func cartButtonTapped()
+    func viewWillAppear()
     func viewWillDisappear()
 }
 
@@ -52,7 +53,6 @@ final class ItemDetailViewModel {
         self.shop = shop
         self.id = id
         getDataFromModel(for: id)
-        setUpdate()
     }
     
     private func setUpdate() {
@@ -62,6 +62,7 @@ final class ItemDetailViewModel {
                 self?.isFavorite = boolValue
             case .cart(let boolValue):
                 self?.isAddedToCart = boolValue
+            default: break
             }
             self?.updateViewCompletion?(updatedProperty)
         }
@@ -96,6 +97,12 @@ extension ItemDetailViewModel: ItemDetailViewModelProtocol {
         } else {
             shop.makeAddedToCart(withId: id)
         }
+    }
+    
+    func viewWillAppear() {
+        setUpdate()
+        getDataFromModel(for: id)
+        updateViewCompletion?(.all)
     }
     
     func viewWillDisappear() {

@@ -48,7 +48,6 @@
 		62A4F7A0298FF67700C127D5 /* ShopFeatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A4F79F298FF67700C127D5 /* ShopFeatureView.swift */; };
 		62B10A2C29487D2000C80F07 /* FeatureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B10A2B29487D2000C80F07 /* FeatureCell.swift */; };
 		62B36A3A2954D8220052454B /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B36A392954D8220052454B /* NetworkManager.swift */; };
-		62B36A3C2955F9FD0052454B /* Array + ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B36A3B2955F9FD0052454B /* Array + ext.swift */; };
 		62B36A3E29573F110052454B /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B36A3D29573F110052454B /* NetworkError.swift */; };
 		62D4EEEF294CBF2F00360851 /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 62D4EEEE294CBF2F00360851 /* FirebaseDatabaseSwift */; };
 		62D4EEF1294CBF2F00360851 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 62D4EEF0294CBF2F00360851 /* FirebaseFirestoreSwift */; };
@@ -142,7 +141,6 @@
 		62A4F79F298FF67700C127D5 /* ShopFeatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopFeatureView.swift; sourceTree = "<group>"; };
 		62B10A2B29487D2000C80F07 /* FeatureCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureCell.swift; sourceTree = "<group>"; };
 		62B36A392954D8220052454B /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
-		62B36A3B2955F9FD0052454B /* Array + ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array + ext.swift"; sourceTree = "<group>"; };
 		62B36A3D29573F110052454B /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		62E9AF7F290C2FF600175A21 /* Secret Garden.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Secret Garden.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		62E9AF82290C2FF600175A21 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -425,7 +423,7 @@
 				62E9AFB7290D189300175A21 /* Application */,
 				62F7FD53297161A40055B60F /* Coordinators */,
 				623A9F2E296C6AA000A3A17A /* Modules */,
-				62E9AFC82911054400175A21 /* Model */,
+				62E9AFC82911054400175A21 /* Models */,
 				62D4EEF4294DAE4400360851 /* Network */,
 				62E9AFC5290EB5DD00175A21 /* Base */,
 				62EC9B192974875E0014CD84 /* Protocols */,
@@ -495,7 +493,7 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
-		62E9AFC82911054400175A21 /* Model */ = {
+		62E9AFC82911054400175A21 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				62E9AFC62911051400175A21 /* Plant.swift */,
@@ -503,7 +501,7 @@
 				6248B16D2944B4B80075CE25 /* ShopItem.swift */,
 				620332EB2923CB7A00ADE1A1 /* Shop.swift */,
 			);
-			path = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		62E9AFD82913BA9D00175A21 /* Extensions */ = {
@@ -511,7 +509,6 @@
 			children = (
 				62E9AFD62913BA9800175A21 /* UIView + ext.swift */,
 				626FA074291E82F100FEB461 /* UIImage + ext.swift */,
-				62B36A3B2955F9FD0052454B /* Array + ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -764,7 +761,6 @@
 				625F950F2986E5E300EB628A /* CategoryCell.swift in Sources */,
 				62B10A2C29487D2000C80F07 /* FeatureCell.swift in Sources */,
 				627B6A31296EF5C60072C1D7 /* EditPlantViewModel.swift in Sources */,
-				62B36A3C2955F9FD0052454B /* Array + ext.swift in Sources */,
 				625F950E2986E5E300EB628A /* ShopViewModel.swift in Sources */,
 				62E9AFD72913BA9800175A21 /* UIView + ext.swift in Sources */,
 				62E9AFBC290D409500175A21 /* HomeViewController.swift in Sources */,

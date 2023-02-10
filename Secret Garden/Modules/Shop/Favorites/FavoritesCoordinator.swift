@@ -28,7 +28,6 @@ final class FavoritesCoordinator: Coordinator {
         let viewModel = FavoritesViewModel(coordinator: self, shop: shop)
         let favoritesView = FavoritesViewController(viewModel: viewModel)
         navigationController.pushViewController(favoritesView, animated: true)
-        
     }
 }
 

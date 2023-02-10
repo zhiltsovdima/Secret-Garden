@@ -45,6 +45,11 @@ final class ItemDetailController: UIViewController {
         updateUI()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.viewWillAppear()
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         viewModel.viewWillDisappear()
@@ -69,6 +74,9 @@ extension ItemDetailController {
             case .favorite(_):
                 self?.setFavoriteButtonAppearance()
             case .cart(_):
+                self?.setCartButtonAppearance()
+            case .all:
+                self?.setFavoriteButtonAppearance()
                 self?.setCartButtonAppearance()
             }
         }
@@ -125,6 +133,10 @@ extension ItemDetailController {
         setCartButtonAppearance()
         setFavoriteButtonAppearance()
     }
+    
+    //        var sizeValueText = shopItem.size?.components(separatedBy: ",").map({$0.trimmingCharacters(in: .whitespaces) + "\n"}).joined()
+    //        sizeValueText?.removeLast()
+    //        sizeValueLabel.text = sizeValueText
     
     // MARK: - CONSTRAINTS
     
