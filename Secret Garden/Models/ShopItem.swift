@@ -52,8 +52,8 @@ class ShopItem {
 struct ShopItemFeatures {
     let careLevel: String
     let petFriendly: String
-    let width: String
-    let height: String
+    let width: String?
+    let height: String?
     let light: String
     let humidity: String
     let minTemp: NSNumber?
@@ -61,10 +61,11 @@ struct ShopItemFeatures {
     let origin: String
     
     var size: String {
-        "W: \(width)cm\nH: \(height)cm"
+        guard let width, let height else { return "No data" }
+        return "W: \(width)cm\nH: \(height)cm"
     }
     var temperature: String {
-        guard let minTemp, let maxTemp else { return "" }
+        guard let minTemp, let maxTemp else { return "No data" }
         return "\(minTemp)C to \(maxTemp)C"
     }
 }

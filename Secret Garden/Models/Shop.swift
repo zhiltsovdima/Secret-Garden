@@ -48,12 +48,6 @@ class Shop {
     }
     
     func downloadData(for shopItem: ShopItem, completion: ((UIImage?) -> Void)?) {
-        if shopItem.image != nil {
-            return
-        }
-
-        shopItem.isDownloading = true
-        
         guard let imageString = shopItem.imageString else { completion?(Resources.Images.Common.defaultPlant); return }
         dbManager.getImage(name: imageString) { fetchedImage in
             shopItem.image = fetchedImage

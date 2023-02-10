@@ -14,7 +14,7 @@ protocol ShopViewModelProtocol: AnyObject {
     var updateCellCompletion: ((Int?) -> Void)? { get set }
     
     func updateCollectionData(by: ShopCategory)
-    func updateImage(with index: Int)
+    func updateImage(index: Int, isUpdateCell: Bool)
     func navBarFavoritesButtonTapped()
     func navBarCartButtonTapped()
     func favoriteButtonTapped(id: String, indexPath: IndexPath)
@@ -77,11 +77,13 @@ extension ShopViewModel: ShopViewModelProtocol {
         updateCellCompletion?(nil)
     }
     
-    func updateImage(with index: Int) {
+    func updateImage(index: Int, isUpdateCell: Bool) {
+        guard collectionData[index].image == nil else { return }
         let id = collectionData[index].id
         guard let item = shop.items.first(where: { $0.id == id }) else { return }
         shop.downloadData(for: item) { [weak self] fetchedImage in
             self?.collectionData[index].image = fetchedImage
+            guard isUpdateCell else { return }
             self?.updateCellCompletion?(index)
         }
     }

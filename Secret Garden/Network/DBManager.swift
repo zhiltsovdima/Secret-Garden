@@ -35,9 +35,9 @@ struct DBManager {
                 let category = data["category"] as? String
                 let description = data["description"] as? String ?? ""
                 let image = data["image"] as? String
-                let price = data["price"] as? String ?? "??"
-                let width = data["width"] as? String ?? ""
-                let height = data["height"] as? String ?? ""
+                let price = data["price"] as? String ?? "No data"
+                let width = data["width"] as? String
+                let height = data["height"] as? String
                 let petFriendly = data["petFriendly"] as? String ?? "No data"
                 let careLevel = data["careLevel"] as? String ?? "No data"
                 let origin = data["origin"] as? String ?? "No data"

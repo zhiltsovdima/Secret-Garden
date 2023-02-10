@@ -121,7 +121,7 @@ extension ShopViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Resources.Identifiers.itemCell, for: indexPath) as! ItemCell
         cell.setup(with: viewModel.collectionData[indexPath.item])
-        viewModel.updateImage(with: indexPath.item)
+        viewModel.updateImage(index: indexPath.item, isUpdateCell: true)
         cell.favoriteCompletion = { [weak self] id in
             self?.viewModel.favoriteButtonTapped(id: id, indexPath: indexPath)
         }
@@ -157,7 +157,9 @@ extension ShopViewController: UICollectionViewDelegate, UICollectionViewDataSour
 extension ShopViewController: UICollectionViewDataSourcePrefetching {
     
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
-        
+        for indexPath in indexPaths {
+            viewModel.updateImage(index: indexPath.row, isUpdateCell: false)
+        }
     }
 }
 
