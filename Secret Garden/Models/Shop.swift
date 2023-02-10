@@ -10,6 +10,7 @@ import UIKit
 enum UpdateProperty {
     case favorite(Bool)
     case cart(Bool)
+    case all
 }
 
 class Shop {

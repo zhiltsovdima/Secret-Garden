@@ -52,11 +52,21 @@ class ShopItem {
 struct ShopItemFeatures {
     let careLevel: String
     let petFriendly: String
-    let size: String
+    let width: String
+    let height: String
     let light: String
     let humidity: String
-    let temperature: String
+    let minTemp: NSNumber?
+    let maxTemp: NSNumber?
     let origin: String
+    
+    var size: String {
+        "W: \(width)cm\nH: \(height)cm"
+    }
+    var temperature: String {
+        guard let minTemp, let maxTemp else { return "" }
+        return "\(minTemp)C to \(maxTemp)C"
+    }
 }
 
 enum ShopCategory: String {

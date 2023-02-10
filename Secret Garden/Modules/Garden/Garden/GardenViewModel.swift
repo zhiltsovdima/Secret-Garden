@@ -74,6 +74,7 @@ extension GardenViewModel: GardenViewModelProtocol {
     }
     
     func updateModel() {
+        garden.loadFromFile()
         let plants = garden.getAllPlants()
         tableData = plants.compactMap { PlantCellModel(plantImage: $0.imageData.image, plantTitle: $0.name) }
     }

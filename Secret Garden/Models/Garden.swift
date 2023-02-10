@@ -84,28 +84,28 @@ class Garden {
         let folderForStoring = appSuppDirectory.appendingPathComponent(Resources.Strings.PathForStoringData.folderName)
         checkAndCreateDirectory(at: folderForStoring)
         let pathForStoring = folderForStoring.appendingPathComponent(Resources.Strings.PathForStoringData.fileName)
-        
         return pathForStoring
     }
     
     func saveToFile() {
         guard let path = pathForStoringData() else { return }
-        let jsonData = try? JSONEncoder().encode(plants)
-        if let jsonData {
-            do {
-                try jsonData.write(to: path)
-            } catch {
-                print(error)
-            }
+        let encoder = PropertyListEncoder()
+        encoder.outputFormat = .binary
+        do {
+            let data = try encoder.encode(plants)
+            try data.write(to: path)
+        } catch {
+            print("Error")
         }
     }
     
     func loadFromFile() {
         guard let path = pathForStoringData() else { return }
         guard checkExistingOfFile(at: path) else { return }
+        let decoder = PropertyListDecoder()
         do {
-            let jsonData = try Data(contentsOf: path)
-            plants = try JSONDecoder().decode([Plant].self, from: jsonData)
+            let data = try Data(contentsOf: path)
+            plants = try decoder.decode([Plant].self, from: data)
         } catch {
             let netError = NetworkError.handleError(error)
             print(netError.rawValue)

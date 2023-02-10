@@ -36,20 +36,24 @@ struct DBManager {
                 let description = data["description"] as? String ?? ""
                 let image = data["image"] as? String
                 let price = data["price"] as? String ?? "??"
-                let size = data["size"] as? String ?? "No data"
+                let width = data["width"] as? String ?? ""
+                let height = data["height"] as? String ?? ""
                 let petFriendly = data["petFriendly"] as? String ?? "No data"
                 let careLevel = data["careLevel"] as? String ?? "No data"
                 let origin = data["origin"] as? String ?? "No data"
                 let light = data["light"] as? String ?? "No data"
                 let humidity = data["humidity"] as? String ?? "No data"
-                let temperature = data["temperature"] as? String ?? "No data"
+                let minTemp = data["minTemp"] as? NSNumber
+                let maxTemp = data["maxTemp"] as? NSNumber
                 
                 let features = ShopItemFeatures(careLevel: careLevel,
                                                 petFriendly: petFriendly,
-                                                size: size,
+                                                width: width,
+                                                height: height,
                                                 light: light,
                                                 humidity: humidity,
-                                                temperature: temperature,
+                                                minTemp: minTemp,
+                                                maxTemp: maxTemp,
                                                 origin: origin)
 
                 return ShopItem(id: UUID().uuidString,
