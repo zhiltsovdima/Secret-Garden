@@ -47,15 +47,17 @@ final class DetailPlantController: DetailBaseController {
     
     func updateUI() {
         viewModel.updateCompletion = { [weak self] isSuccess in
-            self?.spinner.stopAnimating()
-            switch isSuccess {
-            case true:
-                self?.latinName.text = self?.viewModel.viewData.latinName
-                self?.tableView.isHidden = false
-                self?.tableView.reloadData()
-            case false:
-                self?.errorMessage.text = self?.viewModel.viewData.errorMessage
-                self?.errorMessage.isHidden = false
+            DispatchQueue.main.async {
+                self?.spinner.stopAnimating()
+                switch isSuccess {
+                case true:
+                    self?.latinName.text = self?.viewModel.viewData.latinName
+                    self?.tableView.isHidden = false
+                    self?.tableView.reloadData()
+                case false:
+                    self?.errorMessage.text = self?.viewModel.viewData.errorMessage
+                    self?.errorMessage.isHidden = false
+                }
             }
         }
     }

@@ -29,8 +29,6 @@ final class EditPlantViewController: DetailBaseController {
                                                title: Resources.Strings.Common.save,
                                                selector: #selector(saveButtonTapped))
     
-    
-    
     init(viewModel: EditPlantViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)

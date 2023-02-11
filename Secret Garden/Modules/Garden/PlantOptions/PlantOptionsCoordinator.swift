@@ -9,7 +9,7 @@ import UIKit.UINavigationController
 
 protocol PlantOptionsCoordinatorProtocol: AnyObject {
     func showEdit(_ indexPath: IndexPath)
-    func succesDeleting()
+    func successDeleting()
     func plantOptionsFinish()
 }
 
@@ -57,13 +57,13 @@ final class PlantOptionsCoordinator: NSObject, Coordinator {
 extension PlantOptionsCoordinator: PlantOptionsCoordinatorProtocol {
     
     func showEdit(_ indexPath: IndexPath) {
-        let editPlantCoordinator = EditPlantCoordinator(navigationController, garden, indexPath)
+        let editPlantCoordinator = EditPlantCoordinator(navigationController, garden, index: indexPath.row)
         editPlantCoordinator.start()
         editPlantCoordinator.parentCoordinator = self
         childCoordinators.append(editPlantCoordinator)
     }
     
-    func succesDeleting() {
+    func successDeleting() {
         navigationController.dismiss(animated: true)
     }
     

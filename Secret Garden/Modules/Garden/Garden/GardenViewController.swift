@@ -7,12 +7,6 @@
 
 import UIKit
 
-// MARK: - GardenViewControllerProtocol
-
-protocol GardenViewControllerProtocol: AnyObject {
-    
-}
-
 // MARK: - GardenViewController
 
 final class GardenViewController: UIViewController {
@@ -37,7 +31,8 @@ final class GardenViewController: UIViewController {
         setupUI()
         setupTableView()
         setupNavBarButton()
-        updateUI()        
+        updateUI()
+        showPlaceholder()
     }
     
     private func updateUI() {
@@ -50,6 +45,17 @@ final class GardenViewController: UIViewController {
         }
         viewModel.deleteTabelData = { [weak self] rowInt in
             self?.tableView.deleteRows(at: [IndexPath(row: rowInt, section: 0)], with: .fade)
+            self?.showPlaceholder()
+        }
+    }
+    
+    private func showPlaceholder() {
+        if viewModel.isEmptyTableData {
+            tableView.isHidden = true
+            placeholder.isHidden = false
+        } else {
+            tableView.isHidden = false
+            placeholder.isHidden = true
         }
     }
     
@@ -106,7 +112,7 @@ extension GardenViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        viewModel.rowTapped(indexPath.row)
+        viewModel.tableRowTapped(indexPath)
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }

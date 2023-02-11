@@ -67,7 +67,7 @@ final class CartViewController: UIViewController {
         }
     }
     
-    func showPlaceholder() {
+    private func showPlaceholder() {
         if viewModel.isEmptyTableData {
             tableView.isHidden = true
             checkoutStack.isHidden = true

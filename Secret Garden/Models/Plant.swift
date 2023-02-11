@@ -8,6 +8,7 @@
 import UIKit
 
 class Plant: Codable {
+    var id = UUID().uuidString
     var name: String
     var imageData: PlantImageData
     var features: Features?

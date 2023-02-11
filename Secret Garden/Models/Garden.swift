@@ -17,15 +17,11 @@ class Garden {
         self.networkManager = networkManager
     }
     
-    func getAllPlants() -> [Plant] {
-        return plants
-    }
-    
-    func updatePlant(name: String?, image: UIImage?, _ rowInt: Int) {
-        plants[rowInt].name = name!
-        plants[rowInt].imageData = PlantImageData(image!)
-        plants[rowInt].isFetched = false
-        updatePlantsCompletion?(.update, rowInt)
+    func updatePlant(name: String, image: UIImage, at index: Int) {
+        plants[index].name = name
+        plants[index].imageData = PlantImageData(image)
+        plants[index].isFetched = false
+        updatePlantsCompletion?(.update, index)
     }
     
     func addNewPlant(name: String, image: UIImage) {
@@ -40,28 +36,30 @@ class Garden {
         updatePlantsCompletion?(.delete, index)
     }
     
-    func downloadFeatures(for plant: Plant, completion: ((Features?, String?) -> Void)?) {
+    func downloadFeatures(for plant: Plant, completion: ((Features?, NetworkError?) -> Void)?) {
         if let features = plant.features {
             completion?(features, nil)
             return
         }
-
-        guard !plant.isFetched else { completion?(nil, NetworkError.noDataForThisName.rawValue); return }
-        networkManager.getPlant(by: plant.name) { [unowned plant] result in
+        
+        guard !plant.isFetched else { completion?(nil, NetworkError.noDataForThisName); return }
+        networkManager.getPlant(by: plant.name) { [weak plant] result in
             switch result {
             case .success(let features):
-                plant.features = features
-                plant.isFetched = true
-                completion?(plant.features, nil)
+                plant?.features = features
+                plant?.isFetched = true
+                completion?(plant?.features, nil)
             case .failure(let error):
-                if error == NetworkError.noDataForThisName {
-                    plant.isFetched = true
-                }
-                completion?(nil, error.rawValue)
+                plant?.isFetched = true
+                completion?(nil, error)
             }
         }
     }
+}
 
+// MARK: - Save & Load to file
+
+extension Garden {
     
     private func checkAndCreateDirectory(at url: URL) {
         let isExist = checkExistingOfFile(at: url)
@@ -108,7 +106,7 @@ class Garden {
             plants = try decoder.decode([Plant].self, from: data)
         } catch {
             let netError = NetworkError.handleError(error)
-            print(netError.rawValue)
+            print(netError.description)
         }
     }
 }

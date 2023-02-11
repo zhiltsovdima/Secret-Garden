@@ -100,6 +100,7 @@ extension ShopViewModel: ShopViewModelProtocol {
         collectionData[indexPath.item].isFavorite = !collectionData[indexPath.item].isFavorite
         shop.makeFavoriteItem(withId: id)
     }
+    
     func cartButtonTapped(id: String, indexPath: IndexPath) {
         collectionData[indexPath.item].isAddedToCart = !collectionData[indexPath.item].isAddedToCart
         shop.makeAddedToCart(withId: id)

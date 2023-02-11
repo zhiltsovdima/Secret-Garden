@@ -8,7 +8,7 @@
 import UIKit.UINavigationController
 
 protocol EditPlantCoordinatorProtocol: AnyObject {
-    func succesEditing()
+    func successEditing()
     func editPlantFinish()
     func showAddNewPhotoAlert(completion: @escaping (UIImage) -> Void)
 }
@@ -22,19 +22,19 @@ final class EditPlantCoordinator: Coordinator {
     private let navigationController: UINavigationController
     private var modalNavigationController: UINavigationController?
     private let garden: Garden
-    private let indexPath: IndexPath
+    private let index: Int
         
-    init(_ navigationController: UINavigationController, _ garden: Garden,_ indexPath: IndexPath) {
+    init(_ navigationController: UINavigationController, _ garden: Garden, index: Int) {
         self.navigationController = navigationController
         self.garden = garden
-        self.indexPath = indexPath
+        self.index = index
     }
     
     func start() {
         navigationController.dismiss(animated: true)
         modalNavigationController = UINavigationController()
         
-        let viewModel = EditPlantViewModel(coordinator: self, garden, indexPath)
+        let viewModel = EditPlantViewModel(coordinator: self, garden, index: index)
         let editView = EditPlantViewController(viewModel: viewModel)
         modalNavigationController?.setViewControllers([editView], animated: false)
         guard let modalNavigationController else { return }
@@ -71,7 +71,7 @@ extension EditPlantCoordinator: EditPlantCoordinatorProtocol {
         childCoordinators.append(choosePhotoAlertCoordinator)
     }
     
-    func succesEditing() {
+    func successEditing() {
         navigationController.dismiss(animated: true)
     }
     

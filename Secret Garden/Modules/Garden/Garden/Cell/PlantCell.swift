@@ -8,6 +8,7 @@
 import UIKit
 
 struct PlantCellModel {
+    var id: String
     var plantImage: UIImage?
     var plantTitle: String
 }

@@ -36,22 +36,21 @@ final class DetailPlantViewModel {
         
     private weak var coordinator: DetailPlantCoordinatorProtocol?
     private let garden: Garden
-    private let index: Int
+    private let plant: Plant
             
-    init(coordinator: DetailPlantCoordinatorProtocol, _ garden: Garden, _ index: Int) {
+    init(coordinator: DetailPlantCoordinatorProtocol, _ garden: Garden, _ plant: Plant) {
         self.coordinator = coordinator
         self.garden = garden
-        self.index = index
+        self.plant = plant
         self.getViewData()
     }
     
     private func getViewData() {
-        let plant = garden.getAllPlants()[index]
         viewData = DetailPlantModel(name: plant.name, image: plant.imageData.image)
         
-        garden.downloadFeatures(for: plant, completion: { [weak self] features, errorMessage in
+        garden.downloadFeatures(for: plant, completion: { [weak self] features, netError in
             guard let features else {
-                self?.viewData.errorMessage = errorMessage
+                self?.viewData.errorMessage = netError?.description
                 self?.updateCompletion?(false)
                 return
             }

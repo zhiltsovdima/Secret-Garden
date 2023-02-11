@@ -18,13 +18,14 @@ enum TypeOfChangeModel {
 protocol GardenViewModelProtocol: AnyObject {
     
     var tableData: [PlantCellModel] { get }
+    var isEmptyTableData: Bool { get }
     
     var updateTabelData: ((Int?) -> Void)? { get set }
     var insertTabelData: (() -> Void)? { get set }
     var deleteTabelData: ((Int) -> Void)? { get set }
     
     func addNewPlantTapped()
-    func rowTapped(_ rowInt: Int)
+    func tableRowTapped(_ indexPath: IndexPath)
     func settingsTapped(_ cell: PlantCell)
 
 }
@@ -32,11 +33,17 @@ protocol GardenViewModelProtocol: AnyObject {
 // MARK: - GardenViewModel
 
 final class GardenViewModel {
+    
+    private(set) var tableData = [PlantCellModel]() {
+        didSet {
+            isEmptyTableData = tableData.isEmpty
+        }
+    }
+    var isEmptyTableData = true
 
     private weak var coordinator: GardenCoordinatorProtocol?
     private let garden: Garden
-    private(set) var tableData = [PlantCellModel]()
-    
+
     var updateTabelData: ((Int?) -> Void)?
     var insertTabelData: (() -> Void)?
     var deleteTabelData: ((Int) -> Void)?
@@ -54,42 +61,42 @@ final class GardenViewModel {
 extension GardenViewModel: GardenViewModelProtocol {
     
     private func setUpdate() {
-        garden.updatePlantsCompletion = { [weak self] typeOfChange, rowInt in
-            self?.updateViewUserData(typeOfChange, rowInt)
+        garden.updatePlantsCompletion = { [weak self] typeOfChange, index in
+            self?.updateViewUserData(typeOfChange, index)
         }
     }
     
-    private func updateViewUserData(_ typeOfChange: TypeOfChangeModel, _ rowInt: Int?) {
+    private func updateViewUserData(_ typeOfChange: TypeOfChangeModel, _ index: Int?) {
         DispatchQueue.main.async {
             self.updateModel()
             switch typeOfChange {
             case .update:
-                self.updateTabelData?(rowInt)
+                self.updateTabelData?(index)
             case .insert:
                 self.insertTabelData?()
             case .delete:
-                self.deleteTabelData?(rowInt!)
+                guard let index else { return }
+                self.deleteTabelData?(index)
             }
         }
     }
     
-    func updateModel() {
+    private func updateModel() {
         garden.loadFromFile()
-        let plants = garden.getAllPlants()
-        tableData = plants.compactMap { PlantCellModel(plantImage: $0.imageData.image, plantTitle: $0.name) }
+        tableData = garden.plants.compactMap { PlantCellModel(id: $0.id, plantImage: $0.imageData.image, plantTitle: $0.name) }
     }
     
     func addNewPlantTapped() {
         coordinator?.showAddNewPlant()
     }
     
-    func rowTapped(_ rowInt: Int) {
-        coordinator?.showPlantDetail(rowInt)
+    func tableRowTapped(_ indexPath: IndexPath) {
+        let id = tableData[indexPath.row].id
+        guard let plant = garden.plants.first(where: { $0.id == id }) else { return }
+        coordinator?.showPlantDetail(plant)
     }
     
     func settingsTapped(_ cell: PlantCell) {
         coordinator?.showOptions(cell)
     }
-
-
 }

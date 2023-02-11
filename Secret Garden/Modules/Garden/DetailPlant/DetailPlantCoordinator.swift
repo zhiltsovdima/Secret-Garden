@@ -9,7 +9,6 @@ import UIKit.UINavigationController
 
 protocol DetailPlantCoordinatorProtocol: AnyObject {
     func detailPlantFinish()
-
 }
 
 final class DetailPlantCoordinator: Coordinator {
@@ -19,16 +18,16 @@ final class DetailPlantCoordinator: Coordinator {
     
     private let navigationController: UINavigationController
     private let garden: Garden
-    private let index: Int
+    private let plant: Plant
     
-    init(_ navigationController: UINavigationController, _ garden: Garden, index: Int) {
+    init(_ navigationController: UINavigationController, _ garden: Garden, plant: Plant) {
         self.navigationController = navigationController
         self.garden = garden
-        self.index = index
+        self.plant = plant
     }
     
     func start() {
-        let viewModel = DetailPlantViewModel(coordinator: self, garden, index)
+        let viewModel = DetailPlantViewModel(coordinator: self, garden, plant)
         let detailView = DetailPlantController(viewModel: viewModel)
         navigationController.pushViewController(detailView, animated: true)
     }

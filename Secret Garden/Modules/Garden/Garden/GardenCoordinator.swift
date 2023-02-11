@@ -9,7 +9,7 @@ import UIKit.UINavigationController
 
 protocol GardenCoordinatorProtocol: AnyObject {
     func showAddNewPlant()
-    func showPlantDetail(_ index: Int)
+    func showPlantDetail(_ plant: Plant)
     func showOptions(_ cell: PlantCell)
 }
 
@@ -49,8 +49,8 @@ extension GardenCoordinator: GardenCoordinatorProtocol {
         childCoordinators.append(addNewPlantCoordinator)
     }
     
-    func showPlantDetail(_ index: Int) {
-        let detailPlantCoordinator = DetailPlantCoordinator(navigationController, garden, index: index)
+    func showPlantDetail(_ plant: Plant) {
+        let detailPlantCoordinator = DetailPlantCoordinator(navigationController, garden, plant: plant)
         detailPlantCoordinator.start()
         detailPlantCoordinator.parentCoordinator = self
         childCoordinators.append(detailPlantCoordinator)

@@ -32,20 +32,20 @@ final class EditPlantViewModel {
     
     private weak var coordinator: EditPlantCoordinatorProtocol?
     private let garden: Garden
-    private let indexPath: IndexPath
+    private let index: Int
     
     var validateCompletion: ((String?) -> Void)?
     var updateImageCompletion: ((UIImage) -> Void)?
             
-    init(coordinator: EditPlantCoordinatorProtocol, _ garden: Garden, _ indexPath: IndexPath) {
+    init(coordinator: EditPlantCoordinatorProtocol, _ garden: Garden, index: Int) {
         self.coordinator = coordinator
         self.garden = garden
-        self.indexPath = indexPath
+        self.index = index
         self.getViewData()
     }
     
     private func getViewData() {
-        let plant = garden.getAllPlants()[indexPath.row]
+        let plant = garden.plants[index]
         viewData = PlantModel(plantImage: plant.imageData.image, plantTitle: plant.name)
     }
     
@@ -56,7 +56,6 @@ final class EditPlantViewModel {
             throw ValidateError.emptyImage
         }
     }
-
 }
 
 // MARK: - EditPlantViewModelProtocol
@@ -72,9 +71,9 @@ extension EditPlantViewModel: EditPlantViewModelProtocol {
     func saveButtonTapped(name: String?, image: UIImage?) {
         do {
             try validateNewPlant(name: name, image: image)
-            garden.updatePlant(name: name, image: image, indexPath.row)
+            garden.updatePlant(name: name!, image: image!, at: index)
             garden.saveToFile()
-            coordinator?.succesEditing()
+            coordinator?.successEditing()
         } catch {
             let validateError = error as? ValidateError
             validateCompletion?(validateError?.rawValue)
