@@ -33,8 +33,10 @@ enum APIType {
         case .all: return "/all"
         }
     }
+}
+extension APIType {
     
-    fileprivate func makeRequest(_ plant: String?) -> URLRequest {
+    fileprivate func makeURLRequest(_ plant: String?) -> URLRequest {
         var fullPath = path
         if let plant {
             fullPath.append(plant.lowercased().replacingOccurrences(of: " ", with: ""))
@@ -54,7 +56,7 @@ protocol NetworkManagerProtocol {
 class NetworkManager: NetworkManagerProtocol {
         
     func getPlant(by name: String?, completion: @escaping (Result<Features, NetworkError>) -> Void) {
-        let request = APIType.common.makeRequest(name)
+        let request = APIType.common.makeURLRequest(name)
         let task = URLSession.shared.dataTask(with: request) { [weak self] (data, response, error) in
             guard let self else { return completion(Result.failure(NetworkError.failed))}
             guard error == nil else {
@@ -85,6 +87,4 @@ class NetworkManager: NetworkManagerProtocol {
             return Result.failure(NetworkError.handleError(error))
         }
     }
-    
-    
 }
