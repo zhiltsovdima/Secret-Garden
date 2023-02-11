@@ -1,0 +1,64 @@
+[
+  {
+    "id": 36,
+    "latin": "Codiaeum petra",
+    "family": "Euphorbiaceae",
+    "common": [
+      "Croton"
+    ],
+    "category": "Foliage plant",
+    "origin": "Cultivar",
+    "climate": "Tropical",
+    "tempmax": {
+      "celsius": 28,
+      "fahrenheit": 82.4
+    },
+    "tempmin": {
+      "celsius": 10,
+      "fahrenheit": 50
+    },
+    "ideallight": "6 or more hours of direct sunlight per day.",
+    "toleratedlight": "Direct sunlight.",
+    "watering": "Keep moist between watering. Water when soil is half dry.",
+    "insects": [
+      "Spider mite",
+      "Mealy bug"
+    ],
+    "diseases": "N/A",
+    "use": [
+      "Potted plant",
+      "Secondary"
+    ]
+  },
+  {
+    "id": 51,
+    "latin": "Codiaeum",
+    "family": "Euphorbiaceae",
+    "common": [
+      "Croton"
+    ],
+    "category": "Foliage plant",
+    "origin": "Cultivar",
+    "climate": "Tropical",
+    "tempmax": {
+      "celsius": 28,
+      "fahrenheit": 82.4
+    },
+    "tempmin": {
+      "celsius": 10,
+      "fahrenheit": 50
+    },
+    "ideallight": "6 or more hours of direct sunlight per day.",
+    "toleratedlight": "Direct sunlight.",
+    "watering": "Keep moist between watering. Water when soil is half dry.",
+    "insects": [
+      "Spider mite",
+      "Mealy bug"
+    ],
+    "diseases": "N/A",
+    "use": [
+      "Secondary",
+      "Tertiary"
+    ]
+  }
+]

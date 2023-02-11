@@ -14,6 +14,8 @@
 		620332F72923DD3000ADE1A1 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 620332F62923DD3000ADE1A1 /* FirebaseStorage */; };
 		620332F92923E90B00ADE1A1 /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620332F82923E90B00ADE1A1 /* DBManager.swift */; };
 		620332FE2924D2AD00ADE1A1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 620332FD2924D2AD00ADE1A1 /* GoogleService-Info.plist */; };
+		620B2FC02997ECF100E57760 /* NetworkParseDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620B2FBF2997ECF100E57760 /* NetworkParseDataTests.swift */; };
+		620B2FC22997F13200E57760 /* FeaturesJsonMock.json in Resources */ = {isa = PBXBuildFile; fileRef = 620B2FC12997F13200E57760 /* FeaturesJsonMock.json */; };
 		622AF21D2928EDD900A1A994 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 622AF21C2928EDD900A1A994 /* Assets.xcassets */; };
 		623008B72994E221000D4216 /* PriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623008B62994E221000D4216 /* PriceView.swift */; };
 		623A9F31296C6AF400A3A17A /* GardenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623A9F30296C6AF400A3A17A /* GardenViewModel.swift */; };
@@ -107,6 +109,8 @@
 		620332EB2923CB7A00ADE1A1 /* Shop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shop.swift; sourceTree = "<group>"; };
 		620332F82923E90B00ADE1A1 /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
 		620332FD2924D2AD00ADE1A1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		620B2FBF2997ECF100E57760 /* NetworkParseDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkParseDataTests.swift; sourceTree = "<group>"; };
+		620B2FC12997F13200E57760 /* FeaturesJsonMock.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = FeaturesJsonMock.json; sourceTree = "<group>"; };
 		622AF21C2928EDD900A1A994 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		623008B62994E221000D4216 /* PriceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceView.swift; sourceTree = "<group>"; };
 		623A9F30296C6AF400A3A17A /* GardenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GardenViewModel.swift; sourceTree = "<group>"; };
@@ -212,6 +216,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		620B2FC32997F95800E57760 /* NetworkLayerTests */ = {
+			isa = PBXGroup;
+			children = (
+				620B2FBF2997ECF100E57760 /* NetworkParseDataTests.swift */,
+			);
+			path = NetworkLayerTests;
+			sourceTree = "<group>";
+		};
 		623A9F2E296C6AA000A3A17A /* Modules */ = {
 			isa = PBXGroup;
 			children = (
@@ -441,6 +453,7 @@
 				62E9AF99290C2FF700175A21 /* Secret_GardenTests.swift */,
 				62EC9B2329758D110014CD84 /* GardenViewModelTests.swift */,
 				62EC9B25297982710014CD84 /* GardenTests.swift */,
+				620B2FC32997F95800E57760 /* NetworkLayerTests */,
 			);
 			path = "Secret GardenTests";
 			sourceTree = "<group>";
@@ -542,6 +555,7 @@
 			isa = PBXGroup;
 			children = (
 				62EC9B1F29755D600014CD84 /* Mocks.swift */,
+				620B2FC12997F13200E57760 /* FeaturesJsonMock.json */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -717,6 +731,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				620B2FC22997F13200E57760 /* FeaturesJsonMock.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -826,6 +841,7 @@
 			files = (
 				62EC9B26297982710014CD84 /* GardenTests.swift in Sources */,
 				62E9AF9A290C2FF700175A21 /* Secret_GardenTests.swift in Sources */,
+				620B2FC02997ECF100E57760 /* NetworkParseDataTests.swift in Sources */,
 				62EC9B2429758D110014CD84 /* GardenViewModelTests.swift in Sources */,
 				62EC9B2029755D600014CD84 /* Mocks.swift in Sources */,
 			);

@@ -53,8 +53,14 @@ protocol NetworkManagerProtocol {
     func getPlant(by name: String?, completion: @escaping (Result<Features, NetworkError>) -> Void)
 }
 
+protocol NetworkManagerDataParser {
+    func parseData(_ data: Data) -> Result<Features, NetworkError>
+}
+
+// MARK: - NetworkManager
+
 class NetworkManager: NetworkManagerProtocol {
-        
+
     func getPlant(by name: String?, completion: @escaping (Result<Features, NetworkError>) -> Void) {
         let request = APIType.common.makeURLRequest(name)
         let task = URLSession.shared.dataTask(with: request) { [weak self] (data, response, error) in
@@ -74,8 +80,11 @@ class NetworkManager: NetworkManagerProtocol {
         }
         task.resume()
     }
+}
+
+extension NetworkManager: NetworkManagerDataParser {
         
-    private func parseData(_ data: Data) -> Result<Features, NetworkError> {
+    func parseData(_ data: Data) -> Result<Features, NetworkError> {
         do {
             let features = try JSONDecoder().decode([Features].self, from: data)
             guard features.count > 0 else {
