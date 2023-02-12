@@ -32,7 +32,7 @@ struct PlantImageData: Codable {
     }
 }
 
-struct Features {
+struct Features: Equatable {
     let latinName: String
     let origin: String
     let idealLight: String

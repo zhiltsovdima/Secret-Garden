@@ -12,63 +12,20 @@ enum Result<Success, Failure: Error> {
     case failure(Failure)
 }
 
-enum APIType {
-    case common
-    case latin
-    case all
-    
-    private var stringURL: String {
-        "https://house-plants.p.rapidapi.com"
-    }
-    private var headers: [String: String] {
-        ["X-RapidAPI-Key": PrivateKeys.APIPlantKey,
-         "X-RapidAPI-Host": "house-plants.p.rapidapi.com"
-        ]
-    }
-    
-    private var path: String {
-        switch self {
-        case .common: return "/common/"
-        case .latin: return "/latin/"
-        case .all: return "/all"
-        }
-    }
-}
-extension APIType {
-    
-    fileprivate func makeURLRequest(_ plant: String?) -> URLRequest {
-        var fullPath = path
-        if let plant {
-            fullPath.append(plant.lowercased().replacingOccurrences(of: " ", with: ""))
-        }
-        let url = URL(string: fullPath, relativeTo: URL(string: stringURL))
-        var request = URLRequest(url: url!)
-        request.httpMethod = "GET"
-        request.allHTTPHeaderFields = headers
-        return request
-    }
-}
-
-protocol NetworkManagerProtocol {
-    func getPlant(by name: String?, completion: @escaping (Result<Features, NetworkError>) -> Void)
-}
-
-protocol NetworkManagerDataParser {
-    func parseData(_ data: Data) -> Result<Features, NetworkError>
-}
-
 // MARK: - NetworkManager
 
 class NetworkManager: NetworkManagerProtocol {
-
+    
+    private let urlSession: URLSessionProtocol
+    
+    init(urlSession: URLSessionProtocol = URLSession.shared) {
+        self.urlSession = urlSession
+    }
+    
     func getPlant(by name: String?, completion: @escaping (Result<Features, NetworkError>) -> Void) {
-        let request = APIType.common.makeURLRequest(name)
-        let task = URLSession.shared.dataTask(with: request) { [weak self] (data, response, error) in
+        let request = APIEndpoints.common.makeURLRequest(name)
+        let task = urlSession.dataTask(with: request) { [weak self] (data, response, error) in
             guard let self else { return completion(Result.failure(NetworkError.failed))}
-            guard error == nil else {
-                completion(.failure(NetworkError.handleError(error!)))
-                return
-            }
             do {
                 let safeData = try NetworkError.handleNetworkResponse(data, response)
                 let result = self.parseData(safeData)
