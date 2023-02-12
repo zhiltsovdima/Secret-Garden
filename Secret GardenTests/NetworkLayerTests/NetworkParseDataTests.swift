@@ -10,26 +10,29 @@ import XCTest
 
 final class NetworkParseDataTests: XCTestCase {
     
-    var networkManager: NetworkManagerDataParser!
+    var sut: NetworkManagerDataParser!
 
     override func setUpWithError() throws {
-        networkManager = NetworkManager()
+        sut = NetworkManager()
     }
 
     override func tearDownWithError() throws {
-        networkManager = nil
+        sut = nil
     }
     
     func testParseData_shouldReturnSuccess() {
+        // Given
         guard let url = Bundle(for: NetworkParseDataTests.self).url(forResource: "FeaturesJsonMock", withExtension: "json") else {
-            fatalError("Can't find search.json file")
+            fatalError("Can't find a json file")
         }
         guard let data = try? Data(contentsOf: url) else {
             fatalError("Can't convert json into data")
         }
         
-        let result = networkManager.parseData(data)
+        // When
+        let result = sut.parseData(data)
         
+        // Then
         switch result {
         case .success(let features):
             XCTAssertEqual(features.latinName, "Codiaeum petra")
@@ -44,23 +47,26 @@ final class NetworkParseDataTests: XCTestCase {
     }
     
     func testParseData_shouldReturnFailure_NoDataForThisName() {
+        // Given
         let json = """
         []
         """
         guard let data = json.data(using: .utf8) else { fatalError("Can't convert json into data") }
         
-        let result = networkManager.parseData(data)
+        // When
+        let result = sut.parseData(data)
         
+        // Then
         switch result {
         case .success:
             XCTFail("Parsing should have failed")
         case .failure(let error):
-            print(error.description)
             XCTAssertEqual(error, NetworkError.noDataForThisName)
         }
     }
     
     func testParseData_shouldReturnFailure() {
+        // Given
         let json = """
         {
         "test": "not valid json"
@@ -68,13 +74,14 @@ final class NetworkParseDataTests: XCTestCase {
         """
         guard let data = json.data(using: .utf8) else { fatalError("Can't convert json into data") }
         
-        let result = networkManager.parseData(data)
+        // When
+        let result = sut.parseData(data)
         
+        // Then
         switch result {
         case .success:
             XCTFail("Parsing should have failed")
         case .failure(let error):
-            print(error.description)
             XCTAssertNotNil(error)
         }
     }
