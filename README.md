@@ -11,12 +11,12 @@ UIKit app for storing your plants collection and the ability to browse the produ
 <img src="https://user-images.githubusercontent.com/50846656/208391472-ac5cf102-07ae-4a50-9aa2-2a9ad623765d.PNG" width = 20% height = 20%>
 <img src="https://user-images.githubusercontent.com/50846656/218419044-f1757887-020b-469f-8d7e-abc5c6f5de16.png" width = 20% height = 20%>
 
-**Tech Stack:** Swift, UIKit, MVVM, SPM, FireBase, FileManager
+**Tech Stack:** Swift, UIKit, MVVM-C, SPM, FireBase, FileManager
 
 **Description:** This app allows you to create and manage a personal collection of plants. You can add plants to your collection by either taking a photo or selecting an image from your photo library. The app then downloads relevant information about the plant from the internet, its features. Also you can upload various plants from the shop, filter by category, view detailed information and add to your cart or to your favourites.
 
 **Features:**
-  - MVVM architecture to separate concerns and improve code organization
+  - MVVM-C architecture to separate concerns and improve code organization
   - SPM for managing third-party dependencies
   - Custom UI elements using UIKit
   - Dark mode support
@@ -28,15 +28,17 @@ UIKit app for storing your plants collection and the ability to browse the produ
   - Design, AppIcon, LaunchScreen
 
 **List of things planned for implementation:**
-  - Refactoring and code improvement
   - Greater percentage of test coverage
+  - Improve the use of the coordinator pattern
   - SearchBar
   - Stepper for CartVC
-  - List of tips
+  - List of tips and Home screen developing
   - Cache for loaded images(optional)
+  - Refactoring and code improvement
   - UX/UI improvements
 
   In the long run:
+  - RxSwift implement
   - Add a plant watering reminder
   - Add a note diary for the plant(with more photos)
   - Visual effects of adding to cart/favorites
