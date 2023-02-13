@@ -9,6 +9,7 @@ import Foundation
 import UIKit.UIImage
 
 struct PlantModel {
+    var id: String
     var plantImage: UIImage?
     var plantTitle: String
 }
@@ -46,7 +47,7 @@ final class EditPlantViewModel {
     
     private func getViewData() {
         let plant = garden.plants[index]
-        viewData = PlantModel(plantImage: plant.imageData.image, plantTitle: plant.name)
+        viewData = PlantModel(id: plant.id, plantImage: plant.imageData.image, plantTitle: plant.name)
     }
     
     private func validateNewPlant(name: String?, image: UIImage?) throws {
@@ -71,7 +72,7 @@ extension EditPlantViewModel: EditPlantViewModelProtocol {
     func saveButtonTapped(name: String?, image: UIImage?) {
         do {
             try validateNewPlant(name: name, image: image)
-            garden.updatePlant(name: name!, image: image!, at: index)
+            garden.updatePlant(id: viewData.id, name: name!, image: image!, at: index)
             garden.saveToFile()
             coordinator?.successEditing()
         } catch {

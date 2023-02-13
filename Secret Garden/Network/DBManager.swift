@@ -80,12 +80,12 @@ struct DBManager {
         
         let fileRef = pathRef.child(name + ".jpg")
         fileRef.getData(maxSize: 1024*1024) { (data, error) in
-            guard error == nil else {
+            guard error == nil, let data else {
                 completion(image)
                 print("Get Image error: \(error!)")
                 return
             }
-            image = UIImage(data: data!)!
+            image = UIImage(data: data)!
             completion(image)
         }
     }

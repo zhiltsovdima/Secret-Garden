@@ -28,11 +28,13 @@ final class PlantOptionsViewModel {
     private weak var coordinator: PlantOptionsCoordinatorProtocol?
     private let garden: Garden
     private let indexPath: IndexPath
+    private let id: String
             
-    init(coordinator: PlantOptionsCoordinatorProtocol, _ garden: Garden, _ indexPath: IndexPath) {
+    init(coordinator: PlantOptionsCoordinatorProtocol, _ garden: Garden, _ indexPath: IndexPath, id: String) {
         self.coordinator = coordinator
         self.garden = garden
         self.indexPath = indexPath
+        self.id = id
     }
 
 }
@@ -46,7 +48,7 @@ extension PlantOptionsViewModel: PlantOptionsViewModelProtocol {
     }
     
     func deleteButtonTapped() {
-        garden.removePlant(at: indexPath.row)
+        garden.removePlant(id: id, at: indexPath.row)
         garden.saveToFile()
         coordinator?.successDeleting()
     }

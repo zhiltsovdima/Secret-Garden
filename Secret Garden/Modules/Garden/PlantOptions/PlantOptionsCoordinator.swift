@@ -21,18 +21,20 @@ final class PlantOptionsCoordinator: NSObject, Coordinator {
     private let navigationController: UINavigationController
     private let garden: Garden
     private let cell: PlantCell
+    private let id: String
         
-    init(_ navigationController: UINavigationController, _ garden: Garden, cell: PlantCell) {
+    init(_ navigationController: UINavigationController, _ garden: Garden, cell: PlantCell, id: String) {
         self.navigationController = navigationController
         self.garden = garden
         self.cell = cell
+        self.id = id
     }
     
     func start() {
         guard let vc = navigationController.topViewController as? GardenViewController else { return }
         guard let indexPath = vc.tableView.indexPath(for: cell) else { return }
         
-        let viewModel = PlantOptionsViewModel(coordinator: self, garden, indexPath)
+        let viewModel = PlantOptionsViewModel(coordinator: self, garden, indexPath, id: id)
         let optionsView = PlantOptionsTableViewController(viewModel: viewModel)
         
         optionsView.modalPresentationStyle = .popover

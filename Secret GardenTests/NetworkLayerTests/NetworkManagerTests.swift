@@ -11,11 +11,10 @@ import XCTest
 final class NetworkManagerTests: XCTestCase {
     
     var sut: NetworkManagerProtocol!
-    var mockURLSession: MockURLSession!
-    let fileNameJsonMock = "FeaturesJsonMock"
+    var mockURLSession: URLSessionMock!
     
     override func setUpWithError() throws {
-        mockURLSession = MockURLSession()
+        mockURLSession = URLSessionMock()
         sut = NetworkManager(urlSession: mockURLSession)
     }
 
@@ -24,28 +23,14 @@ final class NetworkManagerTests: XCTestCase {
         sut = nil
     }
     
-    func getDataFromJsonFile(fileName: String) -> Data {
-        guard let url = Bundle(for: NetworkParseDataTests.self).url(forResource: fileName, withExtension: "json") else {
-            fatalError("Can't find \(fileName).json file")
-        }
-        guard let data = try? Data(contentsOf: url) else {
-            fatalError("Can't convert json into data")
-        }
-        return data
-    }
     
-    func createFeaturesFromJson(fileName: String) -> Features {
-        let data = getDataFromJsonFile(fileName: fileName)
-        guard let features = try? JSONDecoder().decode([Features].self, from: data) else { fatalError("Can't decode jsonData") }
-        return features.first!
-    }
 
     func testGetPlant_ReturnsFeatures_WhenResponseIsSuccessful() throws {
         // Given
-        let features = createFeaturesFromJson(fileName: fileNameJsonMock)
+        let features = GetJSONMock.createFeaturesFromJson()
         
-        mockURLSession.data = getDataFromJsonFile(fileName: fileNameJsonMock)
-        mockURLSession.response = MockHTTPURLResponse(statusCode: 200)
+        mockURLSession.data = GetJSONMock.getDataFromJsonFile()
+        mockURLSession.response = HTTPURLResponseMock(statusCode: 200)
         mockURLSession.error = nil
         
         let plantName = "TestName"
@@ -64,7 +49,7 @@ final class NetworkManagerTests: XCTestCase {
     func testGetPlant_ReturnsUnavailableError_WhenResponseStatusCodeIs404() throws {
         // Given
         mockURLSession.data = nil
-        mockURLSession.response = MockHTTPURLResponse(statusCode: 404)
+        mockURLSession.response = HTTPURLResponseMock(statusCode: 404)
         mockURLSession.error = nil
         
         let plantName = "TestName"

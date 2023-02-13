@@ -16,6 +16,14 @@
 		620332FE2924D2AD00ADE1A1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 620332FD2924D2AD00ADE1A1 /* GoogleService-Info.plist */; };
 		620B2FC02997ECF100E57760 /* NetworkParseDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620B2FBF2997ECF100E57760 /* NetworkParseDataTests.swift */; };
 		620B2FC22997F13200E57760 /* FeaturesJsonMock.json in Resources */ = {isa = PBXBuildFile; fileRef = 620B2FC12997F13200E57760 /* FeaturesJsonMock.json */; };
+		620B2FC52998E23C00E57760 /* NetworkManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620B2FC42998E23C00E57760 /* NetworkManagerTests.swift */; };
+		620B2FC72998E4FF00E57760 /* URLSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620B2FC62998E4FF00E57760 /* URLSessionMock.swift */; };
+		620B2FC92998EC6000E57760 /* URLSession + ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620B2FC82998EC6000E57760 /* URLSession + ext.swift */; };
+		620B2FCD2998FC9D00E57760 /* HTTPURLResponseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620B2FCC2998FC9D00E57760 /* HTTPURLResponseMock.swift */; };
+		620B2FCF2999196800E57760 /* Result + ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620B2FCE2999196800E57760 /* Result + ext.swift */; };
+		620B2FD22999408B00E57760 /* NetworkProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620B2FD12999408B00E57760 /* NetworkProtocols.swift */; };
+		620B2FD42999417900E57760 /* APIEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620B2FD32999417900E57760 /* APIEndpoints.swift */; };
+		620B2FD62999571900E57760 /* NetworkManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620B2FD52999571900E57760 /* NetworkManagerMock.swift */; };
 		622AF21D2928EDD900A1A994 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 622AF21C2928EDD900A1A994 /* Assets.xcassets */; };
 		623008B72994E221000D4216 /* PriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623008B62994E221000D4216 /* PriceView.swift */; };
 		623A9F31296C6AF400A3A17A /* GardenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623A9F30296C6AF400A3A17A /* GardenViewModel.swift */; };
@@ -57,7 +65,6 @@
 		62E9AF83290C2FF600175A21 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9AF82290C2FF600175A21 /* AppDelegate.swift */; };
 		62E9AF85290C2FF600175A21 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9AF84290C2FF600175A21 /* SceneDelegate.swift */; };
 		62E9AF8F290C2FF700175A21 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62E9AF8D290C2FF700175A21 /* LaunchScreen.storyboard */; };
-		62E9AF9A290C2FF700175A21 /* Secret_GardenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9AF99290C2FF700175A21 /* Secret_GardenTests.swift */; };
 		62E9AFA4290C2FF700175A21 /* Secret_GardenUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9AFA3290C2FF700175A21 /* Secret_GardenUITests.swift */; };
 		62E9AFA6290C2FF700175A21 /* Secret_GardenUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9AFA5290C2FF700175A21 /* Secret_GardenUITestsLaunchTests.swift */; };
 		62E9AFB9290D1C5C00175A21 /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9AFB8290D1C5C00175A21 /* Resources.swift */; };
@@ -75,7 +82,6 @@
 		62EC9B18297464E90014CD84 /* AlertCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62EC9B17297464E90014CD84 /* AlertCoordinator.swift */; };
 		62EC9B1B297487790014CD84 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62EC9B1A297487790014CD84 /* Protocols.swift */; };
 		62EC9B2029755D600014CD84 /* Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62EC9B1F29755D600014CD84 /* Mocks.swift */; };
-		62EC9B2429758D110014CD84 /* GardenViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62EC9B2329758D110014CD84 /* GardenViewModelTests.swift */; };
 		62EC9B26297982710014CD84 /* GardenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62EC9B25297982710014CD84 /* GardenTests.swift */; };
 		62F7FD502970065B0055B60F /* DetailPlantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62F7FD4F2970065B0055B60F /* DetailPlantViewModel.swift */; };
 		62F7FD55297161B60055B60F /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62F7FD54297161B60055B60F /* AppCoordinator.swift */; };
@@ -111,6 +117,14 @@
 		620332FD2924D2AD00ADE1A1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		620B2FBF2997ECF100E57760 /* NetworkParseDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkParseDataTests.swift; sourceTree = "<group>"; };
 		620B2FC12997F13200E57760 /* FeaturesJsonMock.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = FeaturesJsonMock.json; sourceTree = "<group>"; };
+		620B2FC42998E23C00E57760 /* NetworkManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerTests.swift; sourceTree = "<group>"; };
+		620B2FC62998E4FF00E57760 /* URLSessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionMock.swift; sourceTree = "<group>"; };
+		620B2FC82998EC6000E57760 /* URLSession + ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession + ext.swift"; sourceTree = "<group>"; };
+		620B2FCC2998FC9D00E57760 /* HTTPURLResponseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPURLResponseMock.swift; sourceTree = "<group>"; };
+		620B2FCE2999196800E57760 /* Result + ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Result + ext.swift"; sourceTree = "<group>"; };
+		620B2FD12999408B00E57760 /* NetworkProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProtocols.swift; sourceTree = "<group>"; };
+		620B2FD32999417900E57760 /* APIEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoints.swift; sourceTree = "<group>"; };
+		620B2FD52999571900E57760 /* NetworkManagerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerMock.swift; sourceTree = "<group>"; };
 		622AF21C2928EDD900A1A994 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		623008B62994E221000D4216 /* PriceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceView.swift; sourceTree = "<group>"; };
 		623A9F30296C6AF400A3A17A /* GardenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GardenViewModel.swift; sourceTree = "<group>"; };
@@ -152,7 +166,6 @@
 		62E9AF8E290C2FF700175A21 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		62E9AF90290C2FF700175A21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		62E9AF95290C2FF700175A21 /* Secret GardenTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Secret GardenTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		62E9AF99290C2FF700175A21 /* Secret_GardenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secret_GardenTests.swift; sourceTree = "<group>"; };
 		62E9AF9F290C2FF700175A21 /* Secret GardenUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Secret GardenUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		62E9AFA3290C2FF700175A21 /* Secret_GardenUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secret_GardenUITests.swift; sourceTree = "<group>"; };
 		62E9AFA5290C2FF700175A21 /* Secret_GardenUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secret_GardenUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -171,7 +184,6 @@
 		62EC9B17297464E90014CD84 /* AlertCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertCoordinator.swift; sourceTree = "<group>"; };
 		62EC9B1A297487790014CD84 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		62EC9B1F29755D600014CD84 /* Mocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mocks.swift; sourceTree = "<group>"; };
-		62EC9B2329758D110014CD84 /* GardenViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GardenViewModelTests.swift; sourceTree = "<group>"; };
 		62EC9B25297982710014CD84 /* GardenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GardenTests.swift; sourceTree = "<group>"; };
 		62F7FD4F2970065B0055B60F /* DetailPlantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPlantViewModel.swift; sourceTree = "<group>"; };
 		62F7FD54297161B60055B60F /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
@@ -219,9 +231,37 @@
 		620B2FC32997F95800E57760 /* NetworkLayerTests */ = {
 			isa = PBXGroup;
 			children = (
+				620B2FC42998E23C00E57760 /* NetworkManagerTests.swift */,
 				620B2FBF2997ECF100E57760 /* NetworkParseDataTests.swift */,
 			);
 			path = NetworkLayerTests;
+			sourceTree = "<group>";
+		};
+		620B2FCA2998F0D000E57760 /* Garden */ = {
+			isa = PBXGroup;
+			children = (
+				62EC9B25297982710014CD84 /* GardenTests.swift */,
+			);
+			path = Garden;
+			sourceTree = "<group>";
+		};
+		620B2FCB2998FC6700E57760 /* NetworkMocks */ = {
+			isa = PBXGroup;
+			children = (
+				620B2FD52999571900E57760 /* NetworkManagerMock.swift */,
+				620B2FC62998E4FF00E57760 /* URLSessionMock.swift */,
+				620B2FCC2998FC9D00E57760 /* HTTPURLResponseMock.swift */,
+				620B2FC12997F13200E57760 /* FeaturesJsonMock.json */,
+			);
+			path = NetworkMocks;
+			sourceTree = "<group>";
+		};
+		620B2FD02999407400E57760 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				620B2FD12999408B00E57760 /* NetworkProtocols.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 		623A9F2E296C6AA000A3A17A /* Modules */ = {
@@ -402,6 +442,7 @@
 			isa = PBXGroup;
 			children = (
 				620332F82923E90B00ADE1A1 /* DBManager.swift */,
+				620B2FD32999417900E57760 /* APIEndpoints.swift */,
 				62B36A392954D8220052454B /* NetworkManager.swift */,
 				62B36A3D29573F110052454B /* NetworkError.swift */,
 			);
@@ -450,9 +491,7 @@
 			isa = PBXGroup;
 			children = (
 				62EC9B1E29755D1A0014CD84 /* Mocks */,
-				62E9AF99290C2FF700175A21 /* Secret_GardenTests.swift */,
-				62EC9B2329758D110014CD84 /* GardenViewModelTests.swift */,
-				62EC9B25297982710014CD84 /* GardenTests.swift */,
+				620B2FCA2998F0D000E57760 /* Garden */,
 				620B2FC32997F95800E57760 /* NetworkLayerTests */,
 			);
 			path = "Secret GardenTests";
@@ -522,6 +561,8 @@
 			children = (
 				62E9AFD62913BA9800175A21 /* UIView + ext.swift */,
 				626FA074291E82F100FEB461 /* UIImage + ext.swift */,
+				620B2FC82998EC6000E57760 /* URLSession + ext.swift */,
+				620B2FCE2999196800E57760 /* Result + ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -546,6 +587,7 @@
 		62EC9B192974875E0014CD84 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				620B2FD02999407400E57760 /* Network */,
 				62EC9B1A297487790014CD84 /* Protocols.swift */,
 			);
 			path = Protocols;
@@ -555,7 +597,7 @@
 			isa = PBXGroup;
 			children = (
 				62EC9B1F29755D600014CD84 /* Mocks.swift */,
-				620B2FC12997F13200E57760 /* FeaturesJsonMock.json */,
+				620B2FCB2998FC6700E57760 /* NetworkMocks */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -789,6 +831,7 @@
 				62F7FD5B29716E890055B60F /* HomeCoordinator.swift in Sources */,
 				62E9AF83290C2FF600175A21 /* AppDelegate.swift in Sources */,
 				6270BBBB295CD3B700871C0F /* PrivateKeys.swift in Sources */,
+				620B2FC92998EC6000E57760 /* URLSession + ext.swift in Sources */,
 				62EC9B1B297487790014CD84 /* Protocols.swift in Sources */,
 				62B36A3A2954D8220052454B /* NetworkManager.swift in Sources */,
 				625F951C298839A100EB628A /* CartCell.swift in Sources */,
@@ -802,6 +845,7 @@
 				626FA071291CFCB000FEB461 /* DetailBaseController.swift in Sources */,
 				62F7FD592971674A0055B60F /* AddNewPlantCoordinator.swift in Sources */,
 				62E9AFBE290D40AF00175A21 /* GardenViewController.swift in Sources */,
+				620B2FD22999408B00E57760 /* NetworkProtocols.swift in Sources */,
 				6248B16E2944B4B80075CE25 /* ShopItem.swift in Sources */,
 				626FA06F291CFC0E00FEB461 /* DetailPlantController.swift in Sources */,
 				625F95132986E5E300EB628A /* ItemDetailController.swift in Sources */,
@@ -828,6 +872,8 @@
 				625F95122986E5E300EB628A /* CartViewController.swift in Sources */,
 				62EC9B18297464E90014CD84 /* AlertCoordinator.swift in Sources */,
 				62B36A3E29573F110052454B /* NetworkError.swift in Sources */,
+				620B2FCF2999196800E57760 /* Result + ext.swift in Sources */,
+				620B2FD42999417900E57760 /* APIEndpoints.swift in Sources */,
 				62E9AF85290C2FF600175A21 /* SceneDelegate.swift in Sources */,
 				62E9AFC2290EAB4500175A21 /* NavBarController.swift in Sources */,
 				625F950C2986E5E300EB628A /* ItemCell.swift in Sources */,
@@ -839,10 +885,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				620B2FCD2998FC9D00E57760 /* HTTPURLResponseMock.swift in Sources */,
+				620B2FD62999571900E57760 /* NetworkManagerMock.swift in Sources */,
+				620B2FC52998E23C00E57760 /* NetworkManagerTests.swift in Sources */,
 				62EC9B26297982710014CD84 /* GardenTests.swift in Sources */,
-				62E9AF9A290C2FF700175A21 /* Secret_GardenTests.swift in Sources */,
 				620B2FC02997ECF100E57760 /* NetworkParseDataTests.swift in Sources */,
-				62EC9B2429758D110014CD84 /* GardenViewModelTests.swift in Sources */,
+				620B2FC72998E4FF00E57760 /* URLSessionMock.swift in Sources */,
 				62EC9B2029755D600014CD84 /* Mocks.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

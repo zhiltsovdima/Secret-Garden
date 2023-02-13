@@ -26,8 +26,7 @@ protocol GardenViewModelProtocol: AnyObject {
     
     func addNewPlantTapped()
     func tableRowTapped(_ indexPath: IndexPath)
-    func settingsTapped(_ cell: PlantCell)
-
+    func settingsTapped(_ cell: PlantCell, id: String)
 }
 
 // MARK: - GardenViewModel
@@ -96,7 +95,7 @@ extension GardenViewModel: GardenViewModelProtocol {
         coordinator?.showPlantDetail(plant)
     }
     
-    func settingsTapped(_ cell: PlantCell) {
-        coordinator?.showOptions(cell)
+    func settingsTapped(_ cell: PlantCell, id: String) {
+        coordinator?.showOptions(cell, id: id)
     }
 }

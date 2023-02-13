@@ -105,8 +105,9 @@ extension GardenViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: Resources.Identifiers.plantCell, for: indexPath) as? PlantCell else { return UITableViewCell() }
         cell.setup(with: viewModel.tableData[indexPath.row])
+        let id = viewModel.tableData[indexPath.row].id
         cell.buttonCompletionHandler = { [weak self] in
-            self?.viewModel.settingsTapped(cell)
+            self?.viewModel.settingsTapped(cell, id: id)
         }
         return cell
     }

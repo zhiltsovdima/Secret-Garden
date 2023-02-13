@@ -8,7 +8,8 @@
 import UIKit
 
 class Garden {
-    private(set) var plants = [Plant]()
+    var plants = [Plant]()
+    
     private let networkManager: NetworkManagerProtocol
     
     var updatePlantsCompletion: ((TypeOfChangeModel, Int?) -> Void)?
@@ -17,10 +18,11 @@ class Garden {
         self.networkManager = networkManager
     }
     
-    func updatePlant(name: String, image: UIImage, at index: Int) {
-        plants[index].name = name
-        plants[index].imageData = PlantImageData(image)
-        plants[index].isFetched = false
+    func updatePlant(id: String, name: String, image: UIImage, at index: Int) {
+        guard let plant = plants.first(where: { $0.id == id }) else { return }
+        plant.name = name
+        plant.imageData = PlantImageData(image)
+        plant.isFetched = false
         updatePlantsCompletion?(.update, index)
     }
     
@@ -31,8 +33,8 @@ class Garden {
         updatePlantsCompletion?(.insert, nil)
     }
     
-    func removePlant(at index: Int) {
-        plants.remove(at: index)
+    func removePlant(id: String, at index: Int) {
+        plants.removeAll(where: { $0.id == id })
         updatePlantsCompletion?(.delete, index)
     }
     
@@ -50,7 +52,11 @@ class Garden {
                 plant?.isFetched = true
                 completion?(plant?.features, nil)
             case .failure(let error):
-                plant?.isFetched = true
+                if error == NetworkError.noDataForThisName {
+                    plant?.isFetched = true
+                } else {
+                    plant?.isFetched = false
+                }
                 completion?(nil, error)
             }
         }
