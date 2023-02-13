@@ -22,6 +22,7 @@ protocol DetailPlantViewModelProtocol: AnyObject {
     var tableData: [FeatureCellModel] { get }
     
     var updateCompletion: ((Bool) -> Void)? { get set }
+    func updateFeatures()
     func viewWillDisappear()
 }
 
@@ -47,7 +48,24 @@ final class DetailPlantViewModel {
     
     private func getViewData() {
         viewData = DetailPlantModel(name: plant.name, image: plant.imageData.image)
-        
+    }
+    
+    private func convertString(name: String, value: String) -> NSMutableAttributedString {
+        let atrString1 = NSMutableAttributedString(string: name + ": ",
+                                                   attributes: [NSAttributedString.Key.font: Resources.Fonts.generalBold!])
+        let atrString2 = NSMutableAttributedString(string: value,
+                                                   attributes: [NSAttributedString.Key.font: Resources.Fonts.general!])
+        atrString1.append(atrString2)
+        return atrString1
+    }
+
+}
+
+// MARK: - DetailPlantViewModelProtocol
+
+extension DetailPlantViewModel: DetailPlantViewModelProtocol {
+    
+    func updateFeatures() {
         garden.downloadFeatures(for: plant, completion: { [weak self] features, netError in
             guard let features else {
                 self?.viewData.errorMessage = netError?.description
@@ -82,21 +100,6 @@ final class DetailPlantViewModel {
             self?.updateCompletion?(true)
         })
     }
-    
-    private func convertString(name: String, value: String) -> NSMutableAttributedString {
-        let atrString1 = NSMutableAttributedString(string: name + ": ",
-                                                   attributes: [NSAttributedString.Key.font: Resources.Fonts.generalBold!])
-        let atrString2 = NSMutableAttributedString(string: value,
-                                                   attributes: [NSAttributedString.Key.font: Resources.Fonts.general!])
-        atrString1.append(atrString2)
-        return atrString1
-    }
-
-}
-
-// MARK: - DetailPlantViewModelProtocol
-
-extension DetailPlantViewModel: DetailPlantViewModelProtocol {
     
     func viewWillDisappear() {
         coordinator?.detailPlantFinish()

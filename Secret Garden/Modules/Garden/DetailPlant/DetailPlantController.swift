@@ -60,6 +60,7 @@ final class DetailPlantController: DetailBaseController {
                 }
             }
         }
+        viewModel.updateFeatures()
     }
     
     override func setupUI() {
