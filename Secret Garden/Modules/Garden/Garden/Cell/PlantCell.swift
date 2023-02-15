@@ -66,7 +66,7 @@ extension PlantCell {
 
         settingsButton.setImage(Resources.Images.Common.moreOptions, for: .normal)
         settingsButton.addTarget(self, action: #selector(settingsButtonAction), for: .touchUpInside)
-        makeSystemAnimation(for: settingsButton)
+        settingsButton.makeSystemAnimation()
     }
     
     private func setupConstraints() {

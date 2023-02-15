@@ -71,7 +71,7 @@ final class CartCell: UITableViewCell {
         deleteButton.setImage(Resources.Images.Common.delete, for: .normal)
         deleteButton.tintColor = Resources.Colors.blackOnWhite
         deleteButton.addTarget(self, action: #selector(deleteFromCartAction), for: .touchUpInside)
-        makeSystemAnimation(for: deleteButton)
+        deleteButton.makeSystemAnimation()
     }
     
     private func setupConstraints() {

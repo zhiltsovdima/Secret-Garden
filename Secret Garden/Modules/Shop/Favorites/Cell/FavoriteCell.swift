@@ -70,7 +70,7 @@ final class FavoriteCell: UITableViewCell {
         favoriteButton.addTarget(self, action: #selector(unfavItemAction), for: .touchUpInside)
         favoriteButton.setImage(Resources.Images.Common.addToFavoriteFill, for: .normal)
         favoriteButton.tintColor = Resources.Colors.blackOnWhite
-        makeSystemAnimation(for: favoriteButton)
+        favoriteButton.makeSystemAnimation()
     }
     
     private func setupConstraints() {

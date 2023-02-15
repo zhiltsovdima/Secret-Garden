@@ -28,7 +28,7 @@ class BaseButton: UIButton {
         backgroundColor = Resources.Colors.accent
         setTitleColor(.white, for: .normal)
         titleLabel?.font = Resources.Fonts.general?.withSize(20)
-        makeSystemAnimation(for: self)
+        makeSystemAnimation()
     }
     
 }
