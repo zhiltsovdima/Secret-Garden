@@ -17,10 +17,10 @@ class Shop {
     
     var items = [ShopItem]()
     
-    private let dbManager: DBManager
+    private let fbManager: FBManagerProtocol
     
-    init(dbManager: DBManager) {
-        self.dbManager = dbManager
+    init(fbManager: FBManagerProtocol) {
+        self.fbManager = fbManager
         fetchData()
     }
     
@@ -42,14 +42,14 @@ class Shop {
     }
     
     private func fetchData() {
-        dbManager.getPost() { [weak self] shopItems in
+        fbManager.getPost() { [weak self] shopItems in
             self?.items = shopItems
         }
     }
     
     func downloadData(for shopItem: ShopItem, completion: ((UIImage?) -> Void)?) {
         guard let imageString = shopItem.imageString else { completion?(Resources.Images.Common.defaultPlant); return }
-        dbManager.getImage(name: imageString) { fetchedImage in
+        fbManager.getImage(name: imageString) { fetchedImage in
             shopItem.image = fetchedImage
             completion?(shopItem.image)
         }

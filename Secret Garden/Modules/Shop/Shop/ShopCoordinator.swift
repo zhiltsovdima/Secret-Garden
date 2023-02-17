@@ -19,8 +19,8 @@ final class ShopCoordinator: Coordinator {
             
     private var navigationController: UINavigationController
     
-    lazy private var shop = Shop(dbManager: dbManager)
-    private let dbManager = DBManager()
+    private let fbManager = FBManager()
+    lazy private var shop = Shop(fbManager: fbManager)
         
     init(_ navigationController: UINavigationController) {
         self.navigationController = navigationController

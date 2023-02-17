@@ -8,11 +8,7 @@
 import Foundation
 @testable import Secret_Garden
 
-protocol ResultSetable {
-    var resultToReturn: Result<Features, NetworkError>! { get set }
-}
-
-class NetworkManagerMock: NetworkManagerProtocol {
+final class NetworkManagerMock: NetworkManagerProtocol {
     
     var resultToReturn: Result<Features, NetworkError>!
     
@@ -20,5 +16,3 @@ class NetworkManagerMock: NetworkManagerProtocol {
         completion(resultToReturn)
     }
 }
-
-extension NetworkManagerMock: ResultSetable { }
