@@ -7,12 +7,6 @@
 
 import UIKit.UIImage
 
-enum ValidateError: String, Error {
-    case empty = "Please, add the data"
-    case emptyName = "You have to add the plant name"
-    case emptyImage = "You have to add the Image"
-}
-
 // MARK: - AddPlantViewModelProtocol
 
 protocol AddPlantViewModelProtocol: AnyObject {
@@ -64,11 +58,11 @@ extension AddPlantViewModel: AddPlantViewModelProtocol {
         do {
             try validateNewPlant(name: name, image: image)
             garden.addNewPlant(name: name!, image: image!)
-            garden.saveToFile()
+            garden.savePlants()
             coordinator?.succesAdding()
         } catch {
-            let validateError = error as? ValidateError
-            validateCompletion?(validateError?.rawValue)
+            let validateError = error as! ValidateError
+            validateCompletion?(validateError.description)
         }
     }
     

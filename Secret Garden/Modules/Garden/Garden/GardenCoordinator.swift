@@ -19,8 +19,9 @@ final class GardenCoordinator: Coordinator {
     
     private var navigationController: UINavigationController
     
-    lazy private var garden = Garden(networkManager: networkManager)
     private let networkManager = NetworkManager()
+    private let plantsDataManager = PlantsDataManager()
+    lazy private var garden = Garden(networkManager: networkManager, plantsDataManager: plantsDataManager)
     
     init(_ navigationController: UINavigationController) {
         self.navigationController = navigationController

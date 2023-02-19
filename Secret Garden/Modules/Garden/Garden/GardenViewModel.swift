@@ -81,7 +81,7 @@ extension GardenViewModel: GardenViewModelProtocol {
     }
     
     private func updateModel() {
-        garden.loadFromFile()
+        garden.uploadPlants()
         tableData = garden.plants.compactMap { PlantCellModel(id: $0.id, plantImage: $0.imageData.image, plantTitle: $0.name) }
     }
     

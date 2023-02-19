@@ -50,7 +50,7 @@ extension NetworkManager: NetworkManagerDataParser {
             let featuresForPlant = features.first!
             return Result.success(featuresForPlant)
         } catch {
-            return Result.failure(NetworkError.handleError(error))
+            return Result.failure(NetworkError.unableToDecode)
         }
     }
 }

@@ -77,18 +77,53 @@ enum NetworkError: Error, Equatable {
         }
     }
     
-    static func handleError(_ error: Error) -> NetworkError {
+//    static func handleError(_ error: Error) -> NetworkError {
+//        switch error {
+//        case is DecodingError:
+//            return .unableToDecode
+//        case let error as URLError where error.code == .badURL:
+//            return .wrongURL
+//        case let error as URLError where error.code == .notConnectedToInternet:
+//            return .noInternet
+//        case let error as URLError where error.code == .timedOut:
+//            return .timeout(statusCode: error.errorCode)
+//        default:
+//            return .failed
+//        }
+//    }
+}
+
+enum ErrorType: Error, Equatable {
+    
+    case unableToDecode
+    case unableToEncode
+    case writeToPathError
+    case failed
+    
+    var description: String {
+        switch self {
+        case .unableToDecode:
+            return "Couldn't decode"
+        case .unableToEncode:
+            return "Couldn't encode"
+        case .writeToPathError:
+            return "Couldn't write to the path"
+        case .failed:
+            return "Failed"
+        }
+    }
+    
+    static func handleError(_ error: Error) -> ErrorType {
         switch error {
         case is DecodingError:
             return .unableToDecode
-        case let error as URLError where error.code == .badURL:
-            return .wrongURL
-        case let error as URLError where error.code == .notConnectedToInternet:
-            return .noInternet
-        case let error as URLError where error.code == .timedOut:
-            return .timeout(statusCode: error.errorCode)
+        case is EncodingError:
+            return .unableToEncode
+        case let error as NSError where error.code == NSFileWriteUnknownError:
+            return .writeToPathError
         default:
             return .failed
         }
     }
+    
 }

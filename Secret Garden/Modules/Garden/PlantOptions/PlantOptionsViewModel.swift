@@ -49,7 +49,7 @@ extension PlantOptionsViewModel: PlantOptionsViewModelProtocol {
     
     func deleteButtonTapped() {
         garden.removePlant(id: id, at: indexPath.row)
-        garden.saveToFile()
+        garden.savePlants()
         coordinator?.successDeleting()
     }
     
