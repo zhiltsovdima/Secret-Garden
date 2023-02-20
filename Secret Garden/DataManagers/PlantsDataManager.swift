@@ -31,7 +31,6 @@ final class PlantsDataManager: PlantsDataManagerProtocol {
     private func pathForStoringData() -> URL? {
         guard let appSuppDirectory = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first else { return nil }
         checkAndCreateDirectory(at: appSuppDirectory)
-
         let folderForStoring = appSuppDirectory.appendingPathComponent(Resources.Strings.PathForStoringData.folderName)
         checkAndCreateDirectory(at: folderForStoring)
         let pathForStoring = folderForStoring.appendingPathComponent(Resources.Strings.PathForStoringData.fileName)
@@ -39,8 +38,8 @@ final class PlantsDataManager: PlantsDataManagerProtocol {
     }
     
     func loadFromFile() -> Result<[Plant], Error> {
-        guard let path = pathForStoringData() else { return .failure(NSError())}
-        guard checkExistingOfFile(at: path) else { return .failure(NSError())}
+        guard let path = pathForStoringData() else { return .failure(FileManagerError.invalidPath)}
+        guard checkExistingOfFile(at: path) else { return .failure(FileManagerError.fileNotFound)}
         let decoder = PropertyListDecoder()
         do {
             let data = try Data(contentsOf: path)
