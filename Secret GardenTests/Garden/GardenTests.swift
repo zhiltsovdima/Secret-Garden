@@ -12,11 +12,12 @@ final class GardenTests: XCTestCase {
     
     var sut: Garden!
     let networkManager = NetworkManagerMock()
+    let plantsDataManager = PlantsDataManagerMock()
     let plantName = "PlantName"
     let image = UIImage()
     
     override func setUpWithError() throws {
-        sut = Garden(networkManager: networkManager)
+        sut = Garden(networkManager: networkManager, plantsDataManager: plantsDataManager)
     }
 
     override func tearDownWithError() throws {

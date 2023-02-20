@@ -12,7 +12,7 @@ protocol PlantsDataManagerProtocol {
     func saveToFile(plants: [Plant])
 }
 
-class PlantsDataManager: PlantsDataManagerProtocol {
+final class PlantsDataManager: PlantsDataManagerProtocol {
     
     private func checkAndCreateDirectory(at url: URL) {
         let isExist = checkExistingOfFile(at: url)
