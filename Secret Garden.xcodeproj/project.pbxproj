@@ -33,6 +33,7 @@
 		623A9F31296C6AF400A3A17A /* GardenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623A9F30296C6AF400A3A17A /* GardenViewModel.swift */; };
 		623A9F37296CC41900A3A17A /* AddPlantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623A9F36296CC41900A3A17A /* AddPlantViewModel.swift */; };
 		6248B16E2944B4B80075CE25 /* ShopItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6248B16D2944B4B80075CE25 /* ShopItem.swift */; };
+		625104AE29ADE51000A637C0 /* ItemStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625104AD29ADE51000A637C0 /* ItemStepper.swift */; };
 		625F950B2986E5E300EB628A /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625F94F72986E5E300EB628A /* FavoritesViewController.swift */; };
 		625F950C2986E5E300EB628A /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625F94FA2986E5E300EB628A /* ItemCell.swift */; };
 		625F950D2986E5E300EB628A /* ShopCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625F94FB2986E5E300EB628A /* ShopCoordinator.swift */; };
@@ -141,6 +142,7 @@
 		623A9F30296C6AF400A3A17A /* GardenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GardenViewModel.swift; sourceTree = "<group>"; };
 		623A9F36296CC41900A3A17A /* AddPlantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlantViewModel.swift; sourceTree = "<group>"; };
 		6248B16D2944B4B80075CE25 /* ShopItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopItem.swift; sourceTree = "<group>"; };
+		625104AD29ADE51000A637C0 /* ItemStepper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemStepper.swift; sourceTree = "<group>"; };
 		625F94F72986E5E300EB628A /* FavoritesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		625F94FA2986E5E300EB628A /* ItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
 		625F94FB2986E5E300EB628A /* ShopCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopCoordinator.swift; sourceTree = "<group>"; };
@@ -440,6 +442,7 @@
 			isa = PBXGroup;
 			children = (
 				625F952C298ED4B200EB628A /* PlaceholderView.swift */,
+				625104AD29ADE51000A637C0 /* ItemStepper.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -892,6 +895,7 @@
 				62EC9B1B297487790014CD84 /* Protocols.swift in Sources */,
 				62B36A3A2954D8220052454B /* NetworkManager.swift in Sources */,
 				625F951C298839A100EB628A /* CartCell.swift in Sources */,
+				625104AE29ADE51000A637C0 /* ItemStepper.swift in Sources */,
 				62E9AFCD2911106E00175A21 /* PlantCell.swift in Sources */,
 				625F950D2986E5E300EB628A /* ShopCoordinator.swift in Sources */,
 				626FA075291E82F100FEB461 /* UIImage + ext.swift in Sources */,
