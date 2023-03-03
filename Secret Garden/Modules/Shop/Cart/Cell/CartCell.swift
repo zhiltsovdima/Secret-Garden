@@ -7,22 +7,45 @@
 
 import UIKit
 
-struct CartCellModel {
+final class CartCellViewModel {
     var id: String
     var name: String
     var price: String
     var image: UIImage?
+    var count: Int
+    
+    var updateCountCompletion: ((Int) -> Void)?
+    
+    init(id: String, name: String, price: String, image: UIImage? = nil, count: Int, updateCountCompletion: ((Int) -> Void)? = nil) {
+        self.id = id
+        self.name = name
+        self.price = price
+        self.image = image
+        self.count = count
+        self.updateCountCompletion = updateCountCompletion
+    }
+    
+    func update(count: Int) {
+        self.count = count
+        updateCountCompletion?(self.count)
+    }
 }
 
 final class CartCell: UITableViewCell {
     
-    private var model: CartCellModel?
+    private var model: CartCellViewModel?
     
     private let nameItem = UILabel()
     private let priceLabel = UILabel()
     private let itemImageView = UIImageView()
-    
     private let deleteButton = UIButton()
+
+    lazy private var stepper: ItemStepper = {
+        let viewData = ItemStepper.ViewData(minimum: 1, maximum: 100, stepValue: 1)
+        let stepper = ItemStepper(viewData: viewData)
+        stepper.addTarget(self, action: #selector(stepperValueChanged), for: .valueChanged)
+        return stepper
+    }()
     
     var removeFromCartCompletion: ((UITableViewCell) -> Void)?
     
@@ -37,15 +60,20 @@ final class CartCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setup(with model: CartCellModel) {
+    func setup(with model: CartCellViewModel) {
         self.model = model
         nameItem.text = model.name
         priceLabel.text = model.price
         itemImageView.image = model.image
+        stepper.setup(value: model.count)
     }
     
     @objc func deleteFromCartAction() {
         removeFromCartCompletion?(self)
+    }
+    
+    @objc func stepperValueChanged() {
+        model?.update(count: stepper.value)
     }
     
     // MARK: - Setup Views
@@ -57,6 +85,7 @@ final class CartCell: UITableViewCell {
         addSubview(priceLabel)
         addSubview(nameItem)
         contentView.addSubview(deleteButton)
+        contentView.addSubview(stepper)
         
         itemImageView.layer.cornerRadius = 10
         itemImageView.clipsToBounds = true
@@ -75,11 +104,9 @@ final class CartCell: UITableViewCell {
     }
     
     private func setupConstraints() {
-        itemImageView.translatesAutoresizingMaskIntoConstraints = false
-        priceLabel.translatesAutoresizingMaskIntoConstraints = false
-        nameItem.translatesAutoresizingMaskIntoConstraints = false
-        deleteButton.translatesAutoresizingMaskIntoConstraints = false
-        
+        [itemImageView, priceLabel, nameItem, deleteButton, stepper].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
         
         NSLayoutConstraint.activate([
             itemImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
@@ -94,9 +121,12 @@ final class CartCell: UITableViewCell {
             priceLabel.topAnchor.constraint(equalTo: nameItem.bottomAnchor, constant: 20),
             priceLabel.leadingAnchor.constraint(equalTo: itemImageView.trailingAnchor, constant: 10),
             
+            deleteButton.topAnchor.constraint(equalTo: stepper.topAnchor),
             deleteButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
-            deleteButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10)
+            deleteButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
             
+            stepper.leadingAnchor.constraint(equalTo: itemImageView.trailingAnchor, constant: 10),
+            stepper.bottomAnchor.constraint(equalTo: itemImageView.bottomAnchor)
         ])
     }
     

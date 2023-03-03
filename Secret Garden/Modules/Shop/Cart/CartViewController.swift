@@ -65,6 +65,9 @@ final class CartViewController: UIViewController {
             self?.tableView.deleteRows(at: [indexPath], with: .fade)
             self?.showPlaceholder()
         }
+        viewModel.updatePriceCompletion = { [weak self] in
+            self?.showPlaceholder()
+        }
     }
     
     private func showPlaceholder() {

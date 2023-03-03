@@ -20,7 +20,6 @@ class ItemStepper: UIControl {
     lazy private var counterLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.text = String(value)
         label.textColor = Resources.Colors.blackOnWhite
         label.font = Resources.Fonts.generalBold
         return label
@@ -39,7 +38,6 @@ class ItemStepper: UIControl {
     init(viewData: ViewData) {
         self.viewData = viewData
         super.init(frame: .zero)
-        setup()
     }
     
     required init?(coder: NSCoder) {
@@ -53,7 +51,9 @@ class ItemStepper: UIControl {
         minusButton.layer.cornerRadius = 0.2 * bounds.height
     }
     
-    func setup() {
+    func setup(value: Int) {
+        self.value = value
+        counterLabel.text = String(value)
         backgroundColor = Resources.Colors.backgroundColor
         addSubview(stackView)
         

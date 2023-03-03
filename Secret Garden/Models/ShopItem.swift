@@ -17,6 +17,7 @@ class ShopItem {
     let imageString: String?
     let features: ShopItemFeatures
     
+    var count: Int?
     var image: UIImage?
     var category: ShopCategory? {
         switch categoryString?.lowercased() {

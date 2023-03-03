@@ -8,11 +8,12 @@
 import Foundation
 
 protocol CartViewModelProtocol: AnyObject {
-    var tableData: [CartCellModel] { get }
+    var tableData: [CartCellViewModel] { get }
     var isEmptyTableData: Bool { get }
     var subTotalPrice: String? { get }
     var totalPrice: String? { get }
     var updateCellCompletion: ((IndexPath) -> Void)? { get set }
+    var updatePriceCompletion: (() -> Void)? { get set }
 
     func removeButtonTapped(id: String, indexPath: IndexPath)
     func tableRowTapped(_ indexPath: IndexPath)
@@ -24,7 +25,7 @@ protocol CartViewModelProtocol: AnyObject {
 
 final class CartViewModel {
     
-    var tableData = [CartCellModel]() {
+    var tableData = [CartCellViewModel]() {
         didSet {
             isEmptyTableData = tableData.isEmpty
             getPrice()
@@ -39,6 +40,7 @@ final class CartViewModel {
     private let shop: Shop
     
     var updateCellCompletion: ((IndexPath) -> Void)?
+    var updatePriceCompletion: (() -> Void)?
     
     init(coordinator: CartCoordinatorProtocol, shop: Shop) {
         self.coordinator = coordinator
@@ -49,19 +51,26 @@ final class CartViewModel {
     private func getTableData() {
         tableData = shop.items
             .filter { $0.isAddedToCart == true }
-            .compactMap { CartCellModel(
-                id: $0.id,
-                name: $0.name,
-                price: $0.price,
-                image: $0.image
-            )}
+            .compactMap { item in
+                CartCellViewModel(
+                    id: item.id,
+                    name: item.name,
+                    price: item.price,
+                    image: item.image,
+                    count: item.count ?? 1,
+                    updateCountCompletion: { [weak self] newCount in
+                        item.count = newCount
+                        self?.getPrice()
+                        self?.updatePriceCompletion?()
+                    })
+            }
     }
     
     private func getPrice() {
         var price = 0.0
         tableData.forEach { item in
             let priceStr = item.price.trimmingCharacters(in: CharacterSet(charactersIn: "0123456789.").inverted)
-            price += Double(priceStr) ?? 0.0 
+            price += (Double(priceStr) ?? 0.0) * Double(item.count)
         }
         subTotalPrice = "$\(price)"
         totalPrice = "$\(price + deliveryPrice)"
