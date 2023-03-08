@@ -29,8 +29,12 @@ final class AppCoordinator: Coordinator {
     }
     
     func start() {
-        let tabCoordinator = TabCoordinator(window)
+        let tabBarController = UITabBarController()
+        let tabCoordinator = TabCoordinator(tabBarController)
         tabCoordinator.start()
         childCoordinators.append(tabCoordinator)
+        
+        window.rootViewController = tabBarController
+        window.makeKeyAndVisible()
     }
 }

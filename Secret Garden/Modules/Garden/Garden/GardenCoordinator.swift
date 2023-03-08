@@ -32,11 +32,6 @@ final class GardenCoordinator: Coordinator {
         let plantViewController = GardenViewController(viewModel: viewModel)
         navigationController.setViewControllers([plantViewController], animated: false)
     }
-    
-    func getController() -> UINavigationController {
-        return navigationController
-    }
-
 }
 
 // MARK: - GardenCoordinatorProtocol

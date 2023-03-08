@@ -13,46 +13,39 @@ final class TabCoordinator: Coordinator {
     
     private let tabBarController: UITabBarController
     
-    private let window: UIWindow
-    
-    init(_ window: UIWindow) {
-        self.window = window
-        self.tabBarController = .init()
+    init(_ tabBarController: UITabBarController) {
+        self.tabBarController = tabBarController
     }
     
     func start() {
         let pages: [TabBarPage] = [.home, .garden, .shop]
             .sorted(by: { $0.pageOrderNumber() < $1.pageOrderNumber() })
-        let controllers: [UIViewController] = pages.map { getTabControllers($0) }
+        let controllers: [UIViewController] = pages.map { getTabControllers(for: $0) }
         prepareTabBarController(withTabControllers: controllers)
-        window.rootViewController = tabBarController
-        window.makeKeyAndVisible()
     }
     
-    private func getTabControllers(_ page: TabBarPage) -> UIViewController {
+    private func getTabControllers(for page: TabBarPage) -> UIViewController {
         
         let navigationController = NavBarController()
         navigationController.tabBarItem = UITabBarItem.init(title: page.pageTitleValue(),
-                                                     image: page.iconValue(),
-                                                     tag: page.pageOrderNumber())
+                                                            image: page.iconValue(),
+                                                            tag: page.pageOrderNumber())
         
+        let childCoordinator = getChildCoordinator(for: page, navigationController)
+        childCoordinator.start()
+        childCoordinators.append(childCoordinator)
+        return navigationController
+    }
+    
+    private func getChildCoordinator(for page: TabBarPage, _ navigationController: UINavigationController) -> Coordinator {
         switch page {
         case .home:
             navigationController.setNavigationBarHidden(true, animated: false)
-            let homeCoordinator = HomeCoordinator(navigationController)
-            homeCoordinator.start()
-            childCoordinators.append(homeCoordinator)
-            return homeCoordinator.getController()
+            return HomeCoordinator(navigationController)
         case .garden:
-            let plantsCoordinator = GardenCoordinator(navigationController)
-            childCoordinators.append(plantsCoordinator)
-            plantsCoordinator.start()
-            return plantsCoordinator.getController()
+            return GardenCoordinator(navigationController)
         case .shop:
-            let shopCoordinator = ShopCoordinator(navigationController)
-            childCoordinators.append(shopCoordinator)
-            shopCoordinator.start()
-            return shopCoordinator.getController()
+            return ShopCoordinator(navigationController)
         }
     }
     

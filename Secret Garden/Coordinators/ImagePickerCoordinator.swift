@@ -32,9 +32,13 @@ final class ImagePickerCoordinator: NSObject, Coordinator {
 extension ImagePickerCoordinator: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let image = info[.originalImage] as? UIImage, let parentCoordinator {
-            parentCoordinator.didFinishPicking(image)
-        }
+        guard let image = info[.originalImage] as? UIImage, let parentCoordinator else { return }
+        parentCoordinator.didFinishPicking(image)
+        navigationController.dismiss(animated: true)
+        parentCoordinator.childDidFinish(self)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         navigationController.dismiss(animated: true)
         parentCoordinator?.childDidFinish(self)
     }

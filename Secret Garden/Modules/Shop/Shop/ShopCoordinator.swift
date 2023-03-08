@@ -31,10 +31,6 @@ final class ShopCoordinator: Coordinator {
         let shopView = ShopViewController(viewModel: viewModel)
         navigationController.setViewControllers([shopView], animated: false)
     }
-    
-    func getController() -> UINavigationController {
-        return navigationController
-    }
 }
 
 extension ShopCoordinator: ShopCoordinatorProtocol {

@@ -19,17 +19,18 @@ final class AlertCoordinator: Coordinator {
     }
     
     func start() {
-        switch parentCoordinator {
-        case is ImagePickable:
-            createPhotoChooseAlert()
-        default:
-            break
+        if let parent = parentCoordinator as? (ImagePickable & Coordinator) {
+            createPhotoChooseAlert(for: parent)
         }
     }
     
-    private func createPhotoChooseAlert() {
-        guard let parent = parentCoordinator as? (ImagePickable & Coordinator) else { return }
-        let alertController = UIAlertController(title: Resources.Strings.AddPlant.titleAlert, message: nil, preferredStyle: .actionSheet)
+    private func showAlertController(title: String?, message: String?, preferredStyle: UIAlertController.Style, actions: [UIAlertAction]) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: preferredStyle)
+        actions.forEach(alertController.addAction)
+        navigationController.visibleViewController?.present(alertController, animated: true)
+    }
+    
+    private func createPhotoChooseAlert(for parent: ImagePickable & Coordinator) {
         let cameraAction = UIAlertAction(title: Resources.Strings.AddPlant.camera, style: .default) { _ in
             parent.showImagePicker(sourceType: .camera)
             parent.childDidFinish(self)
@@ -41,10 +42,15 @@ final class AlertCoordinator: Coordinator {
         let cancelAction = UIAlertAction(title: Resources.Strings.Common.cancel, style: .cancel) { _ in
             parent.childDidFinish(self)
         }
-        
-        alertController.addAction(cameraAction)
-        alertController.addAction(photoLibraryAction)
-        alertController.addAction(cancelAction)
-        navigationController.visibleViewController?.present(alertController, animated: true)
+        showAlertController(
+            title: Resources.Strings.AddPlant.titleAlert,
+            message: nil,
+            preferredStyle: .actionSheet,
+            actions: [
+                cameraAction,
+                photoLibraryAction,
+                cancelAction
+            ]
+        )
     }
 }

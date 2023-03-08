@@ -20,8 +20,4 @@ final class HomeCoordinator: Coordinator {
         let homeView = HomeViewController()
         navigationController.setViewControllers([homeView], animated: false)
     }
-    
-    func getController() -> UINavigationController {
-        return navigationController
-    }
 }
