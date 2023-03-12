@@ -20,17 +20,17 @@ final class TabCoordinator: Coordinator {
     func start() {
         let pages: [TabBarPage] = [.home, .garden, .shop]
             .sorted(by: { $0.pageOrderNumber() < $1.pageOrderNumber() })
-        let controllers: [UIViewController] = pages.map { getTabControllers(for: $0) }
-        prepareTabBarController(withTabControllers: controllers)
+        let controllers: [UIViewController] = pages.map { getControllers(for: $0) }
+        prepareTabBarController(withControllers: controllers)
     }
     
-    private func getTabControllers(for page: TabBarPage) -> UIViewController {
+    private func getControllers(for page: TabBarPage) -> UINavigationController {
         
         let navigationController = NavBarController()
-        navigationController.tabBarItem = UITabBarItem.init(title: page.pageTitleValue(),
-                                                            image: page.iconValue(),
-                                                            tag: page.pageOrderNumber())
-        
+        navigationController.tabBarItem = UITabBarItem(title: page.pageTitleValue(),
+                                                       image: page.iconValue(),
+                                                       tag: page.pageOrderNumber()
+        )
         let childCoordinator = getChildCoordinator(for: page, navigationController)
         childCoordinator.start()
         childCoordinators.append(childCoordinator)
@@ -49,14 +49,13 @@ final class TabCoordinator: Coordinator {
         }
     }
     
-    private func prepareTabBarController(withTabControllers tabControllers: [UIViewController]) {
+    private func prepareTabBarController(withControllers controllers: [UIViewController]) {
         
-        tabBarController.setViewControllers(tabControllers, animated: false)
+        tabBarController.setViewControllers(controllers, animated: false)
         tabBarController.selectedIndex = TabBarPage.home.pageOrderNumber()
         
         tabBarController.tabBar.tintColor = Resources.Colors.accent
         tabBarController.tabBar.backgroundColor = Resources.Colors.tabBarColor
-        
     }
 }
 
@@ -66,19 +65,6 @@ enum TabBarPage {
     case home
     case garden
     case shop
-
-    init?(index: Int) {
-        switch index {
-        case 0:
-            self = .home
-        case 1:
-            self = .garden
-        case 2:
-            self = .shop
-        default:
-            return nil
-        }
-    }
     
     func pageTitleValue() -> String {
         switch self {
