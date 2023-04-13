@@ -134,10 +134,6 @@ extension ItemDetailController {
         setFavoriteButtonAppearance()
     }
     
-    //        var sizeValueText = shopItem.size?.components(separatedBy: ",").map({$0.trimmingCharacters(in: .whitespaces) + "\n"}).joined()
-    //        sizeValueText?.removeLast()
-    //        sizeValueLabel.text = sizeValueText
-    
     // MARK: - CONSTRAINTS
     
     private func setupConstraints() {

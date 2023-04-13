@@ -41,8 +41,9 @@ final class HomeViewController: UIViewController {
         
         tipBackgroundView.addSubview(tipBodyLabel)
         tipBodyLabel.numberOfLines = 0
-        tipBodyLabel.text = Resources.Strings.Home.tipBody
+        tipBodyLabel.text = Tips.all.randomElement()
         tipBodyLabel.font = Resources.Fonts.general
+        tipBodyLabel.adjustsFontSizeToFitWidth = true
         tipBodyLabel.textColor = .black
         
         view.addSubview(descriptionView)
@@ -80,10 +81,10 @@ final class HomeViewController: UIViewController {
             tipTitleLabel.leadingAnchor.constraint(equalTo: tipBackgroundView.leadingAnchor, constant: 25),
             tipTitleLabel.trailingAnchor.constraint(equalTo: tipImageView.leadingAnchor, constant: -10),
 
-            tipBodyLabel.topAnchor.constraint(equalTo: tipTitleLabel.topAnchor, constant: 5),
+            tipBodyLabel.topAnchor.constraint(equalTo: tipTitleLabel.bottomAnchor, constant: 5),
             tipBodyLabel.leadingAnchor.constraint(equalTo: tipBackgroundView.leadingAnchor, constant: 25),
             tipBodyLabel.trailingAnchor.constraint(equalTo: tipImageView.leadingAnchor, constant: -10),
-            tipBodyLabel.bottomAnchor.constraint(equalTo: tipBackgroundView.bottomAnchor, constant: -5),
+            tipBodyLabel.bottomAnchor.constraint(equalTo: tipBackgroundView.bottomAnchor, constant: -10),
             
             descriptionView.topAnchor.constraint(equalTo: tipBackgroundView.bottomAnchor, constant: 30),
             descriptionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
