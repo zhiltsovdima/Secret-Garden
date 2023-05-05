@@ -66,6 +66,9 @@
 		62B10A2C29487D2000C80F07 /* FeatureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B10A2B29487D2000C80F07 /* FeatureCell.swift */; };
 		62B36A3A2954D8220052454B /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B36A392954D8220052454B /* NetworkManager.swift */; };
 		62B36A3E29573F110052454B /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B36A3D29573F110052454B /* NetworkError.swift */; };
+		62C3985F2A052E01006D7B9A /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C3985E2A052E01006D7B9A /* HomeViewModel.swift */; };
+		62C398612A052FED006D7B9A /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C398602A052FED006D7B9A /* LocationManager.swift */; };
+		62C398632A05431A006D7B9A /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C398622A05431A006D7B9A /* WeatherData.swift */; };
 		62D4EEEF294CBF2F00360851 /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 62D4EEEE294CBF2F00360851 /* FirebaseDatabaseSwift */; };
 		62D4EEF1294CBF2F00360851 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 62D4EEF0294CBF2F00360851 /* FirebaseFirestoreSwift */; };
 		62D4EEF3294CBF4500360851 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 62D4EEF2294CBF4500360851 /* FirebaseStorage */; };
@@ -177,6 +180,9 @@
 		62B10A2B29487D2000C80F07 /* FeatureCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureCell.swift; sourceTree = "<group>"; };
 		62B36A392954D8220052454B /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		62B36A3D29573F110052454B /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		62C3985E2A052E01006D7B9A /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		62C398602A052FED006D7B9A /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		62C398622A05431A006D7B9A /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
 		62E9AF7F290C2FF600175A21 /* Secret Garden.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Secret Garden.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		62E9AF82290C2FF600175A21 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		62E9AF84290C2FF600175A21 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -295,13 +301,15 @@
 			path = Errors;
 			sourceTree = "<group>";
 		};
-		620FE01829A239C60037A99C /* DataManagers */ = {
+		620FE01829A239C60037A99C /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				62D4EEF4294DAE4400360851 /* Network */,
 				620FE01929A23AA10037A99C /* PlantsDataManager.swift */,
 				620332F82923E90B00ADE1A1 /* FBManager.swift */,
+				62C398602A052FED006D7B9A /* LocationManager.swift */,
 			);
-			path = DataManagers;
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		620FE01B29A3658B0037A99C /* DataManagersMock */ = {
@@ -534,8 +542,7 @@
 				62E9AFC5290EB5DD00175A21 /* Base */,
 				623A9F2E296C6AA000A3A17A /* Modules */,
 				62E9AFC82911054400175A21 /* Models */,
-				62D4EEF4294DAE4400360851 /* Network */,
-				620FE01829A239C60037A99C /* DataManagers */,
+				620FE01829A239C60037A99C /* Managers */,
 				620FE01529A224490037A99C /* Errors */,
 				62EC9B192974875E0014CD84 /* Protocols */,
 				62E9AFD82913BA9D00175A21 /* Extensions */,
@@ -612,6 +619,7 @@
 				626FA06C291BB7AC00FEB461 /* Garden.swift */,
 				6248B16D2944B4B80075CE25 /* ShopItem.swift */,
 				620332EB2923CB7A00ADE1A1 /* Shop.swift */,
+				62C398622A05431A006D7B9A /* WeatherData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -641,6 +649,7 @@
 			children = (
 				6251B7542A00338700D99748 /* Views */,
 				62F7FD5A29716E890055B60F /* HomeCoordinator.swift */,
+				62C3985E2A052E01006D7B9A /* HomeViewModel.swift */,
 				62E9AFBB290D409500175A21 /* HomeViewController.swift */,
 			);
 			path = Home;
@@ -888,6 +897,7 @@
 				625F950F2986E5E300EB628A /* CategoryCell.swift in Sources */,
 				62B10A2C29487D2000C80F07 /* FeatureCell.swift in Sources */,
 				627B6A31296EF5C60072C1D7 /* EditPlantViewModel.swift in Sources */,
+				62C3985F2A052E01006D7B9A /* HomeViewModel.swift in Sources */,
 				625F950E2986E5E300EB628A /* ShopViewModel.swift in Sources */,
 				62E9AFD72913BA9800175A21 /* UIView + ext.swift in Sources */,
 				62FCBC6D299CCADB00A14A63 /* UIButton + ext.swift in Sources */,
@@ -918,6 +928,7 @@
 				62F7FD6329719EB90055B60F /* DetailPlantCoordinator.swift in Sources */,
 				62F7FD5F297179E10055B60F /* TabCoordinator.swift in Sources */,
 				625F950B2986E5E300EB628A /* FavoritesViewController.swift in Sources */,
+				62C398612A052FED006D7B9A /* LocationManager.swift in Sources */,
 				626FA071291CFCB000FEB461 /* DetailBaseController.swift in Sources */,
 				62F7FD592971674A0055B60F /* AddNewPlantCoordinator.swift in Sources */,
 				62E9AFBE290D40AF00175A21 /* GardenViewController.swift in Sources */,
@@ -945,6 +956,7 @@
 				62E9B0052917C77E00175A21 /* EditPlantViewController.swift in Sources */,
 				625F9524298C515800EB628A /* FavoritesViewModel.swift in Sources */,
 				62E9AFC72911051500175A21 /* Plant.swift in Sources */,
+				62C398632A05431A006D7B9A /* WeatherData.swift in Sources */,
 				620332F92923E90B00ADE1A1 /* FBManager.swift in Sources */,
 				625F95122986E5E300EB628A /* CartViewController.swift in Sources */,
 				62EC9B18297464E90014CD84 /* AlertCoordinator.swift in Sources */,
@@ -1136,7 +1148,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Secret Garden/Supporting Files/Info.plist";
 				INFOPLIST_KEY_NSCameraUsageDescription = "We need access to your Camera";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need access to your photo library";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Would you like to provide access to the current weather in your location?";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Would you like to provide access to your photo library?";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -1169,7 +1182,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Secret Garden/Supporting Files/Info.plist";
 				INFOPLIST_KEY_NSCameraUsageDescription = "We need access to your Camera";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need access to your photo library";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Would you like to provide access to the current weather in your location?";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Would you like to provide access to your photo library?";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;

@@ -10,7 +10,7 @@ import Foundation
 enum APIEndpoints {
     
     case plants(PlantsOption)
-    case weather(String)
+    case weather(lat: String, long: String)
     
     enum PlantsOption {
         case common(String)
@@ -39,8 +39,9 @@ enum APIEndpoints {
                 return "/latin/\(plantName)"
             case .all: return "/all"
             }
-        case .weather(let location):
-            return location + "&appid=" + PrivateKeys.APIWeatherKey
+        case .weather(let latitude, let longitude):
+            let location = "?lat=\(latitude)&lon=\(longitude)"
+            return location + "&units=metric" + "&appid=\(PrivateKeys.APIWeatherKey)"
         }
     }
     

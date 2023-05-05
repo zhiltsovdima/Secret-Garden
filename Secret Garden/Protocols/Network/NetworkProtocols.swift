@@ -8,11 +8,11 @@
 import Foundation
 
 protocol NetworkManagerProtocol {
-    func getPlant(by name: String?, completion: @escaping (Result<Features, NetworkError>) -> Void)
+    func fetchData<T: Decodable>(by apiEndpoint: APIEndpoints, completion: @escaping (Result<T, NetworkError>) -> Void)
 }
 
 protocol NetworkManagerDataParser {
-    func parseData(_ data: Data) -> Result<Features, NetworkError>
+    func parseData<T: Decodable>(_ type: T.Type, _ data: Data) -> Result<T, NetworkError>
 }
 
 protocol URLSessionProtocol {

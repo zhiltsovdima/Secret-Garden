@@ -47,10 +47,14 @@ class Garden {
         }
         
         guard !plant.isFetched else { completion?(nil, NetworkError.noDataForThisName); return }
-        networkManager.getPlant(by: plant.name) { [weak plant] result in
+        networkManager.fetchData(by: .plants(.common(plant.name))) { [weak plant] (result: Result<[Features], NetworkError>) in
             switch result {
             case .success(let features):
-                plant?.features = features
+                guard features.count > 0 else {
+                    completion?(nil, NetworkError.noDataForThisName)
+                    return
+                }
+                plant?.features = features.first
                 plant?.isFetched = true
                 completion?(plant?.features, nil)
             case .failure(let error):

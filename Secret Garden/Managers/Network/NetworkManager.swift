@@ -22,13 +22,13 @@ class NetworkManager: NetworkManagerProtocol {
         self.urlSession = urlSession
     }
     
-    func getPlant(by name: String?, completion: @escaping (Result<Features, NetworkError>) -> Void) {
-        let request = APIEndpoints.common.makeURLRequest(name)
+    func fetchData<T: Decodable>(by apiEndpoint: APIEndpoints, completion: @escaping (Result<T, NetworkError>) -> Void) {
+        let request = apiEndpoint.makeURLRequest()
         let task = urlSession.dataTask(with: request) { [weak self] (data, response, error) in
             guard let self else { return completion(Result.failure(NetworkError.failed))}
             do {
                 let safeData = try NetworkError.handleNetworkResponse(data, response)
-                let result = self.parseData(safeData)
+                let result = self.parseData(T.self, safeData)
                 completion(result)
             } catch {
                 let netError = error as! NetworkError
@@ -40,17 +40,13 @@ class NetworkManager: NetworkManagerProtocol {
 }
 
 extension NetworkManager: NetworkManagerDataParser {
-        
-    func parseData(_ data: Data) -> Result<Features, NetworkError> {
+    
+    func parseData<T: Decodable>(_ type: T.Type, _ data: Data) -> Result<T, NetworkError> {
         do {
-            let features = try JSONDecoder().decode([Features].self, from: data)
-            guard features.count > 0 else {
-                return Result.failure(NetworkError.noDataForThisName)
-            }
-            let featuresForPlant = features.first!
-            return Result.success(featuresForPlant)
+            let decodedData = try JSONDecoder().decode(T.self, from: data)
+            return .success(decodedData)
         } catch {
-            return Result.failure(NetworkError.unableToDecode)
+            return .failure(.unableToDecode)
         }
     }
 }

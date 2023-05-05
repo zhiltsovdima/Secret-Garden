@@ -19,12 +19,13 @@ final class GardenCoordinator: Coordinator {
     
     private var navigationController: UINavigationController
     
-    private let networkManager = NetworkManager()
+    private let networkManager: NetworkManagerProtocol
     private let plantsDataManager = PlantsDataManager()
     lazy private var garden = Garden(networkManager: networkManager, plantsDataManager: plantsDataManager)
     
-    init(_ navigationController: UINavigationController) {
+    init(_ navigationController: UINavigationController, _ networkManager: NetworkManagerProtocol) {
         self.navigationController = navigationController
+        self.networkManager = networkManager
     }
     
     func start() {

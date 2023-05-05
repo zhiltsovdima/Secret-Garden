@@ -12,6 +12,7 @@ final class TabCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
     
     private let tabBarController: UITabBarController
+    private let networkManager = NetworkManager()
     
     init(_ tabBarController: UITabBarController) {
         self.tabBarController = tabBarController
@@ -41,9 +42,9 @@ final class TabCoordinator: Coordinator {
         switch page {
         case .home:
             navigationController.setNavigationBarHidden(true, animated: false)
-            return HomeCoordinator(navigationController)
+            return HomeCoordinator(navigationController, networkManager)
         case .garden:
-            return GardenCoordinator(navigationController)
+            return GardenCoordinator(navigationController, networkManager)
         case .shop:
             return ShopCoordinator(navigationController)
         }

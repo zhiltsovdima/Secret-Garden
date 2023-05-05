@@ -11,3 +11,7 @@ protocol ImagePickable {
     func showImagePicker(sourceType: UIImagePickerController.SourceType)
     func didFinishPicking(_ image: UIImage)
 }
+
+protocol WeatherManagerDelegate {
+    func didUpdateLocation(latitude: String, longitude: String)
+}
