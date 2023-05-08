@@ -6,14 +6,23 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 final class HomeViewController: UIViewController {
     
     private let viewModel: HomeViewModelProtocol
     
+    private let weatherImage = UIImageView()
+    private let weatherStack = UIStackView()
+    private let temperatureLabel = UILabel()
+    private let placeLabel = UILabel()
+    
     private let tipView = TipView()
     private let descriptionView = UIView()
     private let descriptionLabel = UILabel()
+    
+    private let disposeBag = DisposeBag()
     
     init(viewModel: HomeViewModelProtocol) {
         self.viewModel = viewModel
@@ -29,13 +38,37 @@ final class HomeViewController: UIViewController {
         
         setupViews()
         setConstraints()
+        
+        viewModel.weather
+            .observe(on: MainScheduler.instance)
+            .compactMap({ weather in
+                return (weather?.weatherImage, weather?.temperatureString, weather?.cityName)
+            })
+            .bind(onNext: { [weak self] (image, temp, place) in
+                guard let self else { return }
+                self.weatherImage.image = image
+                self.temperatureLabel.text = temp
+                self.placeLabel.text = place
+            })
+            .disposed(by: disposeBag)
     }
     
     private func setupViews() {
         view.backgroundColor = Resources.Colors.backgroundColor
-        view.addSubview(tipView)
         
-        view.addSubview(descriptionView)
+        [weatherImage, weatherStack, tipView, descriptionView, descriptionLabel].forEach {
+            view.addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
+        
+        weatherImage.contentMode = .scaleAspectFit
+        
+        weatherStack.axis = .vertical
+        weatherStack.spacing = 5
+        [placeLabel, temperatureLabel].forEach { weatherStack.addArrangedSubview($0) }
+        temperatureLabel.font = UIFont.boldSystemFont(ofSize: 20)
+        placeLabel.font = UIFont.boldSystemFont(ofSize: 20)
+        
         descriptionView.layer.borderWidth = 1
         descriptionView.layer.borderColor = Resources.Colors.blackOnWhite?.cgColor
         descriptionView.layer.cornerRadius = 20
@@ -48,11 +81,15 @@ final class HomeViewController: UIViewController {
     }
     
     private func setConstraints() {
-        [tipView, descriptionView, descriptionLabel].forEach {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-        }
 
         NSLayoutConstraint.activate([
+            weatherImage.topAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.topAnchor),
+            weatherImage.leadingAnchor.constraint(equalTo: tipView.leadingAnchor),
+            weatherImage.bottomAnchor.constraint(equalTo: tipView.topAnchor),
+            
+            weatherStack.centerYAnchor.constraint(equalTo: weatherImage.centerYAnchor),
+            weatherStack.leadingAnchor.constraint(equalTo: weatherImage.trailingAnchor, constant: 10),
+            
             tipView.topAnchor.constraint(equalTo: view.topAnchor, constant: 150),
             tipView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             tipView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),

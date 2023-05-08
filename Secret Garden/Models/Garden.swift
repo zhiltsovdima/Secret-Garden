@@ -45,16 +45,18 @@ class Garden {
             completion?(features, nil)
             return
         }
+        let name = plant.name
+        let endpoint = APIEndpoints.plants(.common(name))
         
         guard !plant.isFetched else { completion?(nil, NetworkError.noDataForThisName); return }
-        networkManager.fetchData(by: .plants(.common(plant.name))) { [weak plant] (result: Result<[Features], NetworkError>) in
+        networkManager.fetchData(by: endpoint) { [weak plant] (result: Result<[Features], NetworkError>) in
             switch result {
             case .success(let features):
-                guard features.count > 0 else {
+                guard let features = features.first else {
                     completion?(nil, NetworkError.noDataForThisName)
                     return
                 }
-                plant?.features = features.first
+                plant?.features = features
                 plant?.isFetched = true
                 completion?(plant?.features, nil)
             case .failure(let error):

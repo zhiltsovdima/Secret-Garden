@@ -136,6 +136,19 @@ enum Resources {
             static let temperature = UIImage(systemName: "thermometer")
             static let insects = UIImage(systemName: "ladybug")
         }
+        
+        enum Weather {
+            static let storm = UIImage(named: "storm")
+            static let clouds = UIImage(named: "clouds")
+            static let partyCloudy = UIImage(named: "party-cloudy-day")
+            static let partyRain = UIImage(named: "rain-cloud")
+            static let rain = UIImage(named: "rain")
+            static let rainfall = UIImage(named: "rainfall")
+            static let snow = UIImage(named: "snow")
+            static let sun = UIImage(named: "sun")
+            static let windy = UIImage(named: "windy")
+            static let night = UIImage(named: "night")
+        }
     }
     
     enum Identifiers {

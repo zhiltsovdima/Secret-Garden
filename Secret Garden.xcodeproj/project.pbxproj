@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		108AA13071ECB020461D4324 /* Pods_Secret_Garden.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 594F4D61A8F9BBF553211079 /* Pods_Secret_Garden.framework */; };
+		3CD6FDD59A7C9B32CEA24521 /* Pods_Secret_GardenTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9ED96A91797ACC374503B36 /* Pods_Secret_GardenTests.framework */; };
 		620332EC2923CB7A00ADE1A1 /* Shop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620332EB2923CB7A00ADE1A1 /* Shop.swift */; };
 		620332F12923DD3000ADE1A1 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 620332F02923DD3000ADE1A1 /* FirebaseAnalytics */; };
 		620332F32923DD3000ADE1A1 /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 620332F22923DD3000ADE1A1 /* FirebaseDatabaseSwift */; };
@@ -125,6 +127,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2BCB77A0F2738E6769E9757C /* Pods-Secret GardenTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Secret GardenTests.release.xcconfig"; path = "Target Support Files/Pods-Secret GardenTests/Pods-Secret GardenTests.release.xcconfig"; sourceTree = "<group>"; };
+		594F4D61A8F9BBF553211079 /* Pods_Secret_Garden.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Secret_Garden.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		620332EB2923CB7A00ADE1A1 /* Shop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shop.swift; sourceTree = "<group>"; };
 		620332F82923E90B00ADE1A1 /* FBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBManager.swift; sourceTree = "<group>"; };
 		620332FD2924D2AD00ADE1A1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -220,6 +224,10 @@
 		62FCBC6E299CCD7700A14A63 /* ShopTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopTests.swift; sourceTree = "<group>"; };
 		62FCBC71299D2B4300A14A63 /* FBManagerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBManagerMock.swift; sourceTree = "<group>"; };
 		62FCBC73299F7DE500A14A63 /* GetJSONMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetJSONMock.swift; sourceTree = "<group>"; };
+		83C4729B3BC7F335EDA16700 /* Pods-Secret Garden.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Secret Garden.debug.xcconfig"; path = "Target Support Files/Pods-Secret Garden/Pods-Secret Garden.debug.xcconfig"; sourceTree = "<group>"; };
+		8E7749FD96BB47384BCF532B /* Pods-Secret Garden.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Secret Garden.release.xcconfig"; path = "Target Support Files/Pods-Secret Garden/Pods-Secret Garden.release.xcconfig"; sourceTree = "<group>"; };
+		C0A0EFABB202B4C6604C4B17 /* Pods-Secret GardenTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Secret GardenTests.debug.xcconfig"; path = "Target Support Files/Pods-Secret GardenTests/Pods-Secret GardenTests.debug.xcconfig"; sourceTree = "<group>"; };
+		E9ED96A91797ACC374503B36 /* Pods_Secret_GardenTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Secret_GardenTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -231,6 +239,7 @@
 				620332F72923DD3000ADE1A1 /* FirebaseStorage in Frameworks */,
 				620332F12923DD3000ADE1A1 /* FirebaseAnalytics in Frameworks */,
 				620332F52923DD3000ADE1A1 /* FirebaseFirestoreSwift in Frameworks */,
+				108AA13071ECB020461D4324 /* Pods_Secret_Garden.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -241,6 +250,7 @@
 				62D4EEEF294CBF2F00360851 /* FirebaseDatabaseSwift in Frameworks */,
 				62D4EEF1294CBF2F00360851 /* FirebaseFirestoreSwift in Frameworks */,
 				62D4EEF3294CBF4500360851 /* FirebaseStorage in Frameworks */,
+				3CD6FDD59A7C9B32CEA24521 /* Pods_Secret_GardenTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -500,6 +510,8 @@
 		62D4EEE7294BB71400360851 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				594F4D61A8F9BBF553211079 /* Pods_Secret_Garden.framework */,
+				E9ED96A91797ACC374503B36 /* Pods_Secret_GardenTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -521,6 +533,7 @@
 				62E9AFA2290C2FF700175A21 /* Secret GardenUITests */,
 				62E9AF80290C2FF600175A21 /* Products */,
 				62D4EEE7294BB71400360851 /* Frameworks */,
+				CEAE17E316F8204370DDD411 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -723,6 +736,18 @@
 			path = Shop;
 			sourceTree = "<group>";
 		};
+		CEAE17E316F8204370DDD411 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				83C4729B3BC7F335EDA16700 /* Pods-Secret Garden.debug.xcconfig */,
+				8E7749FD96BB47384BCF532B /* Pods-Secret Garden.release.xcconfig */,
+				C0A0EFABB202B4C6604C4B17 /* Pods-Secret GardenTests.debug.xcconfig */,
+				2BCB77A0F2738E6769E9757C /* Pods-Secret GardenTests.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -730,10 +755,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 62E9AFA9290C2FF700175A21 /* Build configuration list for PBXNativeTarget "Secret Garden" */;
 			buildPhases = (
+				37A8381F3106E53F5A0D7741 /* [CP] Check Pods Manifest.lock */,
 				62E9AF7B290C2FF600175A21 /* Sources */,
 				62E9AF7C290C2FF600175A21 /* Frameworks */,
 				62E9AF7D290C2FF600175A21 /* Resources */,
 				620C692A294F39B1008F005E /* Show Version on LaunchScreen */,
+				33822F8858F36E112DB15AE8 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -754,9 +781,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 62E9AFAC290C2FF700175A21 /* Build configuration list for PBXNativeTarget "Secret GardenTests" */;
 			buildPhases = (
+				C2B87CE8B719CCDC48A36DD4 /* [CP] Check Pods Manifest.lock */,
 				62E9AF91290C2FF700175A21 /* Sources */,
 				62E9AF92290C2FF700175A21 /* Frameworks */,
 				62E9AF93290C2FF700175A21 /* Resources */,
+				03D08172A521AFD6AFC84ABF /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -866,6 +895,62 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		03D08172A521AFD6AFC84ABF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Secret GardenTests/Pods-Secret GardenTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Secret GardenTests/Pods-Secret GardenTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Secret GardenTests/Pods-Secret GardenTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		33822F8858F36E112DB15AE8 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Secret Garden/Pods-Secret Garden-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Secret Garden/Pods-Secret Garden-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Secret Garden/Pods-Secret Garden-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		37A8381F3106E53F5A0D7741 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Secret Garden-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		620C692A294F39B1008F005E /* Show Version on LaunchScreen */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
@@ -884,6 +969,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "#   ON/OFF Script Toggle (script ON with #, script OFF without #)\n#exit 0\n\n#   App vesion / Build version constants\nsourceFilePath=\"$PROJECT_DIR/$PROJECT_NAME/Supporting Files/Base.lproj/LaunchScreen.storyboard\"\nversionNumber=\"$MARKETING_VERSION\"\n# buildNumber=\"$CURRENT_PROJECT_VERSION\"\n\n#   Output version & build numbers into a label on LaunchScreen.storyboard\nsed -i .bak -e \"/userLabel=\\\"APP_VERSION\\\"/s/text=\\\"[^\\\"]*\\\"/text=\\\"$versionNumber\\\"/\" \"$sourceFilePath\"\n";
+		};
+		C2B87CE8B719CCDC48A36DD4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Secret GardenTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1139,6 +1246,7 @@
 		};
 		62E9AFAA290C2FF700175A21 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 83C4729B3BC7F335EDA16700 /* Pods-Secret Garden.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1173,6 +1281,7 @@
 		};
 		62E9AFAB290C2FF700175A21 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8E7749FD96BB47384BCF532B /* Pods-Secret Garden.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1207,6 +1316,7 @@
 		};
 		62E9AFAD290C2FF700175A21 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C0A0EFABB202B4C6604C4B17 /* Pods-Secret GardenTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1227,6 +1337,7 @@
 		};
 		62E9AFAE290C2FF700175A21 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2BCB77A0F2738E6769E9757C /* Pods-Secret GardenTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";

@@ -9,14 +9,26 @@ import Foundation
 import CoreLocation
 
 final class LocationManager: NSObject {
-    let locationManager = CLLocationManager()
+    private let locationManager = CLLocationManager()
+    private let geocoder = CLGeocoder()
     
-    var delegate: WeatherManagerDelegate?
+    weak var delegate: WeatherManagerDelegate?
     
     func startUpdatingLocation() {
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
+    }
+    
+    private func getPlace(from location: CLLocation, completion: @escaping (String) -> Void) {
+        geocoder.reverseGeocodeLocation(location) { placemarks, error in
+            guard let placemark = placemarks?.first else {
+                completion("Unknown")
+                return
+            }
+            let place = placemark.locality ?? "Unknown"
+            completion(place)
+        }
     }
 }
 
@@ -24,10 +36,12 @@ extension LocationManager: CLLocationManagerDelegate {
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let currentLocation = locations.last else { return }
-        let latitude = String(currentLocation.coordinate.latitude)
-        let longitude = String(currentLocation.coordinate.longitude)
-        locationManager.stopUpdatingLocation()
-        delegate?.didUpdateLocation(latitude: latitude, longitude: longitude)
+        getPlace(from: currentLocation) { [weak self] place in
+            let latitude = String(currentLocation.coordinate.latitude)
+            let longitude = String(currentLocation.coordinate.longitude)
+            self?.locationManager.stopUpdatingLocation()
+            self?.delegate?.didUpdateLocation(place: place, latitude: latitude, longitude: longitude)
+        }
     }
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

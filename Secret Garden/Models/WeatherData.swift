@@ -9,18 +9,15 @@ import Foundation
 
 struct WeatherData: Codable {
     let weather: [Weather]
-    let main: WeatherMain
+    let main: Main
     let cod: Int
-    
-    var temperature: String {
-        return String(format: "%.0f", main.temp)
-    }
 }
 
 struct Weather: Codable {
+    let id: Int
     let main: String
 }
 
-struct WeatherMain: Codable {
+struct Main: Codable {
     let temp: Double
 }

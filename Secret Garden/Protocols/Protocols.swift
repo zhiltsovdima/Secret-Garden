@@ -12,6 +12,6 @@ protocol ImagePickable {
     func didFinishPicking(_ image: UIImage)
 }
 
-protocol WeatherManagerDelegate {
-    func didUpdateLocation(latitude: String, longitude: String)
+protocol WeatherManagerDelegate: AnyObject {
+    func didUpdateLocation(place: String, latitude: String, longitude: String)
 }
