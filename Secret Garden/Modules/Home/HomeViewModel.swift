@@ -52,9 +52,20 @@ extension HomeViewModel: WeatherManagerDelegate {
         networkManager.fetchData(by: .weather(lat: latitude, long: longitude)) { [weak self] (result: Result<WeatherData, NetworkError>) in
             switch result {
             case .success(let weatherData):
-                guard let id = weatherData.weather.first?.id else { return }
+                guard let id = weatherData.weather.first?.id,
+                      let description = weatherData.weather.first?.description
+                else { return }
                 let temp = weatherData.main.temp
-                let weatherModel = WeatherModel(conditionId: id, cityName: place, temperature: temp)
+                let tempMin = weatherData.main.tempMin
+                let tempMax = weatherData.main.tempMax
+                let weatherModel = WeatherModel(
+                    weatherId: id,
+                    placeName: place,
+                    temperature: temp,
+                    tempMin: tempMin,
+                    tempMax: tempMax,
+                    description: description
+                )
                 self?.weather.accept(weatherModel)
             case .failure(let netError):
                 print(netError.description)
@@ -64,16 +75,25 @@ extension HomeViewModel: WeatherManagerDelegate {
 }
 
 struct WeatherModel {
-    let conditionId: Int
-    let cityName: String
+    let weatherId: Int
+    let placeName: String
     let temperature: Double
+    let tempMin: Double
+    let tempMax: Double
+    let description: String
     
     var temperatureString: String {
-        return String(format: "%.0fC", temperature)
+        return String(format: "%.0f\(Resources.Strings.degreeSymbol)C", temperature)
+    }
+    
+    var tempMinMaxString: String {
+        let tempMinStr = String(format: "%.0f\(Resources.Strings.degreeSymbol)C", tempMin)
+        let tempMaxStr = String(format: "%.0f\(Resources.Strings.degreeSymbol)C", tempMax)
+        return "H: \(tempMaxStr) L: \(tempMinStr)"
     }
     
     var weatherImage: UIImage? {
-        switch conditionId {
+        switch weatherId {
         case 200...232:
             return Resources.Images.Weather.storm
         case 300...321:

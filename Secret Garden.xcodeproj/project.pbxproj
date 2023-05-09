@@ -71,6 +71,7 @@
 		62C3985F2A052E01006D7B9A /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C3985E2A052E01006D7B9A /* HomeViewModel.swift */; };
 		62C398612A052FED006D7B9A /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C398602A052FED006D7B9A /* LocationManager.swift */; };
 		62C398632A05431A006D7B9A /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C398622A05431A006D7B9A /* WeatherData.swift */; };
+		62CA2A602A0A4DD70011AD5B /* WeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62CA2A5F2A0A4DD70011AD5B /* WeatherView.swift */; };
 		62D4EEEF294CBF2F00360851 /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 62D4EEEE294CBF2F00360851 /* FirebaseDatabaseSwift */; };
 		62D4EEF1294CBF2F00360851 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 62D4EEF0294CBF2F00360851 /* FirebaseFirestoreSwift */; };
 		62D4EEF3294CBF4500360851 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 62D4EEF2294CBF4500360851 /* FirebaseStorage */; };
@@ -187,6 +188,7 @@
 		62C3985E2A052E01006D7B9A /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		62C398602A052FED006D7B9A /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		62C398622A05431A006D7B9A /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
+		62CA2A5F2A0A4DD70011AD5B /* WeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherView.swift; sourceTree = "<group>"; };
 		62E9AF7F290C2FF600175A21 /* Secret Garden.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Secret Garden.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		62E9AF82290C2FF600175A21 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		62E9AF84290C2FF600175A21 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -374,6 +376,7 @@
 			isa = PBXGroup;
 			children = (
 				6251B7552A00339A00D99748 /* TipView.swift */,
+				62CA2A5F2A0A4DD70011AD5B /* WeatherView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -744,7 +747,6 @@
 				C0A0EFABB202B4C6604C4B17 /* Pods-Secret GardenTests.debug.xcconfig */,
 				2BCB77A0F2738E6769E9757C /* Pods-Secret GardenTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -1006,6 +1008,7 @@
 				627B6A31296EF5C60072C1D7 /* EditPlantViewModel.swift in Sources */,
 				62C3985F2A052E01006D7B9A /* HomeViewModel.swift in Sources */,
 				625F950E2986E5E300EB628A /* ShopViewModel.swift in Sources */,
+				62CA2A602A0A4DD70011AD5B /* WeatherView.swift in Sources */,
 				62E9AFD72913BA9800175A21 /* UIView + ext.swift in Sources */,
 				62FCBC6D299CCADB00A14A63 /* UIButton + ext.swift in Sources */,
 				6251B7562A00339A00D99748 /* TipView.swift in Sources */,

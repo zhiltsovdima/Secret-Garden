@@ -27,6 +27,9 @@ enum Resources {
     }
     
     enum Strings {
+        
+        static let degreeSymbol = "\u{00B0}"
+        
         enum TabBar {
             static let home = "Home"
             static let garden = "My Garden"
