@@ -32,7 +32,7 @@ class PlaceholderView: UIView {
         placeholderImage.contentMode = .scaleAspectFit
         
         placeholderLabel.text = Resources.Strings.Shop.emptyLabel
-        placeholderLabel.font = Resources.Fonts.generalBold
+        placeholderLabel.font = Font.generalBold
         placeholderLabel.textAlignment = .center
         
         placeholderButton.setTitle(Resources.Strings.Shop.emptyButton, for: .normal)

@@ -62,10 +62,10 @@ final class FavoriteCell: UITableViewCell {
         itemImageView.contentMode = .scaleAspectFill
  
         nameItem.numberOfLines = 0
-        nameItem.font = Resources.Fonts.general
+        nameItem.font = Font.subHeader
         
         priceLabel.numberOfLines = 0
-        priceLabel.font = Resources.Fonts.generalBold
+        priceLabel.font = Font.generalBold
         
         favoriteButton.addTarget(self, action: #selector(unfavItemAction), for: .touchUpInside)
         favoriteButton.setImage(Resources.Images.Common.addToFavoriteFill, for: .normal)

@@ -132,7 +132,7 @@ final class ItemCell: UICollectionViewCell {
         contentView.addSubview(addToCartButton)
         addToCartButton.setTitle(Resources.Strings.Shop.addToCart, for: .normal)
         addToCartButton.setTitleColor(.black, for: .normal)
-        addToCartButton.titleLabel?.font = Resources.Fonts.general?.withSize(13)
+        addToCartButton.titleLabel?.font = Font.generalBold.withSize(12)
         addToCartButton.backgroundColor = Resources.Colors.backgroundColor
         addToCartButton.layer.borderWidth = 0.1
         addToCartButton.addTarget(self, action: #selector(addToCart), for: .touchUpInside)

@@ -13,15 +13,15 @@ final class EditPlantViewController: DetailBaseController {
     
     lazy private var nameLabel = createLabel(text: Resources.Strings.Common.name,
                                              textColor: Resources.Colors.blackOnWhite,
-                                             font: Resources.Fonts.generalBold)
+                                             font: Font.subHeader)
     lazy private var validStatusLabel = createLabel(text: "",
                                                     textColor: .systemRed,
-                                                    font: Resources.Fonts.generalBold?.withSize(12))
+                                                    font: Font.generalLight)
     lazy private var nameTextField = createTextField(placeholder: "")
     
     lazy private var imageLabel = createLabel(text: "Image",
                                               textColor: Resources.Colors.blackOnWhite,
-                                              font: Resources.Fonts.generalBold)
+                                              font: Font.subHeader)
     lazy private var chooseImageButton = createButton(isBase: false,
                                                       title: "Choose new",
                                                       selector: #selector(addNewPhotoTapped))

@@ -111,17 +111,17 @@ extension ItemDetailController {
         
         scrollView.addSubview(nameItem)
         nameItem.text = viewModel.name
-        nameItem.font = Resources.Fonts.header
+        nameItem.font = Font.header
         
         scrollView.addSubview(latinNameItem)
         latinNameItem.text = viewModel.latinName
-        latinNameItem.font = Resources.Fonts.subHeaders
-        latinNameItem.textColor = Resources.Colors.subHeader
+        latinNameItem.font = Font.thinText
+        latinNameItem.textColor = Resources.Colors.blackOnWhite
         
         scrollView.addSubview(descriptionItem)
         descriptionItem.numberOfLines = 0
         descriptionItem.text = viewModel.description
-        descriptionItem.font = Resources.Fonts.general
+        descriptionItem.font = Font.generalLight.withSize(14)
         
         scrollView.addSubview(featuresStackView)
         featuresStackView.setup(with: viewModel.featuresData!)

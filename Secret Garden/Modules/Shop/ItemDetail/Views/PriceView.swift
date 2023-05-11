@@ -47,13 +47,11 @@ final class PriceView: UIView {
         priceStackView.alignment = .leading
         
         priceLabel.text = Resources.Strings.Shop.price
-        priceLabel.font = Resources.Fonts.subHeaders
-        priceLabel.textColor = Resources.Colors.subHeader
+        priceLabel.font = Font.generalBold
+        priceLabel.textColor = Resources.Colors.lightText
         priceLabel.setContentHuggingPriority(.defaultHigh, for: .vertical)
 
-        priceValueLabel.font = Resources.Fonts.header
-                
-        addToCartButton.titleLabel?.font = Resources.Fonts.general?.withSize(18)
+        priceValueLabel.font = Font.header
     }
     
     private func setupConstraints() {

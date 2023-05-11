@@ -21,7 +21,7 @@ class ItemStepper: UIControl {
         let label = UILabel()
         label.textAlignment = .center
         label.textColor = Resources.Colors.blackOnWhite
-        label.font = Resources.Fonts.generalBold
+        label.font = Font.generalBold
         return label
     }()
     private let stackView: UIStackView = {
@@ -84,7 +84,7 @@ class ItemStepper: UIControl {
         button.tintColor = Resources.Colors.blackOnWhite
         button.setTitleColor(Resources.Colors.blackOnWhite, for: .normal)
         button.setTitle(title, for: .normal)
-        button.titleLabel?.font = Resources.Fonts.generalBold
+        button.titleLabel?.font = Font.generalBold
         button.layer.cornerRadius = 5
         button.layer.borderWidth = 1
         button.tag = value

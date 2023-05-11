@@ -135,20 +135,20 @@ extension CartViewController {
         checkoutStack.distribution = .fill
         
         subTotalLabel.text = Resources.Strings.Shop.subTotal
-        subTotalLabel.font = Resources.Fonts.general
+        subTotalLabel.font = Font.general
         subTotalValue.text = viewModel.subTotalPrice
-        subTotalValue.font = Resources.Fonts.generalBold
+        subTotalValue.font = Font.generalBold
         subTotalValue.textAlignment = .right
         shippingLabel.text = Resources.Strings.Shop.shipping
-        shippingLabel.font = Resources.Fonts.general
+        shippingLabel.font = Font.general
         shippingValue.text = "$10.0"
-        shippingValue.font = Resources.Fonts.generalBold
+        shippingValue.font = Font.generalBold
         shippingValue.textAlignment = .right
         
         totalLabel.text = Resources.Strings.Shop.total
-        totalLabel.font = Resources.Fonts.general
+        totalLabel.font = Font.general
         totalValue.text = viewModel.totalPrice
-        totalValue.font = Resources.Fonts.generalBold
+        totalValue.font = Font.generalBold
         totalValue.textAlignment = .right
 
         checkoutButton.setTitle(Resources.Strings.Shop.checkout, for: .normal)

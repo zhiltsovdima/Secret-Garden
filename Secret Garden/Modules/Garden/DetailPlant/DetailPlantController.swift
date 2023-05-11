@@ -16,13 +16,13 @@ final class DetailPlantController: DetailBaseController {
 
     lazy private var namePlant = createLabel(text: viewModel.viewData.name,
                                              textColor: Resources.Colors.blackOnWhite,
-                                             font: Resources.Fonts.header)
+                                             font: Font.header)
     lazy private var latinName = createLabel(text: viewModel.viewData.latinName,
-                                             textColor: UIColor.lightGray,
-                                             font: Resources.Fonts.subHeaders)
+                                             textColor: Resources.Colors.blackOnWhite,
+                                             font: Font.thinText)
     lazy private var errorMessage = createLabel(text: viewModel.viewData.errorMessage,
                                                 textColor: Resources.Colors.blackOnWhite,
-                                                font: Resources.Fonts.generalBold)
+                                                font: Font.generalBold)
     
     init(viewModel: DetailPlantViewModelProtocol) {
         self.viewModel = viewModel

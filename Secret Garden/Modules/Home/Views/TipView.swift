@@ -43,12 +43,12 @@ final class TipView: UIView {
         [tipTitleLabel, tipBodyLabel].forEach { tipStackView.addArrangedSubview($0) }
         
         tipTitleLabel.text = Resources.Strings.Home.tipTitle
-        tipTitleLabel.font = Resources.Fonts.generalBold?.withSize(16)
+        tipTitleLabel.font = Font.generalBold
         tipTitleLabel.textColor = .black
         
         tipBodyLabel.numberOfLines = 0
         tipBodyLabel.text = Tips.all.randomElement()
-        tipBodyLabel.font = Resources.Fonts.general?.withSize(14)
+        tipBodyLabel.font = Font.generalLight
         tipBodyLabel.textColor = .black
         tipBodyLabel.setContentHuggingPriority(.defaultLow, for: .vertical)
         
@@ -65,10 +65,9 @@ final class TipView: UIView {
             tipBackgroundView.topAnchor.constraint(equalTo: topAnchor, constant: 20),
             tipBackgroundView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
-            tipStackView.topAnchor.constraint(equalTo: tipBackgroundView.topAnchor, constant: 10),
             tipStackView.leadingAnchor.constraint(equalTo: tipBackgroundView.leadingAnchor, constant: 20),
             tipStackView.trailingAnchor.constraint(equalTo: tipImageView.leadingAnchor),
-            tipStackView.bottomAnchor.constraint(lessThanOrEqualTo: tipBackgroundView.bottomAnchor, constant: -10),
+            tipStackView.centerYAnchor.constraint(equalTo: tipBackgroundView.centerYAnchor),
             
             tipImageView.topAnchor.constraint(equalTo: topAnchor),
             tipImageView.bottomAnchor.constraint(equalTo: tipBackgroundView.bottomAnchor, constant: -10),

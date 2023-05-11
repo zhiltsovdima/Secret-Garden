@@ -49,7 +49,7 @@ final class HomeViewController: UIViewController {
         descriptionView.addSubview(descriptionLabel)
         descriptionLabel.text = Resources.Strings.Home.descriptionTitle + Resources.Strings.Home.descriptionBody
         descriptionLabel.numberOfLines = 0
-        descriptionLabel.font = Resources.Fonts.general
+        descriptionLabel.font = Font.generalLight
         descriptionLabel.adjustsFontSizeToFitWidth = true
     }
     

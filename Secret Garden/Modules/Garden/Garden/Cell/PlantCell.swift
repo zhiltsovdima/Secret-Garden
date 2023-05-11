@@ -62,7 +62,7 @@ extension PlantCell {
         plantImageView.contentMode = .scaleAspectFill
  
         plantTitleLabel.numberOfLines = 0
-        plantTitleLabel.font = Resources.Fonts.general?.withSize(18)
+        plantTitleLabel.font = Font.generalBold.withSize(18)
 
         settingsButton.setImage(Resources.Images.Common.moreOptions, for: .normal)
         settingsButton.addTarget(self, action: #selector(settingsButtonAction), for: .touchUpInside)

@@ -52,9 +52,9 @@ final class DetailPlantViewModel {
     
     private func convertString(name: String, value: String) -> NSMutableAttributedString {
         let atrString1 = NSMutableAttributedString(string: name + ": ",
-                                                   attributes: [NSAttributedString.Key.font: Resources.Fonts.generalBold!])
+                                                   attributes: [NSAttributedString.Key.font: Font.generalBold])
         let atrString2 = NSMutableAttributedString(string: value,
-                                                   attributes: [NSAttributedString.Key.font: Resources.Fonts.general!])
+                                                   attributes: [NSAttributedString.Key.font: Font.general])
         atrString1.append(atrString2)
         return atrString1
     }

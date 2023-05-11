@@ -23,7 +23,7 @@ enum Resources {
         static let shopButton = UIColor(named: "ShopButton")
         static let secondAccent = UIColor(named: "SecondAccent")
         
-        static let subHeader: UIColor = .systemGray
+        static let lightText: UIColor = .systemGray
     }
     
     enum Strings {
@@ -164,13 +164,6 @@ enum Resources {
         static let cartCell = "CartCell"
         static let featureCell = "FeatureCell"
 
-    }
-    
-    enum Fonts {
-        static let general = UIFont(name: "Helvetica", size: 16)
-        static let header = UIFont(name: "Helvetica-Bold", size: 24)
-        static let subHeaders = UIFont(name: "Helvetica", size: 14)
-        static let generalBold = UIFont(name: "Helvetica-Bold", size: 16)
     }
     
     enum Constants {

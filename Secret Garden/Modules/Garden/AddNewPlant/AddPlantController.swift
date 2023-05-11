@@ -18,14 +18,14 @@ final class AddPlantController: UIViewController {
     lazy private var plantImageView = createImageView()
     lazy private var nameLabel = createLabel(text: Resources.Strings.Common.name,
                                              textColor: Resources.Colors.blackOnWhite,
-                                             font: Resources.Fonts.generalBold)
+                                             font: Font.subHeader)
     lazy private var nameTextField = createTextField()
     lazy private var validStatusLabel = createLabel(text: "",
                                                     textColor: .systemRed,
-                                                    font: Resources.Fonts.generalBold?.withSize(12))
+                                                    font: Font.generalLight)
     lazy private var examplePlantsLabel = createLabel(text: Resources.Strings.AddPlant.examplePlant,
-                                                      textColor: UIColor.lightGray,
-                                                      font: Resources.Fonts.subHeaders)
+                                                      textColor: Resources.Colors.blackOnWhite,
+                                                      font: Font.thinText)
     lazy private var saveButton = createButton()
         
     init(viewModel: AddPlantViewModelProtocol) {
@@ -115,10 +115,9 @@ extension AddPlantController {
         let textField = UITextField()
         textField.delegate = self
         textField.textColor = Resources.Colors.blackOnWhite
-        textField.font = Resources.Fonts.general
+        textField.font = Font.general
         textField.backgroundColor = Resources.Colors.backgroundFields
         textField.placeholder = Resources.Strings.AddPlant.placeholder
-        textField.adjustsFontSizeToFitWidth = true
         textField.borderStyle = .roundedRect
         textField.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(textField)

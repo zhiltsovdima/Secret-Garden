@@ -92,10 +92,10 @@ final class CartCell: UITableViewCell {
         itemImageView.contentMode = .scaleAspectFill
  
         nameItem.numberOfLines = 0
-        nameItem.font = Resources.Fonts.general
+        nameItem.font = Font.subHeader
         
         priceLabel.numberOfLines = 0
-        priceLabel.font = Resources.Fonts.generalBold
+        priceLabel.font = Font.generalBold
         
         deleteButton.setImage(Resources.Images.Common.delete, for: .normal)
         deleteButton.tintColor = Resources.Colors.blackOnWhite

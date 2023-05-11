@@ -63,10 +63,10 @@ final class WeatherView: UIView {
         leftWeatherStack.axis = .vertical
         leftWeatherStack.alignment = .leading
         
-        placeLabel.font = UIFont.boldSystemFont(ofSize: 16)
+        placeLabel.font = Font.generalBold.withSize(16)
         placeLabel.setContentHuggingPriority(.defaultHigh, for: .vertical)
         
-        temperatureLabel.font = UIFont.boldSystemFont(ofSize: 40)
+        temperatureLabel.font = Font.generalBold.withSize(40)
         
         [weatherImage, tempDescription, tempMinMaxLabel].forEach { rightWeatherStack.addArrangedSubview($0) }
         rightWeatherStack.axis = .vertical
@@ -74,8 +74,8 @@ final class WeatherView: UIView {
         rightWeatherStack.distribution = .fillEqually
         
         weatherImage.contentMode = .scaleAspectFit
-        tempDescription.font = UIFont.boldSystemFont(ofSize: 15)
-        tempMinMaxLabel.font = UIFont.boldSystemFont(ofSize: 15)
+        tempDescription.font = Font.generalBold
+        tempMinMaxLabel.font = Font.generalBold
     }
     
     private func setupConstraints() {

@@ -33,7 +33,7 @@ final class PlantOptionsTableViewController: UITableViewController {
     private func setupTableView() {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: Resources.Identifiers.plantOptionsCell)
         tableView.isScrollEnabled = false
-        tableView.backgroundColor = Resources.Colors.backgroundFields
+        tableView.backgroundColor = Resources.Colors.backgroundColor
     }
 }
  
@@ -48,7 +48,8 @@ extension PlantOptionsTableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Resources.Identifiers.plantOptionsCell, for: indexPath)
         cell.textLabel?.text = viewModel.tableData[indexPath.row]
-        cell.backgroundColor = Resources.Colors.backgroundFields
+        cell.textLabel?.font = Font.general
+        cell.backgroundColor = Resources.Colors.backgroundColor
         return cell
     }
     

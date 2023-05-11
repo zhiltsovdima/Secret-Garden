@@ -41,6 +41,7 @@ class FeatureCell: UITableViewCell {
         addSubview(featureLabel)
         featureLabel.numberOfLines = 0
         featureLabel.textAlignment = .left
+        featureLabel.font = Font.general
         featureImage.contentMode = .scaleAspectFit
         
         featureLabel.translatesAutoresizingMaskIntoConstraints = false

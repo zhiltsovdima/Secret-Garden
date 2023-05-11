@@ -74,7 +74,7 @@ class DetailBaseController: UIViewController{
         button.layer.borderColor = UIColor.lightGray.cgColor
         button.layer.borderWidth = 0.5
         button.setTitleColor(Resources.Colors.blackOnWhite, for: .normal)
-        button.titleLabel?.font = Resources.Fonts.general?.withSize(12)
+        button.titleLabel?.font = Font.general
         button.setTitle(title, for: .normal)
         button.addTarget(self, action: selector, for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -85,7 +85,7 @@ class DetailBaseController: UIViewController{
     func createTextField(placeholder: String) -> UITextField {
         let textField = UITextField()
         textField.textColor = Resources.Colors.blackOnWhite
-        textField.font = Resources.Fonts.general
+        textField.font = Font.general
         textField.backgroundColor = Resources.Colors.backgroundFields
         textField.placeholder = placeholder
         textField.adjustsFontSizeToFitWidth = true

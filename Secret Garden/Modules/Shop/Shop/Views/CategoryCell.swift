@@ -44,6 +44,7 @@ final class CategoryCell: UICollectionViewCell {
         categoryLabel.textAlignment = .center
         categoryLabel.layer.cornerRadius = 15
         categoryLabel.layer.borderWidth = 1
+        categoryLabel.font = Font.generalBold
     }
     
     private func setConstraints() {

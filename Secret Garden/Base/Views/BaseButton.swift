@@ -27,7 +27,7 @@ class BaseButton: UIButton {
     func configureAppearance() {
         backgroundColor = Resources.Colors.accent
         setTitleColor(.white, for: .normal)
-        titleLabel?.font = Resources.Fonts.general?.withSize(20)
+        titleLabel?.font = Font.buttonFont
         makeSystemAnimation()
     }
     

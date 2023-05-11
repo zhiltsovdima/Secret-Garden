@@ -53,7 +53,7 @@ extension HomeViewModel: WeatherManagerDelegate {
             switch result {
             case .success(let weatherData):
                 guard let id = weatherData.weather.first?.id,
-                      let description = weatherData.weather.first?.description
+                      let description = weatherData.weather.first?.description.capitalized
                 else { return }
                 let temp = weatherData.main.temp
                 let tempMin = weatherData.main.tempMin

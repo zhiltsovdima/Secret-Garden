@@ -28,12 +28,12 @@ final class ShopFeatureView: UIView {
         
         featureImage.setContentHuggingPriority(.defaultHigh, for: .horizontal)
                 
-        nameLabel.font = Resources.Fonts.subHeaders
-        nameLabel.textColor = Resources.Colors.subHeader
+        nameLabel.font = Font.generalBold
+        nameLabel.textColor = Resources.Colors.lightText
         nameLabel.numberOfLines = 0
         nameLabel.setContentHuggingPriority(.defaultHigh, for: .vertical)
         
-        valueLabel.font = Resources.Fonts.generalBold
+        valueLabel.font = Font.generalBold
         valueLabel.numberOfLines = 0
 
     }
