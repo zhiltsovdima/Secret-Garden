@@ -20,6 +20,8 @@ final class WeatherView: UIView {
     private let tempDescription = UILabel()
     private let tempMinMaxLabel = UILabel()
     
+    private let placeholder = UIActivityIndicatorView()
+    
     private let disposeBag = DisposeBag()
     
     
@@ -36,6 +38,7 @@ final class WeatherView: UIView {
     
     func setup(with weather: BehaviorRelay<WeatherModel?>) {
         weather
+            .skip(1)
             .observe(on: MainScheduler.instance)
             .compactMap({ weather in
                 return (weather?.weatherImage, weather?.temperatureString, weather?.placeName, weather?.description, weather?.tempMinMaxString)
@@ -47,6 +50,7 @@ final class WeatherView: UIView {
                 self.placeLabel.text = place
                 self.tempDescription.text = tempDescription
                 self.tempMinMaxLabel.text = tempMinMax
+                self.placeholder.stopAnimating()
             })
             .disposed(by: disposeBag)
     }
@@ -54,10 +58,13 @@ final class WeatherView: UIView {
     private func setupUI() {
         backgroundColor = .clear
         
-        [leftWeatherStack, rightWeatherStack].forEach {
+        [placeholder, leftWeatherStack, rightWeatherStack].forEach {
             addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
+        
+        placeholder.hidesWhenStopped = true
+        placeholder.startAnimating()
         
         [placeLabel, temperatureLabel].forEach { leftWeatherStack.addArrangedSubview($0) }
         leftWeatherStack.axis = .vertical
@@ -80,6 +87,9 @@ final class WeatherView: UIView {
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
+            placeholder.centerXAnchor.constraint(equalTo: centerXAnchor),
+            placeholder.centerYAnchor.constraint(equalTo: centerYAnchor),
+            
             leftWeatherStack.topAnchor.constraint(equalTo: topAnchor),
             leftWeatherStack.leadingAnchor.constraint(equalTo: leadingAnchor),
             leftWeatherStack.bottomAnchor.constraint(equalTo: bottomAnchor),

@@ -16,6 +16,7 @@ final class NavBarController: UINavigationController {
     
     private func configureAppearance() {
         view.tintColor = Resources.Colors.accent
+        navigationBar.titleTextAttributes = [NSAttributedString.Key.font: Font.subHeader]
         navigationBar.prefersLargeTitles = true
         navigationBar.isTranslucent = true
     }
