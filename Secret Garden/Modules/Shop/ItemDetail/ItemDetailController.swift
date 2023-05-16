@@ -121,13 +121,14 @@ extension ItemDetailController {
         scrollView.addSubview(descriptionItem)
         descriptionItem.numberOfLines = 0
         descriptionItem.text = viewModel.description
+        descriptionItem.setLineSpacing(8)
         descriptionItem.font = Font.generalLight.withSize(14)
         
         scrollView.addSubview(featuresStackView)
         featuresStackView.setup(with: viewModel.featuresData!)
 
         view.addSubview(priceView)
-        priceView.setup(price: viewModel.price!)
+        priceView.setup(price: viewModel.price)
         priceView.addToCartButton.addTarget(self, action: #selector(addToCartButtonAction), for: .touchUpInside)
         
         setCartButtonAppearance()

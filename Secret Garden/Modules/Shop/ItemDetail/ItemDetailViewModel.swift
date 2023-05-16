@@ -10,11 +10,11 @@ import UIKit.UIImage
 protocol ItemDetailViewModelProtocol: AnyObject {
     
     var image: UIImage? { get }
-    var name: String? { get }
-    var latinName: String? { get }
-    var description: String? { get }
+    var name: String { get }
+    var latinName: String { get }
+    var description: String { get }
     var featuresData: ShopItemFeatures? { get }
-    var price: String? { get }
+    var price: String { get }
     
     var isFavorite: Bool { get }
     var isAddedToCart: Bool { get }
@@ -32,11 +32,11 @@ protocol ItemDetailViewModelProtocol: AnyObject {
 final class ItemDetailViewModel {
     
     var image: UIImage?
-    var name: String?
-    var latinName: String?
-    var description: String?
+    var name: String = ""
+    var latinName: String = ""
+    var description: String = ""
     var featuresData: ShopItemFeatures?
-    var price: String?
+    var price: String = ""
     
     var isFavorite = false
     var isAddedToCart = false
