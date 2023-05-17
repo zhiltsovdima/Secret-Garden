@@ -13,8 +13,11 @@ final class HomeViewController: UIViewController {
     
     private let weatherView = WeatherView()
     private let tipView = TipView()
-    private let descriptionView = UIView()
-    private let descriptionLabel = UILabel()
+    
+    private let buttonsStackView = UIStackView()
+    private let gardenButton = QuickJumpButton()
+    private let shopButton = QuickJumpButton()
+    private let plantRecognizerButton = QuickJumpButton()
         
     init(viewModel: HomeViewModelProtocol) {
         self.viewModel = viewModel
@@ -32,25 +35,47 @@ final class HomeViewController: UIViewController {
         setConstraints()
     }
     
+    @objc private func gardenButtonTapped() {
+        viewModel.gardenButtonTapped()
+    }
+    
+    @objc private func shopButtonTapped() {
+        viewModel.shopButtonTapped()
+    }
+    
     private func setupViews() {
         view.backgroundColor = Resources.Colors.backgroundColor
         
-        [weatherView, tipView, descriptionView, descriptionLabel].forEach {
+        [weatherView, tipView, buttonsStackView].forEach {
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         
         weatherView.setup(with: viewModel.weather)
         
-        descriptionView.layer.borderWidth = 1
-        descriptionView.layer.borderColor = Resources.Colors.blackOnWhite?.cgColor
-        descriptionView.layer.cornerRadius = 20
+        gardenButton.setup(
+            title: "My garden",
+            image: Resources.Images.Home.garden,
+            color: Resources.Colors.accent
+        )
+        shopButton.setup(
+            title: "Shop",
+            image: Resources.Images.Home.shop,
+            color: Resources.Colors.secondAccent
+        )
+        plantRecognizerButton.setup(
+            title: "Soon",
+            image: Resources.Images.Home.plantRecognizer,
+            color: .lightGray
+        )
+        gardenButton.addTarget(self, action: #selector(gardenButtonTapped), for: .touchUpInside)
+        shopButton.addTarget(self, action: #selector(shopButtonTapped), for: .touchUpInside)
         
-        descriptionView.addSubview(descriptionLabel)
-        descriptionLabel.text = Resources.Strings.Home.descriptionTitle + Resources.Strings.Home.descriptionBody
-        descriptionLabel.numberOfLines = 0
-        descriptionLabel.font = Font.generalLight
-        descriptionLabel.adjustsFontSizeToFitWidth = true
+        [gardenButton, shopButton, plantRecognizerButton].forEach { buttonsStackView.addArrangedSubview($0) }
+        buttonsStackView.axis = .horizontal
+        buttonsStackView.distribution = .fillEqually
+        buttonsStackView.spacing = 20
+        plantRecognizerButton.isEnabled = false
     }
     
     private func setConstraints() {
@@ -59,22 +84,17 @@ final class HomeViewController: UIViewController {
             weatherView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             weatherView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             weatherView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            weatherView.bottomAnchor.constraint(equalTo: tipView.topAnchor),
+            weatherView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 1/9),
             
-            tipView.topAnchor.constraint(equalTo: view.topAnchor, constant: 150),
+            tipView.topAnchor.constraint(equalTo: weatherView.bottomAnchor),
             tipView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             tipView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            tipView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 1/6),
+            tipView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 1/7),
             
-            descriptionView.topAnchor.constraint(equalTo: tipView.bottomAnchor, constant: 30),
-            descriptionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            descriptionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            descriptionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
-            
-            descriptionLabel.topAnchor.constraint(equalTo: descriptionView.topAnchor, constant: 20),
-            descriptionLabel.leadingAnchor.constraint(equalTo: descriptionView.leadingAnchor, constant: 20),
-            descriptionLabel.trailingAnchor.constraint(equalTo: descriptionView.trailingAnchor, constant: -20),
-            descriptionLabel.bottomAnchor.constraint(lessThanOrEqualTo: descriptionView.bottomAnchor, constant: -20)
+            buttonsStackView.topAnchor.constraint(equalTo: tipView.bottomAnchor, constant: 20),
+            buttonsStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            buttonsStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            buttonsStackView.heightAnchor.constraint(equalTo: gardenButton.widthAnchor)
         ])
     }
     

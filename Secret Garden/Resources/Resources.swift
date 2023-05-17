@@ -9,6 +9,8 @@ import UIKit
 
 enum Resources {
     
+    //MARK: - Colors
+
     enum Colors {
         static let accent = UIColor(named: "TabBarAccent")
         static let tabBarColor = UIColor(named: "TabBarColor")
@@ -25,6 +27,8 @@ enum Resources {
         
         static let lightText: UIColor = .systemGray
     }
+    
+    //MARK: - Strings
     
     enum Strings {
         
@@ -106,6 +110,8 @@ enum Resources {
         }
     }
     
+    //MARK: - Images
+    
     enum Images {
         enum TabBar {
             static let home = UIImage(systemName: "house")
@@ -127,6 +133,9 @@ enum Resources {
         }
         enum Home {
             static let tip = UIImage(named: "PlantForTip")
+            static let garden = UIImage(systemName: "leaf")
+            static let shop = UIImage(systemName: "bag")
+            static let plantRecognizer = UIImage(systemName: "dot.viewfinder")
         }
         
         enum Features {
@@ -154,6 +163,8 @@ enum Resources {
         }
     }
     
+    //MARK: - Identifiers
+
     enum Identifiers {
         static let plantCell = "PlantCell"
         static let plantOptionsCell = "PlantOptionsCell"

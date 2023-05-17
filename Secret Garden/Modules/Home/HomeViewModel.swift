@@ -11,6 +11,8 @@ import RxCocoa
 
 protocol HomeViewModelProtocol: AnyObject {
     var weather: BehaviorRelay<WeatherModel?> { get }
+    func gardenButtonTapped()
+    func shopButtonTapped()
 }
 
 // MARK: - GardenViewModel
@@ -43,6 +45,13 @@ final class HomeViewModel {
 
 extension HomeViewModel: HomeViewModelProtocol {
     
+    func gardenButtonTapped() {
+        coordinator?.moveToGarden()
+    }
+    
+    func shopButtonTapped() {
+        coordinator?.moveToShop()
+    }
     
 }
 
