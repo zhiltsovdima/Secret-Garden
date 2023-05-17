@@ -8,17 +8,20 @@
 import UIKit
 
 protocol HomeCoordinatorProtocol: AnyObject {
-    
+    func moveToGarden()
+    func moveToShop()
 }
 
 final class HomeCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
     
-    private var navigationController: UINavigationController!
+    var parentCoordinator: TabCoordinatorProtocol?
+        
+    private let navigationController: UINavigationController
     private let locationManager = LocationManager()
     private let networkManager: NetworkManagerProtocol
         
-    init(_ navigationController: UINavigationController, _ networkManager: NetworkManagerProtocol) {
+    init( _ navigationController: UINavigationController, _ networkManager: NetworkManagerProtocol) {
         self.navigationController = navigationController
         self.networkManager = networkManager
     }
@@ -31,5 +34,11 @@ final class HomeCoordinator: Coordinator {
 }
 
 extension HomeCoordinator: HomeCoordinatorProtocol {
+    func moveToGarden() {
+        parentCoordinator?.switchToTab(tab: .garden)
+    }
     
+    func moveToShop() {
+        parentCoordinator?.switchToTab(tab: .shop)
+    }
 }

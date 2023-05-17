@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol TabCoordinatorProtocol {
+    func switchToTab(tab: TabBarPage)
+}
+
 final class TabCoordinator: Coordinator {
     
     var childCoordinators: [Coordinator] = []
@@ -42,7 +46,9 @@ final class TabCoordinator: Coordinator {
         switch page {
         case .home:
             navigationController.setNavigationBarHidden(true, animated: false)
-            return HomeCoordinator(navigationController, networkManager)
+            let homeCoordinator = HomeCoordinator(navigationController, networkManager)
+            homeCoordinator.parentCoordinator = self
+            return homeCoordinator
         case .garden:
             return GardenCoordinator(navigationController, networkManager)
         case .shop:
@@ -57,6 +63,19 @@ final class TabCoordinator: Coordinator {
         
         tabBarController.tabBar.tintColor = Resources.Colors.accent
         tabBarController.tabBar.backgroundColor = Resources.Colors.tabBarColor
+    }
+}
+
+extension TabCoordinator: TabCoordinatorProtocol {
+    func switchToTab(tab: TabBarPage) {
+        switch tab {
+        case .home:
+            tabBarController.selectedIndex = 0
+        case .garden:
+            tabBarController.selectedIndex = 1
+        case .shop:
+            tabBarController.selectedIndex = 2
+        }
     }
 }
 
