@@ -133,9 +133,9 @@ enum Resources {
         }
         enum Home {
             static let tip = UIImage(named: "PlantForTip")
-            static let garden = UIImage(systemName: "leaf")
-            static let shop = UIImage(systemName: "bag")
-            static let plantRecognizer = UIImage(systemName: "dot.viewfinder")
+            static let garden = UIImage(named: "Plants")?.withTintColor(.white)
+            static let shop = UIImage(named: "Shop")?.withTintColor(.white)
+            static let plantRecognizer = UIImage(named: "Recognizer")?.withTintColor(.white)
         }
         
         enum Features {

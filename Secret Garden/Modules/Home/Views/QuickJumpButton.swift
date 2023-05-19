@@ -38,12 +38,17 @@ final class QuickJumpButton: UIButton {
             addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
+        icon.tintColor = .white
+        icon.contentMode = .scaleAspectFit
         headerLabel.font = Font.generalBold
         headerLabel.textColor = .white
         
         NSLayoutConstraint.activate([
             icon.centerXAnchor.constraint(equalTo: centerXAnchor),
-            icon.centerYAnchor.constraint(equalTo: centerYAnchor),
+            icon.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -10),
+            icon.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 1/2),
+            icon.heightAnchor.constraint(equalTo: icon.widthAnchor),
+
 
             headerLabel.topAnchor.constraint(equalTo: icon.bottomAnchor, constant: 10),
             headerLabel.centerXAnchor.constraint(equalTo: centerXAnchor)
