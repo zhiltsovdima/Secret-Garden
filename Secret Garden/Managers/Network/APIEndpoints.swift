@@ -9,6 +9,7 @@ import Foundation
 
 enum APIEndpoints {
     
+    case news
     case plants(PlantsOption)
     case weather(lat: String, long: String)
     
@@ -20,6 +21,8 @@ enum APIEndpoints {
     
     private var baseURL: String {
         switch self {
+        case .news:
+            return "https://run.mocky.io"
         case .plants:
             return "https://house-plants.p.rapidapi.com"
         case .weather:
@@ -27,8 +30,10 @@ enum APIEndpoints {
         }
     }
     
-    private var path: String {
+    private var path: String? {
         switch self {
+        case .news:
+            return "/v3/39efc405-78df-474c-8ddf-f94cf7b02231"
         case .plants(let option):
             switch option {
             case .common(let plant):
@@ -45,8 +50,10 @@ enum APIEndpoints {
         }
     }
     
-    private var headers: [String: String] {
+    private var headers: [String: String]? {
         switch self {
+        case .news:
+            return nil
         case .plants:
             return ["X-RapidAPI-Key": PrivateKeys.APIPlantKey,
                     "X-RapidAPI-Host": "house-plants.p.rapidapi.com"
@@ -61,7 +68,9 @@ extension APIEndpoints {
     
     func makeURLRequest() -> URLRequest {
         var urlString = baseURL
-        urlString.append(path)
+        if let path {
+            urlString.append(path)
+        }
         if let url = URL(string: urlString) {
             var request = URLRequest(url: url)
             request.httpMethod = "GET"
