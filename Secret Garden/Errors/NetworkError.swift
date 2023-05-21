@@ -50,7 +50,7 @@ enum NetworkError: Error, Equatable {
         }
     }
     
-    static func handleNetworkResponse(_ data: Data?, _ response: URLResponse?) throws -> Data {
+    static func processResponseData(_ data: Data?, _ response: URLResponse?) throws -> Data {
         guard let httpResponse = response as? HTTPURLResponse else {
             throw NetworkError.failed
         }
