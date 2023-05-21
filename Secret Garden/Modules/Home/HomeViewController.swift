@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 final class HomeViewController: UIViewController {
     
@@ -18,6 +20,12 @@ final class HomeViewController: UIViewController {
     private let gardenButton = QuickJumpButton()
     private let shopButton = QuickJumpButton()
     private let plantRecognizerButton = QuickJumpButton()
+    
+    private let placeholder = UIActivityIndicatorView()
+    private let errorMessage = UILabel()
+    private let newsTableView = UITableView()
+    
+    private let disposeBag = DisposeBag()
         
     init(viewModel: HomeViewModelProtocol) {
         self.viewModel = viewModel
@@ -31,8 +39,12 @@ final class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        viewModel.updateWeather()
+        viewModel.updateNews()
         setupViews()
-        setConstraints()
+        setupTableView()
+        setupConstraints()
+        setupBindings()
     }
     
     @objc private func gardenButtonTapped() {
@@ -43,10 +55,51 @@ final class HomeViewController: UIViewController {
         viewModel.shopButtonTapped()
     }
     
+    private func setupBindings() {
+        viewModel.loadingState
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] state in
+                self?.updateUI(for: state)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.news
+            .bind(to: newsTableView.rx.items(
+                cellIdentifier: Resources.Identifiers.articleCell,
+                cellType: ArticleCell.self)) { index, model, cell in
+                    
+                    cell.setup(with: model)
+                    
+                    let disposeBag = DisposeBag()
+                    model.image
+                        .observe(on: MainScheduler.instance)
+                        .subscribe(onNext: { [weak cell] image in
+                            cell?.updateImage(image)
+                        })
+                        .disposed(by: disposeBag)
+                }
+                .disposed(by: disposeBag)
+    }
+    
+    private func updateUI(for state: LoadingState) {
+        switch state {
+        case .idle:
+            newsTableView.isHidden = true
+        case .loading:
+            placeholder.startAnimating()
+        case .loaded:
+            newsTableView.isHidden = false
+            placeholder.stopAnimating()
+        case .failed(let error):
+            errorMessage.text = error.description
+            placeholder.stopAnimating()
+        }
+    }
+    
     private func setupViews() {
         view.backgroundColor = Resources.Colors.backgroundColor
         
-        [weatherView, tipView, buttonsStackView].forEach {
+        [weatherView, tipView, buttonsStackView, newsTableView, placeholder].forEach {
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -76,10 +129,17 @@ final class HomeViewController: UIViewController {
         buttonsStackView.distribution = .fillEqually
         buttonsStackView.spacing = 20
         plantRecognizerButton.isEnabled = false
+        
+        placeholder.hidesWhenStopped = true
     }
     
-    private func setConstraints() {
-
+    private func setupTableView() {
+        newsTableView.delegate = self
+        newsTableView.register(ArticleCell.self, forCellReuseIdentifier: Resources.Identifiers.articleCell)
+        newsTableView.isScrollEnabled = false
+    }
+    
+    private func setupConstraints() {
         NSLayoutConstraint.activate([
             weatherView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             weatherView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
@@ -94,8 +154,30 @@ final class HomeViewController: UIViewController {
             buttonsStackView.topAnchor.constraint(equalTo: tipView.bottomAnchor, constant: 20),
             buttonsStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             buttonsStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            buttonsStackView.heightAnchor.constraint(equalTo: gardenButton.widthAnchor)
+            buttonsStackView.heightAnchor.constraint(equalTo: gardenButton.widthAnchor),
+            
+            placeholder.centerXAnchor.constraint(equalTo: newsTableView.centerXAnchor),
+            placeholder.centerYAnchor.constraint(equalTo: newsTableView.centerYAnchor),
+
+            newsTableView.topAnchor.constraint(equalTo: buttonsStackView.bottomAnchor, constant: 20),
+            newsTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            newsTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            newsTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
+}
+
+// MARK: - UITableViewDelegate
+
+extension HomeViewController: UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let tableHeight = tableView.bounds.height
+        let cellHeight = tableHeight / 2
+        return cellHeight
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 }

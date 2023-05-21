@@ -11,16 +11,32 @@ import RxCocoa
 
 protocol HomeViewModelProtocol: AnyObject {
     var weather: BehaviorRelay<WeatherModel?> { get }
+    var loadingState: BehaviorRelay<LoadingState> { get }
+    var news: BehaviorRelay<[ArticleModel]> { get }
+    
+    func updateWeather()
+    func updateNews()
     func gardenButtonTapped()
     func shopButtonTapped()
 }
 
 // MARK: - GardenViewModel
 
+enum LoadingState {
+    case idle
+    case loading
+    case loaded
+    case failed(NetworkError)
+}
+
 final class HomeViewModel {
     
-    var weather: BehaviorRelay<WeatherModel?> = BehaviorRelay(value: nil)
+    var weather = BehaviorRelay<WeatherModel?>(value: nil)
     
+    var loadingState = BehaviorRelay<LoadingState>(value: .idle)
+    
+    var news = BehaviorRelay<[ArticleModel]>(value: [])
+        
     private weak var coordinator: HomeCoordinatorProtocol?
     private let locationManager: LocationManager
     private let networkManager: NetworkManagerProtocol
@@ -30,20 +46,64 @@ final class HomeViewModel {
         self.coordinator = coordinator
         self.locationManager = locationManager
         self.networkManager = networkManager
-        
-        updateWeather()
     }
     
-    private func updateWeather() {
-        locationManager.delegate = self
-        locationManager.startUpdatingLocation()
+    private func fetchImages(for articleIndexes: [Int]? = nil) {
+        let indexes = articleIndexes ?? Array(0..<news.value.count)
+        let group = DispatchGroup()
+        indexes.forEach { index in
+            let article = news.value[index]
+            guard let imageURL = URL(string: article.imageString) else { return }
+            group.enter()
+            networkManager.fetchImage(from: imageURL) { result in
+                switch result {
+                case .success(let image):
+                    article.image.accept(image)
+                case .failure(let netError):
+                    print(netError.description)
+                }
+                group.leave()
+            }
+        }
+        group.notify(queue: .main) { [weak self] in
+            guard let self else { return }
+            self.loadingState.accept(.loaded)
+        }
     }
-
 }
 
 // MARK: - GardenViewModelProtocol
 
 extension HomeViewModel: HomeViewModelProtocol {
+    
+    func updateWeather() {
+        locationManager.delegate = self
+        locationManager.startUpdatingLocation()
+    }
+
+    func updateNews() {
+        loadingState.accept(.loading)
+        networkManager.fetchData(by: .news) { [weak self] (result: Result<[ArticleData], NetworkError>) in
+            guard let self else { return }
+            switch result {
+            case.success(let articles):
+                let articleModels = articles.map({ article in
+                    ArticleModel(
+                        title: article.title,
+                        category: article.category,
+                        textId: article.textId,
+                        imageString: article.imageString,
+                        date: article.date
+                    )
+                })
+                self.news.accept(articleModels)
+                self.fetchImages()
+            case .failure(let netError):
+                print(netError.description)
+                self.loadingState.accept(.failed(netError))
+            }
+        }
+    }
     
     func gardenButtonTapped() {
         coordinator?.moveToGarden()
@@ -80,6 +140,25 @@ extension HomeViewModel: WeatherManagerDelegate {
                 print(netError.description)
             }
         }
+    }
+}
+
+final class ArticleModel {
+    let title: String
+    let category: String
+    let textId: String
+    let imageString: String
+    let date: String
+    
+    var image = BehaviorRelay<UIImage?>(value: nil)
+    var fullText: String?
+        
+    init(title: String, category: String, textId: String, imageString: String, date: String) {
+        self.title = title
+        self.category = category
+        self.textId = textId
+        self.imageString = imageString
+        self.date = date
     }
 }
 
