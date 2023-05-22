@@ -26,7 +26,7 @@ enum LoadingState {
     case idle
     case loading
     case loaded
-    case failed(NetworkError)
+    case failed(String)
 }
 
 final class HomeViewModel {
@@ -60,7 +60,8 @@ final class HomeViewModel {
                 case .success(let image):
                     article.image.accept(image)
                 case .failure(let netError):
-                    print(netError.description)
+                    print("Image fetching failure: \(netError.description)")
+                    article.image.accept(Resources.Images.Common.failedImage)
                 }
                 group.leave()
             }
@@ -99,8 +100,8 @@ extension HomeViewModel: HomeViewModelProtocol {
                 self.news.accept(articleModels)
                 self.fetchImages()
             case .failure(let netError):
-                print(netError.description)
-                self.loadingState.accept(.failed(netError))
+                print("News fetching failure: \(netError.description)")
+                self.loadingState.accept(.failed(netError.description))
             }
         }
     }

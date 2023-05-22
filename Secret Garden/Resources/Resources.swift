@@ -26,6 +26,9 @@ enum Resources {
         static let secondAccent = UIColor(named: "SecondAccent")
         
         static let lightText: UIColor = .systemGray
+        
+        static let gardenButtonHome = UIColor(named: "GardenButtonHome")
+        static let shopButtonHome = UIColor(named: "ShopButtonHome")
     }
     
     //MARK: - Strings
@@ -120,6 +123,7 @@ enum Resources {
         }
         enum Common {
             static let defaultPlant = UIImage(named: "DefaultPlant")
+            static let failedImage = UIImage(named: "FailedImage")
             static let shopPlant = UIImage(named: "ShopPlant")
             static let emptyCollection = UIImage(named: "EmptyCollection")
             static let camera = UIImage(systemName: "camera.circle.fill")

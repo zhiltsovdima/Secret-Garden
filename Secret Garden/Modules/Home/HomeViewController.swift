@@ -39,12 +39,13 @@ final class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupBindings()
         viewModel.updateWeather()
         viewModel.updateNews()
         setupViews()
         setupTableView()
         setupConstraints()
-        setupBindings()
+        
     }
     
     @objc private func gardenButtonTapped() {
@@ -66,17 +67,8 @@ final class HomeViewController: UIViewController {
         viewModel.news
             .bind(to: newsTableView.rx.items(
                 cellIdentifier: Resources.Identifiers.articleCell,
-                cellType: ArticleCell.self)) { index, model, cell in
-                    
+                cellType: ArticleCell.self)) { _, model, cell in
                     cell.setup(with: model)
-                    
-                    let disposeBag = DisposeBag()
-                    model.image
-                        .observe(on: MainScheduler.instance)
-                        .subscribe(onNext: { [weak cell] image in
-                            cell?.updateImage(image)
-                        })
-                        .disposed(by: disposeBag)
                 }
                 .disposed(by: disposeBag)
     }
@@ -87,11 +79,13 @@ final class HomeViewController: UIViewController {
             newsTableView.isHidden = true
         case .loading:
             placeholder.startAnimating()
+            errorMessage.isHidden = true
         case .loaded:
             newsTableView.isHidden = false
             placeholder.stopAnimating()
-        case .failed(let error):
-            errorMessage.text = error.description
+        case .failed(let errorText):
+            errorMessage.isHidden = false
+            errorMessage.text = errorText
             placeholder.stopAnimating()
         }
     }
@@ -99,7 +93,7 @@ final class HomeViewController: UIViewController {
     private func setupViews() {
         view.backgroundColor = Resources.Colors.backgroundColor
         
-        [weatherView, tipView, buttonsStackView, newsTableView, placeholder].forEach {
+        [weatherView, tipView, buttonsStackView, newsTableView, placeholder, errorMessage].forEach {
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -109,18 +103,21 @@ final class HomeViewController: UIViewController {
         gardenButton.setup(
             title: "My garden",
             image: Resources.Images.Home.garden,
-            color: Resources.Colors.accent
+            color: Resources.Colors.gardenButtonHome
         )
         shopButton.setup(
             title: "Shop",
             image: Resources.Images.Home.shop,
-            color: Resources.Colors.secondAccent
+            color: Resources.Colors.shopButtonHome
         )
         plantRecognizerButton.setup(
             title: "Soon",
             image: Resources.Images.Home.plantRecognizer,
             color: .lightGray
         )
+        plantRecognizerButton.isEnabled = false
+        plantRecognizerButton.alpha = 0.8
+        
         gardenButton.addTarget(self, action: #selector(gardenButtonTapped), for: .touchUpInside)
         shopButton.addTarget(self, action: #selector(shopButtonTapped), for: .touchUpInside)
         
@@ -128,15 +125,17 @@ final class HomeViewController: UIViewController {
         buttonsStackView.axis = .horizontal
         buttonsStackView.distribution = .fillEqually
         buttonsStackView.spacing = 20
-        plantRecognizerButton.isEnabled = false
         
         placeholder.hidesWhenStopped = true
+        errorMessage.font = Font.generalBold
+        errorMessage.textColor = .red
     }
     
     private func setupTableView() {
         newsTableView.delegate = self
         newsTableView.register(ArticleCell.self, forCellReuseIdentifier: Resources.Identifiers.articleCell)
         newsTableView.isScrollEnabled = false
+        newsTableView.backgroundColor = .clear
     }
     
     private func setupConstraints() {
@@ -158,6 +157,9 @@ final class HomeViewController: UIViewController {
             
             placeholder.centerXAnchor.constraint(equalTo: newsTableView.centerXAnchor),
             placeholder.centerYAnchor.constraint(equalTo: newsTableView.centerYAnchor),
+            
+            errorMessage.centerXAnchor.constraint(equalTo: newsTableView.centerXAnchor),
+            errorMessage.centerYAnchor.constraint(equalTo: newsTableView.centerYAnchor),
 
             newsTableView.topAnchor.constraint(equalTo: buttonsStackView.bottomAnchor, constant: 20),
             newsTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),

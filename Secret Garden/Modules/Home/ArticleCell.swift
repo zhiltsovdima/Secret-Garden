@@ -6,11 +6,19 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 final class ArticleCell: UITableViewCell {
     
-    private let titleLabel = UILabel()
     private let articleImageView = UIImageView()
+
+    private let stackView = UIStackView()
+    private let titleLabel = UILabel()
+    private let categoryLabel = UILabel()
+    private let dateLabel = UILabel()
+    
+    let disposeBag = DisposeBag()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -25,10 +33,12 @@ final class ArticleCell: UITableViewCell {
     
     func setup(with model: ArticleModel) {
         titleLabel.text = model.title
-    }
-    
-    func updateImage(_ image: UIImage?) {
-        articleImageView.image = image
+        categoryLabel.text = model.category
+        dateLabel.text = model.date
+        
+        model.image
+            .bind(to: articleImageView.rx.image)
+            .disposed(by: disposeBag)
     }
     
     // MARK: - Setup Views
@@ -36,15 +46,24 @@ final class ArticleCell: UITableViewCell {
     private func setupViews() {
         backgroundColor = .clear
 
-        [titleLabel, articleImageView].forEach {
+        [articleImageView, stackView].forEach {
             addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         
-        titleLabel.numberOfLines = 0
-        titleLabel.font = Font.generalBold
+        stackView.axis = .vertical
+        stackView.distribution = .fillProportionally
+        [categoryLabel, titleLabel, dateLabel].forEach { stackView.addArrangedSubview($0) }
         
-        articleImageView.layer.cornerRadius = 10
+        categoryLabel.font = Font.general
+        categoryLabel.textColor = .lightGray
+        titleLabel.numberOfLines = 0
+        titleLabel.font = Font.subHeader
+        titleLabel.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
+        dateLabel.font = Font.general
+        dateLabel.textColor = .lightGray
+        
+        articleImageView.layer.cornerRadius = 20
         articleImageView.clipsToBounds = true
         articleImageView.contentMode = .scaleAspectFill
     }
@@ -57,9 +76,10 @@ final class ArticleCell: UITableViewCell {
             articleImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
             articleImageView.widthAnchor.constraint(equalTo: articleImageView.heightAnchor),
         
-            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
-            titleLabel.leadingAnchor.constraint(equalTo: articleImageView.trailingAnchor, constant: 10),
-            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            stackView.topAnchor.constraint(equalTo: articleImageView.topAnchor),
+            stackView.leadingAnchor.constraint(equalTo: articleImageView.trailingAnchor, constant: 10),
+            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10)
         ])
     }
 }
