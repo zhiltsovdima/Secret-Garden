@@ -66,7 +66,7 @@ final class DetailPlantController: DetailBaseController {
     override func setupUI() {
         super.setupUI()
         
-        plantImageView.image = viewModel.viewData.image
+        imageView.image = viewModel.viewData.image
         
         detailView.addSubview(spinner)
         spinner.startAnimating()

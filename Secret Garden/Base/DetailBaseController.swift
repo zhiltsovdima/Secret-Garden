@@ -9,7 +9,7 @@ import UIKit
 
 class DetailBaseController: UIViewController{
     
-    let plantImageView = UIImageView()
+    let imageView = UIImageView()
     let detailView = UIView()
     
     override func viewDidLoad() {
@@ -21,8 +21,8 @@ class DetailBaseController: UIViewController{
     
     func setupUI() {
         view.backgroundColor = Resources.Colors.backgroundColor
-        view.addSubview(plantImageView)
-        plantImageView.contentMode = .scaleAspectFill
+        view.addSubview(imageView)
+        imageView.contentMode = .scaleAspectFill
         
         view.addSubview(detailView)
         detailView.backgroundColor = Resources.Colors.backgroundColor
@@ -30,21 +30,19 @@ class DetailBaseController: UIViewController{
     }
     
     func setupConstraints() {
-        plantImageView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            plantImageView.topAnchor.constraint(equalTo: view.topAnchor),
-            plantImageView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            plantImageView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            plantImageView.heightAnchor.constraint(equalToConstant: (view.bounds.height / 3) + 20)
-        ])
-        
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         detailView.translatesAutoresizingMaskIntoConstraints = false
+
         NSLayoutConstraint.activate([
-            detailView.heightAnchor.constraint(equalToConstant: view.bounds.height * 2/3),
+            imageView.topAnchor.constraint(equalTo: view.topAnchor),
+            imageView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            imageView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            imageView.heightAnchor.constraint(equalToConstant: (view.bounds.height / 3) + 20),
+            
+            detailView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 2/3),
             detailView.leftAnchor.constraint(equalTo: view.leftAnchor),
             detailView.rightAnchor.constraint(equalTo: view.rightAnchor),
             detailView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-            
         ])
     }
     

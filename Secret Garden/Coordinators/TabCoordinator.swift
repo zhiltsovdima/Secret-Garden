@@ -45,7 +45,6 @@ final class TabCoordinator: Coordinator {
     private func getChildCoordinator(for page: TabBarPage, _ navigationController: UINavigationController) -> Coordinator {
         switch page {
         case .home:
-            navigationController.setNavigationBarHidden(true, animated: false)
             let homeCoordinator = HomeCoordinator(navigationController, networkManager)
             homeCoordinator.parentCoordinator = self
             return homeCoordinator

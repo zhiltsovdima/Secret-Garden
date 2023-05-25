@@ -55,7 +55,7 @@ final class EditPlantViewController: DetailBaseController {
         super.setupUI()
         
         nameTextField.text = viewModel.viewData.plantTitle
-        plantImageView.image = viewModel.viewData.plantImage
+        imageView.image = viewModel.viewData.plantImage
         nameTextField.delegate = self
     }
     
@@ -64,12 +64,12 @@ final class EditPlantViewController: DetailBaseController {
             self?.validStatusLabel.text = statusText
         }
         viewModel.updateImageCompletion = { [weak self] image in
-            self?.plantImageView.image = image
+            self?.imageView.image = image
         }
     }
     
     @objc private func saveButtonTapped() {
-        viewModel.saveButtonTapped(name: nameTextField.text, image: plantImageView.image)
+        viewModel.saveButtonTapped(name: nameTextField.text, image: imageView.image)
     }
     @objc private func addNewPhotoTapped() {
         viewModel.addNewPhotoTapped()
