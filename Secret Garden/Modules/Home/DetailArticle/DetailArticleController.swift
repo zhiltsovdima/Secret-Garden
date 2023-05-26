@@ -18,6 +18,9 @@ final class DetailArticleController: UIViewController {
     private let detailView = UIView()
     private let fullTextLabel = UILabel()
     
+    private let placeholder = UIActivityIndicatorView()
+    private let errorMessage = UILabel()
+    
     private let disposeBag = DisposeBag()
     
     init(viewModel: DetailArticleViewModelProtocol) {
@@ -45,6 +48,14 @@ final class DetailArticleController: UIViewController {
 extension DetailArticleController {
     
     private func setupBindings() {
+        
+        viewModel.loadingState
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] state in
+                self?.updateUI(for: state)
+            })
+            .disposed(by: disposeBag)
+        
         viewModel.article.fullText
             .observe(on: MainScheduler.instance)
             .subscribe { [weak fullTextLabel] text in
@@ -53,6 +64,21 @@ extension DetailArticleController {
                 fullTextLabel?.setLineSpacing(8)
             }
             .disposed(by: disposeBag)
+    }
+    
+    private func updateUI(for state: LoadingState) {
+        switch state {
+        case .loading:
+            placeholder.startAnimating()
+            errorMessage.isHidden = true
+        case .loaded:
+            placeholder.stopAnimating()
+        case .failed(let errorText):
+            errorMessage.isHidden = false
+            errorMessage.text = errorText
+            placeholder.stopAnimating()
+        default: break
+        }
     }
     
     private func setupAppearance() {
@@ -73,10 +99,19 @@ extension DetailArticleController {
         detailView.backgroundColor = Resources.Colors.backgroundColor
         detailView.layer.cornerRadius = 20
         detailView.clipsToBounds = true
-        detailView.addSubview(fullTextLabel)
         
         fullTextLabel.font = Font.generalLight.withSize(16)
         fullTextLabel.numberOfLines = 0
+        
+        errorMessage.font = Font.generalBold
+        errorMessage.textColor = .red
+        
+        placeholder.hidesWhenStopped = true
+        
+        [fullTextLabel, errorMessage, placeholder].forEach {
+            detailView.addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
         
         [imageView, detailView].forEach {
             scrollView.addSubview($0)
@@ -110,6 +145,12 @@ extension DetailArticleController {
             fullTextLabel.leadingAnchor.constraint(equalTo: detailView.leadingAnchor, constant: 20),
             fullTextLabel.trailingAnchor.constraint(equalTo: detailView.trailingAnchor, constant: -20),
             fullTextLabel.bottomAnchor.constraint(equalTo: detailView.bottomAnchor, constant: -20),
+            
+            placeholder.centerXAnchor.constraint(equalTo: detailView.centerXAnchor),
+            placeholder.centerYAnchor.constraint(equalTo: detailView.centerYAnchor),
+
+            errorMessage.centerXAnchor.constraint(equalTo: detailView.centerXAnchor),
+            errorMessage.centerYAnchor.constraint(equalTo: detailView.centerYAnchor)
         ])
     }
 }

@@ -588,8 +588,8 @@
 			isa = PBXGroup;
 			children = (
 				628F35FD2A1FCA8B00DF1019 /* Views */,
-				628F35F72A1F414200DF1019 /* DetailArticleController.swift */,
 				628F35F92A1F415700DF1019 /* DetailArticleViewModel.swift */,
+				628F35F72A1F414200DF1019 /* DetailArticleController.swift */,
 			);
 			path = DetailArticle;
 			sourceTree = "<group>";
