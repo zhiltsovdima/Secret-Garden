@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 final class DetailArticleController: UIViewController {
     
@@ -14,6 +16,9 @@ final class DetailArticleController: UIViewController {
     private let scrollView = UIScrollView()
     private let imageView = GradientImageView()
     private let detailView = UIView()
+    private let fullTextLabel = UILabel()
+    
+    private let disposeBag = DisposeBag()
     
     init(viewModel: DetailArticleViewModelProtocol) {
         self.viewModel = viewModel
@@ -27,13 +32,24 @@ final class DetailArticleController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        viewModel.fetchFullText()
+        setupBindings()
         setupViews()
         setupConstraints()
     }
     
+    private func setupBindings() {
+        viewModel.article.fullText
+            .bind(to: fullTextLabel.rx.text)
+            .disposed(by: disposeBag)
+    }
+    
     private func setupViews() {
+        view.backgroundColor = Resources.Colors.backgroundColor
         view.addSubview(scrollView)
-        
+        scrollView.delegate = self
+        scrollView.contentInsetAdjustmentBehavior = .never
+
         [imageView, detailView].forEach {
             scrollView.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -45,10 +61,15 @@ final class DetailArticleController: UIViewController {
         detailView.backgroundColor = Resources.Colors.backgroundColor
         detailView.layer.cornerRadius = 20
         detailView.clipsToBounds = true
+        
+        detailView.addSubview(fullTextLabel)
+        fullTextLabel.font = Font.header
+        fullTextLabel.numberOfLines = 0
     }
     
     private func setupConstraints() {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
+        fullTextLabel.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -60,11 +81,27 @@ final class DetailArticleController: UIViewController {
             imageView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             imageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 1/2),
+            imageView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             
             detailView.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: -20),
             detailView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             detailView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            detailView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor)
+            detailView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            detailView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            
+            fullTextLabel.topAnchor.constraint(equalTo: detailView.topAnchor, constant: 50),
+            fullTextLabel.leadingAnchor.constraint(equalTo: detailView.leadingAnchor, constant: 20),
+            fullTextLabel.trailingAnchor.constraint(equalTo: detailView.trailingAnchor, constant: -20),
+            fullTextLabel.bottomAnchor.constraint(equalTo: detailView.bottomAnchor, constant: -20),
         ])
+    }
+}
+
+// MARK: - UIScrollViewDelegate
+
+extension DetailArticleController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        imageView.transform = CGAffineTransform(translationX: 0, y: offsetY/2)
     }
 }
