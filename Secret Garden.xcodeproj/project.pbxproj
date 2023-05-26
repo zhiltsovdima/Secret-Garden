@@ -68,6 +68,8 @@
 		628F35F82A1F414200DF1019 /* DetailArticleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628F35F72A1F414200DF1019 /* DetailArticleController.swift */; };
 		628F35FA2A1F415700DF1019 /* DetailArticleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628F35F92A1F415700DF1019 /* DetailArticleViewModel.swift */; };
 		628F35FC2A1FB73D00DF1019 /* GradientImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628F35FB2A1FB73D00DF1019 /* GradientImageView.swift */; };
+		628F36002A20A6E400DF1019 /* ArticleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628F35FF2A20A6E400DF1019 /* ArticleModel.swift */; };
+		628F36022A20A71A00DF1019 /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628F36012A20A71A00DF1019 /* WeatherModel.swift */; };
 		62A1820229E83D3C00526F2B /* Tips.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A1820129E83D3C00526F2B /* Tips.swift */; };
 		62A4F79E298FF2FA00C127D5 /* FeaturesStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A4F79D298FF2FA00C127D5 /* FeaturesStackView.swift */; };
 		62A4F7A0298FF67700C127D5 /* ShopFeatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A4F79F298FF67700C127D5 /* ShopFeatureView.swift */; };
@@ -211,6 +213,8 @@
 		628F35F72A1F414200DF1019 /* DetailArticleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailArticleController.swift; sourceTree = "<group>"; };
 		628F35F92A1F415700DF1019 /* DetailArticleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailArticleViewModel.swift; sourceTree = "<group>"; };
 		628F35FB2A1FB73D00DF1019 /* GradientImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientImageView.swift; sourceTree = "<group>"; };
+		628F35FF2A20A6E400DF1019 /* ArticleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleModel.swift; sourceTree = "<group>"; };
+		628F36012A20A71A00DF1019 /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
 		62A1820129E83D3C00526F2B /* Tips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tips.swift; sourceTree = "<group>"; };
 		62A4F79D298FF2FA00C127D5 /* FeaturesStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturesStackView.swift; sourceTree = "<group>"; };
 		62A4F79F298FF67700C127D5 /* ShopFeatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopFeatureView.swift; sourceTree = "<group>"; };
@@ -573,6 +577,7 @@
 		628F35F42A1F40F300DF1019 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				62DDD2672A1A13FF0086A26E /* ArticleCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -590,12 +595,12 @@
 		628F35F62A1F412500DF1019 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				628F35FE2A20A6D400DF1019 /* Models */,
 				628F35F42A1F40F300DF1019 /* Cell */,
 				6251B7542A00338700D99748 /* Views */,
 				62F7FD5A29716E890055B60F /* HomeCoordinator.swift */,
 				62C3985E2A052E01006D7B9A /* HomeViewModel.swift */,
 				62E9AFBB290D409500175A21 /* HomeViewController.swift */,
-				62DDD2672A1A13FF0086A26E /* ArticleCell.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -606,6 +611,15 @@
 				628F35FB2A1FB73D00DF1019 /* GradientImageView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		628F35FE2A20A6D400DF1019 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				628F35FF2A20A6E400DF1019 /* ArticleModel.swift */,
+				628F36012A20A71A00DF1019 /* WeatherModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		62A4F79C298FF2A000C127D5 /* Views */ = {
@@ -1193,11 +1207,13 @@
 				625F9520298C50FB00EB628A /* CartCoordinator.swift in Sources */,
 				625F951A2988399500EB628A /* FavoriteCell.swift in Sources */,
 				62E9B0032916D4D300175A21 /* PlantOptionsTableViewController.swift in Sources */,
+				628F36022A20A71A00DF1019 /* WeatherModel.swift in Sources */,
 				62F7FD55297161B60055B60F /* AppCoordinator.swift in Sources */,
 				62F7FD662971A2070055B60F /* PlantOptionsCoordinator.swift in Sources */,
 				62F7FD57297163E30055B60F /* GardenCoordinator.swift in Sources */,
 				623008B72994E221000D4216 /* PriceView.swift in Sources */,
 				625F951E298C50E100EB628A /* FavoritesCoordinator.swift in Sources */,
+				628F36002A20A6E400DF1019 /* ArticleModel.swift in Sources */,
 				62A4F7A0298FF67700C127D5 /* ShopFeatureView.swift in Sources */,
 				626FA06D291BB7AC00FEB461 /* Garden.swift in Sources */,
 				62E9AFDA2913BD9100175A21 /* BaseButton.swift in Sources */,

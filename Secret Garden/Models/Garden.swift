@@ -41,6 +41,10 @@ class Garden {
     }
     
     func downloadFeatures(for plant: Plant, completion: ((Features?, NetworkError?) -> Void)?) {
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+//            completion?(nil, NetworkError.noDataForThisName)
+//            return
+//        }
         if let features = plant.features {
             completion?(features, nil)
             return

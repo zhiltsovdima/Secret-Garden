@@ -48,7 +48,7 @@ extension HomeCoordinator: HomeCoordinatorProtocol {
     func showArticleDetail(_ model: ArticleModel) {
         let viewModel = DetailArticleViewModel(self, networkManager, model)
         let view = DetailArticleController(viewModel: viewModel)
-        navigationController.setNavigationBarHidden(false, animated: false)
+        navigationController.setNavigationBarHidden(false, animated: true)
         navigationController.pushViewController(view, animated: true)
     }
 }

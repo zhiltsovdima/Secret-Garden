@@ -31,3 +31,7 @@ struct ArticleData: Codable {
         self.date = try container.decode(String.self, forKey: .date)
     }
 }
+
+struct ArticleTextData: Codable {
+    let body: String
+}

@@ -9,6 +9,7 @@ import Foundation
 
 protocol DetailArticleViewModelProtocol: AnyObject {
     var article: ArticleModel { get }
+    func fetchFullText()
 }
 
 // MARK: - DetailArticleViewModel
@@ -26,12 +27,24 @@ final class DetailArticleViewModel {
         self.article = article
     }
     
-    
 }
 
 // MARK: - DetailArticleViewModelProtocol
 
 extension DetailArticleViewModel: DetailArticleViewModelProtocol {
     
+    func fetchFullText() {
+        guard article.fullText.value == nil else { return }
+        let fullTextId = article.textId
+        networkManager.fetchData(by: .fullText(fullTextId)) { [weak article] (result: Result<ArticleTextData, NetworkError>) in
+            switch result {
+            case .success(let articleTextData):
+                let fullText = articleTextData.body
+                article?.fullText.accept(fullText)
+            case .failure(let netError):
+                print("Full text fetching failure: \(netError.description)")
+            }
+        }
+    }
     
 }
