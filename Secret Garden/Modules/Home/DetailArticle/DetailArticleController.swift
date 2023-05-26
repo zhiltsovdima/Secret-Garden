@@ -12,7 +12,7 @@ import RxCocoa
 final class DetailArticleController: UIViewController {
     
     private let viewModel: DetailArticleViewModelProtocol
-        
+
     private let scrollView = UIScrollView()
     private let imageView = GradientImageView()
     private let detailView = UIView()
@@ -34,37 +34,54 @@ final class DetailArticleController: UIViewController {
         
         viewModel.fetchFullText()
         setupBindings()
+        setupAppearance()
         setupViews()
         setupConstraints()
     }
+}
+
+// MARK: - Setup Setings
+
+extension DetailArticleController {
     
     private func setupBindings() {
         viewModel.article.fullText
-            .bind(to: fullTextLabel.rx.text)
+            .observe(on: MainScheduler.instance)
+            .subscribe { [weak fullTextLabel] text in
+                guard let text else { return }
+                fullTextLabel?.attributedText = NSAttributedString(string: text)
+                fullTextLabel?.setLineSpacing(8)
+            }
             .disposed(by: disposeBag)
     }
     
-    private func setupViews() {
+    private func setupAppearance() {
         view.backgroundColor = Resources.Colors.backgroundColor
+        navigationController?.navigationBar.tintColor = Resources.Colors.blackOnWhite
+    }
+    
+    private func setupViews() {
         view.addSubview(scrollView)
         scrollView.delegate = self
         scrollView.contentInsetAdjustmentBehavior = .never
 
-        [imageView, detailView].forEach {
-            scrollView.addSubview($0)
-            $0.translatesAutoresizingMaskIntoConstraints = false
-        }
         imageView.image = viewModel.article.image.value
         imageView.contentMode = .scaleAspectFill
         imageView.setupGradient()
+        imageView.setupLabels(with: viewModel.article)
         
         detailView.backgroundColor = Resources.Colors.backgroundColor
         detailView.layer.cornerRadius = 20
         detailView.clipsToBounds = true
-        
         detailView.addSubview(fullTextLabel)
-        fullTextLabel.font = Font.header
+        
+        fullTextLabel.font = Font.generalLight.withSize(16)
         fullTextLabel.numberOfLines = 0
+        
+        [imageView, detailView].forEach {
+            scrollView.addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
     }
     
     private func setupConstraints() {
@@ -89,7 +106,7 @@ final class DetailArticleController: UIViewController {
             detailView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             detailView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             
-            fullTextLabel.topAnchor.constraint(equalTo: detailView.topAnchor, constant: 50),
+            fullTextLabel.topAnchor.constraint(equalTo: detailView.topAnchor, constant: 40),
             fullTextLabel.leadingAnchor.constraint(equalTo: detailView.leadingAnchor, constant: 20),
             fullTextLabel.trailingAnchor.constraint(equalTo: detailView.trailingAnchor, constant: -20),
             fullTextLabel.bottomAnchor.constraint(equalTo: detailView.bottomAnchor, constant: -20),
