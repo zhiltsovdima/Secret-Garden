@@ -8,12 +8,8 @@
 import UIKit
 
 protocol NetworkManagerProtocol {
-    func fetchData<T: Decodable>(by apiEndpoint: APIEndpoints, completion: @escaping (Result<T, NetworkError>) -> Void)
-    func fetchImage(from url: URL, completion: @escaping (Result<UIImage, NetworkError>) -> Void)
-}
-
-protocol NetworkManagerDataParser {
-    func parseData<T: Decodable>(_ type: T.Type, _ data: Data) -> Result<T, NetworkError>
+    func fetchData(apiEndpoint: APIEndpoints, completion: @escaping (Result<Data, NetworkError>) -> Void)
+    func fetchData(url: URL, completion: @escaping (Result<Data, NetworkError>) -> Void)
 }
 
 protocol URLSessionProtocol {
