@@ -1,5 +1,5 @@
 //
-//  WeatherModel.swift
+//  WeatherViewModel.swift
 //  Secret Garden
 //
 //  Created by Dima Zhiltsov on 26.05.2023.
@@ -7,8 +7,8 @@
 
 import UIKit
 
-struct WeatherModel {
-    let weatherId: Int
+struct WeatherViewModel {
+    let type: WeatherType
     let placeName: String
     let temperature: Double
     let tempMin: Double
@@ -19,35 +19,31 @@ struct WeatherModel {
         return String(format: "%.0f\(Resources.Strings.degreeSymbol)C", temperature)
     }
     
-    var tempMinMaxString: String {
+    var temperatureRange: String {
         let tempMinStr = String(format: "%.0f\(Resources.Strings.degreeSymbol)C", tempMin)
         let tempMaxStr = String(format: "%.0f\(Resources.Strings.degreeSymbol)C", tempMax)
         return "H: \(tempMaxStr) L: \(tempMinStr)"
     }
     
     var weatherImage: UIImage? {
-        switch weatherId {
-        case 200...232:
+        switch type {
+        case .storm:
             return Resources.Images.Weather.storm
-        case 300...321:
+        case .partyRain:
             return Resources.Images.Weather.partyRain
-        case 500...502:
-            return Resources.Images.Weather.partyRain
-        case 503, 504, 521...531:
+        case .rainfall:
             return Resources.Images.Weather.rainfall
-        case 514...520:
+        case .rain:
             return Resources.Images.Weather.rain
-        case 600...622:
+        case .snow:
             return Resources.Images.Weather.snow
-        case 701...781:
+        case .windy:
             return Resources.Images.Weather.windy
-        case 800:
+        case .sun:
             return Resources.Images.Weather.sun
-        case 801:
+        case .partyCloudy:
             return Resources.Images.Weather.partyCloudy
-        case 802...804:
-            return Resources.Images.Weather.clouds
-        default:
+        case .clouds:
             return Resources.Images.Weather.clouds
         }
     }

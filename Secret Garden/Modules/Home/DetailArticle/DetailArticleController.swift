@@ -150,7 +150,9 @@ extension DetailArticleController {
             placeholder.centerYAnchor.constraint(equalTo: detailView.centerYAnchor),
 
             errorMessage.centerXAnchor.constraint(equalTo: detailView.centerXAnchor),
-            errorMessage.centerYAnchor.constraint(equalTo: detailView.centerYAnchor)
+            errorMessage.centerYAnchor.constraint(equalTo: detailView.centerYAnchor),
+            errorMessage.leadingAnchor.constraint(equalTo: detailView.leadingAnchor, constant: 20),
+            errorMessage.trailingAnchor.constraint(equalTo: detailView.trailingAnchor, constant: -20)
         ])
     }
 }

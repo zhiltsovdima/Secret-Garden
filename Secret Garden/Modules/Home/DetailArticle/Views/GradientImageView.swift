@@ -38,7 +38,7 @@ final class GradientImageView: UIImageView {
         layer.addSublayer(bottomGradientLayer)
     }
     
-    func setupLabels(with model: ArticleModel) {
+    func setupLabels(with model: ArticleViewModelProtocol) {
         addSubview(labelsStackView)
         labelsStackView.axis = .vertical
         labelsStackView.alignment = .leading

@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 
 protocol DetailArticleViewModelProtocol: AnyObject {
-    var article: ArticleModel { get }
+    var article: ArticleViewModelProtocol { get }
     var loadingState: BehaviorRelay<LoadingState> { get }
     func fetchFullText()
 }
@@ -19,19 +19,18 @@ protocol DetailArticleViewModelProtocol: AnyObject {
 
 final class DetailArticleViewModel {
     
-    let article: ArticleModel
+    let article: ArticleViewModelProtocol
     
     let loadingState = BehaviorRelay<LoadingState>(value: .idle)
         
     private weak var coordinator: HomeCoordinatorProtocol?
-    private let networkManager: NetworkManagerProtocol
+    private let newsService: NewsServiceProtocol
     
-    init(_ coordinator: HomeCoordinatorProtocol, _ networkManager: NetworkManagerProtocol,_ article: ArticleModel) {
+    init(_ coordinator: HomeCoordinatorProtocol, _ newsService: NewsServiceProtocol,_ article: ArticleViewModelProtocol) {
         self.coordinator = coordinator
-        self.networkManager = networkManager
+        self.newsService = newsService
         self.article = article
     }
-    
 }
 
 // MARK: - DetailArticleViewModelProtocol
@@ -40,19 +39,19 @@ extension DetailArticleViewModel: DetailArticleViewModelProtocol {
     
     func fetchFullText() {
         guard article.fullText.value == nil else { return }
-        let fullTextId = article.textId
-        networkManager.fetchData(by: .fullText(fullTextId)) { [weak article, weak loadingState] (result: Result<ArticleTextData, NetworkError>) in
-            loadingState?.accept(.loading)
+        loadingState.accept(.loading)
+        article.getFullText() { [weak self] result in
+            guard let self else { return }
             switch result {
-            case .success(let articleTextData):
-                let fullText = articleTextData.body
-                article?.fullText.accept(fullText)
-                loadingState?.accept(.loaded)
-            case .failure(let netError):
-                print("Full text fetching failure: \(netError.description)")
-                loadingState?.accept(.failed(netError.description))
+            case .success:
+                loadingState.accept(.loaded)
+            case .failure(let error as NetworkError):
+                loadingState.accept(.failed(error.description))
+            case .failure(let error as DataCodingError):
+                loadingState.accept(.failed(error.description))
+            case .failure(let error):
+                loadingState.accept(.failed(error.localizedDescription))
             }
         }
     }
-    
 }

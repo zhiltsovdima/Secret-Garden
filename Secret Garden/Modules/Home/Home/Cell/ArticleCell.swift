@@ -31,7 +31,7 @@ final class ArticleCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setup(with model: ArticleModel) {
+    func setup(with model: ArticleViewModelProtocol) {
         titleLabel.text = model.title
         categoryLabel.text = model.category
         dateLabel.text = model.date

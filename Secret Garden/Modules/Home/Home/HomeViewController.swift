@@ -65,7 +65,8 @@ final class HomeViewController: UIViewController {
         viewModel.loadingState
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] state in
-                self?.updateUI(for: state)
+                guard let self else { return }
+                updateUI(for: state)
             })
             .disposed(by: disposeBag)
         
@@ -187,5 +188,9 @@ extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         viewModel.articleSelectRow(at: indexPath)
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        viewModel.updateImage(for: indexPath)
     }
 }

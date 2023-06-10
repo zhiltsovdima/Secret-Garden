@@ -9,8 +9,8 @@ import UIKit
 
 protocol NewsServiceProtocol {
     func getNews(completion: @escaping (Result<[ArticleData], Error>) -> Void)
-    func getBody(for article: ArticleViewModel, completion: @escaping (Result<ArticleTextData, Error>) -> Void)
-    func getImage(for article: ArticleViewModel, completion: @escaping ((Result<UIImage, Error>) -> Void))
+    func getBody(for article: ArticleViewModelProtocol, completion: @escaping (Result<ArticleTextData, Error>) -> Void)
+    func getImage(for article: ArticleViewModelProtocol, completion: @escaping ((Result<UIImage, Error>) -> Void))
 }
 
 final class NewsService {
@@ -32,11 +32,11 @@ extension NewsService: NewsServiceProtocol {
         fetchData(apiEndpoint: .news, completion: completion)
     }
     
-    func getBody(for article: ArticleViewModel, completion: @escaping (Result<ArticleTextData, Error>) -> Void) {
+    func getBody(for article: ArticleViewModelProtocol, completion: @escaping (Result<ArticleTextData, Error>) -> Void) {
         fetchData(apiEndpoint: .fullText(article.textId), completion: completion)
     }
     
-    func getImage(for article: ArticleViewModel, completion: @escaping ((Result<UIImage, Error>) -> Void)) {
+    func getImage(for article: ArticleViewModelProtocol, completion: @escaping ((Result<UIImage, Error>) -> Void)) {
         guard let imageURL = URL(string: article.imageString) else {
             completion(.failure(NetworkError.wrongURL))
             return

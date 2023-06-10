@@ -36,12 +36,12 @@ final class WeatherView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setup(with weather: BehaviorRelay<WeatherModel?>) {
+    func setup(with weather: BehaviorRelay<WeatherViewModel?>) {
         weather
             .skip(1)
             .observe(on: MainScheduler.instance)
             .compactMap({ weather in
-                return (weather?.weatherImage, weather?.temperatureString, weather?.placeName, weather?.description, weather?.tempMinMaxString)
+                return (weather?.weatherImage, weather?.temperatureString, weather?.placeName, weather?.description, weather?.temperatureRange)
             })
             .bind(onNext: { [weak self] (image, temp, place, tempDescription, tempMinMax) in
                 guard let self else { return }
