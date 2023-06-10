@@ -17,7 +17,6 @@ enum NetworkError: Error, Equatable {
     case wrongURL
     case failed
     case noData
-    case unableToDecode
     case noDataForThisName
     case serverError(statusCode: Int)
     
@@ -41,8 +40,6 @@ enum NetworkError: Error, Equatable {
             return "Network request failed"
         case .noData:
             return "Response returned with no data to decode"
-        case .unableToDecode:
-            return "Couldn't decode the response"
         case .noDataForThisName:
             return "There is no data for this plant's name"
         case .serverError(let statusCode):
