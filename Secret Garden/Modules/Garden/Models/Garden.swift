@@ -40,7 +40,7 @@ class Garden {
         updatePlantsCompletion?(.delete, index)
     }
     
-    func downloadFeatures(for plant: Plant, completion: ((Features?, NetworkError?) -> Void)?) {
+    func downloadFeatures(for plant: Plant, completion: ((Features?, Error?) -> Void)?) {
 //        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
 //            completion?(nil, NetworkError.noDataForThisName)
 //            return
@@ -50,27 +50,39 @@ class Garden {
             return
         }
         let name = plant.name
-        let endpoint = APIEndpoints.plants(.common(name))
-        
+        let apiEndpoint = APIEndpoints.plants(.common(name))
+//        
         guard !plant.isFetched else { completion?(nil, NetworkError.noDataForThisName); return }
-        networkManager.fetchData(by: endpoint) { [weak plant] (result: Result<[Features], NetworkError>) in
+        
+        networkManager.fetchData(apiEndpoint: apiEndpoint) { [weak self] result in
+            guard let self else { return }
             switch result {
-            case .success(let features):
-                guard let features = features.first else {
-                    completion?(nil, NetworkError.noDataForThisName)
-                    return
-                }
-                plant?.features = features
-                plant?.isFetched = true
-                completion?(plant?.features, nil)
+            case .success(let data):
+                decodeTheResult(data: data, for: plant, completion: completion)
             case .failure(let error):
                 if error == NetworkError.noDataForThisName {
-                    plant?.isFetched = true
+                    plant.isFetched = true
                 } else {
-                    plant?.isFetched = false
+                    plant.isFetched = false
                 }
                 completion?(nil, error)
             }
+        }
+    }
+    
+    func decodeTheResult(data: Data, for plant: Plant, completion: ((Features?, Error?) -> Void)?) {
+        let result = DataCoder.decode(type: [Features].self, from: data)
+        switch result {
+        case .success(let features):
+            guard let features = features.first else {
+                completion?(nil, NetworkError.noDataForThisName)
+                return
+            }
+            plant.features = features
+            plant.isFetched = true
+            completion?(plant.features, nil)
+        case .failure(let error):
+            completion?(nil, error)
         }
     }
     

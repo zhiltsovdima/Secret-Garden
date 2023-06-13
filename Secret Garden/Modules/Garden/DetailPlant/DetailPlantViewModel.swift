@@ -66,9 +66,9 @@ final class DetailPlantViewModel {
 extension DetailPlantViewModel: DetailPlantViewModelProtocol {
     
     func updateFeatures() {
-        garden.downloadFeatures(for: plant, completion: { [weak self] features, netError in
+        garden.downloadFeatures(for: plant, completion: { [weak self] features, error in
             guard let features else {
-                self?.viewData.errorMessage = netError?.description
+                self?.viewData.errorMessage = error?.localizedDescription
                 self?.updateCompletion?(false)
                 return
             }

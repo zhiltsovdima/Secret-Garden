@@ -85,7 +85,7 @@ extension NewsService {
     
     private func processImageData(_ data: Data, imageURL: URL, completion: @escaping ((Result<UIImage, Error>) -> Void)) {
         guard let image = UIImage(data: data) else {
-            completion(.failure(DataCodingError.decodingFailed()))
+            completion(.failure(DataCodingError.decodingToImageFailed))
             return
         }
         imageCache.setObject(image, forKey: imageURL as NSURL)
